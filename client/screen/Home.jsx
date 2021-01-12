@@ -28,7 +28,7 @@ export default function App() {
     navigation.navigate('Details')
   }
 
-  
+
   return (
       <SafeAreaView style={styles.container}>
         <View style={styles.button}>
@@ -46,7 +46,6 @@ export default function App() {
             onPress={() => GotoDetailClick()}
           />
         </View>
-        
         <StatusBar style="auto" />
       </SafeAreaView>
   );
