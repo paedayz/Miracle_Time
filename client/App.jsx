@@ -13,6 +13,8 @@ import Detail from './screen/Detail'
 import Stats from './screen/Stats'
 import Todaylist from './screen/Todaylist'
 import Calendar from './screen/Calendar'
+import Pet from './screen/Pet'
+
 
 
 let axiosDefaults = require("axios/lib/defaults");
@@ -30,6 +32,7 @@ export default function App() {
             <Stack.Screen name='Details' component={Detail} options={{ title: 'Detail Page' }}/>
             <Stack.Screen name='Todaylist' component={Todaylist} options={{ title: 'Todaylist Page' }}/>
             <Stack.Screen name='Calendar' component={Calendar}/>
+            <Stack.Screen name='Pet' component={Pet} />
           </Stack.Navigator>
       </NavigationContainer>
     </Provider>
