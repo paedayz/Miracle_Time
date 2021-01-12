@@ -23,6 +23,7 @@ export default function App() {
           <Stack.Navigator initialRouteName='Home'>
             <Stack.Screen name='Home' component={Home}/>
             <Stack.Screen name='Details' component={Detail} options={{ title: 'Detail Page' }}/>
+            <Stack.Screen name='Today' component={Today}/>
           </Stack.Navigator>
       </NavigationContainer>
     </Provider>
