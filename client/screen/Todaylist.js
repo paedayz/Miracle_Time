@@ -5,7 +5,7 @@ export default function App({navigation}) {
     
       return (
         <SafeAreaView style={{ flex: 1 }}>
-          <Text>Todaylist</Text>
+          <Text>Todaylistt</Text>
         </SafeAreaView>
       );
 }
