@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
+import {createDrawerNavigator} from '@react-navigation/drawer'
 
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
 import {getAuthen} from '../redux/action/userAction'
 
 // Screen
-import CalendarScreen from './Calendar/CalendarScreen'
 import AuthScreen from './Auth/AuthScreen'
+
+// Naviation
+import BottomTabNavigator from '../navigator/BottomTabNavigator'
+const Drawer = createDrawerNavigator()
+
 
 export default function Screen({navigation}) {
     const userData = useSelector(state => state.user.userData)
@@ -28,9 +33,9 @@ export default function Screen({navigation}) {
 
     if(userData) {
         return (
-            <SafeAreaView style={{ flex: 1 , marginTop: 20}}>
-                <CalendarScreen/>
-            </SafeAreaView>
+            <Drawer.Navigator>
+                <Drawer.Screen name="Calendar" component={BottomTabNavigator}/>
+            </Drawer.Navigator>
         )
         
     } else {
