@@ -1,7 +1,7 @@
 import {SET_USER_DATA} from '../type'
 
 const initialState = {
-    userData = null
+    userData : null
 }
 
 export default function (state = initialState, action){
