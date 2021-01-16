@@ -1,6 +1,7 @@
 import React from 'react'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Octicons from 'react-native-vector-icons/Octicons';
 
 // Screen
 import SocialScreen from '../screen/Social/SocialScreen'
@@ -10,6 +11,10 @@ import PetScreen from '../screen/Pet/PetScreen'
 
 // Stack Screen
 import CalendarStackScreen from '../screen/Calendar/CalendarStack'
+import SocialStackScreen from '../screen/Social/SocialStack'
+import StatsStackScreen from '../screen/Stats/StatsStack'
+import QuestArchieveStackScreen from '../screen/Quest_Archieve/QuestArchieveStack'
+import PetStackScreen from '../screen/Pet/PetStack'
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -20,57 +25,57 @@ export default function TabFunction () {
           activeColor="#fff"
         >
           <Tab.Screen
-            name="Home"
+            name="Calendar"
             component={CalendarStackScreen}
             options={{
-              tabBarLabel: 'Home',
+              tabBarLabel: 'Calendar',
               tabBarColor: 'red',
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="home" color={color} size={26} />
+                <MaterialCommunityIcons name="calendar" color={color} size={26} />
               ),
             }}
           />
           <Tab.Screen
             name="Social"
-            component={SocialScreen}
+            component={SocialStackScreen}
             options={{
               tabBarLabel: 'Social',
               tabBarColor: 'green',
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="bell" color={color} size={26} />
+                <MaterialCommunityIcons name="earth" color={color} size={26} />
               ),
             }}
           />
           <Tab.Screen
             name="Stats"
-            component={StatsScreen}
+            component={StatsStackScreen}
             options={{
               tabBarLabel: 'Stats',
               tabBarColor: 'blue',
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="account" color={color} size={26} />
+                <Octicons name="graph" color={color} size={26} />
               ),
             }}
           />
           <Tab.Screen
             name="QuestArchieve"
-            component={QuestArchieveScreen}
+            component={QuestArchieveStackScreen}
             options={{
-              tabBarLabel: 'Quest & Archieve',
+              tabBarLabel: 'Quest Archieve',
               tabBarColor: 'black',
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="account" color={color} size={26} />
+                <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
               ),
             }}
           />
           <Tab.Screen
             name="Pet"
-            component={PetScreen}
+            component={PetStackScreen}
             options={{
               tabBarLabel: 'Pet',
               tabBarColor: 'pink',
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="account" color={color} size={26} />
+                <MaterialCommunityIcons name="dog" color={color} size={26} />
               ),
             }}
           />
