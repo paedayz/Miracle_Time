@@ -2,12 +2,15 @@ import React, {useState}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
 import Edittodaylist from '../component/Edittodaylist'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Todaylist from '../screen/Todaylist'
 
-export default function DetailToday() {
+export default function DetailToday({navigation}) {
     
     const route = useRoute() 
-    const { Event,detail,time } = route.params
+    const { Event,detail,time,key } = route.params
+    const dispatch = useDispatch()
+    const values = { Event,detail,time,key }
 
     const [todaylist, setTodaylist] = useState([
         {
@@ -26,10 +29,13 @@ export default function DetailToday() {
 
     return (
         <View>
-            <Text>{Event}</Text>
-            <Text>{time}</Text>
-            <Text>{detail}</Text>
-            
+            <View style={style.card}>
+                <View style={style.cardcon}>
+                    <Text style={style.fontSize}>{Event}</Text>
+                    <Text style={style.fontSize}>{time}</Text>
+                    <Text style={style.fontSize}>{detail}</Text>
+                </View>
+            </View>
 
             <Modal visible={modalOpen} animationType={'slide'}>
                 <View>
@@ -50,6 +56,11 @@ export default function DetailToday() {
             title="Edit"
             onPress={() => setModalOpen()}
             />
+            <Button
+            color="blue"
+            title="Delete"
+            onPress={() => dispatch({type: 'DELETE_EVENT', payload: values}, navigation.navigate('Todaylist'))}
+            />
 
 
         
@@ -57,4 +68,26 @@ export default function DetailToday() {
     )
 }
 
-
+const style = StyleSheet.create({
+    card: {
+      borderRadius: 6,
+      elevation: 3,
+      backgroundColor: '#fff',
+      shadowOffset: { width: 1 , height: 1 },
+      shadowColor: '#333',
+      shadowOpacity: 0.3,
+      shadowRadius: 2,
+      marginHorizontal: 4,
+      marginVertical: 6
+    },
+    cardcon: {
+      marginHorizontal: 18,
+      marginVertical: 10, 
+      
+    },
+    fontSize:{
+      fontSize: 18
+    }
+  
+  })
+  

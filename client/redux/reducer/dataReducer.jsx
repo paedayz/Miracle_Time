@@ -8,7 +8,8 @@ const initialState = {
             Event: 'Event A',
             time: '13.00-13.30', 
             detail: 'LLLLL', 
-            key: '1.0'
+            key: '1.0',
+            rank:'1'
         }
     ]
 }
