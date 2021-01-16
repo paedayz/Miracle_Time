@@ -15,6 +15,7 @@ import {
 } from 'react-native-paper'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
@@ -22,7 +23,7 @@ import {signout} from '../redux/action/userAction'
 
 export function DrawerContent(props){
     const userData = useSelector(state => state.user.userData)
-    const {username, userImage} = userData
+    const {username, nickname, userImage} = userData
     const dispatch = useDispatch()
 
     return (
@@ -38,7 +39,7 @@ export function DrawerContent(props){
                                 size={50}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
-                                <Title style={styles.title}>{username}</Title>
+                                <Title style={styles.title}>{nickname}</Title>
                                 <Caption style={styles.caption}>@{username}</Caption>
                             </View>
                         </View>
@@ -69,36 +70,14 @@ export function DrawerContent(props){
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
-                                <Icon 
-                                name="bookmark-outline" 
-                                color={color}
-                                size={size}
-                                />
-                            )}
-                            label="Bookmarks"
-                            onPress={() => {props.navigation.navigate('Social')}}
-                        />
-                        <DrawerItem 
-                            icon={({color, size}) => (
-                                <Icon 
-                                name="settings-outline" 
+                                <FontAwesome 
+                                name="gears" 
                                 color={color}
                                 size={size}
                                 />
                             )}
                             label="Settings"
-                            onPress={() => {props.navigation.navigate('Calendar')}}
-                        />
-                        <DrawerItem 
-                            icon={({color, size}) => (
-                                <Icon 
-                                name="account-check-outline" 
-                                color={color}
-                                size={size}
-                                />
-                            )}
-                            label="Support"
-                            onPress={() => {props.navigation.navigate('Calendar')}}
+                            // onPress={() => {props.navigation.navigate('Calendar')}}
                         />
                     </Drawer.Section>
                 </View>

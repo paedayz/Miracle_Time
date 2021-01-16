@@ -6,6 +6,7 @@ exports.signup = (req, res) => {
       email: req.body.email,
       password: req.body.password,
       username: req.body.username,
+      nickname: req.body.nickname,
     };
 
 //   const { valid, errors } = validateLoginData(user);
@@ -40,12 +41,17 @@ exports.signup = (req, res) => {
         const userCredentials = {
           username: newUser.username,
           email: newUser.email,
+          nickname: newUser.nickname,
           createdAt: new Date().toLocaleString("en-US", {
             timeZone: "Asia/Bangkok",
           }),
           userImage: `https://firebasestorage.googleapis.com/v0/b/${config.firebaseConfig.storageBucket}/o/${noImg}?alt=media`,
           userId,
           status: "user",
+          level: 0,
+          exp: 0,
+          coin: 0,
+          theme: null
         };
   
         firestore.doc(`/users/${newUser.username}`).set(userCredentials);

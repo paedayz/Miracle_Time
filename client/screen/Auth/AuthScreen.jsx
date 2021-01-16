@@ -45,6 +45,7 @@ export function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userName, setUsername] = useState('')
+    const [nickname, setNickname] = useState('')
 
     const dispatch = useDispatch()
 
@@ -52,7 +53,8 @@ export function Register() {
         let userData = {
             email : email,
             password : password,
-            username : userName
+            username : userName,
+            nickname : nickname
         }
         
         dispatch(register(userData))
@@ -71,8 +73,11 @@ export function Register() {
             />
             <TextInput
                 placeholder="username"
-                secureTextEntry={true}
                 onChangeText={(username) =>setUsername(username)}
+            />
+            <TextInput
+                placeholder="nickname"
+                onChangeText={(nickname) =>setNickname(nickname)}
             />
 
             <Button

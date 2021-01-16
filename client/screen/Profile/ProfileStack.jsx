@@ -23,6 +23,15 @@ const ProfileStackScreen = ({navigation}) => {
                 color="black"
                 onPress={() => navigation.openDrawer()}
               />
+            ),
+            headerRight: () => (
+              <Icon.Button 
+                name="notifications-outline"
+                size={25}
+                backgroundColor="#fff"
+                color="black"
+                onPress={() => {}}
+              />
             )
           }}
         />
