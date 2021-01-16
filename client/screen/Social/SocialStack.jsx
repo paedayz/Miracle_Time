@@ -11,10 +11,10 @@ const SocialStackScreen = ({navigation}) => {
     return (
       <SocialStack.Navigator>
         <SocialStack.Screen 
-          name="Pet" 
+          name="Social" 
           component={SocialScreen} 
           options={{
-            title:'Pet',
+            title:'Social',
             headerLeft: () => (
               <Icon.Button 
                 name="menu" 

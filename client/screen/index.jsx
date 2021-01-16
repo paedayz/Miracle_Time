@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer'
+import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
@@ -11,6 +12,7 @@ import AuthScreen from './Auth/AuthScreen'
 
 // Naviation
 import BottomTabNavigator from '../navigator/BottomTabNavigator'
+import {DrawerContent} from '../navigator/DrawerContent'
 const Drawer = createDrawerNavigator()
 
 
@@ -33,8 +35,8 @@ export default function Screen({navigation}) {
 
     if(userData) {
         return (
-            <Drawer.Navigator>
-                <Drawer.Screen name="Calendar" component={BottomTabNavigator}/>
+            <Drawer.Navigator initialRouteName="Calendar" drawerContent={props => <DrawerContent {...props}/>}>
+                <Drawer.Screen name="Calendar" component={BottomTabNavigator} />
             </Drawer.Navigator>
         )
         
