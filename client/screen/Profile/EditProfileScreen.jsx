@@ -6,6 +6,7 @@ import {
   ImageBackground,
   TextInput,
   StyleSheet,
+  Button
 } from 'react-native';
 
 import {Avatar, useTheme} from 'react-native-paper';
@@ -19,10 +20,13 @@ import Animated from 'react-native-reanimated';
 
 import ImagePicker from 'react-native-image-crop-picker';
 
+import UploadImage from './TestUploadImage'
+
 // Redux
 import {useSelector} from 'react-redux'
 
-const EditProfileScreen = () => {
+export default function EditProfileScreen (){
+  console.log('wowww')
 
   const {username, nickname, email, userImage, level, exp, coin} = useSelector(state => state.user.userData)
 
@@ -43,6 +47,7 @@ const EditProfileScreen = () => {
   }
 
   const choosePhotoFromLibrary = () => {
+    console.log('library')
     ImagePicker.openPicker({
       width: 300,
       height: 300,
@@ -64,7 +69,7 @@ const EditProfileScreen = () => {
       <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
         <Text style={styles.panelButtonTitle}>Take Photo</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
+      <TouchableOpacity style={styles.panelButton} onPress={() => choosePhotoFromLibrary()}>
         <Text style={styles.panelButtonTitle}>Choose From Library</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -86,8 +91,19 @@ const EditProfileScreen = () => {
   let bs = React.createRef();
   let fall = new Animated.Value(1);
 
+  const upload = () => {
+    ImagePicker.openPicker({
+        width: 300,
+        height: 400,
+        cropping: true
+      }).then(image => {
+        console.log(image);
+      });
+  }
+
   return (
     <View style={styles.container}>
+        <UploadImage/>
       <BottomSheet
         ref={bs}
         snapPoints={[330, 0]}
@@ -208,8 +224,6 @@ const EditProfileScreen = () => {
   );
 };
 
-export default EditProfileScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -267,7 +281,7 @@ const styles = StyleSheet.create({
   panelButton: {
     padding: 13,
     borderRadius: 10,
-    backgroundColor: '#FF6347',
+    backgroundColor: 'black',
     alignItems: 'center',
     marginVertical: 7,
   },
