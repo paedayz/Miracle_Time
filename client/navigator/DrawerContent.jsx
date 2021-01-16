@@ -43,7 +43,7 @@ export function DrawerContent(props){
                                 <Caption style={styles.caption}>@{username}</Caption>
                             </View>
                         </View>
-                        
+
                     </View>
                     <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem 
@@ -66,7 +66,7 @@ export function DrawerContent(props){
                                 />
                             )}
                             label="Profile"
-                            onPress={() => {props.navigation.navigate('Calendar')}}
+                            onPress={() => {props.navigation.navigate('Pet')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -77,7 +77,7 @@ export function DrawerContent(props){
                                 />
                             )}
                             label="Bookmarks"
-                            onPress={() => {props.navigation.navigate('Calendar')}}
+                            onPress={() => {props.navigation.navigate('Social')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
