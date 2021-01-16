@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {LOADING_DATA, LOADING_COMPLETE, SET_USER_DATA} from '../type'
 
 export const getAuthen = ()=> (dispatch) => {

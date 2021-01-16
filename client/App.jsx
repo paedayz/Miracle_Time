@@ -20,9 +20,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <SafeAreaView>
           <IndexScreen/>
-        </SafeAreaView>
       </NavigationContainer>
     </Provider>
   );
