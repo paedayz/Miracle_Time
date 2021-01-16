@@ -11,6 +11,9 @@ import {getAuthen} from '../redux/action/userAction'
 import AuthScreen from './Auth/AuthScreen'
 import PetScreen from './Pet/PetScreen'
 
+// Stack
+import ProfileStackScreen from './Profile/ProfileStack'
+
 // Naviation
 import BottomTabNavigator from '../navigator/BottomTabNavigator'
 import {DrawerContent} from '../navigator/DrawerContent'
@@ -38,7 +41,7 @@ export default function Screen({navigation}) {
         return (
             <Drawer.Navigator initialRouteName="Calendar" drawerContent={props => <DrawerContent {...props}/>}>
                 <Drawer.Screen name="Calendar" component={BottomTabNavigator} />
-                <Drawer.Screen name="Pet" component={PetScreen} />
+                <Drawer.Screen name="Profile" component={ProfileStackScreen} />
             </Drawer.Navigator>
         )
         

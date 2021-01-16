@@ -17,15 +17,14 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 // Redux
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {signout} from '../redux/action/userAction'
 
 export function DrawerContent(props){
     const userData = useSelector(state => state.user.userData)
     const {username, userImage} = userData
+    const dispatch = useDispatch()
 
-    // const paperTheme = useTheme();
-
-    // const { signOut, toggleTheme } = React.useContext(AuthContext);
     return (
         <View style={{flex:1}}>
             <DrawerContentScrollView {...props}>
@@ -66,7 +65,7 @@ export function DrawerContent(props){
                                 />
                             )}
                             label="Profile"
-                            onPress={() => {props.navigation.navigate('Pet')}}
+                            onPress={() => {props.navigation.navigate('Profile')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -102,16 +101,6 @@ export function DrawerContent(props){
                             onPress={() => {props.navigation.navigate('Calendar')}}
                         />
                     </Drawer.Section>
-                    {/* <Drawer.Section title="Preferences">
-                        <TouchableRipple onPress={() => {toggleTheme()}}>
-                            <View style={styles.preference}>
-                                <Text>Dark Theme</Text>
-                                <View pointerEvents="none">
-                                    <Switch value={paperTheme.dark}/>
-                                </View>
-                            </View>
-                        </TouchableRipple>
-                    </Drawer.Section> */}
                 </View>
             </DrawerContentScrollView>
             <Drawer.Section style={styles.drawerSection}>
@@ -124,7 +113,7 @@ export function DrawerContent(props){
                         />
                     )}
                     label='Sign Out'
-                    onPress={() => {}}
+                    onPress={() => {dispatch(signout())}}
                 />
             </Drawer.Section>
         </View>
