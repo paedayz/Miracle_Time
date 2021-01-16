@@ -2,8 +2,11 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/Ionicons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
+// Screen
 import ProfileScreen from './ProfileScreen'
+import EditProfileScreen from './EditProfileScreen'
 
 const ProfileStack = createStackNavigator()
 
@@ -25,16 +28,17 @@ const ProfileStackScreen = ({navigation}) => {
               />
             ),
             headerRight: () => (
-              <Icon.Button 
-                name="notifications-outline"
+              <AntDesign.Button 
+                name="edit"
                 size={25}
                 backgroundColor="#fff"
                 color="black"
-                onPress={() => {}}
+                onPress={() => navigation.navigate('Edit Profile')}
               />
             )
           }}
         />
+        <ProfileStack.Screen name="Edit Profile" component={EditProfileScreen} />
       </ProfileStack.Navigator>
     )
   }
