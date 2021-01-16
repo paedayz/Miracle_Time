@@ -1,21 +1,17 @@
 import React from 'react'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createStackNavigator } from '@react-navigation/stack';
-
-import Icon from 'react-native-vector-icons/Ionicons'
 
 // Screen
-import CalendarScreen from '../screen/Calendar/CalendarScreen'
 import SocialScreen from '../screen/Social/SocialScreen'
 import StatsScreen from '../screen/Stats/StatsScreen'
 import QuestArchieveScreen from '../screen/Quest_Archieve/QuestArchieveScreen'
 import PetScreen from '../screen/Pet/PetScreen'
 
-const Tab = createMaterialBottomTabNavigator();
+// Stack Screen
+import CalendarStackScreen from '../screen/Calendar/CalendarStack'
 
-const HomeStack = createStackNavigator()
-// const DetailStack = createStackNavigator()
+const Tab = createMaterialBottomTabNavigator();
 
 export default function TabFunction () {
     return (
@@ -81,29 +77,6 @@ export default function TabFunction () {
         </Tab.Navigator>
     )
     
-}
-
-const CalendarStackScreen = ({navigation}) => {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen 
-        name="Calendar" 
-        component={CalendarScreen} 
-        options={{
-          title:'Home',
-          headerLeft: () => (
-            <Icon.Button 
-              name="menu" 
-              size={20} 
-              backgroundColor="#fff"
-              color="black"
-              onPress={() => navigation.openDrawer()}
-            />
-          )
-        }}
-      />
-    </HomeStack.Navigator>
-  )
 }
 
 // const DetailStackScreen = ({navigation}) => {
