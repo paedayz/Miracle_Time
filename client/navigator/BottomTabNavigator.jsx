@@ -3,12 +3,6 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-// Screen
-import SocialScreen from '../screen/Social/SocialScreen'
-import StatsScreen from '../screen/Stats/StatsScreen'
-import QuestArchieveScreen from '../screen/Quest_Archieve/QuestArchieveScreen'
-import PetScreen from '../screen/Pet/PetScreen'
-
 // Stack Screen
 import CalendarStackScreen from '../screen/Calendar/CalendarStack'
 import SocialStackScreen from '../screen/Social/SocialStack'
@@ -29,7 +23,7 @@ export default function TabFunction () {
             component={CalendarStackScreen}
             options={{
               tabBarLabel: 'Calendar',
-              tabBarColor: 'red',
+              tabBarColor: '#185696',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="calendar" color={color} size={26} />
               ),
@@ -40,7 +34,7 @@ export default function TabFunction () {
             component={SocialStackScreen}
             options={{
               tabBarLabel: 'Social',
-              tabBarColor: 'green',
+              tabBarColor: '#88c7dc',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="earth" color={color} size={26} />
               ),
@@ -51,7 +45,7 @@ export default function TabFunction () {
             component={StatsStackScreen}
             options={{
               tabBarLabel: 'Stats',
-              tabBarColor: 'blue',
+              tabBarColor: '#aec3b0',
               tabBarIcon: ({ color }) => (
                 <Octicons name="graph" color={color} size={26} />
               ),
@@ -62,7 +56,7 @@ export default function TabFunction () {
             component={QuestArchieveStackScreen}
             options={{
               tabBarLabel: 'Q & A',
-              tabBarColor: 'black',
+              tabBarColor: '#d3a9ab',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
               ),
@@ -73,7 +67,7 @@ export default function TabFunction () {
             component={PetStackScreen}
             options={{
               tabBarLabel: 'Pet',
-              tabBarColor: 'pink',
+              tabBarColor: '#e09873',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="dog" color={color} size={26} />
               ),
