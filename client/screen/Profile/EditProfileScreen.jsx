@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -18,106 +18,62 @@ import Feather from 'react-native-vector-icons/Feather';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 
-import ImagePicker from 'react-native-image-crop-picker';
+import * as ImagePicker from 'expo-image-picker';
 
 import UploadImage from './TestUploadImage'
 
 // Redux
 import {useSelector} from 'react-redux'
+import {uploadImage} from '../../redux/action/userAction'
 
 export default function EditProfileScreen (){
-  console.log('wowww')
 
   const {username, nickname, email, userImage, level, exp, coin} = useSelector(state => state.user.userData)
 
-  const [image, setImage] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
+  const [image, setImage] = useState(userImage);
   const {colors} = useTheme();
 
-  const takePhotoFromCamera = () => {
-    ImagePicker.openCamera({
-      compressImageMaxWidth: 300,
-      compressImageMaxHeight: 300,
-      cropping: true,
-      compressImageQuality: 0.7
-    }).then(image => {
-      console.log(image);
-      setImage(image.path);
-      bs.current.snapTo(1);
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
     });
-  }
 
-  const choosePhotoFromLibrary = () => {
-    console.log('library')
-    ImagePicker.openPicker({
-      width: 300,
-      height: 300,
-      cropping: true,
-      compressImageQuality: 0.7
-    }).then(image => {
-      console.log(image);
-      setImage(image.path);
-      bs.current.snapTo(1);
-    });
-  }
-
-  const renderInner = () => (
-    <View style={styles.panel}>
-      <View style={{alignItems: 'center'}}>
-        <Text style={styles.panelTitle}>Upload Photo</Text>
-        <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
-      </View>
-      <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
-        <Text style={styles.panelButtonTitle}>Take Photo</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.panelButton} onPress={() => choosePhotoFromLibrary()}>
-        <Text style={styles.panelButtonTitle}>Choose From Library</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.panelButton}
-        onPress={() => bs.current.snapTo(1)}>
-        <Text style={styles.panelButtonTitle}>Cancel</Text>
-      </TouchableOpacity>
-    </View>
-  );
-
-  const renderHeader = () => (
-    <View style={styles.header}>
-      <View style={styles.panelHeader}>
-        <View style={styles.panelHandle} />
-      </View>
-    </View>
-  );
-
-  let bs = React.createRef();
-  let fall = new Animated.Value(1);
-
-  const upload = () => {
-    ImagePicker.openPicker({
-        width: 300,
-        height: 400,
-        cropping: true
-      }).then(image => {
-        console.log(image);
+    let imageData = new FormData()
+    const name = `picture.jpg`;
+    if(result) {
+      imageData.append("picture", {
+        uri: result.uri,
+        name,
+        type: "image/jpg"
       });
-  }
+      uploadImage(imageData)
+    }
+
+    // console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
 
   return (
     <View style={styles.container}>
-        <UploadImage/>
-      <BottomSheet
-        ref={bs}
-        snapPoints={[330, 0]}
-        renderContent={renderInner}
-        renderHeader={renderHeader}
-        initialSnap={1}
-        callbackNode={fall}
-        enabledGestureInteraction={true}
-      />
-      <Animated.View style={{margin: 20,
-        opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
-    }}>
         <View style={{alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => bs.current.snapTo(0)}>
+          <TouchableOpacity onPress={() => {pickImage()}}>
             <View
               style={{
                 height: 100,
@@ -126,12 +82,6 @@ export default function EditProfileScreen (){
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <ImageBackground
-                source={{
-                  uri: image,
-                }}
-                style={{height: 100, width: 100}}
-                imageStyle={{borderRadius: 15}}>
                 <View
                   style={{
                     flex: 1,
@@ -139,12 +89,11 @@ export default function EditProfileScreen (){
                     alignItems: 'center',
                   }}>
                   <Avatar.Image 
-                    source={{uri: userImage}}
+                    source={{uri: image}}
                     size={100}
                   />
                   <Feather name='edit' size={25} style={{position:'absolute', left:80, top:70}} />
                 </View>
-              </ImageBackground>
             </View>
           </TouchableOpacity>
           <Text style={{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>
@@ -219,7 +168,6 @@ export default function EditProfileScreen (){
         <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
-      </Animated.View>
     </View>
   );
 };

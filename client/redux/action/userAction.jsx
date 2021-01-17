@@ -50,3 +50,13 @@ export const signout = () => (dispatch) => {
             dispatch({type: LOADING_COMPLETE})
         })
 }
+
+export const uploadImage = (image) => {
+    console.log(image._parts[0][1])
+    axios.post('/uploadImage', image._parts[0][1]).then((res) => {
+        console.log(res)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
