@@ -55,7 +55,7 @@ export default function TabFunction () {
             name="QuestArchieve"
             component={QuestArchieveStackScreen}
             options={{
-              tabBarLabel: 'Q & A',
+              tabBarLabel: 'Q/A',
               tabBarColor: '#d3a9ab',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
