@@ -3,7 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
+// Screen
 import CalendarScreen from './CalendarScreen'
+import TodayListsScreen from './TodayLists'
 
 const CalendarStack = createStackNavigator()
 
@@ -26,6 +28,7 @@ const CalendarStackScreen = ({navigation}) => {
             )
           }}
         />
+        <CalendarStack.Screen name='TodayList' component={TodayListsScreen} />
       </CalendarStack.Navigator>
     )
   }

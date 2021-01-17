@@ -17,7 +17,8 @@ export default class AgendaScreen extends Component {
         }
         this.state.items[item.date].push({
             height: Math.max(50, Math.floor(Math.random() * 150)),
-            name: item.name
+            name: item.name,
+            date: item.date
         })
     })
 
@@ -71,10 +72,11 @@ export default class AgendaScreen extends Component {
   }
 
   renderItem(item) {
+      console.log(item)
     return (
       <TouchableOpacity
         style={[styles.item, {height: item.height}]}
-        onPress={() => Alert.alert(item.name)}
+        onPress={() => this.props.navigation.navigate('TodayList', item)}
       >
         <Text>{item.name}</Text>
       </TouchableOpacity>
