@@ -8,24 +8,42 @@ export default class AgendaScreen extends Component {
     this.state = {
         items: {},
         todayDate : this.timeToString(new Date()),
-        test: this.props.Test
+        userEventdata: this.props.userEventdata,
+        eventLength: this.props.userEventdata.length
       };
 
-    this.props.Test.map((item) => {
+    this.props.userEventdata.map((item) => {
         if(!this.state.items[item.date]) {
             this.state.items[item.date] = []
         }
         this.state.items[item.date].push({
             height: 80,
-            name: item.name,
+            event: item.event,
             date: item.date,
-            time: item.time
+            time: item.time,
+            detail: item.detail,
+            rank: item.rank,
+            key: item.key
         })
     })
-
     
   }
   render() {
+    if (this.state.eventLength < this.props.userEventdata.length){
+      const newData = this.props.userEventdata[this.props.userEventdata.length - 1]
+      const newDataDate = newData.date
+      this.state.items[newDataDate].push({
+        height: 80,
+        event: newData.event,
+        date: newData.date,
+        time: newData.time,
+        detail: newData.detail,
+        rank: newData.rank,
+        key: newData.key
+      })
+      this.setState({eventLength : this.state.eventLength+1})
+    }
+    
     return (
       <Agenda
         items={this.state.items}
@@ -73,28 +91,36 @@ export default class AgendaScreen extends Component {
   }
 
   renderItem(item) {
-      console.log(item)
     return (
       <TouchableOpacity
         style={[styles.item, {height: item.height}]}
         onPress={() => this.props.navigation.navigate('TodayList', item)}
       >
         <Text>{item.time}</Text>
-        <Text>{item.name}</Text>
+        <Text>{item.event}</Text>
       </TouchableOpacity>
     );
   }
 
-  renderEmptyDate() {
+  renderEmptyDate(item) {
+    let date = this.timeToString(item)
+    let data = {
+      date: date
+    }
     return (
-      <View style={styles.emptyDate}>
-        <Text>This is empty date!</Text>
-      </View>
+      <TouchableOpacity
+        style={{height: 20}}
+        onPress={() => this.props.navigation.navigate('TodayList', data)}
+      >
+        <View style={styles.emptyDate}>
+          <Text>This is empty date!</Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 
   rowHasChanged(r1, r2) {
-    return r1.name !== r2.name;
+    return r1.event !== r2.event;
   }
 
   timeToString(time) {

@@ -15,7 +15,7 @@ export default function DetailToday({navigation}) {
 
     const [todaylist, setTodaylist] = useState([
         {
-          Event:route.params.Event,
+          Event:route.params.event,
           time:route.params.time, 
           detail:route.params.detail, 
           key:route.params.key

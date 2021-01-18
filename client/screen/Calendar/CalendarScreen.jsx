@@ -4,17 +4,17 @@ import { SafeAreaView, Text, Button } from 'react-native';
 // Component
 import Calendar from './Calendar'
 
+// Redux
+import {useSelector} from "react-redux"
+
 export default function CalendarScreen({navigation}) {
 
-  const mockData = [
-    {date:'2021-01-17', name: 'one', time: '13.00-14.00'},
-    {date:'2021-01-17', name: 'two', time: '20.00-21.00'},
-    {date:'2021-01-18', name: 'ไปกินข้าว', time: '20.00-21.00'}
-  ]
+  const userEventdata = useSelector(state => state.data.events)
+  console.log('event',userEventdata)
     
       return (
         <SafeAreaView style={{ flex: 1 }}>
-          <Calendar Test={mockData} navigation={navigation} />
+          <Calendar userEventdata={userEventdata} navigation={navigation} />
         </SafeAreaView>
       );
 }

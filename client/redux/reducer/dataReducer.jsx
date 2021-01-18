@@ -5,11 +5,12 @@ const initialState = {
     data: [],
     events: [
         {
-            Event: 'กินข้าวเที่ยง',
+            event: 'กินข้าวเที่ยง',
             time: '13.00-15.00',
             detail: 'กินกับแม่',
             key: '1.0',
-            rank: 1
+            rank: 1,
+            date:'2021-01-18'
         }
     ],
 }

@@ -14,17 +14,24 @@ const Addtodaylist = (props) => {
     return (
         
             <Formik
-                initialValues={{ Event: '', time: '', detail: '', key: '',rank: ''}}  
+                initialValues={{ event: '', time: '', detail: '', key: '',rank: '',date: props.date}}  
                 onSubmit={(values) => {
-                    // addtoday(values)
                     values.key = Math.random().toString()
                     dispatch({type:'ADD_EVENT', payload: values})
-                    {console.log(values.rank)}
                     props.setModalOpen(false)
                 }}
             >
                 {(props) => (
                 <View >
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Date'
+                        onChangeText={props.handleChange('date')}
+                        value={props.values.date}
+                        editable={false}
+                        >
+                    </TextInput>
+
                     <RNPickerSelect 
                             onValueChange={props.handleChange('rank')}
                             style={styles.input}
@@ -37,8 +44,8 @@ const Addtodaylist = (props) => {
                     <TextInput
                         style={styles.input}
                         placeholder='Event'
-                        onChangeText={props.handleChange('Event')}
-                        value={props.values.Event}
+                        onChangeText={props.handleChange('event')}
+                        value={props.values.event}
                         >
                     </TextInput>
                     <TextInput

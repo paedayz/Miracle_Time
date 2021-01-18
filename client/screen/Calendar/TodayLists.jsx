@@ -1,4 +1,4 @@
-import React, {useState}  from 'react'
+import React, {useState, useEffect}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -13,8 +13,25 @@ export default function Todaylist({route, navigation}) {
   const {date} = route.params
 
   const [modalOpen, setModalOpen] = useState(false)
+  const [today, setToday] = useState()
 
-  const todaylist = useSelector((state) => state.data.events)
+  const allList = useSelector((state) => state.data.events)
+
+  const todaylist = []
+
+  useEffect(() => {
+    allList.map(event => {
+      console.log(event.date)
+      console.log(date)
+      if(event.date === date) {
+        todaylist.push(event)
+      }
+    })
+    setToday(todaylist)
+    console.log(todaylist)
+    console.log(allList)
+  },[])
+  
 
   return (
     <View>
@@ -26,7 +43,7 @@ export default function Todaylist({route, navigation}) {
                         style={style.modalToggle}
                         onPress={() => setModalOpen(false)}
                     />
-                      <Addtoday setModalOpen={setModalOpen} />
+                      <Addtoday setModalOpen={setModalOpen} date={date} />
                 </View>
             </Modal>
             <Icon 
@@ -39,12 +56,12 @@ export default function Todaylist({route, navigation}) {
             
 
             <FlatList
-                data={todaylist.sort((a, b) => { return b.rank - a.rank; })}
+                data={today}
                 renderItem={({ item,index}) => (
                   <View style={style.card}>
                     <View style={style.cardcon}>
                       <TouchableOpacity onPress={() => navigation.navigate('TodayListDetail', item )}>
-                          <Text key={index} style={style.fontSize}>{item.Event}{item.time}</Text>
+                          <Text key={index} style={style.fontSize}>{item.event}{item.time}</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
