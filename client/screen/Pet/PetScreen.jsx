@@ -48,11 +48,11 @@ export default function PetScreen({navigation}) {
             </TouchableOpacity>
 
           <TouchableOpacity style={styles.button1}>
-            <Button color="black" title='ขอกำลังใจหน่อย' onPress={() => FirstBtnClick()} />
+            <Button color="gray" title='ขอกำลังใจหน่อย' onPress={() => FirstBtnClick()} />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button2} >
-            <Button color="brown" title='ทำอะไรดีน้า' onPress={() => SecondBtnClick()} />
+            <Button color="gray" title='ทำอะไรดีน้า' onPress={() => SecondBtnClick()} />
           </TouchableOpacity>
         </SafeAreaView>
       );

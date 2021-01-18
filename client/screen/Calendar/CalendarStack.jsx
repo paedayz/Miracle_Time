@@ -17,7 +17,7 @@ const CalendarStackScreen = ({navigation}) => {
           name="Calendar" 
           component={CalendarScreen} 
           options={{
-            title:'Home',
+            title:'Calendar',
             headerLeft: () => (
               <Icon.Button 
                 name="menu" 

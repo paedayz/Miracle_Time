@@ -15,7 +15,7 @@ const Tab = createMaterialBottomTabNavigator();
 export default function TabFunction () {
     return (
         <Tab.Navigator
-          initialRouteName="Home"
+          initialRouteName="Calendar"
           activeColor="#fff"
         >
           <Tab.Screen
@@ -23,7 +23,7 @@ export default function TabFunction () {
             component={CalendarStackScreen}
             options={{
               tabBarLabel: 'Calendar',
-              tabBarColor: '#185696',
+              tabBarColor: '#4A9FFF',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="calendar" color={color} size={26} />
               ),
@@ -34,7 +34,7 @@ export default function TabFunction () {
             component={SocialStackScreen}
             options={{
               tabBarLabel: 'Social',
-              tabBarColor: '#88c7dc',
+              tabBarColor: '#6170D7',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="earth" color={color} size={26} />
               ),
@@ -45,7 +45,7 @@ export default function TabFunction () {
             component={StatsStackScreen}
             options={{
               tabBarLabel: 'Stats',
-              tabBarColor: '#aec3b0',
+              tabBarColor: '#008891',
               tabBarIcon: ({ color }) => (
                 <Octicons name="graph" color={color} size={26} />
               ),
@@ -56,7 +56,7 @@ export default function TabFunction () {
             component={QuestArchieveStackScreen}
             options={{
               tabBarLabel: 'Q/A',
-              tabBarColor: '#d3a9ab',
+              tabBarColor: '#20E1D4',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
               ),
@@ -67,7 +67,7 @@ export default function TabFunction () {
             component={PetStackScreen}
             options={{
               tabBarLabel: 'Pet',
-              tabBarColor: '#e09873',
+              tabBarColor: '#B9CE8D',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="dog" color={color} size={26} />
               ),
