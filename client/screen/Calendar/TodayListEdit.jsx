@@ -18,7 +18,7 @@ const Edittodaylist = () => {
             initialValues={{ Event: Event, time: time , detail: detail, key: key}}  
             onSubmit={(values) => {
                 dispatch({type: 'SET_DATA', payload: values})
-                navigation.navigate('Todaylist')
+                navigation.navigate('TodayList')
             }}
         >
         {(props) => (

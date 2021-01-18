@@ -26,7 +26,7 @@ export default function Todaylist({route, navigation}) {
                         style={style.modalToggle}
                         onPress={() => setModalOpen(false)}
                     />
-                      <Addtoday />
+                      <Addtoday setModalOpen={setModalOpen} />
                 </View>
             </Modal>
             <Icon 

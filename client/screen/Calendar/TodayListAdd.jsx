@@ -7,7 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import RNPickerSelect from 'react-native-picker-select';
 
 
-const Addtodaylist = () => {
+const Addtodaylist = (props) => {
 
     const dispatch = useDispatch()
 
@@ -20,6 +20,7 @@ const Addtodaylist = () => {
                     values.key = Math.random().toString()
                     dispatch({type:'ADD_EVENT', payload: values})
                     {console.log(values.rank)}
+                    props.setModalOpen(false)
                 }}
             >
                 {(props) => (
