@@ -10,7 +10,8 @@ import {Provider} from 'react-redux'
 // Screen
 import Home from './screen/Home'
 import Detail from './screen/Detail'
-import Stats from './screen/Stats'
+import OverallStats from './screen/OverallStats'
+import WeeklyStats from './screen/WeeklyStats'
 
 let axiosDefaults = require("axios/lib/defaults");
 axiosDefaults.baseURL =`http://${config.IPAddress}:3003`;
@@ -23,8 +24,9 @@ export default function App() {
       <NavigationContainer>
           <Stack.Navigator initialRouteName='Home'>
             <Stack.Screen name='Home' component={Home}/>
-            <Stack.Screen name='Details' component={Detail}/>
-            <Stack.Screen name='Stats' component={Stats} options={{ title: 'Detail Page' }}/>
+            <Stack.Screen name='Details' component={Detail} options={{ title: 'Detail Page' }}/>
+            <Stack.Screen name='OverallStats' component={OverallStats}/>
+            <Stack.Screen name='WeeklyStats' component={WeeklyStats}/>
           </Stack.Navigator>
       </NavigationContainer>
     </Provider>

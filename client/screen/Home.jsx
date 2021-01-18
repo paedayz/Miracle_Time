@@ -25,7 +25,7 @@ export default function App() {
   }
 
   const GotoDetailClick = () => {
-    navigation.navigate('Details')
+    navigation.navigate('OverallStats')
   }
 
   return (
