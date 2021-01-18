@@ -1,16 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { SafeAreaView, Text, Button } from 'react-native';
 
 // Component
 import Calendar from './Calendar'
 
 // Redux
-import {useSelector} from "react-redux"
+import {useSelector, useDispatch} from "react-redux"
+import {getAllEvents} from "../../redux/action/dataAction"
 
 export default function CalendarScreen({navigation}) {
-
+  const dispatch = useDispatch()
   const userEventdata = useSelector(state => state.data.events)
-  console.log('event',userEventdata)
+  
+  useEffect(() => {
+    console.log(userEventdata)
+    if(userEventdata.length === 0){
+      dispatch(getAllEvents())
+    }
+    
+  }, [])
     
       return (
         <SafeAreaView style={{ flex: 1 }}>

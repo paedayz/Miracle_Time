@@ -17,7 +17,7 @@ const Edittodaylist = () => {
         <Formik
             initialValues={{ Event: Event, time: time , detail: detail, key: key}}  
             onSubmit={(values) => {
-                dispatch({type: 'SET_DATA', payload: values})
+                dispatch({type: 'EDIT_EVENT', payload: values})
                 navigation.navigate('TodayList')
             }}
         >

@@ -1,23 +1,19 @@
-import {SET_DATA, ADD_EVENT,DELETE_EVENT} from "../type"
+import {SET_EVENT, EDIT_EVENT, ADD_EVENT,DELETE_EVENT} from "../type"
 
 const initialState = {
     user: {},
     data: [],
-    events: [
-        {
-            event: 'กินข้าวเที่ยง',
-            time: '13.00-15.00',
-            detail: 'กินกับแม่',
-            key: '1.0',
-            rank: 1,
-            date:'2021-01-18'
-        }
-    ],
+    events: [],
 }
 
 export default function (state = initialState, action){
     switch (action.type) {
-        case SET_DATA :
+        case SET_EVENT :
+            return {
+                ...state,
+                events : action.payload
+            }
+        case EDIT_EVENT :
             let nowEvents = state.events
             let newEvents = []
             console.log('nowEvent-----',nowEvents)

@@ -22,9 +22,6 @@ export default function DetailToday({navigation}) {
         }
     ])
 
-    // console.log('listtoday')
-    // console.log(todaylist)
-
     const [modalOpen, setModalOpen] = useState(false)
     
 
