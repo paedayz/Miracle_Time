@@ -21,15 +21,11 @@ export default function Todaylist({route, navigation}) {
 
   useEffect(() => {
     allList.map(event => {
-      console.log(event.date)
-      console.log(date)
       if(event.date === date) {
         todaylist.push(event)
       }
     })
     setToday(todaylist)
-    console.log(todaylist)
-    console.log(allList)
   },[])
   
 

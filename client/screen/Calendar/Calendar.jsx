@@ -109,7 +109,7 @@ export default class AgendaScreen extends Component {
     }
     return (
       <TouchableOpacity
-        style={{height: 20}}
+        style={[styles.item, {height: 20, backgroundColor: '#EBEBEB'}]}
         onPress={() => this.props.navigation.navigate('TodayList', data)}
       >
         <View style={styles.emptyDate}>

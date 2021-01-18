@@ -2,10 +2,12 @@ import React from 'react'
 import { StyleSheet, Text, View,Button } from 'react-native'
 import { Formik } from 'formik'
 import { TextInput } from 'react-native-gesture-handler'
-import { useDispatch } from 'react-redux'
 import DropDownPicker from 'react-native-dropdown-picker';
 import RNPickerSelect from 'react-native-picker-select';
 
+// Redux
+import { useDispatch } from 'react-redux'
+import {addEvent} from '../../redux/action/dataAction'
 
 const Addtodaylist = (props) => {
 
@@ -17,7 +19,7 @@ const Addtodaylist = (props) => {
                 initialValues={{ event: '', time: '', detail: '', key: '',rank: '',date: props.date}}  
                 onSubmit={(values) => {
                     values.key = Math.random().toString()
-                    dispatch({type:'ADD_EVENT', payload: values})
+                    dispatch(addEvent(values))
                     props.setModalOpen(false)
                 }}
             >

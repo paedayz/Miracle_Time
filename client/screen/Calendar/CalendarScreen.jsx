@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { SafeAreaView, Text, Button } from 'react-native';
 
 // Component
@@ -13,7 +13,6 @@ export default function CalendarScreen({navigation}) {
   const userEventdata = useSelector(state => state.data.events)
   
   useEffect(() => {
-    console.log(userEventdata)
     if(userEventdata.length === 0){
       dispatch(getAllEvents())
     }
