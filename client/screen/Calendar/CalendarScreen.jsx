@@ -17,7 +17,7 @@ export default function CalendarScreen({navigation}) {
       dispatch(getAllEvents())
     }
     
-  }, [])
+  }, [userEventdata])
     
       return (
         <SafeAreaView style={{ flex: 1 }}>

@@ -3,7 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
+// Screen
 import StatsScreen from './StatsScreen'
+
 
 const StatsStack = createStackNavigator()
 
@@ -26,6 +28,8 @@ const StatsStackScreen = ({navigation}) => {
             )
           }}
         />
+      <StatsStack.Screen name="OverallStats" component={StatsScreen} />
+      <StatsStack.Screen name="WeeklyStats" component={StatsScreen} />
       </StatsStack.Navigator>
     )
   }
