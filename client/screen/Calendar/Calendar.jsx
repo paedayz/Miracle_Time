@@ -16,7 +16,7 @@ export default class AgendaScreen extends Component {
             this.state.items[item.date] = []
         }
         this.state.items[item.date].push({
-            height: Math.max(50, Math.floor(Math.random() * 150)),
+            height: 80,
             name: item.name,
             date: item.date,
             time: item.time

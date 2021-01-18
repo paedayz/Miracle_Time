@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Button, TextInput, Text } from 'react-native'
+import { View, Button, TextInput, Text, StyleSheet } from 'react-native'
 
 // Redux
 import {useDispatch} from "react-redux"
@@ -21,21 +21,24 @@ export function Login  () {
     }
 
     return (
-        <View style={{marginTop:30}}>
-            <TextInput
-                placeholder="email"
+        <View style={styles.headerView}>
+            <Text style={styles.headerText}>Miracle time</Text>
+            <TextInput style={styles.input}
+                placeholder=" Email"
                 onChangeText={(email) => setEmail(email)}
             />
-            <TextInput
-                placeholder="password"
+            <TextInput style={styles.input}
+                placeholder=" Password"
                 secureTextEntry={true}
                 onChangeText={(password) =>setPassword(password)}
             />
 
-            <Button
-                onPress={() => onSignUp()}
-                title="Sign In"
-            />
+            <View style={styles.button}>
+                <Button
+                    onPress={() => onSignUp()}
+                    title="Log In"
+                />
+            </View>
         </View>
     )
     
@@ -61,29 +64,32 @@ export function Register() {
     }
 
     return (
-        <View style={{marginTop:30}}>
-            <TextInput
-                placeholder="email"
+        <View style={styles.headerView}>
+            <Text style={styles.headerText}>Miracle time</Text>
+            <TextInput  style={styles.input}
+                placeholder=" Email"
                 onChangeText={(email) => setEmail(email)}
             />
-            <TextInput
-                placeholder="password"
+            <TextInput  style={styles.input}
+                placeholder=" Password"
                 secureTextEntry={true}
                 onChangeText={(password) =>setPassword(password)}
             />
-            <TextInput
-                placeholder="username"
+            <TextInput  style={styles.input}
+                placeholder=" Username"
                 onChangeText={(username) =>setUsername(username)}
             />
-            <TextInput
-                placeholder="nickname"
+            <TextInput  style={styles.input}
+                placeholder=" Nickname"
                 onChangeText={(nickname) =>setNickname(nickname)}
             />
 
-            <Button
-                onPress={() => onSignUp()}
-                title="Sign up"
-            />
+            <View style={styles.button}>
+                <Button 
+                    onPress={() => onSignUp()}
+                    title="Register"
+                />
+            </View>
         </View>
     )
     
@@ -98,17 +104,62 @@ export default function auth() {
 
     if(mode) {
         return (
-            <View>
+            <View style={styles.footerView}>
                 <Login/>
-                <Button onPress={() => changeMode()} title="Mode" />
+                <Text style={styles.text}>Don't have an account?</Text>
+                <Text style={styles.footerText} 
+                onPress={() => changeMode()}>Register</Text>
             </View>
         )
     } else {
         return (
-            <View>
+            <View style={styles.footerView}>
                 <Register/>
-                <Button onPress={() => changeMode()} title="Mode" />
+                <Text style={styles.text}>Have an account?</Text>
+                <Text style={styles.footerText} 
+                onPress={() => changeMode()}>Log in</Text>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    headerText: {
+        textAlign: 'center',
+        fontSize: 28,
+        color: '#2296F3',
+        marginBottom: 30,
+    },
+    headerView: {
+        marginTop:150,
+        justifyContent: 'center'
+    },
+    input: {
+        marginHorizontal: 60,
+        marginBottom: 15,
+        fontSize: 16,
+        borderWidth: 1,
+        borderColor: 'gray',
+        backgroundColor: '#f2f2f2',
+        padding: 5
+    },
+    button: {
+        marginHorizontal: 120,
+        marginVertical: 15,
+        justifyContent: 'center'
+    },
+    text: {
+        textAlign: 'center',
+        fontSize: 16,
+        color: 'black',
+    },
+    footerText: {
+        textAlign: 'center',
+        fontSize: 16,
+        color: '#2296F3',
+        marginHorizontal: 165
+    },
+    footerView: {
+        justifyContent: 'center'
+    }
+  });
