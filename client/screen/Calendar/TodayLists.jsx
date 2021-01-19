@@ -42,13 +42,17 @@ export default function Todaylist({route, navigation}) {
                       <Addtoday setModalOpen={setModalOpen} date={date} />
                 </View>
             </Modal>
-            <Icon 
-                name="plus" 
-                size={20} 
-                style={style.modalToggle}
-                onPress={() => setModalOpen()}
-            />
-
+            
+            <View style={{flexDirection: 'row'}}>
+              <Icon 
+                  name="plus-square" 
+                  size={30} 
+                  color='gray'
+                  style={{marginTop:10, marginBottom:10, marginLeft:280}}
+                  onPress={() => setModalOpen()}
+              />
+              <Text style={{fontSize:18, marginTop: 13, marginLeft: 5}}>ADD</Text>
+            </View>
             
 
             <FlatList
@@ -65,16 +69,16 @@ export default function Todaylist({route, navigation}) {
                           }}
                         >
                           {item.rank === "1" &&
-                            <View style={{ backgroundColor: 'red', width: 40, marginRight:20 }} />
+                            <View style={{ backgroundColor: '#FF5733', width: 40, marginRight:20 }} />
                           }
                           {item.rank === "2" &&
-                            <View style={{ backgroundColor: 'yellow', width: 40, marginRight:20 }} />
+                            <View style={{ backgroundColor: '#FFC300', width: 40, marginRight:20 }} />
                           }
                           {item.rank === "3" &&
-                            <View style={{ backgroundColor: 'green', width: 40, marginRight:20 }} />
+                            <View style={{ backgroundColor: '#ABFFA6', width: 40, marginRight:20 }} />
                           }
                           
-                          <Text key={index} style={style.fontSize}>{item.event}    {item.time}</Text>
+                          <Text key={index} style={style.fontSize}>{item.time}    {item.event}</Text>
                         </View>
                       </TouchableOpacity>
                     </View>
