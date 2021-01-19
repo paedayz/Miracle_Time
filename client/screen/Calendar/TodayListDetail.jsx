@@ -9,28 +9,18 @@ import Edittodaylist from './TodayListEdit'
 export default function DetailToday({navigation}) {
     
     const route = useRoute() 
-    const { Event,detail,time,key } = route.params
+    const { event,detail,time,key } = route.params
     const dispatch = useDispatch()
-    const values = { Event,detail,time,key }
-
-    const [todaylist, setTodaylist] = useState([
-        {
-          Event:route.params.event,
-          time:route.params.time, 
-          detail:route.params.detail, 
-          key:route.params.key
-        }
-    ])
 
     const [modalOpen, setModalOpen] = useState(false)
     
 
     return (
-        <View>
+        <View style={style.container}>
             <View style={style.card}>
                 <View style={style.cardcon}>
-                    <Text style={style.fontSize}>{Event}</Text>
-                    <Text style={style.fontSize}>{time}</Text>
+                    <Text style={{ fontSize: 25}}>{event}</Text>
+                    <Text style={{fontSize:18,color: 'gray',marginBottom: 20}}>{time}</Text>
                     <Text style={style.fontSize}>{detail}</Text>
                 </View>
             </View>
@@ -48,17 +38,22 @@ export default function DetailToday({navigation}) {
                 </View>
             </Modal>
 
-
-            <Button
-            color="yellow"
-            title="Edit"
-            onPress={() => setModalOpen()}
-            />
-            <Button
-            color="blue"
-            title="Delete"
-            onPress={() => dispatch({type: 'DELETE_EVENT', payload: values}, navigation.navigate('Todaylist'))}
-            />
+            <View style={{marginBottom:10, marginTop: 10, flexDirection:'row'}}>
+              <Button
+                color="#7686CA"
+                title="Edit"
+                // onPress={() => setModalOpen()}
+              />
+              <View style={{marginLeft: 20}}>
+                <Button
+                  color="#FB8888"
+                  title="Delete"
+                  // onPress={() => dispatch({type: 'DELETE_EVENT', payload: values}, navigation.navigate('Todaylist'))}
+                />
+              </View>
+            </View>
+            
+            
 
 
         
@@ -67,8 +62,15 @@ export default function DetailToday({navigation}) {
 }
 
 const style = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     card: {
       borderRadius: 6,
+      width: 320 ,
+      height: 300,
       elevation: 3,
       backgroundColor: '#fff',
       shadowOffset: { width: 1 , height: 1 },
