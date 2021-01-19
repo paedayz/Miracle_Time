@@ -30,7 +30,7 @@ export default function Todaylist({route, navigation}) {
   
 
   return (
-    <View>
+    <View style={style.container}>
             <Modal visible={modalOpen} animationType={'slide'}>
                 <View>
                     <Icon 
@@ -60,12 +60,21 @@ export default function Todaylist({route, navigation}) {
                         <View
                           style={{
                             flexDirection: "row",
-                            height: 100,
+                            height: 65,
                             padding: 20
                           }}
                         >
-                          <View style={{ backgroundColor: 'red', flex: 0.3 }} />
-                          <Text key={index} style={style.fontSize}>{item.event}{item.time}</Text>
+                          {item.rank === "1" &&
+                            <View style={{ backgroundColor: 'red', width: 40, marginRight:20 }} />
+                          }
+                          {item.rank === "2" &&
+                            <View style={{ backgroundColor: 'yellow', width: 40, marginRight:20 }} />
+                          }
+                          {item.rank === "3" &&
+                            <View style={{ backgroundColor: 'green', width: 40, marginRight:20 }} />
+                          }
+                          
+                          <Text key={index} style={style.fontSize}>{item.event}    {item.time}</Text>
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -79,6 +88,11 @@ export default function Todaylist({route, navigation}) {
 }
 
 const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   card: {
     borderRadius: 6,
     elevation: 3,
@@ -100,10 +114,9 @@ const style = StyleSheet.create({
   }, 
   modalToggle:{
     marginBottom: 5,
-    borderWidth: 1,
     borderColor: '#FFF',
     backgroundColor: '#fff',
-    padding: 15,
+    padding: 12,
     borderRadius: 100,
     alignSelf: 'center',
     marginTop: 15
