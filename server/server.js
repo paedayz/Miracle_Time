@@ -10,7 +10,7 @@ let FBAuth = require('./util/FBAuth')
 
 // import functions
 let {signup, login, checkAuthen, signout, uploadImage} = require('./handler/user')
-let {getAllEvents, addEvent} = require('./handler/data')
+let {getAllEvents, addEvent, editEvent} = require('./handler/data')
 
 // User Route
 app.post('/signup',signup)
@@ -22,6 +22,7 @@ app.post('/uploadImage', uploadImage)
 // Data Route
 app.get('/getAllEvents',FBAuth, getAllEvents)
 app.post('/addEvent', FBAuth, addEvent)
+app.post('/editEvent', FBAuth, editEvent)
 
 
 app.listen(app.get("port"), function () {
