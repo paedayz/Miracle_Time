@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
 import {getAuthen} from '../redux/action/userAction'
+import {getAllEvents} from '../redux/action/dataAction'
 
 // Screen
 import AuthScreen from './Auth/AuthScreen'
@@ -23,11 +24,19 @@ const Drawer = createDrawerNavigator()
 export default function Screen({navigation}) {
     const userData = useSelector(state => state.user.userData)
     const loading = useSelector(state => state.system.loading)
+    const userEventData = useSelector(state => state.data.events)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAuthen())
-    }, [])
+        console.log(userData)
+        if(!userData) {
+            console.log('what')
+            dispatch(getAuthen())
+        }
+        if(userData) {
+            dispatch(getAllEvents(userEventData))
+        }
+    }, [userData])
 
     if(loading) {
         return (

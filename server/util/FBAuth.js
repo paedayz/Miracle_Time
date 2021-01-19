@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
     }
     if (user != null) {
         uid = user.uid
-        firestore.collection('users').where('uid', '==', uid).limit(1).get()
+        firestore.collection('users').where('userId', '==', uid).limit(1).get()
             .then((snapshot) => {
                 snapshot.forEach(function(doc){
                     req.user.username = doc.data().username;

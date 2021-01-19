@@ -1,17 +1,18 @@
 import axios from 'axios'
 import {LOADING_DATA, LOADING_COMPLETE, SET_EVENT} from "../type"
 
-export const getAllEvents = () => (dispatch) => {
+export const getAllEvents = (oldEvents) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.get('/getAllEvents')
         .then((res) => {
-            dispatch({type: "SET_EVENT", payload: res.data.data})
+            if(res.data.data.length !== oldEvents.length){
+                console.log('wow')
+                dispatch({type: "SET_EVENT", payload: res.data.data})
+            }
             dispatch({type: LOADING_COMPLETE})
-            return res.data.data.length
         })
         .catch((err) => {
             console.log(err)
-            return 0
         })
 }
 

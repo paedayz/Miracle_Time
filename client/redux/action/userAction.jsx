@@ -1,14 +1,20 @@
 import axios from 'axios'
-import {LOADING_DATA, LOADING_COMPLETE, SET_USER_DATA} from '../type'
+import {LOADING_DATA, LOADING_COMPLETE, SET_USER_DATA, SET_EVENT} from '../type'
 
 export const getAuthen = ()=> (dispatch) => {
+    dispatch({type: LOADING_DATA})
     axios.get('/authen').then((res) => {
-        if(res.data.data) {
-            dispatch({type: SET_USER_DATA, payload: res.data.data})
+        if(res.data.userData) {
+            dispatch({type: SET_USER_DATA, payload: res.data.userData})
         }
+        if(res.data.eventData) {
+            dispatch({type: SET_EVENT, payload: res.data.eventData})
+        }
+        dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {
         console.log(err)
+        dispatch({type: LOADING_COMPLETE})
     })
 }
 

@@ -57,7 +57,16 @@ export default function Todaylist({route, navigation}) {
                   <View style={style.card}>
                     <View style={style.cardcon}>
                       <TouchableOpacity onPress={() => navigation.navigate('TodayListDetail', item )}>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            height: 100,
+                            padding: 20
+                          }}
+                        >
+                          <View style={{ backgroundColor: 'red', flex: 0.3 }} />
                           <Text key={index} style={style.fontSize}>{item.event}{item.time}</Text>
+                        </View>
                       </TouchableOpacity>
                     </View>
                   </View>

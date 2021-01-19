@@ -104,14 +104,31 @@ exports.login = (req, res) => {
 
 exports.checkAuthen = (req, res) => {
   console.log('check')
+  let userData = {}
   firebase.auth().onAuthStateChanged((user) => {
-    
     if(user) {
       let userId = user.uid
       firestore.collection('users').where('userId', '==', userId).get()
         .then((snapshot) => {
           snapshot.forEach(function(doc){
-            return res.json({data : doc.data()}) 
+            userData = doc.data()
+            // return res.json({data : doc.data()})
+            return firestore.collection('events').where('username', '==', doc.data().username).get() 
+        })
+        .then((snapshot) => {
+          let data = []
+            snapshot.forEach(function(doc){
+                let newData = {
+                    date: doc.data().date,
+                    detail: doc.data().detail,
+                    event: doc.data().event,
+                    key: doc.data().key,
+                    rank: doc.data().rank,
+                    time: doc.data().time,
+                }
+                data.push(newData)
+            })
+            return res.json({eventData: data, userData: userData})
         })
       })
     } else {
