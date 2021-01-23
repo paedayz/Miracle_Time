@@ -8,7 +8,7 @@ import {useSelector} from 'react-redux'
 const CalendarsScreen = ({navigation}) => {
   const now = new Date()
   const userEvents = useSelector(state => state.data.events)
-  const [isData, setIsdata] = useState(false)
+  const [isData, setIsdata] = useState(true)
   const [data, setData] = useState({})
   // let markedData = {
   //   '2021-01-25': {
@@ -30,25 +30,27 @@ const CalendarsScreen = ({navigation}) => {
   useEffect(() => {
     let markedData = {}
     userEvents.map((event) => {
-      if(Object.keys(markedData).length !== 0) {
-        console.log('yes')
-      } else {
-        console.log('no')
-      }
       let day = event.date.toString()
-      if(!markedData[day]) {
-        markedData[day] = {
-          selected: false,
-          dots: [
-            {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
-          ]
+        if(event.success) {
+          markedData[day] = {
+            selected: false,
+            dots: [
+              {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
+            ]
+          }
+        } else {
+          markedData[day] = {
+            selected: false,
+            dots: [
+              {key: 'vacation', color: 'red', selectedDotColor: 'red'},
+            ]
+          }
         }
-      }
       if(Object.keys(markedData).length !== 0) {
         setIsdata(true)
         setData(markedData)
       } else {
-        setIsdata(false)
+        setIsdata(true)
       }
     })
   },[])

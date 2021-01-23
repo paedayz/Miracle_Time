@@ -32,7 +32,8 @@ exports.addEvent = (req, res) => {
         key: eventData.key,
         rank: eventData.rank,
         time: eventData.time,
-        username: req.user.username
+        username: req.user.username,
+        success : eventData.success
     }
     firestore.collection('events').add(newData)
         .then(() => {

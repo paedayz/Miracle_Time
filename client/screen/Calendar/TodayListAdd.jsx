@@ -16,7 +16,7 @@ const Addtodaylist = (props) => {
     return (
         
             <Formik
-                initialValues={{ event: '', time: '', detail: '', key: '',rank: '',date: props.date}}  
+                initialValues={{ event: '', time: '', detail: '', key: '',rank: '',date: props.date, success: false}}  
                 onSubmit={(values) => {
                     values.key = Math.random().toString()
                     dispatch(addEvent(values))
