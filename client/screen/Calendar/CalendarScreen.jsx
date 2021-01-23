@@ -12,7 +12,7 @@ export default function CalendarScreen({navigation}) {
     
       return (
         <SafeAreaView style={{ flex: 1 }}>
-          <Calendar userEventdata={userEventdata} navigation={navigation} />
+          <Calendar navigation={navigation}/>
         </SafeAreaView>
       );
 }

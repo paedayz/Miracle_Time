@@ -3,7 +3,10 @@ import { StyleSheet, Text, View,Button } from 'react-native'
 import { Formik } from 'formik'
 import { TextInput } from 'react-native-gesture-handler'
 import { useRoute, useNavigation }  from '@react-navigation/native'
+
+// Redux
 import { useDispatch, useSelector } from 'react-redux'
+import {editEvent} from '../../redux/action/dataAction'
 
 const Edittodaylist = () => {
 
@@ -17,8 +20,8 @@ const Edittodaylist = () => {
         <Formik
             initialValues={{ Event: Event, time: time , detail: detail, key: key}}  
             onSubmit={(values) => {
-                dispatch({type: 'EDIT_EVENT', payload: values})
-                navigation.navigate('TodayList')
+                // dispatch(editEvent(values))
+                // navigation.navigate('TodayList')
             }}
         >
         {(props) => (

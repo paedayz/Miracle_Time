@@ -28,15 +28,9 @@ export default function Screen({navigation}) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log(userData)
-        if(!userData) {
-            console.log('what')
-            dispatch(getAuthen())
-        }
-        if(userData) {
-            dispatch(getAllEvents(userEventData))
-        }
-    }, [userData])
+        dispatch(getAuthen())
+        dispatch(getAllEvents())
+    }, [])
 
     if(loading) {
         return (
