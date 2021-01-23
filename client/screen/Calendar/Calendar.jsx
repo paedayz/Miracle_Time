@@ -1,5 +1,5 @@
-import React, {useState, Fragment} from 'react';
-import {StyleSheet, View, ScrollView, Text, TouchableOpacity} from 'react-native';
+import React, {useState, Fragment, useEffect} from 'react';
+import {StyleSheet, View, ScrollView, Text, TouchableOpacity, SafeAreaView} from 'react-native';
 import {Calendar} from 'react-native-calendars';
 
 // Redux
@@ -8,42 +8,72 @@ import {useSelector} from 'react-redux'
 const CalendarsScreen = ({navigation}) => {
   const now = new Date()
   const userEvents = useSelector(state => state.data.events)
-  let markedData = {
-    '2021-01-25': {
-      selected: true,
-      dots: [
-        {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
-        {key: 'massage', color: 'red', selectedDotColor: 'white'},
-      ]
-    },
-    '2021-01-27': {
-      disabled: true,
-      dots: [
-        {key: 'vacation', color: 'green', selectedDotColor: 'red'},
-        {key: 'massage', color: 'red', selectedDotColor: 'green'}
-      ]
-    }
-  }
-  
-  markedData['2021-01-28'] = {
-    selected: true,
-      dots: [
-        {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
-        {key: 'massage', color: 'red', selectedDotColor: 'white'},
-      ]
+  const [isData, setIsdata] = useState(false)
+  const [data, setData] = useState({})
+  // let markedData = {
+  //   '2021-01-25': {
+  //     selected: true,
+  //     dots: [
+  //       {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
+  //       {key: 'massage', color: 'red', selectedDotColor: 'white'},
+  //     ]
+  //   },
+  //   '2021-01-27': {
+  //     disabled: true,
+  //     dots: [
+  //       {key: 'vacation', color: 'green', selectedDotColor: 'red'},
+  //       {key: 'massage', color: 'red', selectedDotColor: 'green'}
+  //     ]
+  //   }
+  // }
+
+  useEffect(() => {
+    let markedData = {}
+    userEvents.map((event) => {
+      if(Object.keys(markedData).length !== 0) {
+        console.log('yes')
+      } else {
+        console.log('no')
+      }
+      let day = event.date.toString()
+      if(!markedData[day]) {
+        markedData[day] = {
+          selected: false,
+          dots: [
+            {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
+          ]
+        }
+      }
+      if(Object.keys(markedData).length !== 0) {
+        setIsdata(true)
+        setData(markedData)
+      } else {
+        setIsdata(false)
+      }
+    })
+  },[])
+
+  if(isData) {
+    return (
+      <Fragment>
+        <Calendar
+          style={styles.calendar}
+          current={now}
+          markingType={'multi-dot'}
+          markedDates={data}
+          onDayPress={(day) => {navigation.navigate('TodayList',{date:day.dateString}) }}
+        />
+      </Fragment>
+    );
+  } else {
+    return (
+      <SafeAreaView>
+        <Text>Loading</Text>
+      </SafeAreaView>
+    )
   }
 
-  return (
-    <Fragment>
-      <Calendar
-        style={styles.calendar}
-        current={now}
-        markingType={'multi-dot'}
-        markedDates={markedData}
-        onDayPress={(day) => {navigation.navigate('TodayList',{date:day.dateString}) }}
-      />
-    </Fragment>
-  );
+  
 
 };
 
