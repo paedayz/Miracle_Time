@@ -29,7 +29,7 @@ export default function Screen({navigation}) {
 
     useEffect(() => {
         dispatch(getAuthen())
-    }, [])
+    }, [userData])
 
     if(userData && !userEventData){
         dispatch(getAllEvents())

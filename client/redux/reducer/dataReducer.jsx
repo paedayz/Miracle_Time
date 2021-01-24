@@ -13,18 +13,16 @@ export default function (state = initialState, action){
                 ...state,
                 events : action.payload
             }
-            
+
         case EDIT_EVENT :
             let nowEvents = state.events
             let newEvents = []
-            console.log('nowEvent-----',nowEvents)
             nowEvents.map((event) => {
                 if(event.key === action.payload.key) {
                     event = action.payload
                 }
                 newEvents.push(event)
             })
-            console.log('newEvent-----',newEvents)
             return {
                 ...state,
                 events: newEvents

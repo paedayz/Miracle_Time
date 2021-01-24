@@ -130,6 +130,10 @@ exports.checkAuthen = (req, res) => {
             })
             return res.json({eventData: data, userData: userData})
         })
+        .catch((err) => {
+          console.log(err)
+          return res.json({error: err})
+        })
     } else {
       return res.json({error: 'something went wrong'})
     }

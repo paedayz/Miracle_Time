@@ -4,10 +4,10 @@ import {LOADING_DATA, LOADING_COMPLETE, SET_USER_DATA, SET_EVENT, CLEAR_SESSION}
 export const getAuthen = ()=> (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.get('/authen').then((res) => {
-        if(res.data.userData) {
-            console.log('user')
-            dispatch({type: SET_USER_DATA, payload: res.data.userData})
-        }
+        // if(res.data.userData) {
+        //     console.log('user')
+        //     dispatch({type: SET_USER_DATA, payload: res.data.userData})
+        // }
         if(res.data.eventData) {
             console.log('events')
             dispatch({type: SET_EVENT, payload: res.data.eventData})
@@ -23,7 +23,6 @@ export const getAuthen = ()=> (dispatch) => {
 export const login = (userData) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/login', userData).then((res) => {
-        console.log('success')
         dispatch({type: SET_USER_DATA, payload: res.data.data})
         dispatch({type: LOADING_COMPLETE})
     })
