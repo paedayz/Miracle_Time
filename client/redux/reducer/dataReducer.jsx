@@ -6,8 +6,10 @@ const initialState = {
     events: [
         {
             Event: 'Event A',
-            time: '13.00-13.30', 
+            start: "19.00",
+            end: "20.00",
             detail: 'LLLLL', 
+            catagory: 'งาน',
             key: '1.0',
             rank:'1'
         }

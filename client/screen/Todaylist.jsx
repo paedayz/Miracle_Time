@@ -42,7 +42,7 @@ export default function Todaylist({navigation}) {
                   <View style={style.card}>
                     <View style={style.cardcon}>
                       <TouchableOpacity onPress={() => navigation.navigate('DetailToday', item )}>
-                          <Text key={index} style={style.fontSize}>{item.Event}{item.time}</Text>
+                          <Text key={index} style={style.fontSize}>{item.Event}{item.start}:{item.end}</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -82,7 +82,7 @@ const style = StyleSheet.create({
     padding: 15,
     borderRadius: 100,
     alignSelf: 'center',
-    marginTop: 15
+    marginTop: 16
 },
   
 

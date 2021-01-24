@@ -5,17 +5,18 @@ import { TextInput } from 'react-native-gesture-handler'
 import { useRoute, useNavigation }  from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 
+
 const Edittodaylist = () => {
 
     const route = useRoute() 
     const navigation = useNavigation()
-    const { Event,detail,time,key } = route.params
+    const { Event,detail,start,catagory,end,key } = route.params
 
     const dispatch = useDispatch()
 
     return (
         <Formik
-            initialValues={{ Event: Event, time: time , detail: detail, key: key}}  
+            initialValues={{ Event: Event, start: start, end: end ,catagory: catagory, detail: detail, key: key}}  
             onSubmit={(values) => {
                 dispatch({type: 'SET_DATA', payload: values})
                 navigation.navigate('Todaylist')
@@ -32,9 +33,16 @@ const Edittodaylist = () => {
             </TextInput>
             <TextInput
                 style={styles.input}
-                placeholder={time}
-                onChangeText={props.handleChange('time')}
-                defaultValue={time}
+                placeholder={start}
+                onChangeText={props.handleChange('start')}
+                defaultValue={start}
+                >
+            </TextInput>
+            <TextInput
+                style={styles.input}
+                placeholder={end}
+                onChangeText={props.handleChange('end')}
+                defaultValue={end}
                 >
             </TextInput>
             <TextInput
@@ -45,7 +53,13 @@ const Edittodaylist = () => {
                 >
             </TextInput>
             
-            <Button title='submit' color='maroon' onPress={props.handleSubmit}></Button>
+            
+            <View style={{flex: 1, flexDirection: 'row',justifyContent:'center',marginTop:50,}}>
+              <View style={{width: 95, height: 50}}>
+                    <Button title='submit' color='#90ee90' onPress={props.handleSubmit}></Button>
+              </View>
+              
+            </View>
         </View>
     )}
     </Formik>
@@ -60,7 +74,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 20,
         fontSize: 18,
-        borderRadius: 6
+        borderRadius: 10
     },
     container:{
         flex:1,
