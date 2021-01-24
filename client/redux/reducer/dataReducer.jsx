@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {SET_DATA, ADD_EVENT,DELETE_EVENT} from "../type"
 
 const initialState = {
@@ -14,10 +15,19 @@ const initialState = {
             rank:'1'
         }
     ]
+=======
+import {SET_EVENT, EDIT_EVENT, ADD_EVENT,DELETE_EVENT, CLEAR_SESSION} from "../type"
+
+const initialState = {
+    user: {},
+    data: [],
+    events: [],
+>>>>>>> develop
 }
 
 export default function (state = initialState, action){
     switch (action.type) {
+<<<<<<< HEAD
         case SET_DATA :
             let nowEvents = state.events
             let newEvents = []
@@ -33,6 +43,28 @@ export default function (state = initialState, action){
                 ...state,
                 events: newEvents
             }
+=======
+        case SET_EVENT :
+            return {
+                ...state,
+                events : action.payload
+            }
+
+        case EDIT_EVENT :
+            let nowEvents = state.events
+            let newEvents = []
+            nowEvents.map((event) => {
+                if(event.key === action.payload.key) {
+                    event = action.payload
+                }
+                newEvents.push(event)
+            })
+            return {
+                ...state,
+                events: newEvents
+            }
+
+>>>>>>> develop
         case ADD_EVENT :
             let newList = state.events
             newList.push(action.payload)
@@ -40,6 +72,10 @@ export default function (state = initialState, action){
                 ...state,
                 events: newList
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
         case DELETE_EVENT :
             let  nowEvent = state.events
             let  newEvent = []
@@ -52,8 +88,14 @@ export default function (state = initialState, action){
                 ...state,
                 events: newEvent
             }
+<<<<<<< HEAD
 
 
+=======
+            
+        case CLEAR_SESSION :
+            return initialState
+>>>>>>> develop
 
         default :
             return state
