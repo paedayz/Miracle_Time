@@ -1,4 +1,4 @@
-import {LOADING_DATA, LOADING_COMPLETE} from "../type"
+import {LOADING_DATA, LOADING_COMPLETE, CLEAR_SESSION} from "../type"
 
 const initialState = {
     loading: false,
@@ -16,6 +16,10 @@ export default function (state = initialState, action){
                 ...state,
                 loading: false
             }
+        
+        case CLEAR_SESSION :
+            return initialState
+
         default :
             return state
     }

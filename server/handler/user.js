@@ -112,8 +112,8 @@ exports.checkAuthen = (req, res) => {
         .then((snapshot) => {
           snapshot.forEach(function(doc){
             userData = doc.data()
-            // return res.json({data : doc.data()})
-            return firestore.collection('events').where('username', '==', doc.data().username).get() 
+          })
+          return firestore.collection('events').where('username', '==', userData.username).get() 
         })
         .then((snapshot) => {
           let data = []
@@ -130,7 +130,6 @@ exports.checkAuthen = (req, res) => {
             })
             return res.json({eventData: data, userData: userData})
         })
-      })
     } else {
       return res.json({error: 'something went wrong'})
     }

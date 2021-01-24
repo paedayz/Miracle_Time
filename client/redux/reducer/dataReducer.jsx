@@ -1,4 +1,4 @@
-import {SET_EVENT, EDIT_EVENT, ADD_EVENT,DELETE_EVENT} from "../type"
+import {SET_EVENT, EDIT_EVENT, ADD_EVENT,DELETE_EVENT, CLEAR_SESSION} from "../type"
 
 const initialState = {
     user: {},
@@ -13,6 +13,7 @@ export default function (state = initialState, action){
                 ...state,
                 events : action.payload
             }
+            
         case EDIT_EVENT :
             let nowEvents = state.events
             let newEvents = []
@@ -28,6 +29,7 @@ export default function (state = initialState, action){
                 ...state,
                 events: newEvents
             }
+
         case ADD_EVENT :
             let newList = state.events
             newList.push(action.payload)
@@ -35,6 +37,7 @@ export default function (state = initialState, action){
                 ...state,
                 events: newList
             }
+
         case DELETE_EVENT :
             let  nowEvent = state.events
             let  newEvent = []
@@ -47,8 +50,9 @@ export default function (state = initialState, action){
                 ...state,
                 events: newEvent
             }
-
-
+            
+        case CLEAR_SESSION :
+            return initialState
 
         default :
             return state

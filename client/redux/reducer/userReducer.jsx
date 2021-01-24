@@ -1,4 +1,4 @@
-import {SET_USER_DATA} from '../type'
+import {SET_USER_DATA, CLEAR_SESSION} from '../type'
 
 const initialState = {
     userData : null
@@ -11,6 +11,10 @@ export default function (state = initialState, action){
                 ...state,
                 userData: action.payload
             }
+
+        case CLEAR_SESSION :
+            return initialState
+
         default :
             return state
     }

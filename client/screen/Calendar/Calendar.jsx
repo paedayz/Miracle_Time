@@ -10,6 +10,7 @@ const CalendarsScreen = ({navigation}) => {
   const userEvents = useSelector(state => state.data.events)
   const [isData, setIsdata] = useState(true)
   const [data, setData] = useState({})
+  console.log(userEvents)
   // let markedData = {
   //   '2021-01-25': {
   //     selected: true,

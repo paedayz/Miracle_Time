@@ -1,13 +1,15 @@
 import axios from 'axios'
-import {LOADING_DATA, LOADING_COMPLETE, SET_USER_DATA, SET_EVENT} from '../type'
+import {LOADING_DATA, LOADING_COMPLETE, SET_USER_DATA, SET_EVENT, CLEAR_SESSION} from '../type'
 
 export const getAuthen = ()=> (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.get('/authen').then((res) => {
         if(res.data.userData) {
+            console.log('user')
             dispatch({type: SET_USER_DATA, payload: res.data.userData})
         }
         if(res.data.eventData) {
+            console.log('events')
             dispatch({type: SET_EVENT, payload: res.data.eventData})
         }
         dispatch({type: LOADING_COMPLETE})
@@ -50,6 +52,7 @@ export const signout = () => (dispatch) => {
         .then((res) => {
             dispatch({type: SET_USER_DATA, payload: null})
             dispatch({type: LOADING_COMPLETE})
+            dispatch({type: CLEAR_SESSION})
         })
         .catch((err) => {
             console.log(err)

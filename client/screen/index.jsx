@@ -29,8 +29,11 @@ export default function Screen({navigation}) {
 
     useEffect(() => {
         dispatch(getAuthen())
-        dispatch(getAllEvents())
     }, [])
+
+    if(userData && !userEventData){
+        dispatch(getAllEvents())
+    }
 
     if(loading) {
         return (
