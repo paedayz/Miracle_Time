@@ -27,6 +27,7 @@ export default function App() {
     navigation.navigate('Stats')
   }
 
+
   return (
       <SafeAreaView style={styles.container}>
         <View style={styles.button}>
