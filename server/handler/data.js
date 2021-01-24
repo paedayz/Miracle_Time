@@ -11,7 +11,9 @@ exports.getAllEvents = (req, res) => {
                     event: doc.data().event,
                     key: doc.data().key,
                     rank: doc.data().rank,
-                    time: doc.data().time,
+                    start: doc.data().start,
+                    end: doc.data().end,
+                    catagory: doc.data().catagory,
                 }
                 data.push(newData)
             })
@@ -31,7 +33,9 @@ exports.addEvent = (req, res) => {
         event: eventData.event,
         key: eventData.key,
         rank: eventData.rank,
-        time: eventData.time,
+        start : eventData.start,
+        end : eventData.end,
+        catagory : eventData.catagory,
         username: req.user.username,
         success : eventData.success
     }
@@ -48,7 +52,9 @@ exports.addEvent = (req, res) => {
                     event: doc.data().event,
                     key: doc.data().key,
                     rank: doc.data().rank,
-                    time: doc.data().time,
+                    start: doc.data().start,
+                    end: doc.data().end,
+                    catagory: doc.data().catagory,
                 }
                 data.push(newData)
             })
@@ -68,7 +74,9 @@ exports.editEvent = (req, res) => {
         event : req.body.event,
         key : req.body.key,
         rank : req.body.rank,
-        time : req.body.time,
+        start : req.body.start,
+        end : req.body.end,
+        catagory : req.body.catagory,
         username : username,
     }
     firestore.collection('events').where('key', '==', updateData.key).limit(1).get()
@@ -89,7 +97,9 @@ exports.editEvent = (req, res) => {
                     event: doc.data().event,
                     key: doc.data().key,
                     rank: doc.data().rank,
-                    time: doc.data().time,
+                    start: doc.data().start,
+                    end: doc.data().end,
+                    catagory: doc.data().catagory,
                 }
                 data.push(newData)
             })
