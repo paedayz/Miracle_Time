@@ -9,7 +9,6 @@ import {getData} from '../redux/action/dataAction'
 // Navigation
 import {useNavigation} from '@react-navigation/native'
 
-
 export default function App() {
   const dispatch = useDispatch()
 
@@ -25,8 +24,9 @@ export default function App() {
   }
 
   const GotoDetailClick = () => {
-    navigation.navigate('OverallStats')
+    navigation.navigate('Stats')
   }
+
 
   return (
       <SafeAreaView style={styles.container}>
