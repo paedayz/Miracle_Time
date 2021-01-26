@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import PetScreen from './PetScreen'
+import GifpointScreen from './GifpointScreen'
 
 const PetStack = createStackNavigator()
 
@@ -14,7 +15,7 @@ const PetStackScreen = ({navigation}) => {
           name="Pet" 
           component={PetScreen} 
           options={{
-            title:'Pet',
+            title:'Pet sugoi',
             headerLeft: () => (
               <Icon.Button 
                 name="menu" 
@@ -26,6 +27,7 @@ const PetStackScreen = ({navigation}) => {
             )
           }}
         />
+        <PetStack.Screen name="Gif-point" component={GifpointScreen} />
       </PetStack.Navigator>
     )
   }
