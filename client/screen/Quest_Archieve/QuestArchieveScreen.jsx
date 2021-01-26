@@ -1,9 +1,11 @@
 import React from 'react';
 import { SafeAreaView, Text } from 'react-native';
-export default function App({navigation}) {
+
+export default function QuestArchieveScreen({navigation}) {
+    
       return (
         <SafeAreaView style={{ flex: 1 }}>
-          <Text>Stat</Text>
+          <Text>Quest and Archieve Screen</Text>
         </SafeAreaView>
       );
 }
