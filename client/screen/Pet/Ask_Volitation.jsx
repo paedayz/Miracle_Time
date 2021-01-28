@@ -3,17 +3,63 @@ import {StyleSheet, SafeAreaView, Text, Image, View, TouchableOpacity, Button } 
 
 export default function Ask_Volitation() {
 
-    const [volitat, setVolitat] = useState([
+    const [Volitat, setVolitat] = useState([
         {id: 1, words:"สู้ๆนะ"},
         {id: 2, words:"เธอทำได้"},
         {id: 3, words:"เธอเก่งมากๆเลย"},
         {id: 4, words:"เธอนี้โคตรเจ๋ง"}
     ])
+    const [Point, setPoint] = useState()
+    const [give_A_Point, setgive_A_Point] = useState(false)
 
-    let randomword = volitat[Math.floor(Math.random()*volitat.length)].words
+    
+    let randomed = Random(Volitat)
 
     return (
-        <Text>{randomword}</Text>
+        <View>
+            <Text>{randomed.words}</Text>
+            
+            {/* { !give_A_Point ? 
+                <TouchableOpacity style={styles.button}>
+                    
+                    <Button color="green" title='+3'  onPress={() => GivePoint()} />  เดียวลองเปลี่ยนเป็น onClick ดู
+                    <Button color="blue"  title='+2'  onPress={() => GivePoint()} />
+                    <Button color="red"   title='+1'  onPress={() => GivePoint()} />
+                    
+                </TouchableOpacity>
+              :null
+            } */}
+            <Text>{Point}</Text>
+        </View>
+        
     );
 }
+
+function Random (data) {
+
+    const random = data[Math.floor(Math.random()*data.length)]
+    return (
+        random
+    );
+}
+
+// const GivePoint = () => {
+//     setgive_A_Point(!give_A_Point);
+// }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    button: {
+      borderRadius:100
+      
+    },
+    button2: {
+      marginTop: 10,
+      marginLeft: 250
+    }
+});
 
