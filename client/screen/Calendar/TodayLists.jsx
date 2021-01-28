@@ -13,11 +13,12 @@ export default function Todaylist({route, navigation}) {
   const {date} = route.params
 
   const [modalOpen, setModalOpen] = useState(false)
-  const [today, setToday] = useState()
+  const [showData, setShowData] = useState()
 
   const allList = useSelector((state) => state.data.events)
 
   const todaylist = []
+ 
 
   useEffect(() => {
     allList.map(event => {
@@ -25,8 +26,26 @@ export default function Todaylist({route, navigation}) {
         todaylist.push(event)
       }
     })
-    setToday(todaylist)
+    setShowData(todaylist)
   },[])
+
+  let sortRank = () => {
+      let rankTime = showData.sort((a, b) => a.rank-b.rank)
+      const updated = rankTime.map((item) => {
+        return item;
+      });
+      setShowData(updated);
+      
+  }
+
+  let sortTime = () => {
+    let rankTime = showData.sort((a, b) => new Date(`${a.date}T${a.end}`) - new Date(`${b.date}T${b.end}`))
+    const updated = rankTime.map((item) => {
+      return item;
+    });
+    setShowData(updated);
+    
+}
   
 
   return (
@@ -44,19 +63,32 @@ export default function Todaylist({route, navigation}) {
             </Modal>
             
             <View style={{flexDirection: 'row'}}>
+            <Icon 
+                  name="history" 
+                  size={30} 
+                  color='gray'
+                  style={{marginTop:10, marginBottom:10, marginLeft:10}}
+                  onPress={() => sortTime()}
+              />
               <Icon 
                   name="plus-square" 
                   size={30} 
                   color='gray'
-                  style={{marginTop:10, marginBottom:10, marginLeft:280}}
+                  style={{marginTop:10, marginBottom:10, marginLeft:20}}
                   onPress={() => setModalOpen()}
+              />
+              <Icon 
+                  name="random" 
+                  size={30} 
+                  color='gray'
+                  style={{marginTop:10, marginBottom:10, marginLeft:20}}
+                  onPress={() => sortRank()}
               />
               <Text style={{fontSize:18, marginTop: 13, marginLeft: 5}}>ADD</Text>
             </View>
             
-
             <FlatList
-                data={today}
+                data={showData}
                 renderItem={({ item,index}) => (
                   <View style={style.card}>
                     <View style={style.cardcon}>
@@ -78,15 +110,17 @@ export default function Todaylist({route, navigation}) {
                             <View style={{ backgroundColor: '#ABFFA6', width: 40, marginRight:20 }} />
                           }
                           
-                          <Text key={index} style={style.fontSize}>{item.time}    {item.event}</Text>
+                          <Text key={index} style={style.fontSize}>{item.start}:{item.end}    {item.event}</Text>
                         </View>
                       </TouchableOpacity>
+                      
                     </View>
+                   
                   </View>
             )}>
              
             </FlatList>
-            
+           
         </View>
   )
 }

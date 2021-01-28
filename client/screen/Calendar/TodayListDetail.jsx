@@ -9,7 +9,7 @@ import Edittodaylist from './TodayListEdit'
 export default function DetailToday({navigation}) {
     
     const route = useRoute() 
-    const { event,detail,time,key } = route.params
+    const { event,detail,start,end,key } = route.params
     const dispatch = useDispatch()
 
     const [modalOpen, setModalOpen] = useState(false)
@@ -20,7 +20,7 @@ export default function DetailToday({navigation}) {
             <View style={style.card}>
                 <View style={style.cardcon}>
                     <Text style={{ fontSize: 25}}>{event}</Text>
-                    <Text style={{fontSize:18,color: 'gray',marginBottom: 20}}>{time}</Text>
+                    <Text style={{fontSize:18,color: 'gray',marginBottom: 20}}>{start}:{end}</Text>
                     <Text style={style.fontSize}>{detail}</Text>
                 </View>
             </View>

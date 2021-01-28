@@ -12,13 +12,13 @@ const Edittodaylist = () => {
 
     const route = useRoute() 
     const navigation = useNavigation()
-    const { Event,detail,time,key } = route.params
+    const { Event,detail,start,end,key } = route.params
 
     const dispatch = useDispatch()
 
     return (
         <Formik
-            initialValues={{ Event: Event, time: time , detail: detail, key: key}}  
+            initialValues={{ Event: Event, start:start, end:end , detail: detail, key: key}}  
             onSubmit={(values) => {
                 // dispatch(editEvent(values))
                 // navigation.navigate('TodayList')
@@ -35,9 +35,16 @@ const Edittodaylist = () => {
             </TextInput>
             <TextInput
                 style={styles.input}
-                placeholder={time}
-                onChangeText={props.handleChange('time')}
-                defaultValue={time}
+                placeholder={start}
+                onChangeText={props.handleChange('start')}
+                defaultValue={start}
+                >
+            </TextInput>
+            <TextInput
+                style={styles.input}
+                placeholder={end}
+                onChangeText={props.handleChange('end')}
+                defaultValue={end}
                 >
             </TextInput>
             <TextInput

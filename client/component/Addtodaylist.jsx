@@ -42,7 +42,7 @@ const Addtodaylist = () => {
                     <RNPickerSelect 
                             placeholder={{ label: "ระดับความสำคัญ", value: null }}
                             onValueChange={props.handleChange('rank')}
-                            style={styles.input}
+                            style={styles.inputAndroid}
                             
                             items={[
                                 { label: 'น้อย', value: '1' },
