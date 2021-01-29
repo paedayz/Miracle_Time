@@ -1,5 +1,7 @@
-const {firebase, firestore} = require("../util/firebase")
+const {firebase, firestore, admin} = require("../util/firebase")
 const config = require("../util/config")
+const fs = require("fs")
+const {save} = require('save-file')
 
 exports.signup = (req, res) => {
     const newUser = {
@@ -209,6 +211,10 @@ exports.signout = (req, res) => {
 //   busboy.end(req.rawBody);
 // };
 
-exports.uploadImage = (req, res) => {
-  console.log(req.body)
+exports.editProfile = async (req, res) => {
+  console.log('hello from server')
+  return res.json({success : 'yeah'})
+  // admin.storage().bucket().upload('C:/Users/paedayz/Desktop/complaints-manager.png', {
+  //   destination: req.user.username,
+  // })
 }

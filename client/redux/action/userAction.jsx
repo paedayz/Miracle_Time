@@ -1,5 +1,7 @@
 import axios from 'axios'
 import {LOADING_DATA, LOADING_COMPLETE, SET_USER_DATA, SET_EVENT, CLEAR_SESSION} from '../type'
+import firebase from 'firebase'
+require('firebase/storage')
 
 export const getAuthen = ()=> (dispatch) => {
     dispatch({type: LOADING_DATA})
@@ -59,12 +61,34 @@ export const signout = () => (dispatch) => {
         })
 }
 
-export const uploadImage = (image) => {
-    console.log(image._parts[0][1])
-    axios.post('/uploadImage', image._parts[0][1]).then((res) => {
-        console.log(res)
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+export const uploadImage = (blob) => {
+    
+    const task = firebase
+    .storage()
+    .ref()
+    .child(blob._data.name)
+    .put(blob);
+
+    const taskProgress = snapshot => {
+        console.log('inprogress')
+    }
+
+    const taskCompleted = () => {
+        task.snapshot.ref.getDownloadURL().then((snapshot) => {
+            console.log('success')
+        })
+        axios.post('/editProfile')
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const taskError = snapshot => {
+        console.log('errors')
+    }
+
+    task.on("state_changed", taskProgress, taskError, taskCompleted);
 }

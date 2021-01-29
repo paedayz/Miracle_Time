@@ -60,7 +60,9 @@ export default function EditProfileScreen (){
         name,
         type: "image/jpg"
       });
-      uploadImage(imageData)
+      // uploadImage(imageData)
+      // getImage(result.uri)
+      upload(result.uri)
     }
 
     // console.log(result);
@@ -69,6 +71,41 @@ export default function EditProfileScreen (){
       setImage(result.uri);
     }
   };
+
+
+  // image upload function 
+ const upload = async (uri) =>{
+    // function to generate a random int which will be used for image name
+  function randomString(length, chars) {
+      var result = '';
+      for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+      return result;
+  }
+  const imagename = randomString(9, 2);
+
+  // this.setState({uri:uri, imagecode:imagename })
+//   getting image uri
+  const response  = await fetch(uri);
+
+//   convert it to blob
+  const blob = await response.blob();
+  uploadImage(blob)
+
+//   upload to firebase storage
+  // var ref = firebase.storage().ref().child("image/"+imagename);
+  // return ref.put(blob);
+}
+
+  const getImage = async(uri) => {
+    // const response = await fetch(uri);
+    // if(response) {
+    //   console.log(response)
+    // }
+    
+    // const blob = await response.blob();
+    // console.log(blob)
+    // console.log(uri)
+  }
 
   return (
     <View style={styles.container}>
