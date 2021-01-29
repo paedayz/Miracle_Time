@@ -32,7 +32,7 @@ export default function EditProfileScreen (){
 
   const [image, setImage] = useState(userImage);
   const [imageBlob, setImageBlob] = useState()
-  
+
   const [userNickname, setUserNickname] = useState(nickname)
   const [userPhone, setUserPhone] = useState(phone)
   const [userEmail, setUserEmail] = useState(email)
@@ -85,6 +85,13 @@ export default function EditProfileScreen (){
 
   const onSubmit = () => {
     console.log('submit')
+    let userNewData = {
+      nickname : userNickname,
+      phone : userPhone,
+      email : userEmail,
+      bio : userBio
+    }
+   console.log(userNewData)
   }
 
   return (
@@ -121,6 +128,7 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <FontAwesome name="user-o" color={colors.text} size={20} />
           <TextInput
+            onChangeText={nickname => setUserNickname(nickname)}
             defaultValue={userNickname}
             placeholder="Nickname"
             placeholderTextColor="#666666"
@@ -137,6 +145,7 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <Feather name="phone" color={colors.text} size={20} />
           <TextInput
+            onChangeText={phone => setUserPhone(phone)}
             defaultValue={userPhone}
             placeholder="Phone"
             placeholderTextColor="#666666"
@@ -154,6 +163,7 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <FontAwesome name="envelope-o" color={colors.text} size={20} />
           <TextInput
+            onChangeText={email => setUserEmail(email)}
             defaultValue={userEmail}
             placeholder="Email"
             placeholderTextColor="#666666"
@@ -171,6 +181,7 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <Icon name="bio" color={colors.text} size={20} />
           <TextInput
+            onChangeText={bio => setUserBio(bio)}
             defaultValue={userBio}
             placeholder="Bio"
             placeholderTextColor="#666666"
