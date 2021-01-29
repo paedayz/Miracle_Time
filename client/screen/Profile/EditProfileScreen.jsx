@@ -28,9 +28,16 @@ import {uploadImage} from '../../redux/action/userAction'
 
 export default function EditProfileScreen (){
 
-  const {username, nickname, email, userImage, level, exp, coin} = useSelector(state => state.user.userData)
+  const {username, nickname, email, userImage, level, exp, coin, phone, bio} = useSelector(state => state.user.userData)
 
   const [image, setImage] = useState(userImage);
+  const [imageBlob, setImageBlob] = useState()
+  
+  const [userNickname, setUserNickname] = useState(nickname)
+  const [userPhone, setUserPhone] = useState(phone)
+  const [userEmail, setUserEmail] = useState(email)
+  const [userBio, setUserBio] = useState(bio)
+
   const {colors} = useTheme();
 
   useEffect(() => {
@@ -60,51 +67,24 @@ export default function EditProfileScreen (){
         name,
         type: "image/jpg"
       });
-      // uploadImage(imageData)
-      // getImage(result.uri)
-      upload(result.uri)
-    }
 
-    // console.log(result);
+      createBlob(result.uri)
+    }
 
     if (!result.cancelled) {
       setImage(result.uri);
     }
   };
 
-
-  // image upload function 
- const upload = async (uri) =>{
-    // function to generate a random int which will be used for image name
-  function randomString(length, chars) {
-      var result = '';
-      for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-      return result;
+  const createBlob = async (uri) =>{
+    const response  = await fetch(uri);
+    const blob = await response.blob();
+    setImageBlob(blob)
+    // uploadImage(blob)
   }
-  const imagename = randomString(9, 2);
 
-  // this.setState({uri:uri, imagecode:imagename })
-//   getting image uri
-  const response  = await fetch(uri);
-
-//   convert it to blob
-  const blob = await response.blob();
-  uploadImage(blob)
-
-//   upload to firebase storage
-  // var ref = firebase.storage().ref().child("image/"+imagename);
-  // return ref.put(blob);
-}
-
-  const getImage = async(uri) => {
-    // const response = await fetch(uri);
-    // if(response) {
-    //   console.log(response)
-    // }
-    
-    // const blob = await response.blob();
-    // console.log(blob)
-    // console.log(uri)
+  const onSubmit = () => {
+    console.log('submit')
   }
 
   return (
@@ -141,7 +121,7 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <FontAwesome name="user-o" color={colors.text} size={20} />
           <TextInput
-            defaultValue={nickname}
+            defaultValue={userNickname}
             placeholder="Nickname"
             placeholderTextColor="#666666"
             autoCorrect={false}
@@ -157,6 +137,7 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <Feather name="phone" color={colors.text} size={20} />
           <TextInput
+            defaultValue={userPhone}
             placeholder="Phone"
             placeholderTextColor="#666666"
             keyboardType="number-pad"
@@ -173,7 +154,7 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <FontAwesome name="envelope-o" color={colors.text} size={20} />
           <TextInput
-            defaultValue={email}
+            defaultValue={userEmail}
             placeholder="Email"
             placeholderTextColor="#666666"
             keyboardType="email-address"
@@ -190,6 +171,7 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <Icon name="bio" color={colors.text} size={20} />
           <TextInput
+            defaultValue={userBio}
             placeholder="Bio"
             placeholderTextColor="#666666"
             autoCorrect={false}
@@ -202,7 +184,7 @@ export default function EditProfileScreen (){
           />
         </View>
         
-        <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
+        <TouchableOpacity style={styles.commandButton} onPress={() => onSubmit()}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
     </View>
