@@ -2,6 +2,7 @@ import React, {useState}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Component
 import Edittodaylist from './TodayListEdit'
@@ -27,13 +28,18 @@ export default function DetailToday({navigation}) {
 
             <Modal visible={modalOpen} animationType={'slide'}>
                 <View>
-                    <Button
-                      color="red"
-                      title="Close"
-                      onPress={() => {
-                          setModalOpen(false)
-                        }}
-                      />
+                    <Icon 
+                        name="close" 
+                        size={24} 
+                        style={{marginBottom: 5,
+                          borderColor: '#FFF',
+                          backgroundColor: '#fff',
+                          padding: 12,
+                          borderRadius: 100,
+                          alignSelf: 'center',
+                          marginTop: 15}}
+                        onPress={() => setModalOpen(false)}
+                    />
                       <Edittodaylist/>
                 </View>
             </Modal>

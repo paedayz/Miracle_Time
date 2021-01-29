@@ -30,7 +30,7 @@ export default function Todaylist({route, navigation}) {
   },[])
 
   let sortRank = () => {
-      let rankTime = showData.sort((a, b) => a.rank-b.rank)
+      let rankTime = showData.sort((a, b) => b.rank-a.rank)
       const updated = rankTime.map((item) => {
         return item;
       });
@@ -63,12 +63,20 @@ export default function Todaylist({route, navigation}) {
             </Modal>
             
             <View style={{flexDirection: 'row'}}>
+              <Text style={{marginTop:15,marginRight:8,fontSize:15}}>sort</Text>
             <Icon 
                   name="history" 
                   size={30} 
                   color='gray'
-                  style={{marginTop:10, marginBottom:10, marginLeft:10}}
+                  style={{marginTop:10, marginBottom:10, marginRight:10}}
                   onPress={() => sortTime()}
+              />
+              <Icon 
+                  name="heart" 
+                  size={30} 
+                  color='gray'
+                  style={{marginTop:10, marginBottom:10, marginRight:200}}
+                  onPress={() => sortRank()}
               />
               <Icon 
                   name="plus-square" 
@@ -76,13 +84,6 @@ export default function Todaylist({route, navigation}) {
                   color='gray'
                   style={{marginTop:10, marginBottom:10, marginLeft:20}}
                   onPress={() => setModalOpen()}
-              />
-              <Icon 
-                  name="random" 
-                  size={30} 
-                  color='gray'
-                  style={{marginTop:10, marginBottom:10, marginLeft:20}}
-                  onPress={() => sortRank()}
               />
               <Text style={{fontSize:18, marginTop: 13, marginLeft: 5}}>ADD</Text>
             </View>
@@ -93,25 +94,63 @@ export default function Todaylist({route, navigation}) {
                   <View style={style.card}>
                     <View style={style.cardcon}>
                       <TouchableOpacity onPress={() => navigation.navigate('TodayListDetail', item )}>
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            height: 65,
-                            padding: 20
-                          }}
-                        >
-                          {item.rank === "1" &&
-                            <View style={{ backgroundColor: '#FF5733', width: 40, marginRight:20 }} />
-                          }
-                          {item.rank === "2" &&
-                            <View style={{ backgroundColor: '#FFC300', width: 40, marginRight:20 }} />
-                          }
-                          {item.rank === "3" &&
-                            <View style={{ backgroundColor: '#ABFFA6', width: 40, marginRight:20 }} />
-                          }
-                          
-                          <Text key={index} style={style.fontSize}>{item.start}:{item.end}    {item.event}</Text>
-                        </View>
+                        
+
+                        {item.rank === "1" &&
+                            <View
+                            style={{
+                              flexDirection: "row",
+                              height: 65,
+                              padding: 20,
+                              borderLeftWidth:10,
+                              borderLeftColor:'#ABFFA6'
+                            }}
+                            >
+                              
+                            <Text key={index} style={style.fontSize}>{item.start} -- {item.end}    {item.event}</Text>
+                            {item.rank === "1" &&
+                              <View style={{ backgroundColor: '#ABFFA6', width: 15,height: 15, marginLeft:80,borderRadius:1000,marginTop:8 }} />
+                            }
+                      
+                            </View>
+                        }
+                        {item.rank === "2" &&
+                            <View
+                            style={{
+                              flexDirection: "row",
+                              height: 65,
+                              padding: 20,
+                              borderLeftWidth:10,
+                              borderLeftColor:'#FFC300'
+                            }}
+                            >
+                              <Text key={index} style={style.fontSize}>{item.start} -- {item.end}    {item.event}</Text>
+                            {item.rank === "2" &&
+                              <View style={{ backgroundColor: '#FFC300', width: 15,height: 15, marginLeft:80,borderRadius:1000,marginTop:8 }} />
+                            }
+                            </View>
+                
+                        }
+                        {item.rank === "3" &&
+                            <View
+                            style={{
+                              flexDirection: "row",
+                              height: 65,
+                              padding: 20,
+                              borderLeftWidth:10,
+                              borderLeftColor:'#FF5733'
+                            }}
+                            >
+                              <Text key={index} style={style.fontSize}>{item.start} -- {item.end}    {item.event}</Text>
+                            {item.rank === "3" &&
+                              <View style={{ backgroundColor: '#FF5733', width: 15,height: 15, marginLeft:80,borderRadius:1000,marginTop:8 }} />
+                            }
+                      
+                            
+                            </View>
+                        }
+                        
+                        
                       </TouchableOpacity>
                       
                     </View>
@@ -148,7 +187,8 @@ const style = StyleSheet.create({
     
   },
   fontSize:{
-    fontSize: 18
+    fontSize: 18,
+    width:190
   }, 
   modalToggle:{
     marginBottom: 5,
