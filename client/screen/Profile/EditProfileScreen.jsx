@@ -6,7 +6,8 @@ import {
   ImageBackground,
   TextInput,
   StyleSheet,
-  Button
+  Button,
+  SafeAreaView
 } from 'react-native';
 
 import {Avatar, useTheme} from 'react-native-paper';
@@ -37,6 +38,8 @@ export default function EditProfileScreen (){
   const [userPhone, setUserPhone] = useState(phone)
   const [userWebsite, setUserWebsite] = useState(website)
   const [userBio, setUserBio] = useState(bio)
+  const [nickNameError, setNickNameError] = useState(null)
+  const [nickNameErrorPopUp, setNickNameErrorPopUp] = useState(false)
 
   const {colors} = useTheme();
 
@@ -96,7 +99,7 @@ export default function EditProfileScreen (){
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <View style={{alignItems: 'center'}}>
           <TouchableOpacity onPress={() => {pickImage()}}>
             <View
@@ -106,6 +109,7 @@ export default function EditProfileScreen (){
                 borderRadius: 15,
                 justifyContent: 'center',
                 alignItems: 'center',
+                marginTop: 20
               }}>
                 <View
                   style={{
@@ -129,6 +133,7 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <FontAwesome name="user-o" color={colors.text} size={20} />
           <TextInput
+            
             onChangeText={nickname => setUserNickname(nickname)}
             defaultValue={userNickname}
             placeholder="Nickname"
@@ -198,14 +203,15 @@ export default function EditProfileScreen (){
         <TouchableOpacity style={styles.commandButton} onPress={() => onSubmit()}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    alignItems: 'center',
   },
   commandButton: {
     padding: 15,
@@ -272,6 +278,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 10,
     marginBottom: 10,
+    marginLeft: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#f2f2f2',
     paddingBottom: 5,

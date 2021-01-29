@@ -154,19 +154,25 @@ exports.signout = (req, res) => {
 
 exports.editProfile = (req, res) => {
   const userData = reduceUserDetails(req.body)
-  console.log(userData)
-  firestore.doc(`/users/${req.user.username}`)
-    .update(userData)
-    .then(() => {
-      return firestore.collection('users').where('username', '==', req.user.username).get() 
-    })
-    .then((snapshot) => {
-      snapshot.forEach(function(doc){
-        return res.json({data : doc.data()}) 
+  
+  if(!userData.errors) {
+    firestore.doc(`/users/${req.user.username}`)
+      .update(userData)
+      .then(() => {
+        return firestore.collection('users').where('username', '==', req.user.username).get() 
       })
-    })
-    .catch((err) => {
-      console.error(err);
-      return res.status(500).json({ error: err.code });
-    });
+      .then((snapshot) => {
+        snapshot.forEach(function(doc){
+          return res.json({data : doc.data()}) 
+        })
+      })
+      .catch((err) => {
+        console.error(err);
+        return res.status(500).json({ error: err.code });
+      });
+
+  } else {
+    return res.status(500).json({ error: userData.errors });
+  }
+  
 }

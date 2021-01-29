@@ -53,7 +53,7 @@ exports.reduceUserDetails = (data) => {
     let userDetails = {};
 
     if(isEmpty(data.nickname)) {
-        userDetails.errors = {error : 'Nickname is missing'}
+        userDetails.errors = {nickname : 'Nickname is missing'}
 
     } else {
         userDetails.nickname = data.nickname;
