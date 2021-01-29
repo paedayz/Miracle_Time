@@ -23,7 +23,7 @@ import * as ImagePicker from 'expo-image-picker';
 import UploadImage from './TestUploadImage'
 
 // Redux
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {editProfile} from '../../redux/action/userAction'
 
 export default function EditProfileScreen (){
@@ -39,6 +39,8 @@ export default function EditProfileScreen (){
   const [userBio, setUserBio] = useState(bio)
 
   const {colors} = useTheme();
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     (async () => {
@@ -90,7 +92,7 @@ export default function EditProfileScreen (){
       email : userEmail,
       bio : userBio
     }
-    editProfile(imageBlob, userNewData)
+    dispatch(editProfile(imageBlob, userNewData))
   }
 
   return (

@@ -61,8 +61,8 @@ export const signout = () => (dispatch) => {
         })
 }
 
-export const editProfile = (blob, updateData) => {
-
+export const editProfile = (blob, updateData) => (dispatch) => {
+    dispatch({type: LOADING_DATA})
     if(blob) {
         const imageName = blob._data.name
         updateData.imageName = imageName
@@ -80,8 +80,10 @@ export const editProfile = (blob, updateData) => {
             axios.post('/editProfile', updateData)
                 .then((res) => {
                     console.log(res)
+                    dispatch({type: LOADING_COMPLETE})
                 })
                 .catch((err) => {
+                    dispatch({type: LOADING_COMPLETE})
                     console.log(err)
                 })
         }
@@ -96,9 +98,11 @@ export const editProfile = (blob, updateData) => {
         updateData.imageName = null
         axios.post('/editProfile', updateData)
                 .then((res) => {
+                    dispatch({type: LOADING_COMPLETE})
                     console.log(res.data)
                 })
                 .catch((err) => {
+                    dispatch({type: LOADING_COMPLETE})
                     console.log(err)
                 })
     }
