@@ -28,14 +28,14 @@ import {editProfile} from '../../redux/action/userAction'
 
 export default function EditProfileScreen (){
 
-  const {username, nickname, email, userImage, level, exp, coin, phone, bio} = useSelector(state => state.user.userData)
+  const {username, nickname, email, userImage, level, exp, coin, phone, bio, website} = useSelector(state => state.user.userData)
 
   const [image, setImage] = useState(userImage);
   const [imageBlob, setImageBlob] = useState()
 
   const [userNickname, setUserNickname] = useState(nickname)
   const [userPhone, setUserPhone] = useState(phone)
-  const [userEmail, setUserEmail] = useState(email)
+  const [userWebsite, setUserWebsite] = useState(website)
   const [userBio, setUserBio] = useState(bio)
 
   const {colors} = useTheme();
@@ -89,7 +89,7 @@ export default function EditProfileScreen (){
     let userNewData = {
       nickname : userNickname,
       phone : userPhone,
-      email : userEmail,
+      website : userWebsite,
       bio : userBio
     }
     dispatch(editProfile(imageBlob, userNewData))
@@ -162,13 +162,12 @@ export default function EditProfileScreen (){
           
         </View>
         <View style={styles.action}>
-          <FontAwesome name="envelope-o" color={colors.text} size={20} />
+          <FontAwesome name="globe" color={colors.text} size={20} />
           <TextInput
-            onChangeText={email => setUserEmail(email)}
-            defaultValue={userEmail}
-            placeholder="Email"
+            onChangeText={website => setUserWebsite(website)}
+            defaultValue={userWebsite}
+            placeholder="Website"
             placeholderTextColor="#666666"
-            keyboardType="email-address"
             autoCorrect={false}
             style={[
               styles.textInput,
