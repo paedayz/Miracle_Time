@@ -15,7 +15,7 @@ import {useSelector} from 'react-redux'
 
 export default function ProfileScreen({navigation}) {
 
-  const {username, nickname, email, userImage, level, exp, coin} = useSelector(state => state.user.userData)
+  const {username, nickname, email, userImage, level, exp, coin, bio, phone, website} = useSelector(state => state.user.userData)
     
       return (
         <SafeAreaView style={styles.container}>
@@ -34,12 +34,32 @@ export default function ProfileScreen({navigation}) {
             </View>
           </View>
 
-          <View style={styles.userInfoSection}>
-            <View style={styles.row}>
-              <Icon name="email-outline" color="#777777" size={20} />
-              <Text style={{color:"#777777", marginLeft:20}}>{email}</Text>
+          {phone &&
+            <View style={styles.userInfoSection}>
+              <View style={styles.row}>
+                <Icon name="phone" color="#777777" size={20} />
+                <Text style={{color:"#777777", marginLeft:20}}>{phone}</Text>
+              </View>
             </View>
-          </View>
+          }
+
+          {website &&
+            <View style={styles.userInfoSection}>
+              <View style={styles.row}>
+                <Icon name="web" color="#777777" size={20} />
+                <Text style={{color:"#777777", marginLeft:20}}>{website}</Text>
+              </View>
+            </View>
+          }
+
+          {bio &&
+            <View style={styles.userInfoSection}>
+              <View style={styles.row}>
+                <Icon name="bio" color="#777777" size={20} />
+                <Text style={{color:"#777777", marginLeft:20, fontSize:20}}>{bio}</Text>
+              </View>
+            </View>
+          }
 
           <View style={styles.infoBoxWrapper}>
             <View style={[styles.infoBox, {
