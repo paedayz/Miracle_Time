@@ -61,34 +61,51 @@ export const signout = () => (dispatch) => {
         })
 }
 
-export const uploadImage = (blob) => {
+export const editProfile = (blob, updateData) => {
+
+    if(blob) {
+        const imageName = blob._data.name
+        updateData.imageName = imageName
+
+        const task = firebase.storage().ref().child(imageName).put(blob);
+
+        const taskProgress = snapshot => {
+            console.log('inprogress')
+        }
+
+        const taskCompleted = () => {
+            task.snapshot.ref.getDownloadURL().then((snapshot) => {
+                console.log('success')
+            })
+            axios.post('/editProfile', updateData)
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+
+        const taskError = snapshot => {
+            console.log('errors')
+        }
+
+        task.on("state_changed", taskProgress, taskError, taskCompleted);
+        
+    } else {
+        updateData.imageName = null
+        axios.post('/editProfile', updateData)
+                .then((res) => {
+                    console.log(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+    }
+
+
+
     
-    const task = firebase
-    .storage()
-    .ref()
-    .child(blob._data.name)
-    .put(blob);
-
-    const taskProgress = snapshot => {
-        console.log('inprogress')
-    }
-
-    const taskCompleted = () => {
-        task.snapshot.ref.getDownloadURL().then((snapshot) => {
-            console.log('success')
-        })
-        axios.post('/editProfile')
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
-    const taskError = snapshot => {
-        console.log('errors')
-    }
-
-    task.on("state_changed", taskProgress, taskError, taskCompleted);
+    
+    
 }

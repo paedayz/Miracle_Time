@@ -212,7 +212,8 @@ exports.signout = (req, res) => {
 // };
 
 exports.editProfile = async (req, res) => {
-  console.log('hello from server')
+  console.log(req.user)
+  console.log(req.body)
   return res.json({success : 'yeah'})
   // admin.storage().bucket().upload('C:/Users/paedayz/Desktop/complaints-manager.png', {
   //   destination: req.user.username,

@@ -24,7 +24,7 @@ import UploadImage from './TestUploadImage'
 
 // Redux
 import {useSelector} from 'react-redux'
-import {uploadImage} from '../../redux/action/userAction'
+import {editProfile} from '../../redux/action/userAction'
 
 export default function EditProfileScreen (){
 
@@ -84,14 +84,13 @@ export default function EditProfileScreen (){
   }
 
   const onSubmit = () => {
-    console.log('submit')
     let userNewData = {
       nickname : userNickname,
       phone : userPhone,
       email : userEmail,
       bio : userBio
     }
-   console.log(userNewData)
+    editProfile(imageBlob, userNewData)
   }
 
   return (

@@ -17,7 +17,7 @@ app.post('/signup',signup)
 app.post('/login', login)
 app.get('/authen', checkAuthen)
 app.get('/signout', signout)
-app.post('/editProfile' , editProfile)
+app.post('/editProfile' , FBAuth ,editProfile)
 
 // Data Route
 app.get('/getAllEvents',FBAuth, getAllEvents)
