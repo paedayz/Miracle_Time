@@ -1,3 +1,5 @@
+const config = require('./config')
+
 const isEmail = (email) => {
     const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (email.match(regEx)) return true;
@@ -61,6 +63,8 @@ exports.reduceUserDetails = (data) => {
         if (data.phone) userDetails.phone = data.phone;
 
         if (data.website) userDetails.website = data.website;
+
+        if (data.imageName) userDetails.userImage = `https://firebasestorage.googleapis.com/v0/b/${config.firebaseConfig.storageBucket}/o/${data.imageName}?alt=media`;
 
     }
 

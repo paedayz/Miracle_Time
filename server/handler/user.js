@@ -158,7 +158,12 @@ exports.editProfile = (req, res) => {
   firestore.doc(`/users/${req.user.username}`)
     .update(userData)
     .then(() => {
-      return res.json({ message: "Details added successfully" });
+      return firestore.collection('users').where('username', '==', req.user.username).get() 
+    })
+    .then((snapshot) => {
+      snapshot.forEach(function(doc){
+        return res.json({data : doc.data()}) 
+      })
     })
     .catch((err) => {
       console.error(err);
