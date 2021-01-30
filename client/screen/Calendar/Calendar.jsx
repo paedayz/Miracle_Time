@@ -8,7 +8,7 @@ import {useSelector} from 'react-redux'
 const CalendarsScreen = ({navigation}) => {
   const now = new Date()
   const userEvents = useSelector(state => state.data.events)
-  const [isData, setIsdata] = useState(false)
+  const [isData, setIsdata] = useState(true)
   const [data, setData] = useState({})
   // let markedData = {
   //   '2021-01-25': {
