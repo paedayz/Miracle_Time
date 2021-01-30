@@ -47,12 +47,14 @@ export default class AgendaScreen extends Component {
         const strTime = this.timeToString(time);
         if (!this.state.items[strTime]) {
           this.state.items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 3 + 1);
-            for (let j = 0; j < numItems; j++) {
-              this.state.items[strTime].push({
-                name: 'Item for ' + strTime + ' #' + j,
-                height: Math.max(100, Math.floor(Math.random() * 150))
+            for (let j = 1; j <= 1; j++) {
+              if(this.state.items['2021-01-18']  && this.state.items['2021-01-18'].length < j){
+                let newItems = this.state.items
+                newItems['2021-01-18'].push({
+                name: 'Item for ' + '2021-01-18' + ' #' + j,
+                height: Math.max(80)
              });
+              }
            }
         }
       }
