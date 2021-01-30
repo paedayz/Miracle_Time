@@ -17,6 +17,8 @@ const Addtodaylist = (props) => {
     
     
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isStartDatePickerVisible, setIsStartDatePickerVisible] = useState(false);
+    const [isEndDatePickerVisible, setIsEndDatePickerVisible] = useState(false);
 
     const [startTime , setStartTime] = useState('00:00')
 
@@ -31,7 +33,7 @@ const Addtodaylist = (props) => {
         const result = moment(time).format('HH:mm')
         setStartTime(result)
         console.log('-----start-----',result)
-        setDatePickerVisibility(false)
+        setIsStartDatePickerVisible(false)
       };
     const endhandleConfirm = (time) => {
         // console.log(moment(time).format('HH:mm')) 
@@ -42,7 +44,7 @@ const Addtodaylist = (props) => {
         const result = moment(time).format('HH:mm')
         setEndTime(result)
         console.log('-----end-----',result)
-        setDatePickerVisibility(false)
+        setIsEndDatePickerVisible(false)
       };
 
       LogBox.ignoreAllLogs()
@@ -139,13 +141,13 @@ const Addtodaylist = (props) => {
                                 size={30} 
                                 color='gray'
                                 style={{marginTop:25,marginLeft:10}}
-                                onPress={()=> setDatePickerVisibility(true)}/>
+                                onPress={()=> setIsStartDatePickerVisible(true)}/>
                             <DateTimePickerModal
                                     
-                                    isVisible={isDatePickerVisible}
+                                    isVisible={isStartDatePickerVisible}
                                     mode="time"
                                     onConfirm={props.handleChange('start'),starthandleConfirm}
-                                    onCancel={()=> setDatePickerVisibility(false)}/>
+                                    onCancel={()=> setIsStartDatePickerVisible(false)}/>
 
                             <View style={{width: 100, height: 90,marginLeft:6}}> 
                                 <TextInput
@@ -160,14 +162,14 @@ const Addtodaylist = (props) => {
                                 size={30} 
                                 color='gray'
                                 style={{marginTop:25,marginLeft:10}}
-                                onPress={()=> setDatePickerVisibility(true)}/>     
+                                onPress={()=> setIsEndDatePickerVisible(true)}/>     
                             <DateTimePickerModal
                                     
-                                    isVisible={isDatePickerVisible}
+                                    isVisible={isEndDatePickerVisible}
                                     mode="time"
                                     onConfirm={props.handleChange('end'),endhandleConfirm}
 
-                                    onCancel={()=> setDatePickerVisibility(false)}/>
+                                    onCancel={()=> setIsEndDatePickerVisible(false)}/>
                         </View>
                         <View style={{width: 50, height: 20 , marginTop: -20}}>
                                 <Text>Detail :</Text>
