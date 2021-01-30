@@ -69,7 +69,6 @@ export default function DetailToday({navigation}) {
                 <Button
                   color="#7686CA"
                   title="Edit"
-                  
                   onPress={() => setModalOpen()}
                 />
               </View>

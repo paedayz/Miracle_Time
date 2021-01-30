@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {LOADING_DATA, LOADING_COMPLETE, SET_EVENT, ADD_EVENT, DELETE_EVENT} from "../type"
+import {LOADING_DATA, LOADING_COMPLETE, SET_EVENT, ADD_EVENT, DELETE_EVENT, EDIT_EVENT} from "../type"
 
 export const getAllEvents = () => (dispatch) => {
     dispatch({type: LOADING_DATA})
@@ -31,7 +31,7 @@ export const editEvent = (eventData) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/editEvent', eventData)
         .then((res) => {
-            dispatch({type: "SET_EVENT", payload: res.data.data})
+            dispatch({type: EDIT_EVENT, payload: res.data.data})
             dispatch({type: LOADING_COMPLETE})
         })
         .catch((err) => {

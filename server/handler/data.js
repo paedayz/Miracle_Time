@@ -85,12 +85,12 @@ exports.editEvent = (req, res) => {
             })
         })
         .then(() => {
-            return firestore.collection('events').where('username', '==', username).get()
+            return firestore.collection('events').where('key', '==', updateData.key).get()
         })
         .then((snapshot) => {
-            let data = []
+            let data
             snapshot.forEach((doc) => {
-                let newData = {
+                data = {
                     date: doc.data().date,
                     detail: doc.data().detail,
                     event: doc.data().event,
@@ -100,7 +100,6 @@ exports.editEvent = (req, res) => {
                     end: doc.data().end,
                     catagory: doc.data().catagory,
                 }
-                data.push(newData)
             })
             return res.json({data: data})
         })
