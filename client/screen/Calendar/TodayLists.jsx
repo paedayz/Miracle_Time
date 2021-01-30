@@ -13,11 +13,12 @@ export default function Todaylist({route, navigation}) {
   const {date} = route.params
 
   const [modalOpen, setModalOpen] = useState(false)
-  const [today, setToday] = useState()
+  const [showData, setShowData] = useState()
 
   const allList = useSelector((state) => state.data.events)
 
   const todaylist = []
+ 
 
   useEffect(() => {
     allList.map(event => {
@@ -25,8 +26,26 @@ export default function Todaylist({route, navigation}) {
         todaylist.push(event)
       }
     })
-    setToday(todaylist)
+    setShowData(todaylist)
   },[])
+
+  let sortRank = () => {
+      let rankTime = showData.sort((a, b) => b.rank-a.rank)
+      const updated = rankTime.map((item) => {
+        return item;
+      });
+      setShowData(updated);
+      
+  }
+
+  let sortTime = () => {
+    let rankTime = showData.sort((a, b) => new Date(`${a.date}T${a.end}`) - new Date(`${b.date}T${b.end}`))
+    const updated = rankTime.map((item) => {
+      return item;
+    });
+    setShowData(updated);
+    
+}
   
 
   return (
@@ -44,49 +63,198 @@ export default function Todaylist({route, navigation}) {
             </Modal>
             
             <View style={{flexDirection: 'row'}}>
+              <Text style={{marginTop:15,marginRight:8,fontSize:15}}>sort</Text>
+            <Icon 
+                  name="history" 
+                  size={30} 
+                  color='gray'
+                  style={{marginTop:10, marginBottom:10, marginRight:10}}
+                  onPress={() => sortTime()}
+              />
+              <Icon 
+                  name="heart" 
+                  size={30} 
+                  color='gray'
+                  style={{marginTop:10, marginBottom:10, marginRight:200}}
+                  onPress={() => sortRank()}
+              />
               <Icon 
                   name="plus-square" 
                   size={30} 
                   color='gray'
-                  style={{marginTop:10, marginBottom:10, marginLeft:280}}
+                  style={{marginTop:10, marginBottom:10, marginLeft:20}}
                   onPress={() => setModalOpen()}
               />
               <Text style={{fontSize:18, marginTop: 13, marginLeft: 5}}>ADD</Text>
             </View>
             
-
             <FlatList
-                data={today}
+                data={showData}
                 renderItem={({ item,index}) => (
                   <View style={style.card}>
                     <View style={style.cardcon}>
                       <TouchableOpacity onPress={() => navigation.navigate('TodayListDetail', item )}>
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            height: 65,
-                            padding: 20
-                          }}
-                        >
-                          {item.rank === "1" &&
-                            <View style={{ backgroundColor: '#FF5733', width: 40, marginRight:20 }} />
-                          }
-                          {item.rank === "2" &&
-                            <View style={{ backgroundColor: '#FFC300', width: 40, marginRight:20 }} />
-                          }
-                          {item.rank === "3" &&
-                            <View style={{ backgroundColor: '#ABFFA6', width: 40, marginRight:20 }} />
-                          }
+                        
+
+                        {item.rank === "1" &&
+                            <View
+                            style={{
+                              flexDirection: "row",
+                             
+                              padding: 20,
+                              borderLeftWidth:10,
+                              borderLeftColor:'#ABFFA6',
+                              borderBottomLeftRadius:10,
+                            }}
+                            >
+                               <View style={{flexDirection: 'row'}}>
+                                    <View style={{width:120}}>
+                                      <Text key={index} style={style.fontSize}>{item.start} -- {item.end}</Text>
+                                    </View>
+                                    <View style={{flexDirection: 'column'}}>
+                                      <View style={{}}>
+                                        <Text key={index} style={{fontSize: 17,width:190}}>{item.event}</Text>
+                                      </View>
+                                      {item.catagory === "งาน" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#ff3399'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "ทั่วไป" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#009900'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "นัดสำคัญ" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#993300'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                    </View>
+                                    <View>
+                                      {item.rank === "1" &&
+                                        <View style={{ backgroundColor: '#ABFFA6', width: 13,height: 13, marginLeft:10,borderRadius:1000,marginTop:20 }} />
+                                      }
+                                    </View>
+
+                                </View>
+                            
+                            </View>
+                        }
+                        {item.rank === "2" &&
+                            <View
+                            style={{
+                              flexDirection: "row",
+                              
+                              padding: 20,
+                              borderLeftWidth:10,
+                              borderLeftColor:'#FFC300',
+                              borderBottomLeftRadius:10,
+                            }}
+                            >
+                                <View style={{flexDirection: 'row'}}>
+                                    <View style={{width:120}}>
+                                      <Text key={index} style={style.fontSize}>{item.start} -- {item.end}</Text>
+                                    </View>
+                                    <View style={{flexDirection: 'column'}}>
+                                      <View style={{}}>
+                                        <Text key={index} style={{fontSize: 17,width:190}}>{item.event}</Text>
+                                      </View>
+                                      {item.catagory === "งาน" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#ff3399'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "ทั่วไป" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#009900'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "นัดสำคัญ" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#993300'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                    </View>
+                                    
+                                    <View>
+                                      {item.rank === "2" &&
+                                        <View style={{ backgroundColor: '#FFC300', width: 13,height: 13, marginLeft:10,borderRadius:1000,marginTop:20 }} />
+                                      }
+                                    </View>
+
+                                </View>
+                            </View>
+                
+                        }
+                        {item.rank === "3" &&
+                            <View
+                            style={{
+                              flexDirection: "row",
                           
-                          <Text key={index} style={style.fontSize}>{item.time}    {item.event}</Text>
-                        </View>
+                              padding: 20,
+                              borderLeftWidth:10,
+                              borderLeftColor:'#FF5733',
+                              borderBottomLeftRadius:10,
+                            }}
+                            >
+                              <View style={{flexDirection: 'row'}}>
+                                  <View style={{width:120}}>
+                                    <Text key={index} style={style.fontSize}>{item.start} -- {item.end}</Text>
+                                  </View>
+                                  <View style={{flexDirection: 'column'}}>
+                                      <View style={{}}>
+                                        <Text key={index} style={{fontSize: 17,width:190}}>{item.event}</Text>
+                                      </View>
+                                      {item.catagory === "งาน" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#ff3399'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "ทั่วไป" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#009900'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "นัดสำคัญ" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#993300'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                    </View>
+                                  <View>
+                                    {item.rank === "3" &&
+                                      <View style={{ backgroundColor: '#FF5733', width: 13,height: 13, marginLeft:10,borderRadius:1000,marginTop:20 }} />
+                                    }
+                                  </View>
+
+                              </View>
+                            </View>
+                        }
+                        {item.rank === "" &&
+                            <View
+                            style={{
+                              flexDirection: "row",
+                              height: 65,
+                              padding: 20,
+                              borderLeftWidth:10,
+                              borderLeftColor:'#333'
+                            }}
+                            >
+                              <Text key={index} style={style.fontSize}>No Event</Text>
+                            </View>
+                        }
+                        
+                        
                       </TouchableOpacity>
+                      
                     </View>
+                   
                   </View>
             )}>
              
             </FlatList>
-            
+           
         </View>
   )
 }
@@ -114,7 +282,8 @@ const style = StyleSheet.create({
     
   },
   fontSize:{
-    fontSize: 18
+    fontSize: 17,
+    width:190
   }, 
   modalToggle:{
     marginBottom: 5,

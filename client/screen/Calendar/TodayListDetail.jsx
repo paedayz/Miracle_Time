@@ -1,6 +1,7 @@
 import React, {useState}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
 
 // Component
 import Edittodaylist from './TodayListEdit'
@@ -10,8 +11,8 @@ import {useDispatch} from 'react-redux'
 import {deleteEvent} from '../../redux/action/dataAction'
 
 export default function DetailToday({navigation}) {
-    
-    const route = useRoute()
+    const route = useRoute() 
+    const { event,detail,start,end,key } = route.params
     const dispatch = useDispatch()
     
     const { event,detail,time,key } = route.params
@@ -21,34 +22,61 @@ export default function DetailToday({navigation}) {
 
     return (
         <View style={style.container}>
-            <View style={style.card}>
+            <View style={{  borderRadius: 10,
+                  width: 320 ,
+                  height: 60,
+                  elevation: 3,
+                  backgroundColor: '#fff',
+                  shadowOffset: { width: 1 , height: 1 },
+                  shadowColor: '',
+                  shadowOpacity: 0.3,
+                  shadowRadius: 2,
+                  marginHorizontal: 4,
+                  marginVertical: 6,
+                  borderLeftWidth:10}}>
                 <View style={style.cardcon}>
                     <Text style={{ fontSize: 25}}>{event}</Text>
-                    <Text style={{fontSize:18,color: 'gray',marginBottom: 20}}>{time}</Text>
+                </View>
+            </View>
+
+            
+            <View style={style.card}>
+                <View style={style.cardcon}>
+                    <Text style={{ fontSize: 5}}></Text>
+                    <Text style={{fontSize:18,color: 'gray',marginBottom: 20}}>{start}--{end}</Text>
                     <Text style={style.fontSize}>{detail}</Text>
                 </View>
             </View>
 
             <Modal visible={modalOpen} animationType={'slide'}>
                 <View>
-                    <Button
-                      color="red"
-                      title="Close"
-                      onPress={() => {
-                          setModalOpen(false)
-                        }}
-                      />
+                    <Icon 
+                        name="close" 
+                        size={24} 
+                        style={{marginBottom: 5,
+                          borderColor: '#FFF',
+                          backgroundColor: '#fff',
+                          padding: 12,
+                          borderRadius: 100,
+                          alignSelf: 'center',
+                          marginTop: 15}}
+                        onPress={() => setModalOpen(false)}
+                    />
                       <Edittodaylist/>
                 </View>
             </Modal>
 
             <View style={{marginBottom:10, marginTop: 10, flexDirection:'row'}}>
-              <Button
-                color="#7686CA"
-                title="Edit"
-                onPress={() => setModalOpen()}
-              />
-              <View style={{marginLeft: 20}}>
+              <View style={{width:70,height:10}}>
+                <Button
+                  color="#7686CA"
+                  title="Edit"
+                  
+                  onPress={() => setModalOpen()}
+                />
+              </View>
+              
+              <View style={{width:70,height:10,marginLeft: 20}}>
                 <Button
                   color="#FB8888"
                   title="Delete"

@@ -35,7 +35,6 @@ export default function (state = initialState, action){
                 ...state,
                 events: newList
             }
-
         case DELETE_EVENT :
             let  nowEvent = state.events
             let  newEvent = []

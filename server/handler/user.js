@@ -125,7 +125,9 @@ exports.checkAuthen = (req, res) => {
                     event: doc.data().event,
                     key: doc.data().key,
                     rank: doc.data().rank,
-                    time: doc.data().time,
+                    start: doc.data().start,
+                    end: doc.data().end,
+                    catagory: doc.data().catagory,
                 }
                 data.push(newData)
             })
