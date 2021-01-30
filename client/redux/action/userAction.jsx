@@ -11,7 +11,6 @@ export const getAuthen = ()=> (dispatch) => {
         //     dispatch({type: SET_USER_DATA, payload: res.data.userData})
         // }
         if(res.data.eventData) {
-            console.log('events')
             dispatch({type: SET_EVENT, payload: res.data.eventData})
         }
         dispatch({type: LOADING_COMPLETE})
@@ -79,7 +78,6 @@ export const editProfile = (blob, updateData) => (dispatch) => {
             })
             axios.post('/editProfile', updateData)
                 .then((res) => {
-                    console.log(res.data.data)
                     dispatch({type: SET_USER_DATA, payload: res.data.data})
                     dispatch({type: LOADING_COMPLETE})
                 })
@@ -101,7 +99,6 @@ export const editProfile = (blob, updateData) => (dispatch) => {
                 .then((res) => {
                     dispatch({type: SET_USER_DATA, payload: res.data.data})
                     dispatch({type: LOADING_COMPLETE})
-                    console.log(res.data.data)
                 })
                 .catch((err) => {
                     dispatch({type: LOADING_COMPLETE})

@@ -37,12 +37,12 @@ exports.addEvent = (req, res) => {
     }
     firestore.collection('events').add(newData)
         .then(() => {
-            return firestore.collection('events').where('username', '==', req.user.username).get()
+            return firestore.collection('events').where('key', '==', newData.key).get()
         })
         .then((snapshot) => {
-            let data = []
+            let data = {}
             snapshot.forEach(function(doc){
-                let newData = {
+                data = {
                     date: doc.data().date,
                     detail: doc.data().detail,
                     event: doc.data().event,
@@ -50,7 +50,6 @@ exports.addEvent = (req, res) => {
                     rank: doc.data().rank,
                     time: doc.data().time,
                 }
-                data.push(newData)
             })
             return res.json({data: data})
         })
