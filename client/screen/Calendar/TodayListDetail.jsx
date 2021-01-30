@@ -2,16 +2,20 @@ import React, {useState}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Component
 import Edittodaylist from './TodayListEdit'
 
+// Redux
+import {useDispatch} from 'react-redux'
+import {deleteEvent} from '../../redux/action/dataAction'
+
 export default function DetailToday({navigation}) {
-    
     const route = useRoute() 
     const { event,detail,start,end,key } = route.params
     const dispatch = useDispatch()
+    
+    const { event,detail,time,key } = route.params
 
     const [modalOpen, setModalOpen] = useState(false)
     
@@ -77,14 +81,10 @@ export default function DetailToday({navigation}) {
                   color="#FB8888"
                   title="Delete"
                   // onPress={() => dispatch({type: 'DELETE_EVENT', payload: values}, navigation.navigate('Todaylist'))}
+                  onPress={() => dispatch(deleteEvent(key))}
                 />
               </View>
             </View>
-            
-            
-
-
-        
         </View>
     )
 }
