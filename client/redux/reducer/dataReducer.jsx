@@ -40,7 +40,7 @@ export default function (state = initialState, action){
             let  nowEvent = state.events
             let  newEvent = []
             nowEvent.map((event) => {
-                if(event.key !== action.payload.key) {
+                if(event.key !== action.payload) {
                     newEvent.push(event)
                 }
             })

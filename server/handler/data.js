@@ -106,17 +106,19 @@ exports.deleteEvent = (req, res) => {
 
     firestore.collection('events').where('key', '==', req.body.eventKey).get()
         .then((snapshot) => {
+            let resKey
             snapshot.forEach((doc) => {
                 if(doc.data().username === req.user.username) {
                     dataID = doc.id;
                     batch.delete(path.doc(dataID));
+                    resKey = doc.data().key
                 } else {
                     return res.status(403).json({err: 'No permission to delete this event'})
                 }
                 
             })
             batch.commit();
-            return res.status(200).json({success : 'Delete complete'})
+            return res.status(200).json({data : resKey})
         })
         .catch((err) => {
             console.log(err)
