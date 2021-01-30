@@ -100,34 +100,90 @@ export default function Todaylist({route, navigation}) {
                             <View
                             style={{
                               flexDirection: "row",
-                              height: 65,
+                             
                               padding: 20,
                               borderLeftWidth:10,
-                              borderLeftColor:'#ABFFA6'
+                              borderLeftColor:'#ABFFA6',
+                              borderBottomLeftRadius:10,
                             }}
                             >
-                              
-                            <Text key={index} style={style.fontSize}>{item.start} -- {item.end}    {item.event}</Text>
-                            {item.rank === "1" &&
-                              <View style={{ backgroundColor: '#ABFFA6', width: 15,height: 15, marginLeft:80,borderRadius:1000,marginTop:8 }} />
-                            }
-                      
+                               <View style={{flexDirection: 'row'}}>
+                                    <View style={{width:120}}>
+                                      <Text key={index} style={style.fontSize}>{item.start} -- {item.end}</Text>
+                                    </View>
+                                    <View style={{flexDirection: 'column'}}>
+                                      <View style={{}}>
+                                        <Text key={index} style={{fontSize: 17,width:190}}>{item.event}</Text>
+                                      </View>
+                                      {item.catagory === "งาน" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#ff3399'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "ทั่วไป" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#009900'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "นัดสำคัญ" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#993300'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                    </View>
+                                    <View>
+                                      {item.rank === "1" &&
+                                        <View style={{ backgroundColor: '#ABFFA6', width: 13,height: 13, marginLeft:10,borderRadius:1000,marginTop:20 }} />
+                                      }
+                                    </View>
+
+                                </View>
+                            
                             </View>
                         }
                         {item.rank === "2" &&
                             <View
                             style={{
                               flexDirection: "row",
-                              height: 65,
+                              
                               padding: 20,
                               borderLeftWidth:10,
-                              borderLeftColor:'#FFC300'
+                              borderLeftColor:'#FFC300',
+                              borderBottomLeftRadius:10,
                             }}
                             >
-                              <Text key={index} style={style.fontSize}>{item.start} -- {item.end}    {item.event}</Text>
-                            {item.rank === "2" &&
-                              <View style={{ backgroundColor: '#FFC300', width: 15,height: 15, marginLeft:80,borderRadius:1000,marginTop:8 }} />
-                            }
+                                <View style={{flexDirection: 'row'}}>
+                                    <View style={{width:120}}>
+                                      <Text key={index} style={style.fontSize}>{item.start} -- {item.end}</Text>
+                                    </View>
+                                    <View style={{flexDirection: 'column'}}>
+                                      <View style={{}}>
+                                        <Text key={index} style={{fontSize: 17,width:190}}>{item.event}</Text>
+                                      </View>
+                                      {item.catagory === "งาน" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#ff3399'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "ทั่วไป" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#009900'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "นัดสำคัญ" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#993300'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                    </View>
+                                    
+                                    <View>
+                                      {item.rank === "2" &&
+                                        <View style={{ backgroundColor: '#FFC300', width: 13,height: 13, marginLeft:10,borderRadius:1000,marginTop:20 }} />
+                                      }
+                                    </View>
+
+                                </View>
                             </View>
                 
                         }
@@ -135,18 +191,57 @@ export default function Todaylist({route, navigation}) {
                             <View
                             style={{
                               flexDirection: "row",
+                          
+                              padding: 20,
+                              borderLeftWidth:10,
+                              borderLeftColor:'#FF5733',
+                              borderBottomLeftRadius:10,
+                            }}
+                            >
+                              <View style={{flexDirection: 'row'}}>
+                                  <View style={{width:120}}>
+                                    <Text key={index} style={style.fontSize}>{item.start} -- {item.end}</Text>
+                                  </View>
+                                  <View style={{flexDirection: 'column'}}>
+                                      <View style={{}}>
+                                        <Text key={index} style={{fontSize: 17,width:190}}>{item.event}</Text>
+                                      </View>
+                                      {item.catagory === "งาน" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#ff3399'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "ทั่วไป" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#009900'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                      {item.catagory === "นัดสำคัญ" &&
+                                      <View style={{marginTop:8}}>
+                                          <Text style={{fontSize: 14,width:190,color:'#993300'}}>{item.catagory}</Text>
+                                      </View>
+                                      }
+                                    </View>
+                                  <View>
+                                    {item.rank === "3" &&
+                                      <View style={{ backgroundColor: '#FF5733', width: 13,height: 13, marginLeft:10,borderRadius:1000,marginTop:20 }} />
+                                    }
+                                  </View>
+
+                              </View>
+                            </View>
+                        }
+                        {item.rank === "" &&
+                            <View
+                            style={{
+                              flexDirection: "row",
                               height: 65,
                               padding: 20,
                               borderLeftWidth:10,
-                              borderLeftColor:'#FF5733'
+                              borderLeftColor:'#333'
                             }}
                             >
-                              <Text key={index} style={style.fontSize}>{item.start} -- {item.end}    {item.event}</Text>
-                            {item.rank === "3" &&
-                              <View style={{ backgroundColor: '#FF5733', width: 15,height: 15, marginLeft:80,borderRadius:1000,marginTop:8 }} />
-                            }
-                      
-                            
+                              <Text key={index} style={style.fontSize}>No Event</Text>
                             </View>
                         }
                         
@@ -187,7 +282,7 @@ const style = StyleSheet.create({
     
   },
   fontSize:{
-    fontSize: 18,
+    fontSize: 17,
     width:190
   }, 
   modalToggle:{

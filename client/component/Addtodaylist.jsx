@@ -8,6 +8,7 @@ import RNPickerSelect from 'react-native-picker-select';
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment'
+import { black } from 'react-native-paper/lib/typescript/styles/colors'
 
 
 
@@ -45,7 +46,7 @@ const Addtodaylist = () => {
                             style={styles.inputAndroid}
                             
                             items={[
-                                { label: 'น้อย', value: '1' },
+                                { label: 'น้อย', value: '1',color:black },
                                 { label: 'กลาง', value: '2' },
                                 { label: 'มาก', value: '3' },
                             ]}

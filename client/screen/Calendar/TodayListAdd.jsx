@@ -24,22 +24,24 @@ const Addtodaylist = (props) => {
 
     const starthandleConfirm = (time) => {
         // console.log(moment(time).format('HH:mm')) 
-        const startString = time.toLocaleTimeString()
-        const hour = startString.split(':')[0]
-        const minute = startString.split(':')[1]
-        const result = `${hour}:${minute}`
+        // const startString = time.toLocaleTimeString()
+        // const hour = startString.split(':')[0]
+        // const minute = startString.split(':')[1]
+        // const result = `${hour}:${minute}`
+        const result = moment(time).format('HH:mm')
         setStartTime(result)
-        console.log(result)
+        console.log('-----start-----',result)
         setDatePickerVisibility(false)
       };
     const endhandleConfirm = (time) => {
         // console.log(moment(time).format('HH:mm')) 
-        const startString = time.toLocaleTimeString()
-        const hour = startString.split(':')[0]
-        const minute = startString.split(':')[1]
-        const result = `${hour}:${minute}`
+        // const startString = time.toLocaleTimeString()
+        // const hour = startString.split(':')[0]
+        // const minute = startString.split(':')[1]
+        // const result = `${hour}:${minute}`
+        const result = moment(time).format('HH:mm')
         setEndTime(result)
-        console.log(result)
+        console.log('-----end-----',result)
         setDatePickerVisibility(false)
       };
 
@@ -63,7 +65,7 @@ const Addtodaylist = (props) => {
                     
                         <View >
                             <TextInput
-                                style={styles.input}
+                                style={{height:0,width:0}}
                                 placeholder='Date'
                                 onChangeText={props.handleChange('date')}
                                 value={props.values.date}
@@ -71,7 +73,10 @@ const Addtodaylist = (props) => {
                                 >
                             </TextInput>
                         </View>
-                        <View style={{width: 280, height: 60}} >
+                        <View style={{width: 50, height: 30,marginTop:60}}>
+                            <Text>Rank :</Text>
+                        </View>
+                        <View style={{width: 280, height: 50, borderColor: '#ddd', borderWidth: 1,}} >
                             <RNPickerSelect 
                                     placeholder={{ label: "ระดับความสำคัญ", value: null }}
                                     onValueChange={props.handleChange('rank')}
@@ -83,6 +88,24 @@ const Addtodaylist = (props) => {
                                     ]}
                             />
                         </View>
+                        <View style={{width: 70, height: 30,marginTop:5}}>
+                            <Text>catagory :</Text>
+                        </View>
+                        <View style={{width: 280, height: 50, borderColor: '#ddd', borderWidth: 1,}} >
+                            <RNPickerSelect 
+                                    placeholder={{ label: "catagory", value: null }}
+                                    onValueChange={props.handleChange('catagory')}
+                                    style={styles.input}
+                                    items={[
+                                        { label: 'งาน', value: 'งาน' },
+                                        { label: 'ทั่วไป', value: 'ทั่วไป' },
+                                        { label: 'นัดสำคัญ', value: 'นัดสำคัญ' },
+                                    ]}
+                            />
+                        </View>
+                        <View style={{width: 50, height: 17,marginTop:10}}>
+                            <Text>Event :</Text>
+                        </View>
                         <View style={{width: 280, height: 90}}>
                             <TextInput
                                 style={styles.input}
@@ -91,6 +114,16 @@ const Addtodaylist = (props) => {
                                 value={props.values.event}
                                 >
                             </TextInput>
+                        </View>
+                        
+
+                        <View style={{flexDirection: 'row',height:20,marginTop:-20}}>
+                            <View style={{width: 50, height: 30}}>
+                                <Text>Start :</Text>
+                            </View>
+                            <View style={{width: 50, height: 30,marginLeft:100}}>
+                                <Text>End :</Text>
+                            </View>
                         </View>
                         <View style={{flexDirection: 'row',height:90}}>
                             <View style={{width: 100, height: 90}}>
@@ -112,7 +145,6 @@ const Addtodaylist = (props) => {
                                     isVisible={isDatePickerVisible}
                                     mode="time"
                                     onConfirm={props.handleChange('start'),starthandleConfirm}
-
                                     onCancel={()=> setDatePickerVisibility(false)}/>
 
                             <View style={{width: 100, height: 90,marginLeft:6}}> 
@@ -137,7 +169,9 @@ const Addtodaylist = (props) => {
 
                                     onCancel={()=> setDatePickerVisibility(false)}/>
                         </View>
-                        
+                        <View style={{width: 50, height: 20 , marginTop: -20}}>
+                                <Text>Detail :</Text>
+                        </View>
                         <View style={{width: 280, height: 90}}>
                             <TextInput
                                 style={styles.input}
@@ -166,7 +200,7 @@ const styles = StyleSheet.create({
     input: {
         borderColor: '#ddd',
         borderWidth: 1,
-        padding: 20,
+        padding: 10,
         fontSize: 14,
         borderRadius: 6,
         marginBottom:10,
