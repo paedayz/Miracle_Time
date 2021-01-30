@@ -1,10 +1,10 @@
-const {firebase, firestore} = require("../util/firebase")
+const {firebase, firestore, admin} = require("../util/firebase")
 
 exports.getAllEvents = (req, res) => {
     firestore.collection('events').where('username', '==', req.user.username).get()
         .then((snapshot) => {
             let data = []
-            snapshot.forEach(function(doc){
+            snapshot.forEach((doc) => {
                 let newData = {
                     date: doc.data().date,
                     detail: doc.data().detail,
@@ -41,7 +41,7 @@ exports.addEvent = (req, res) => {
         })
         .then((snapshot) => {
             let data = {}
-            snapshot.forEach(function(doc){
+            snapshot.forEach((doc) => {
                 data = {
                     date: doc.data().date,
                     detail: doc.data().detail,
@@ -72,7 +72,7 @@ exports.editEvent = (req, res) => {
     }
     firestore.collection('events').where('key', '==', updateData.key).limit(1).get()
         .then((snapshot) => {
-            snapshot.forEach(function(doc){
+            snapshot.forEach((doc) => {
                 return firestore.collection('events').doc(doc.id).set(updateData)
             })
         })
@@ -81,7 +81,7 @@ exports.editEvent = (req, res) => {
         })
         .then((snapshot) => {
             let data = []
-            snapshot.forEach(function(doc){
+            snapshot.forEach((doc) => {
                 let newData = {
                     date: doc.data().date,
                     detail: doc.data().detail,
@@ -97,5 +97,29 @@ exports.editEvent = (req, res) => {
         .catch((err) => {
             console.log(err)
             return res.json({error: err})
-          })
+        })
+}
+
+exports.deleteEvent = (req, res) => {
+    let batch = firestore.batch()
+    let path = firestore.collection('events')
+
+    firestore.collection('events').where('key', '==', req.body.eventKey).get()
+        .then((snapshot) => {
+            snapshot.forEach((doc) => {
+                if(doc.data().username === req.user.username) {
+                    dataID = doc.id;
+                    batch.delete(path.doc(dataID));
+                } else {
+                    return res.status(403).json({err: 'No permission to delete this event'})
+                }
+                
+            })
+            batch.commit();
+            return res.status(200).json({success : 'Delete complete'})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
 }
