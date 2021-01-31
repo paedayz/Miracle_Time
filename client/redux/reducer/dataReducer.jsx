@@ -1,9 +1,17 @@
-import {SET_EVENT, EDIT_EVENT, ADD_EVENT,DELETE_EVENT, CLEAR_SESSION} from "../type"
+import {SET_EVENT, EDIT_EVENT, ADD_EVENT,DELETE_EVENT, CLEAR_SESSION, ADD_NOTIFICATIONS} from "../type"
 
 const initialState = {
     user: {},
     data: [],
     events: [],
+    notifications: []
+}
+
+const startState = {
+    user: {},
+    data: [],
+    events: [],
+    notifications: []
 }
 
 export default function (state = initialState, action){
@@ -47,9 +55,21 @@ export default function (state = initialState, action){
                 ...state,
                 events: newEvent
             }
+
+        case ADD_NOTIFICATIONS :
+            let nowNoti = state.notifications
+            nowNoti.push({
+                name: 'xxx',
+                from: 'ooo'
+            })
+
+            return{
+                ...state,
+                notifications : nowNoti
+            }
             
         case CLEAR_SESSION :
-            return initialState
+            return startState
 
         default :
             return state

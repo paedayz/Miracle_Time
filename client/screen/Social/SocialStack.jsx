@@ -27,8 +27,7 @@ const SocialStackScreen = ({navigation}) => {
                 color="black"
                 onPress={() => navigation.openDrawer()}
               />
-            ),
-            headerRight: () => <Notifications/>,
+            )
           }}
         />
       </SocialStack.Navigator>

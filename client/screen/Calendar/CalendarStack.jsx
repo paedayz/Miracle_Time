@@ -62,8 +62,7 @@ const CalendarStackScreen = ({ navigation }) => {
               color="black"
               onPress={() => navigation.openDrawer()}
             />
-          ),
-          headerRight: () => <Notifications/>,
+          )
         }}
       />
       <CalendarStack.Screen name="TodayList" component={TodayListsScreen} />

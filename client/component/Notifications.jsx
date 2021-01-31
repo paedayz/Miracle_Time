@@ -1,12 +1,29 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Avatar, Badge, withBadge } from "react-native-elements";
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
 
-const Notifications = () => {
+// redux
+import {useSelector, useDispatch} from 'react-redux'
+
+export default function Notifications({navigation}) {
   const [isNoti, setIsNoti] = useState(true);
-  console.log('notifications')
+  const [test, setTest] = useState(true);
+  const userNoti = useSelector(state => state.data.notifications)
+  
+  const [num, setNum] = useState(0)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    setNum(userNoti.length)
+  },[test])
+
+  const addNoti = () => {
+      dispatch({type:"ADD_NOTIFICATIONS"})
+      setTest(!test)
+  }
+
 
   return (
     <Fragment>
@@ -21,7 +38,7 @@ const Notifications = () => {
           />
 
           <Badge
-            value={3}
+            value={num}
             containerStyle={{ position: "absolute", right: 9 }}
           />
         </View>
@@ -37,5 +54,3 @@ const Notifications = () => {
     </Fragment>
   );
 };
-
-export default Notifications;
