@@ -8,7 +8,6 @@ import Calendar from './Calendar'
 import {useSelector} from "react-redux"
 
 export default function CalendarScreen({navigation}) {
-  const userEventdata = useSelector(state => state.data.events)
     
       return (
         <SafeAreaView style={{ flex: 1 }}>
