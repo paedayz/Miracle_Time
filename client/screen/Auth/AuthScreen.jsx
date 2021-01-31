@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, Button, TextInput, Text, StyleSheet } from 'react-native'
+import { View, TextInput, Text, StyleSheet } from 'react-native'
+import { Button } from 'react-native-elements';
 
 // Redux
 import {useDispatch} from "react-redux"
@@ -126,8 +127,9 @@ export default function auth() {
 const styles = StyleSheet.create({
     headerText: {
         textAlign: 'center',
-        fontSize: 28,
-        color: '#2296F3',
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#2289DC',
         marginBottom: 30,
     },
     headerView: {
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
     footerText: {
         textAlign: 'center',
         fontSize: 16,
-        color: '#2296F3',
+        color: '#2289DC',
         marginHorizontal: 165
     },
     footerView: {

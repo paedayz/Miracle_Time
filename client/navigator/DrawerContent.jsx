@@ -79,6 +79,17 @@ export function DrawerContent(props){
                             label="Settings"
                             // onPress={() => {props.navigation.navigate('Calendar')}}
                         />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="crown-outline" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Admin"
+                            onPress={() => {props.navigation.navigate('Admin')}}
+                        />
                     </Drawer.Section>
                 </View>
             </DrawerContentScrollView>
