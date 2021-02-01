@@ -134,3 +134,34 @@ exports.deleteEvent = (req, res) => {
             return res.json({error: err})
         })
 }
+
+exports.addNotifications = (req, res) => {
+    let docId
+
+    const notiData = {
+        createdAt : new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),
+        username : req.user.username,
+        read : false,
+        toggle : false,
+        type : req.body.type,
+        data : req.body.data,
+    }
+
+    firestore.collection('notifications').add(notiData)
+        .then((doc) => {
+            docId = doc.id
+            return firestore.doc(`/notifications/${docId}`).get()
+        })
+        .then((snapshot) => {
+            console.log(snapshot.data())
+            const resData = {
+                createdAt : snapshot.data().createdAt,
+                read : snapshot.data().read,
+                toggle : snapshot.data().toggle,
+                type : snapshot.data().type,
+                data : snapshot.data().data,
+                docId : docId
+            }
+            return res.json({data : resData})
+        })
+}
