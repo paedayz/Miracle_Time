@@ -163,6 +163,10 @@ exports.addNotifications = (req, res) => {
             }
             return res.json({data : resData})
         })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
 }
 
 exports.readNotifications = (req, res) => {
@@ -172,6 +176,10 @@ exports.readNotifications = (req, res) => {
             return firestore.doc(`/notifications/${docId}`).get()
         })
         .then((snapshot) => {
+            const username = snapshot.data().username
+
+            if(username !== req.user.username) return res.status(403).json({err: 'No permission to delete this event'})
+
             const resData = {
                 createdAt : snapshot.data().createdAt,
                 read : snapshot.data().read,
@@ -181,6 +189,10 @@ exports.readNotifications = (req, res) => {
                 docId : docId
             }
             return res.json({data : resData})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
         })
 }
 
@@ -191,6 +203,10 @@ exports.toggleNotifications = (req, res) => {
             return firestore.doc(`/notifications/${docId}`).get()
         })
         .then((snapshot) => {
+            const username = snapshot.data().username
+
+            if(username !== req.user.username) return res.status(403).json({err: 'No permission to delete this event'})
+            
             const resData = {
                 createdAt : snapshot.data().createdAt,
                 read : snapshot.data().read,
@@ -200,5 +216,9 @@ exports.toggleNotifications = (req, res) => {
                 docId : docId
             }
             return res.json({data : resData})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
         })
 }
