@@ -136,8 +136,6 @@ exports.deleteEvent = (req, res) => {
 }
 
 exports.addNotifications = (req, res) => {
-    let docId
-
     const notiData = {
         createdAt : new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),
         username : req.user.username,
@@ -147,13 +145,52 @@ exports.addNotifications = (req, res) => {
         data : req.body.data,
     }
 
+    let docId
+
     firestore.collection('notifications').add(notiData)
         .then((doc) => {
             docId = doc.id
             return firestore.doc(`/notifications/${docId}`).get()
         })
         .then((snapshot) => {
-            console.log(snapshot.data())
+            const resData = {
+                createdAt : snapshot.data().createdAt,
+                read : snapshot.data().read,
+                toggle : snapshot.data().toggle,
+                type : snapshot.data().type,
+                data : snapshot.data().data,
+                docId : docId
+            }
+            return res.json({data : resData})
+        })
+}
+
+exports.readNotifications = (req, res) => {
+    const docId = req.body.docId
+    firestore.collection('notifications').doc(docId).update({read : true})
+        .then(() => {
+            return firestore.doc(`/notifications/${docId}`).get()
+        })
+        .then((snapshot) => {
+            const resData = {
+                createdAt : snapshot.data().createdAt,
+                read : snapshot.data().read,
+                toggle : snapshot.data().toggle,
+                type : snapshot.data().type,
+                data : snapshot.data().data,
+                docId : docId
+            }
+            return res.json({data : resData})
+        })
+}
+
+exports.toggleNotifications = (req, res) => {
+    const docId = req.body.docId
+    firestore.collection('notifications').doc(docId).update({toggle : true})
+        .then(() => {
+            return firestore.doc(`/notifications/${docId}`).get()
+        })
+        .then((snapshot) => {
             const resData = {
                 createdAt : snapshot.data().createdAt,
                 read : snapshot.data().read,
