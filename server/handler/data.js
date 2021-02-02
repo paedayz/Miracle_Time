@@ -122,7 +122,7 @@ exports.deleteEvent = (req, res) => {
                     batch.delete(path.doc(dataID));
                     resKey = doc.data().key
                 } else {
-                    return res.status(403).json({err: 'No permission to delete this event'})
+                    return res.status(403).json({error: 'No permission to delete this event'})
                 }
                 
             })
@@ -178,7 +178,7 @@ exports.readNotifications = (req, res) => {
         .then((snapshot) => {
             const username = snapshot.data().username
 
-            if(username !== req.user.username) return res.status(403).json({err: 'No permission to delete this event'})
+            if(username !== req.user.username) return res.status(403).json({error: 'No permission to delete this event'})
 
             const resData = {
                 createdAt : snapshot.data().createdAt,
@@ -205,8 +205,8 @@ exports.toggleNotifications = (req, res) => {
         .then((snapshot) => {
             const username = snapshot.data().username
 
-            if(username !== req.user.username) return res.status(403).json({err: 'No permission to delete this event'})
-            
+            if(username !== req.user.username) return res.status(403).json({error: 'No permission to delete this event'})
+
             const resData = {
                 createdAt : snapshot.data().createdAt,
                 read : snapshot.data().read,

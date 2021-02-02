@@ -1,4 +1,4 @@
-import {SET_EVENT, EDIT_EVENT, ADD_EVENT,DELETE_EVENT, CLEAR_SESSION, ADD_NOTIFICATIONS} from "../type"
+import {SET_EVENT, EDIT_EVENT, ADD_EVENT,DELETE_EVENT, CLEAR_SESSION, ADD_NOTIFICATIONS, SET_NOTIFICATIONS} from "../type"
 
 const initialState = {
     user: {},
@@ -66,6 +66,12 @@ export default function (state = initialState, action){
             return{
                 ...state,
                 notifications : nowNoti
+            }
+
+        case SET_NOTIFICATIONS :
+            return {
+                ...state,
+                notifications : action.payload
             }
             
         case CLEAR_SESSION :
