@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import { Avatar, Badge, withBadge } from "react-native-elements";
 import { Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -24,10 +24,26 @@ const Tab = createMaterialBottomTabNavigator();
 export default function TabFunction () {
   const [isNoti, setIsNoti] = useState(true);
   const userNoti = useSelector(state => state.data.notifications)
+  const [unRead, setUnread] = useState(1)
+  console.log('useEffect noti')
+
+  // let num = 0
+  //   if(userNoti) {
+  //     console.log('useEffect noti')
+  //     userNoti.map((noti) => {
+  //       console.log(noti.read)
+  //       if(!noti.read) {
+  //         num = num + 1
+  //       }
+  //     })
+
+  //     setUnread(num)
+  //   }
+
 
   const renderNotification = (
     <Fragment>
-      {isNoti ? (
+      {unRead !== 0 ? (
         <View>
           <Icon.Button
             name="notifications"

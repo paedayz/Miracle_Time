@@ -58,10 +58,8 @@ export default function (state = initialState, action){
 
         case ADD_NOTIFICATIONS :
             let nowNoti = state.notifications
-            nowNoti.push({
-                name: 'xxx',
-                from: 'ooo'
-            })
+            nowNoti.push(action.payload)
+            console.log('add notiiii')
 
             return{
                 ...state,

@@ -147,7 +147,8 @@ exports.checkAuthen = (req, res) => {
                 console.log(newData)
                 notifications.push(newData)
             })
-            return res.json({eventData: events, notiData: notifications, userData: userData})
+            let sortNotifications = notifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            return res.json({eventData: events, notiData: sortNotifications, userData: userData})
         })
         .catch((err) => {
           console.log(err)

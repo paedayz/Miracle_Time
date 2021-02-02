@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {LOADING_DATA, LOADING_COMPLETE, SET_EVENT, ADD_EVENT, DELETE_EVENT, EDIT_EVENT} from "../type"
+import {LOADING_DATA, LOADING_COMPLETE, SET_EVENT, ADD_EVENT, DELETE_EVENT, EDIT_EVENT, ADD_NOTIFICATIONS} from "../type"
 
 export const getAllEvents = () => (dispatch) => {
     dispatch({type: LOADING_DATA})
@@ -50,5 +50,15 @@ export const deleteEvent = (eventKey) => (dispatch) => {
         .catch((err) => {
             console.log(err)
             dispatch({type: LOADING_COMPLETE})
+        })
+}
+
+export const addNotifications = (type, data) => (dispatch) => {
+    axios.post('/addNotifications', {type:type, data:data})
+        .then((res) => {
+            dispatch({type: ADD_NOTIFICATIONS, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
         })
 }

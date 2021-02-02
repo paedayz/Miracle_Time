@@ -3,6 +3,7 @@ import { SafeAreaView, Text, View, Button } from 'react-native';
 
 // redux
 import {useDispatch, useSelector} from 'react-redux'
+import {addNotifications} from '../../redux/action/dataAction'
 
 export default function SocialScreen({navigation}) {
   const dispatch = useDispatch()
@@ -10,7 +11,7 @@ export default function SocialScreen({navigation}) {
   console.log(noti)
 
   const addNoti = () => {
-    dispatch({type:"ADD_NOTIFICATIONS"})
+    dispatch(addNotifications("event", {status : "now", time : "20 minute"}))
   }
       return (
         <SafeAreaView style={{ flex: 1 }}>
