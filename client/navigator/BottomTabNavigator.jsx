@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
+import {useNavigation} from '@react-navigation/native'
 
 // Stack Screen
 import CalendarStackScreen from '../screen/Calendar/CalendarStack'
@@ -25,6 +26,7 @@ export default function TabFunction () {
   const [isNoti, setIsNoti] = useState(true);
   const userNoti = useSelector(state => state.data.notifications)
   const unRead = useSelector(state => state.data.unreadNoti)
+  const navigation = useNavigation()
 
   const renderNotification = (
     <Fragment>
@@ -35,7 +37,7 @@ export default function TabFunction () {
             size={25}
             backgroundColor="#fff"
             color="black"
-            onPress={() => {}}
+            onPress={() => {navigation.navigate('Notifications')}}
           />
 
           <Badge
@@ -49,7 +51,7 @@ export default function TabFunction () {
           size={25}
           backgroundColor="#fff"
           color="black"
-          onPress={() => {}}
+          onPress={() => {navigation.navigate('Notifications')}}
         />
       )}
     </Fragment>

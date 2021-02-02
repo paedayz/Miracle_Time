@@ -5,9 +5,6 @@ import { Text, View } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
 
-// Component
-import Notifications from '../../component/Notifications'
-
 // Screen
 import CalendarScreen from "./CalendarScreen";
 import TodayListsScreen from "./TodayLists";
@@ -16,36 +13,6 @@ import TodayListDetailScreen from "./TodayListDetail";
 const CalendarStack = createStackNavigator();
 
 const CalendarStackScreen = ({ navigation }) => {
-  const [isNoti, setIsNoti] = useState(true);
-
-  const renderNotification = (
-    <Fragment>
-      {isNoti ? (
-        <View>
-          <Icon.Button
-            name="notifications"
-            size={25}
-            backgroundColor="#fff"
-            color="black"
-            onPress={() => {}}
-          />
-
-          <Badge
-            value={3}
-            containerStyle={{ position: "absolute", right: 9 }}
-          />
-        </View>
-      ) : (
-        <Icon.Button
-          name="ios-notifications-outline"
-          size={25}
-          backgroundColor="#fff"
-          color="black"
-          onPress={() => {}}
-        />
-      )}
-    </Fragment>
-  );
 
   return (
     <CalendarStack.Navigator>
