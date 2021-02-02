@@ -24,22 +24,7 @@ const Tab = createMaterialBottomTabNavigator();
 export default function TabFunction () {
   const [isNoti, setIsNoti] = useState(true);
   const userNoti = useSelector(state => state.data.notifications)
-  const [unRead, setUnread] = useState(1)
-  console.log('useEffect noti')
-
-  // let num = 0
-  //   if(userNoti) {
-  //     console.log('useEffect noti')
-  //     userNoti.map((noti) => {
-  //       console.log(noti.read)
-  //       if(!noti.read) {
-  //         num = num + 1
-  //       }
-  //     })
-
-  //     setUnread(num)
-  //   }
-
+  const unRead = useSelector(state => state.data.unreadNoti)
 
   const renderNotification = (
     <Fragment>
@@ -54,7 +39,7 @@ export default function TabFunction () {
           />
 
           <Badge
-            value={userNoti.length}
+            value={unRead}
             containerStyle={{ position: "absolute", right: 9 }}
           />
         </View>

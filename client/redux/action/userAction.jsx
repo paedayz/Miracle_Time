@@ -1,5 +1,13 @@
 import axios from 'axios'
-import {LOADING_DATA, LOADING_COMPLETE, SET_USER_DATA, SET_EVENT, CLEAR_SESSION, SET_NOTIFICATIONS} from '../type'
+import {
+    LOADING_DATA, 
+    LOADING_COMPLETE, 
+    SET_USER_DATA, 
+    SET_EVENT, 
+    CLEAR_SESSION, 
+    SET_NOTIFICATIONS,
+    SET_UNREAD_NOTI
+} from '../type'
 import firebase from 'firebase'
 require('firebase/storage')
 
@@ -16,6 +24,7 @@ export const getAuthen = ()=> (dispatch) => {
 
         if(res.data.notiData) {
             dispatch({type: SET_NOTIFICATIONS, payload: res.data.notiData})
+            dispatch({type: SET_UNREAD_NOTI, payload: true})
         }
         dispatch({type: LOADING_COMPLETE})
     })

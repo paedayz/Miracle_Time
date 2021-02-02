@@ -144,7 +144,6 @@ exports.checkAuthen = (req, res) => {
                   data : doc.data().data,
                   docId : doc.id
                 }
-                console.log(newData)
                 notifications.push(newData)
             })
             let sortNotifications = notifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))

@@ -136,9 +136,6 @@ exports.deleteEvent = (req, res) => {
 }
 
 exports.addNotifications = (req, res) => {
-    console.log(req.body)
-    console.log(req.body.type)
-    console.log(req.body.data)
     const notiData = {
         createdAt : new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),
         username : req.user.username,

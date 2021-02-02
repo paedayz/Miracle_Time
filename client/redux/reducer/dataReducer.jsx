@@ -1,17 +1,28 @@
-import {SET_EVENT, EDIT_EVENT, ADD_EVENT,DELETE_EVENT, CLEAR_SESSION, ADD_NOTIFICATIONS, SET_NOTIFICATIONS} from "../type"
+import {
+    SET_EVENT, 
+    EDIT_EVENT, 
+    ADD_EVENT,
+    DELETE_EVENT,
+    CLEAR_SESSION,
+    ADD_NOTIFICATIONS,
+    SET_NOTIFICATIONS,
+    SET_UNREAD_NOTI
+} from "../type"
 
 const initialState = {
     user: {},
     data: [],
     events: [],
-    notifications: []
+    notifications: [],
+    unreadNoti : 0
 }
 
 const startState = {
     user: {},
     data: [],
     events: [],
-    notifications: []
+    notifications: [],
+    unreadNoti : 0
 }
 
 export default function (state = initialState, action){
@@ -59,7 +70,6 @@ export default function (state = initialState, action){
         case ADD_NOTIFICATIONS :
             let nowNoti = state.notifications
             nowNoti.push(action.payload)
-            console.log('add notiiii')
 
             return{
                 ...state,
@@ -70,6 +80,19 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 notifications : action.payload
+            }
+        
+        case SET_UNREAD_NOTI :
+            let num = 0
+            state.notifications.map((noti) => {
+                if(!noti.read) {
+                num = num + 1
+                }
+            })
+
+            return {
+                ...state,
+                unreadNoti : num
             }
             
         case CLEAR_SESSION :
