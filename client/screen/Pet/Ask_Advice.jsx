@@ -20,17 +20,9 @@ export default function Ask_Advice() {
     const Top_5_Event = num_foreach_event.slice(0,5)
     const randomEvent = Random(Top_5_Event)
 
-
-    console.log("------------");
-
-    // Check_Today_Task()
-    // let A = Check_Today_Task()
-    // console.log(A);
-    const advice = Check_Today_Task() ? (" ไปทำ "+Check_Today_Task().event+" ซะนะ" ) : ("ว่างเเล้วอยาก "+randomEvent.Event_Name+" ไหมละ")
+    const advice = Check_Today_Task() ? (" ไปทำ "+Check_Today_Task().event+" ซะนะ" ) 
+    : ("ว่างเเล้วอยาก "+randomEvent.Event_Name+" ไหมละ")
     
-    // console.log("Is Adive" + advice);
-    // const advice = Istoday_task_done ? randomEvent.Event_Name : Next_Task;
-
     return (
         <View>
            <Text>{advice}</Text> 
@@ -38,12 +30,12 @@ export default function Ask_Advice() {
     );
 }
 
-function Random (data) {
+const Random =(data) =>{
     const random = data[Math.floor(Math.random()*data.length)]
     return random
 }
 
-function CountEvent (Event_Name) {
+const CountEvent =(Event_Name) =>{
     if (num_foreach_event.length === 0) {
         num_foreach_event = [{Event_Name :Event_Name, start: 1}]
     }else{
@@ -63,36 +55,17 @@ function CountEvent (Event_Name) {
 }
 
 const Check_Today_Task = () =>{
-    
-    // eventData.map((E) => {
-
-    //     let timeEvent = new Date(E.date+"T"+E.end)
-        
-    //     // console.log(timeEvent)
-    
-    //     if(timeEvent > Today && timeEvent < ToMorrow && E.success === false) {
-    //         // console.log(E.event)
-    //         // console.log("-----------***---------")
-    //     }
-    // })
-
     let Today_task = eventData.filter((E) => {
         let timeEvent = new Date(E.date+"T"+E.end)
         if(timeEvent > Today && timeEvent < ToMorrow && E.success === false)return true;
     })
-    // console.log(Today_task.length === 0)
-    
     if(Today_task.length == 0 )return false;
     else {
         Today_task.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
-        
-        // const [Next, setNext] = useState(Next_Task(Today_task)) 
+    
         let Next = Next_Task(Today_task)
 
-        console.log(Next)
-
         return Next;
-
     }
 }
 

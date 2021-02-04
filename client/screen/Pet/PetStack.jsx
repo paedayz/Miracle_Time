@@ -15,7 +15,7 @@ const PetStackScreen = ({navigation}) => {
           name="Pet" 
           component={PetScreen} 
           options={{
-            title:'Pet sugoi',
+            title:'Pet',
             headerLeft: () => (
               <Icon.Button 
                 name="menu" 
@@ -27,7 +27,7 @@ const PetStackScreen = ({navigation}) => {
             )
           }}
         />
-        <PetStack.Screen name="Gif-point" component={GifpointScreen} />
+        {/* <PetStack.Screen name="Gif-point" component={GifpointScreen} /> */}
       </PetStack.Navigator>
     )
   }

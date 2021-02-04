@@ -39,7 +39,6 @@ export default function PetScreen({navigation}) {
             
             {isFirsBtnClick &&
               <View style={{position:'absolute', top: 60}}>
-                {/* <Text style={{fontSize:25}}>สู้ๆนะมนุษย์</Text> */}
                 <Ask_Volitation/>
               </View>
             }
