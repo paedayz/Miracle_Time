@@ -6,7 +6,8 @@ import {
   ImageBackground,
   TextInput,
   StyleSheet,
-  Button
+  Button,
+  SafeAreaView
 } from 'react-native';
 
 import {Avatar, useTheme} from 'react-native-paper';
@@ -23,15 +24,26 @@ import * as ImagePicker from 'expo-image-picker';
 import UploadImage from './TestUploadImage'
 
 // Redux
-import {useSelector} from 'react-redux'
-import {uploadImage} from '../../redux/action/userAction'
+import {useSelector, useDispatch} from 'react-redux'
+import {editProfile} from '../../redux/action/userAction'
 
 export default function EditProfileScreen (){
 
-  const {username, nickname, email, userImage, level, exp, coin} = useSelector(state => state.user.userData)
+  const {username, nickname, email, userImage, level, exp, coin, phone, bio, website} = useSelector(state => state.user.userData)
 
   const [image, setImage] = useState(userImage);
+  const [imageBlob, setImageBlob] = useState()
+
+  const [userNickname, setUserNickname] = useState(nickname)
+  const [userPhone, setUserPhone] = useState(phone)
+  const [userWebsite, setUserWebsite] = useState(website)
+  const [userBio, setUserBio] = useState(bio)
+  const [nickNameError, setNickNameError] = useState(null)
+  const [nickNameErrorPopUp, setNickNameErrorPopUp] = useState(false)
+
   const {colors} = useTheme();
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     (async () => {
@@ -60,18 +72,34 @@ export default function EditProfileScreen (){
         name,
         type: "image/jpg"
       });
-      uploadImage(imageData)
-    }
 
-    // console.log(result);
+      createBlob(result.uri)
+    }
 
     if (!result.cancelled) {
       setImage(result.uri);
     }
   };
 
+  const createBlob = async (uri) =>{
+    const response  = await fetch(uri);
+    const blob = await response.blob();
+    setImageBlob(blob)
+    // uploadImage(blob)
+  }
+
+  const onSubmit = () => {
+    let userNewData = {
+      nickname : userNickname,
+      phone : userPhone,
+      website : userWebsite,
+      bio : userBio
+    }
+    dispatch(editProfile(imageBlob, userNewData))
+  }
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <View style={{alignItems: 'center'}}>
           <TouchableOpacity onPress={() => {pickImage()}}>
             <View
@@ -81,6 +109,7 @@ export default function EditProfileScreen (){
                 borderRadius: 15,
                 justifyContent: 'center',
                 alignItems: 'center',
+                marginTop: 20
               }}>
                 <View
                   style={{
@@ -104,7 +133,9 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <FontAwesome name="user-o" color={colors.text} size={20} />
           <TextInput
-            defaultValue={nickname}
+            
+            onChangeText={nickname => setUserNickname(nickname)}
+            defaultValue={userNickname}
             placeholder="Nickname"
             placeholderTextColor="#666666"
             autoCorrect={false}
@@ -120,6 +151,8 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <Feather name="phone" color={colors.text} size={20} />
           <TextInput
+            onChangeText={phone => setUserPhone(phone)}
+            defaultValue={userPhone}
             placeholder="Phone"
             placeholderTextColor="#666666"
             keyboardType="number-pad"
@@ -134,12 +167,12 @@ export default function EditProfileScreen (){
           
         </View>
         <View style={styles.action}>
-          <FontAwesome name="envelope-o" color={colors.text} size={20} />
+          <FontAwesome name="globe" color={colors.text} size={20} />
           <TextInput
-            defaultValue={email}
-            placeholder="Email"
+            onChangeText={website => setUserWebsite(website)}
+            defaultValue={userWebsite}
+            placeholder="Website"
             placeholderTextColor="#666666"
-            keyboardType="email-address"
             autoCorrect={false}
             style={[
               styles.textInput,
@@ -153,6 +186,8 @@ export default function EditProfileScreen (){
         <View style={styles.action}>
           <Icon name="bio" color={colors.text} size={20} />
           <TextInput
+            onChangeText={bio => setUserBio(bio)}
+            defaultValue={userBio}
             placeholder="Bio"
             placeholderTextColor="#666666"
             autoCorrect={false}
@@ -165,17 +200,18 @@ export default function EditProfileScreen (){
           />
         </View>
         
-        <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
+        <TouchableOpacity style={styles.commandButton} onPress={() => onSubmit()}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    alignItems: 'center',
   },
   commandButton: {
     padding: 15,
@@ -242,6 +278,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 10,
     marginBottom: 10,
+    marginLeft: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
