@@ -9,7 +9,9 @@ import store from './redux/store'
 import {Provider} from 'react-redux'
 
 // Screen
+
 import IndexScreen from './screen'
+
 
 let axiosDefaults = require("axios/lib/defaults");
 axiosDefaults.baseURL =`http://${config.IPAddress}:3003`;
@@ -20,7 +22,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
+
           <IndexScreen/>
+
       </NavigationContainer>
     </Provider>
   );
