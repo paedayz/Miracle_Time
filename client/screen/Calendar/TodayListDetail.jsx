@@ -1,7 +1,7 @@
 import React, {useState}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux'
+
 
 // Component
 import Edittodaylist from './TodayListEdit'
@@ -15,7 +15,7 @@ export default function DetailToday({navigation}) {
     const { event,detail,start,end,rank,key } = route.params
     const dispatch = useDispatch()
     
-    const { event,detail,time,key } = route.params
+    
 
     const [modalOpen, setModalOpen] = useState(false)
     
