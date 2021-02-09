@@ -13,7 +13,50 @@ const initialState = {
     user: {},
     data: [],
     events: [],
-    notifications: [],
+    notifications: [
+        {
+        "createdAt": "2/9/2021, 6:25:51 PM",
+        "data":  {
+          "eventData":  {
+            "catagory": "ทั่วไป",
+            "date": "2021-02-25",
+            "detail": "with family",
+            "end": "15:20",
+            "event": "Eat lunch",
+            "key": "0.5724287889047687",
+            "rank": "3",
+            "start": "20:52",
+          },
+          "status": "now",
+          "time": "20 minute",
+        },
+        "docId": "qFYl7HhTABsSaTPylUUo",
+        "read": false,
+        "toggle": false,
+        "type": "event",
+      },
+      {
+        "createdAt": "2/9/2021, 6:25:51 PM",
+        "data":  {
+          "eventData":  {
+            "catagory": "ทั่วไป",
+            "date": "2021-02-25",
+            "detail": "with family",
+            "end": "15:20",
+            "event": "Eat lunch",
+            "key": "0.57242878890547687",
+            "rank": "3",
+            "start": "20:52",
+          },
+          "status": "now",
+          "time": "20 minute",
+        },
+        "docId": "qFYl7HhTABsSaTPy5lUUo",
+        "read": false,
+        "toggle": false,
+        "type": "event",
+      },
+    ],
     unreadNoti : 0
 }
 
