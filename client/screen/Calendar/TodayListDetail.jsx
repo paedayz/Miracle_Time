@@ -12,9 +12,8 @@ import {deleteEvent} from '../../redux/action/dataAction'
 
 export default function DetailToday({navigation}) {
     const route = useRoute() 
-    const { event,detail,start,end,key } = route.params
+    const { event,detail,start,end,rank,key } = route.params
     const dispatch = useDispatch()
-
     const [modalOpen, setModalOpen] = useState(false)
     
 

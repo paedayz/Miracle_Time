@@ -70,7 +70,10 @@ const Edittodaylist = () => {
                     
                     
                 </View>
-                
+                <View style={{width: 50, height: 30,marginTop:10}}>
+                            <Text >Event :</Text>
+                           
+                </View>
                 <View style={{width: 280, height: 90}}>
                     <TextInput
                         style={styles.input}
@@ -79,6 +82,16 @@ const Edittodaylist = () => {
                         defaultValue={event}
                         >
                     </TextInput>
+                </View>
+                <View style={{flexDirection: 'row',height:30,marginTop:-16}}>
+                            <View style={{width: 50, height: 40}}>
+                                <Text >Start :</Text>
+                                
+                            </View>
+                            <View style={{width: 50, height: 40,marginLeft:100}}>
+                                <Text >End :</Text>
+                                
+                            </View>
                 </View>
                 <View style={{flexDirection: 'row',height:90}}>
                     <View style={{width: 100, height: 90}}>
@@ -125,6 +138,10 @@ const Edittodaylist = () => {
 
                             onCancel={()=> setIsEndDatePickerVisible(false)}/>
                 </View>
+                <View style={{width: 50, height: 30 , marginTop: -15}}>
+                                <Text >Detail :</Text>
+                                
+                </View>
 
                 <View style={{width: 280, height: 90}}>
                     <TextInput
@@ -161,5 +178,11 @@ const styles = StyleSheet.create({
          flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    textstyle : {
+        backgroundColor:'#ffccff',
+        borderRadius: 10,
+        width:80,
+        padding:2
     }
 })
