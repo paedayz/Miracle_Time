@@ -106,6 +106,8 @@ exports.login = (req, res) => {
 exports.checkAuthen = (req, res) => {
   console.log('check')
   let userData = {}
+  let events = []
+  let notifications = []
   firebase.auth().onAuthStateChanged((user) => {
     if(user) {
       let userId = user.uid
@@ -117,7 +119,6 @@ exports.checkAuthen = (req, res) => {
           return firestore.collection('events').where('username', '==', userData.username).get() 
         })
         .then((snapshot) => {
-          let data = []
             snapshot.forEach(function(doc){
                 let newData = {
                     date: doc.data().date,
@@ -129,9 +130,24 @@ exports.checkAuthen = (req, res) => {
                     end: doc.data().end,
                     catagory: doc.data().catagory,
                 }
-                data.push(newData)
+                events.push(newData)
             })
-            return res.json({eventData: data, userData: userData})
+            return firestore.collection('notifications').where('username', '==', userData.username).get() 
+        })
+        .then((snapshot) => {
+            snapshot.forEach(function(doc){
+                let newData = {
+                  createdAt : doc.data().createdAt,
+                  read : doc.data().read,
+                  toggle : doc.data().toggle,
+                  type : doc.data().type,
+                  data : doc.data().data,
+                  docId : doc.id
+                }
+                notifications.push(newData)
+            })
+            let sortNotifications = notifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            return res.json({eventData: events, notiData: sortNotifications, userData: userData})
         })
         .catch((err) => {
           console.log(err)

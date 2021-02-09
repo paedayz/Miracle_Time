@@ -85,12 +85,12 @@ exports.editEvent = (req, res) => {
             })
         })
         .then(() => {
-            return firestore.collection('events').where('username', '==', username).get()
+            return firestore.collection('events').where('key', '==', updateData.key).get()
         })
         .then((snapshot) => {
-            let data = []
+            let data
             snapshot.forEach((doc) => {
-                let newData = {
+                data = {
                     date: doc.data().date,
                     detail: doc.data().detail,
                     event: doc.data().event,
@@ -100,7 +100,6 @@ exports.editEvent = (req, res) => {
                     end: doc.data().end,
                     catagory: doc.data().catagory,
                 }
-                data.push(newData)
             })
             return res.json({data: data})
         })
@@ -123,12 +122,100 @@ exports.deleteEvent = (req, res) => {
                     batch.delete(path.doc(dataID));
                     resKey = doc.data().key
                 } else {
-                    return res.status(403).json({err: 'No permission to delete this event'})
+                    return res.status(403).json({error: 'No permission to delete this event'})
                 }
                 
             })
             batch.commit();
             return res.status(200).json({data : resKey})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
+
+exports.addNotifications = (req, res) => {
+    const notiData = {
+        createdAt : new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),
+        username : req.user.username,
+        read : false,
+        toggle : false,
+        type : req.body.type,
+        data : req.body.data,
+    }
+
+    let docId
+
+    firestore.collection('notifications').add(notiData)
+        .then((doc) => {
+            docId = doc.id
+            return firestore.doc(`/notifications/${docId}`).get()
+        })
+        .then((snapshot) => {
+            const resData = {
+                createdAt : snapshot.data().createdAt,
+                read : snapshot.data().read,
+                toggle : snapshot.data().toggle,
+                type : snapshot.data().type,
+                data : snapshot.data().data,
+                docId : docId
+            }
+            return res.json({data : resData})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
+
+exports.readNotifications = (req, res) => {
+    const docId = req.body.docId
+    firestore.collection('notifications').doc(docId).update({read : true})
+        .then(() => {
+            return firestore.doc(`/notifications/${docId}`).get()
+        })
+        .then((snapshot) => {
+            const username = snapshot.data().username
+
+            if(username !== req.user.username) return res.status(403).json({error: 'No permission to delete this event'})
+
+            const resData = {
+                createdAt : snapshot.data().createdAt,
+                read : snapshot.data().read,
+                toggle : snapshot.data().toggle,
+                type : snapshot.data().type,
+                data : snapshot.data().data,
+                docId : docId
+            }
+            return res.json({data : resData})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
+
+exports.toggleNotifications = (req, res) => {
+    const docId = req.body.docId
+    firestore.collection('notifications').doc(docId).update({toggle : true})
+        .then(() => {
+            return firestore.doc(`/notifications/${docId}`).get()
+        })
+        .then((snapshot) => {
+            const username = snapshot.data().username
+
+            if(username !== req.user.username) return res.status(403).json({error: 'No permission to delete this event'})
+
+            const resData = {
+                createdAt : snapshot.data().createdAt,
+                read : snapshot.data().read,
+                toggle : snapshot.data().toggle,
+                type : snapshot.data().type,
+                data : snapshot.data().data,
+                docId : docId
+            }
+            return res.json({data : resData})
         })
         .catch((err) => {
             console.log(err)
