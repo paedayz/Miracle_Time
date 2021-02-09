@@ -3,22 +3,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
-// Component
-import Notifications from '../../component/Notifications'
+import AdminScreen from './AdminScreen'
 
-// Screen
-import SocialScreen from './SocialScreen'
+const AdminStack = createStackNavigator()
 
-const SocialStack = createStackNavigator()
-
-const SocialStackScreen = ({navigation}) => {
+const AdminStackScreen = ({navigation}) => {
     return (
-      <SocialStack.Navigator>
-        <SocialStack.Screen 
-          name="Social" 
-          component={SocialScreen} 
+      <AdminStack.Navigator>
+        <AdminStack.Screen 
+          name="Admin" 
+          component={AdminScreen} 
           options={{
-            title:'Social',
+            title:'Admin',
             headerLeft: () => (
               <Icon.Button 
                 name="menu" 
@@ -30,8 +26,8 @@ const SocialStackScreen = ({navigation}) => {
             )
           }}
         />
-      </SocialStack.Navigator>
+      </AdminStack.Navigator>
     )
   }
 
-export default SocialStackScreen
+export default AdminStackScreen

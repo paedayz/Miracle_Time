@@ -1,7 +1,7 @@
 import React, {useState}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
-
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 // Component
 import Edittodaylist from './TodayListEdit'
@@ -14,9 +14,6 @@ export default function DetailToday({navigation}) {
     const route = useRoute() 
     const { event,detail,start,end,rank,key } = route.params
     const dispatch = useDispatch()
-    
-    
-
     const [modalOpen, setModalOpen] = useState(false)
     
 
@@ -71,7 +68,6 @@ export default function DetailToday({navigation}) {
                 <Button
                   color="#7686CA"
                   title="Edit"
-                  
                   onPress={() => setModalOpen()}
                 />
               </View>

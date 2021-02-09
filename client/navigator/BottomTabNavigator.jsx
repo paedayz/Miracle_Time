@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
+import { Avatar, Badge, withBadge } from "react-native-elements";
+import { Text, View } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
+import {useNavigation} from '@react-navigation/native'
 
 // Stack Screen
 import CalendarStackScreen from '../screen/Calendar/CalendarStack'
@@ -10,10 +14,51 @@ import StatsStackScreen from '../screen/Stats/StatsStack'
 import QuestArchieveStackScreen from '../screen/Quest_Archieve/QuestArchieveStack'
 import PetStackScreen from '../screen/Pet/PetStack'
 
+// Component
+import Notifications from '../component/Notifications'
+
+// Redux
+import {useSelector} from 'react-redux'
+
 const Tab = createMaterialBottomTabNavigator();
 
 export default function TabFunction () {
+  const [isNoti, setIsNoti] = useState(true);
+  const userNoti = useSelector(state => state.data.notifications)
+  const unRead = useSelector(state => state.data.unreadNoti)
+  const navigation = useNavigation()
+
+  const renderNotification = (
+    <Fragment>
+      {unRead !== 0 ? (
+        <View>
+          <Icon.Button
+            name="notifications"
+            size={25}
+            backgroundColor="#fff"
+            color="black"
+            onPress={() => {navigation.navigate('Notifications')}}
+          />
+
+          <Badge
+            value={unRead}
+            containerStyle={{ position: "absolute", right: 9 }}
+          />
+        </View>
+      ) : (
+        <Icon.Button
+          name="ios-notifications-outline"
+          size={25}
+          backgroundColor="#fff"
+          color="black"
+          onPress={() => {navigation.navigate('Notifications')}}
+        />
+      )}
+    </Fragment>
+  );
+
     return (
+      <Fragment>
         <Tab.Navigator
           initialRouteName="Calendar"
           activeColor="#fff"
@@ -74,6 +119,10 @@ export default function TabFunction () {
             }}
           />
         </Tab.Navigator>
+        <View style={{position:'absolute', right:15, top:30}}>
+          {renderNotification}
+        </View>
+      </Fragment>
     )
     
 }
