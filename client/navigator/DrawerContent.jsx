@@ -16,6 +16,7 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
@@ -67,6 +68,17 @@ export function DrawerContent(props){
                             )}
                             label="Profile"
                             onPress={() => {props.navigation.navigate('Profile')}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <FontAwesome5 
+                                name="user-friends" 
+                                color={color}
+                                size={15}
+                                />
+                            )}
+                            label="Friend"
+                            onPress={() => {props.navigation.navigate('Friend')}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
