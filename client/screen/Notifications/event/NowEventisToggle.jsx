@@ -2,9 +2,12 @@ import React from 'react'
 import { SafeAreaView, Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import dayjs from 'dayjs'
+import relativeTime from "dayjs/plugin/relativeTime";
 
-export default function NowEvent({data, eventData}) {
+export default function NowEvent({data, eventData, createdAt}) {
     const navigation = useNavigation()
+    dayjs.extend(relativeTime);
     return (
         <SafeAreaView style={{ flex: 1 }}>
           <TouchableOpacity onPress={() => {navigation.navigate('TodayListDetail', eventData) }}>
@@ -21,7 +24,7 @@ export default function NowEvent({data, eventData}) {
                    size={18} 
                    style={{
                    padding: 6,
-                   color: "#ddd"
+                   color: "#ff9900"
                           }}
                       />
               </View>
@@ -29,7 +32,7 @@ export default function NowEvent({data, eventData}) {
                 <View style={{flexDirection:'column'}}>
                   <View style={{flexDirection:'row'}}>
                     <View style={{width:280}}>
-                      <Text style={styles.title}>It is time to {data.eventData.event} at {data.time}</Text>
+                      <Text style={styles.title}> ถึงเวลาที่ต้องทำ {data.eventData.event} แล้ว </Text>
                     </View>
                     <Icon 
                         name="ellipsis-h" 
@@ -42,7 +45,7 @@ export default function NowEvent({data, eventData}) {
                     />
                   </View>  
                   <View style={{marginTop:5}}>
-                    <Text style={styles.colorminute}>15 minute ago</Text>
+                    <Text style={styles.colorminute}>{dayjs(createdAt).fromNow()}</Text>
                   </View>
                 </View>
                   
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
       borderRadius:100, 
       width:30,
       height:30,
-      backgroundColor:"#333" , 
+      backgroundColor:"green" , 
       marginLeft:-20,
       marginTop:35
     }
