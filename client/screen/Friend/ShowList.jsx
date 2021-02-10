@@ -7,7 +7,7 @@ export default function ShowList({data}) {
     const navigation = useNavigation()
     return (
         <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => {navigation.navigate('FriendProfile', data)}}>
             <View style={styles.box}>   
               <Image 
                 style={{width: 60, height: 60, borderRadius: 60/ 2}} 

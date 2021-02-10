@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 // Screen
 import FriendScreen from './FriendScreen'
+import FriendProfileScreen from './FriendProfileScreen'
 
 const FriendStack = createStackNavigator()
 
@@ -12,7 +13,7 @@ const FriendStackScreen = ({navigation}) => {
     return (
       <FriendStack.Navigator>
         <FriendStack.Screen 
-          name="Firned" 
+          name="Friend" 
           component={FriendScreen} 
           options={{
             title:'Friend',
@@ -27,6 +28,7 @@ const FriendStackScreen = ({navigation}) => {
             )
           }}
         />
+        <FriendStack.Screen name='FriendProfile' component={FriendProfileScreen}/>
       </FriendStack.Navigator>
     )
   }
