@@ -1,5 +1,14 @@
 import axios from 'axios'
-import {LOADING_DATA, LOADING_COMPLETE, SET_EVENT, ADD_EVENT, DELETE_EVENT} from "../type"
+import {
+    LOADING_DATA, 
+    LOADING_COMPLETE, 
+    SET_EVENT, 
+    ADD_EVENT, 
+    DELETE_EVENT, 
+    EDIT_EVENT, 
+    ADD_NOTIFICATIONS, 
+    SET_UNREAD_NOTI
+} from "../type"
 
 export const getAllEvents = () => (dispatch) => {
     dispatch({type: LOADING_DATA})
@@ -31,7 +40,7 @@ export const editEvent = (eventData) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/editEvent', eventData)
         .then((res) => {
-            dispatch({type: "SET_EVENT", payload: res.data.data})
+            dispatch({type: EDIT_EVENT, payload: res.data.data})
             dispatch({type: LOADING_COMPLETE})
         })
         .catch((err) => {
@@ -50,5 +59,17 @@ export const deleteEvent = (eventKey) => (dispatch) => {
         .catch((err) => {
             console.log(err)
             dispatch({type: LOADING_COMPLETE})
+        })
+}
+
+export const addNotifications = (type, data) => (dispatch) => {
+    axios.post('/addNotifications', {type:type, data:data})
+        .then((res) => {
+            dispatch({type: ADD_NOTIFICATIONS, payload: res.data.data})
+            dispatch({type: SET_UNREAD_NOTI, payload: false})
+            
+        })
+        .catch((err) => {
+            console.log(err)
         })
 }

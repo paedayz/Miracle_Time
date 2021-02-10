@@ -1,7 +1,7 @@
 import React, {useState}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 // Component
 import Edittodaylist from './TodayListEdit'
@@ -12,11 +12,8 @@ import {deleteEvent} from '../../redux/action/dataAction'
 
 export default function DetailToday({navigation}) {
     const route = useRoute() 
-    const { event,detail,start,end,key } = route.params
+    const { event,detail,start,end,rank,key } = route.params
     const dispatch = useDispatch()
-    
-    const { event,detail,time,key } = route.params
-
     const [modalOpen, setModalOpen] = useState(false)
     
 
@@ -71,7 +68,6 @@ export default function DetailToday({navigation}) {
                 <Button
                   color="#7686CA"
                   title="Edit"
-                  
                   onPress={() => setModalOpen()}
                 />
               </View>
