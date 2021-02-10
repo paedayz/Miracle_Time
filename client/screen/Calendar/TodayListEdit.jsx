@@ -14,12 +14,13 @@ const Edittodaylist = () => {
 
     const route = useRoute() 
     const navigation = useNavigation()
-    const { Event,detail,start,end,key } = route.params
+    const { event,detail,start,end,key, rank, catagory, date } = route.params
 
     const dispatch = useDispatch()
 
-
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isStartDatePickerVisible, setIsStartDatePickerVisible] = useState(false);
+    const [isEndDatePickerVisible, setIsEndDatePickerVisible] = useState(false);
     const [startTime , setStartTime] = useState(start)
     const [endTime , setEndTime] = useState(end)
     const starthandleConfirm = (time) => {
@@ -30,7 +31,7 @@ const Edittodaylist = () => {
         const result = `${hour}:${minute}`
         setStartTime(result)
         console.log(result)
-        setDatePickerVisibility(false)
+        setIsStartDatePickerVisible(false)
       };
     const endhandleConfirm = (time) => {
         // console.log(moment(time).format('HH:mm')) 
@@ -40,7 +41,7 @@ const Edittodaylist = () => {
         const result = `${hour}:${minute}`
         setEndTime(result)
         console.log(result)
-        setDatePickerVisibility(false)
+        setIsEndDatePickerVisible(false)
       };
 
       LogBox.ignoreAllLogs()
@@ -49,9 +50,13 @@ const Edittodaylist = () => {
     return (
         <View style={styles.container}>
             <Formik
-                initialValues={{ Event: Event, start:start, end:end , detail: detail, key: key}}  
+                initialValues={{ event: event, start:start, end:end , detail: detail, key: key}}  
                 onSubmit={(values) => {
-                    // dispatch(editEvent(values))
+                    values.catagory = catagory
+                    values.rank = rank
+                    values.date = date
+                    console.log(values)
+                    dispatch(editEvent(values))
                     // navigation.navigate('TodayList')
                 }}
             >
@@ -65,15 +70,28 @@ const Edittodaylist = () => {
                     
                     
                 </View>
-                
+                <View style={{width: 50, height: 30,marginTop:10}}>
+                            <Text >Event :</Text>
+                           
+                </View>
                 <View style={{width: 280, height: 90}}>
                     <TextInput
                         style={styles.input}
                         placeholder='Event'
                         onChangeText={props.handleChange('event')}
-                        defaultValue={Event}
+                        defaultValue={event}
                         >
                     </TextInput>
+                </View>
+                <View style={{flexDirection: 'row',height:30,marginTop:-16}}>
+                            <View style={{width: 50, height: 40}}>
+                                <Text >Start :</Text>
+                                
+                            </View>
+                            <View style={{width: 50, height: 40,marginLeft:100}}>
+                                <Text >End :</Text>
+                                
+                            </View>
                 </View>
                 <View style={{flexDirection: 'row',height:90}}>
                     <View style={{width: 100, height: 90}}>
@@ -89,14 +107,14 @@ const Edittodaylist = () => {
                         size={30} 
                         color='gray'
                         style={{marginTop:25,marginLeft:10}}
-                        onPress={()=> setDatePickerVisibility(true)}/>
+                        onPress={()=> setIsStartDatePickerVisible(true)}/>
                     <DateTimePickerModal
                             
-                            isVisible={isDatePickerVisible}
+                            isVisible={isStartDatePickerVisible}
                             mode="time"
                             onConfirm={props.handleChange('start'),starthandleConfirm}
 
-                            onCancel={()=> setDatePickerVisibility(false)}/>
+                            onCancel={()=> setIsStartDatePickerVisible(false)}/>
 
                     <View style={{width: 100, height: 90,marginLeft:6}}> 
                         <TextInput
@@ -111,14 +129,18 @@ const Edittodaylist = () => {
                         size={30} 
                         color='gray'
                         style={{marginTop:25,marginLeft:10}}
-                        onPress={()=> setDatePickerVisibility(true)}/>     
+                        onPress={()=> setIsEndDatePickerVisible(true)}/>     
                     <DateTimePickerModal
                             
-                            isVisible={isDatePickerVisible}
+                            isVisible={isEndDatePickerVisible}
                             mode="time"
                             onConfirm={props.handleChange('end'),endhandleConfirm}
 
-                            onCancel={()=> setDatePickerVisibility(false)}/>
+                            onCancel={()=> setIsEndDatePickerVisible(false)}/>
+                </View>
+                <View style={{width: 50, height: 30 , marginTop: -15}}>
+                                <Text >Detail :</Text>
+                                
                 </View>
 
                 <View style={{width: 280, height: 90}}>
@@ -156,5 +178,11 @@ const styles = StyleSheet.create({
          flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    textstyle : {
+        backgroundColor:'#ffccff',
+        borderRadius: 10,
+        width:80,
+        padding:2
     }
 })

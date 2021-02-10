@@ -15,6 +15,7 @@ import PetScreen from './Pet/PetScreen'
 // Stack
 import ProfileStackScreen from './Profile/ProfileStack'
 import AdminStackScreen from './Admin/AdminStack'
+import NotificationStackScreen from './Notifications/NotificationStack'
 
 // Naviation
 import BottomTabNavigator from '../navigator/BottomTabNavigator'
@@ -50,6 +51,7 @@ export default function Screen({navigation}) {
                 <Drawer.Screen name="Calendar" component={BottomTabNavigator} />
                 <Drawer.Screen name="Profile" component={ProfileStackScreen} />
                 <Drawer.Screen name="Admin" component={AdminStackScreen} />
+                <Drawer.Screen name="Notifications" component={NotificationStackScreen} />
             </Drawer.Navigator>
         )
         
