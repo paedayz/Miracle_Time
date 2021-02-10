@@ -5,6 +5,7 @@ import {
   Button,
   StyleSheet,
   TouchableOpacity,
+  TextInput
 } from "react-native";
 
 import {
@@ -21,6 +22,7 @@ import FriendRequest from './FriendRequest'
 
 export default function FriendScreen({ navigation }) {
     const [isList, setIsList] = useState(true)
+    const [username, setUsername] = useState()
 
     const showPage = () => {
         if(isList) {
@@ -30,8 +32,30 @@ export default function FriendScreen({ navigation }) {
         }
     }
 
+    const onClickAdd = () => {
+        console.log(username)
+        setUsername(null)
+    }
+
   return (
     <SafeAreaView style={styles.container}>
+        <View style={{flexDirection:'row', justifyContent:'center'}}>
+            <View>
+            <TextInput
+                onChangeText={username => setUsername(username)}
+                placeholder="username"
+                placeholderTextColor="#666666"
+                autoCorrect={false}
+                style={styles.textInput}
+                value={username}
+                clearButtonMode="always"
+            />
+            </View>
+            <View style={{marginTop:17, marginLeft:30}}>
+            <Button onPress={() => onClickAdd()} title="ADD"/>
+            </View>
+            
+        </View>
       <View style={styles.headerBoxWrapper}>
         <TouchableOpacity
             onPress={() => setIsList(true)}
@@ -77,5 +101,15 @@ const styles = StyleSheet.create({
     width: "50%",
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
+  textInput: {
+    marginTop: Platform.OS === 'ios' ? 0 : -2,
+    paddingLeft: 10,
+    color: 'black',
+    marginTop: 20,
+    marginBottom: 20,
+    backgroundColor: 'white',
+    maxWidth: 200,
+    minWidth: 200
+  },
 });
