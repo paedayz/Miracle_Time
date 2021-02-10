@@ -74,7 +74,7 @@ export function DrawerContent(props){
                                 <FontAwesome5 
                                 name="user-friends" 
                                 color={color}
-                                size={15}
+                                size={17}
                                 />
                             )}
                             label="Friend"
