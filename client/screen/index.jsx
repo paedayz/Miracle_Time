@@ -38,7 +38,7 @@ export default function Screen({navigation}) {
 
     if(loading) {
         return (
-            <SafeAreaView style={{ flex: 1 , marginTop: 20}}>
+            <SafeAreaView style={{ flex: 1 , justifyContent: 'center', alignItems: 'center'}}>
                 <Text>Loading</Text>
             </SafeAreaView>
         )

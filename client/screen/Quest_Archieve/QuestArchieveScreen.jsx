@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: 'row',
     height: 50,
+    marginBottom: 5
   },
   headerBox: {
     width: '50%',
