@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux'
 // Component
 import ShowList from './ShowList'
 
-export default function SocialScreen({navigation}) {
+export default function FriendList({navigation}) {
     const friendList = useSelector(state => state.friend.list)
     console.log(friendList)
 

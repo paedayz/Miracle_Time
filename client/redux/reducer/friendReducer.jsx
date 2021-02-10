@@ -40,7 +40,7 @@ const initialState = {
     ],
     request: [
         {
-            "bio": "I love eating",
+            "bio": "BLACK CLOVER!!",
             "coin": 0,
             "createdAt": "1/19/2021, 7:03:17 AM",
             "email": "pae@email.com",
@@ -49,14 +49,14 @@ const initialState = {
             },
             "exp": 0,
             "level": 0,
-            "nickname": "WowZa888",
-            "phone": "0882804276",
+            "nickname": "Astaz",
+            "phone": "0214569856",
             "status": "user",
             "theme": null,
-            "userId": "B6vFDPyylAYn3oN5z0euLNfREcm2",
-            "userImage": "https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/132f123b-7989-4e5c-83dc-6b2d92950c6d.jpg?alt=media",
-            "username": "Pdayz",
-            "website": "www.facebook.com/pae.signal",
+            "userId": "B6vFDPsdfwerxcyylAYn3oN5z0euLNfREcm2",
+            "userImage": "https://strawhatmanga.com/wp-content/uploads/2020/02/Black-Clover-241.jpeg",
+            "username": "Asta",
+            "website": "www.facebook.com/asta",
           }
     ]
 }

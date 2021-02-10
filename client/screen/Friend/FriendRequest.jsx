@@ -1,15 +1,35 @@
 import React from 'react';
-import { SafeAreaView, Text, View, Button } from 'react-native';
+import { SafeAreaView, Text, View, Button, FlatList } from 'react-native';
 
 // Redux
 import {useSelector} from 'react-redux'
 
-export default function SocialScreen({navigation}) {
-    const friendRequest = useSelector(state => state.friend.request)
-    console.log(friendRequest)
-      return (
-        <SafeAreaView style={{ flex: 1 }}>
-          <Text>Friend Request</Text>
-        </SafeAreaView>
-      );
+// Component
+import RequestList from './RequestList'
+
+export default function FriendRequest({navigation}) {
+    const friendList = useSelector(state => state.friend.request)
+    console.log(friendList)
+
+    const Item = ({data}) => {
+        let allEventData = data
+          console.log(data.item.nickname)
+        return (
+            <RequestList data={data.item} />
+            )
+    };
+      
+    const renderItem = (noti) => (
+        <Item data={noti} />
+    );
+
+    return (
+        <View>
+            <FlatList
+                data={friendList}
+                renderItem={renderItem}
+                keyExtractor={item => item.userId}
+            />
+        </View> 
+    );
 }
