@@ -23,7 +23,7 @@ export const getAuthen = ()=> (dispatch) => {
         }
 
         if(res.data.notiData) {
-            dispatch({type: SET_NOTIFICATIONS, payload: res.data.notiData})
+            // dispatch({type: SET_NOTIFICATIONS, payload: res.data.notiData})
             dispatch({type: SET_UNREAD_NOTI, payload: true})
         }
         dispatch({type: LOADING_COMPLETE})

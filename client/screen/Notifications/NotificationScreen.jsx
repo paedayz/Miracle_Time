@@ -12,6 +12,73 @@ export default function NotificationScreen({navigation}) {
   const dispatch = useDispatch()
   const noti = useSelector(state => state.data.notifications)
   const [update, setUpdate] = useState(true)
+  const [notiData, setNotiData] = useState(
+    [
+      {
+      "createdAt": "2/9/2021, 6:25:51 PM",
+      "data":  {
+        "eventData":  {
+          "catagory": "ทั่วไป",
+          "date": "2021-02-25",
+          "detail": "with family",
+          "end": "15:20",
+          "event": "Eat lunch",
+          "key": "0.5724287889047687",
+          "rank": "3",
+          "start": "20:52",
+        },
+        "status": "will",
+        "time": "20 minute",
+      },
+      "docId": "qFYl7HhTABsSaTPylUUo",
+      "read": false,
+      "toggle": false,
+      "type": "event",
+    },
+    {
+      "createdAt": "2/9/2021, 6:25:51 PM",
+      "data":  {
+        "eventData":  {
+          "catagory": "ทั่วไป",
+          "date": "2021-02-25",
+          "detail": "with family",
+          "end": "15:20",
+          "event": "Run for Mom",
+          "key": "0.57242878890547687",
+          "rank": "3",
+          "start": "20:52",
+        },
+        "status": "now",
+        "time": "5 minute",
+      },
+      "docId": "qFYl7HhTABsSaTPy5lUUo",
+      "read": false,
+      "toggle": true,
+      "type": "event",
+    },
+    {
+      "createdAt": "2/9/2021, 6:25:51 PM",
+      "data":  {
+        "eventData":  {
+          "catagory": "ทั่วไป",
+          "date": "2021-02-25",
+          "detail": "with family",
+          "end": "15:20",
+          "event": "Swimmimg",
+          "key": "0.572428789890547687",
+          "rank": "3",
+          "start": "20:52",
+        },
+        "status": "now",
+        "time": "5 minute",
+      },
+      "docId": "qFYl7HhTzABsSaTPy5lUUo",
+      "read": false,
+      "toggle": false,
+      "type": "event",
+    },
+  ]
+  )
   
   useEffect(() => {
     navigation.addListener('focus', () => {
@@ -52,7 +119,7 @@ export default function NotificationScreen({navigation}) {
         <Button title="add" onPress={() => addNoti()}/>
     </View>
     <FlatList
-        data={noti}
+        data={notiData}
         renderItem={renderItem}
         keyExtractor={item => item.docId}
       />
