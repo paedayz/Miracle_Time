@@ -9,7 +9,6 @@ import ShowList from './ShowList'
 
 export default function FriendList({navigation}) {
     const friendList = useSelector(state => state.friend.list)
-    console.log(friendList)
 
     const Item = ({data}) => {
         let allEventData = data

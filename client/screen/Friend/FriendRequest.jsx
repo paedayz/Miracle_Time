@@ -9,11 +9,10 @@ import RequestList from './RequestList'
 
 export default function FriendRequest({navigation}) {
     const friendList = useSelector(state => state.friend.request)
-    console.log(friendList)
 
     const Item = ({data}) => {
         let allEventData = data
-          console.log(data.item.nickname)
+          console.log(data.item.docId)
         return (
             <RequestList data={data.item} />
             )

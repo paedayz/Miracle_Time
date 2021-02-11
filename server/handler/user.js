@@ -115,6 +115,8 @@ exports.checkAuthen = (req, res) => {
   let friendListToFetch = []
   let friendRequestToFetch = []
 
+  let friendRequestDocId = []
+
   firebase.auth().onAuthStateChanged((user) => {
     if(user) {
       let userId = user.uid
@@ -148,6 +150,7 @@ exports.checkAuthen = (req, res) => {
               friendListToFetch.push(doc.data().sender)
             } else {
               friendRequestToFetch.push(doc.data().sender)
+              friendRequestDocId.push(doc.id)
             }
           })
           return firestore.collection('friend').where('sender', '==', username).get()
@@ -206,6 +209,16 @@ exports.checkAuthen = (req, res) => {
             })
 
             let sortNotifications = notifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
+            let friendRequestBuff = []
+            let reqNum = 0
+            friendRequest.map((request) => {
+              request.docId = friendRequestDocId[reqNum]
+              friendRequestBuff.push(request)
+              reqNum = reqNum + 1
+            })
+
+            friendRequest = friendRequestBuff
 
             const resData = {
               eventData: events, 
