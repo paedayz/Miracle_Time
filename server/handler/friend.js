@@ -115,3 +115,43 @@ exports.deniedFriendRequest = (req, res) => {
             return res.json({error: err})
         })
 }
+
+exports.getFriendRequest = (req, res) => {
+    const username = req.user.username
+    console.log('getttttttt')
+    console.log(username)
+
+    let friendRequest = []
+    let friendRequestToFetch = []
+    let friendRequestDocId = []
+
+    firestore.collection('friend').where('recipient', '==', username).get()
+        .then((snapshot) => {
+            snapshot.forEach((doc) => {
+                if(!doc.data().accept) {
+                    friendRequestToFetch.push(doc.data().sender)
+                    friendRequestDocId.push(doc.id)
+                }
+            })
+
+            const friendRequestPromise = friendRequestToFetch.map((reqUsername) => {
+                return firestore.doc(`/users/${reqUsername}`).get()
+              })
+
+            Promise.all(friendRequestPromise)
+                .then((data) => {
+                    data.forEach((doc) => {
+                        friendRequest.push(doc.data())
+                    })
+                })
+                .catch((err) => {
+                    console.log(err)
+                    return res.json({error: err})
+                })
+            return firestore.collection('friend').where('recipient', '==', username).get() 
+            
+        })
+        .then(() => {
+            return res.json({data: friendRequest})
+        })
+}

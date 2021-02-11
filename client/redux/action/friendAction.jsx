@@ -1,5 +1,16 @@
 import axios from 'axios'
-import { LOADING_DATA, LOADING_COMPLETE ,ACCEPT_FRIEND, DENIED_FRIEND} from '../type'
+import { LOADING_DATA, LOADING_COMPLETE ,ACCEPT_FRIEND, DENIED_FRIEND, SET_FRIEND_REQUEST} from '../type'
+
+export const getFriendRequest = () => (dispatch) => {
+    axios.get('/getFriendRequest')
+        .then((res) => {
+            console.log(res.data)
+            dispatch({type: SET_FRIEND_REQUEST, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
 
 export const addFriend = (recipient) => {
     axios.post('/addFriend',{recipient: recipient})

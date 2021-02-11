@@ -166,7 +166,7 @@ exports.checkAuthen = (req, res) => {
             return firestore.doc(`/users/${username}`).get()
           })
 
-          const friendRequestPromis = friendRequestToFetch.map((username) => {
+          const friendRequestPromise = friendRequestToFetch.map((username) => {
             return firestore.doc(`/users/${username}`).get()
           })
 
@@ -182,7 +182,7 @@ exports.checkAuthen = (req, res) => {
               return res.json({error: err})
             })
 
-            Promise.all(friendRequestPromis)
+            Promise.all(friendRequestPromise)
             .then((data) => {
               data.forEach((doc) => {
                 friendRequest.push(doc.data())
