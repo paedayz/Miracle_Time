@@ -3,7 +3,12 @@ const config = require("../util/config")
 
 exports.addFriend = (req, res) => {
     const recipient = req.body.recipient
-    let recipientData = {}
+
+    if(recipient == req.user.username) {
+        return res.status(403).json({error: 'You Can not send friend request to yourself'})
+    }
+    
+    let friendSendReq = false
 
     firestore.doc(`/users/${recipient}`).get()
         .then((doc) => {
@@ -11,11 +16,20 @@ exports.addFriend = (req, res) => {
                 return res.status(404).json({ error: "User not found" });
             }
 
+            return firestore.collection('friend').where('recipient', '==', req.user.username).get()
+        })
+        .then((snapshot) => {
+
+            if(snapshot.docs) {
+                friendSendReq = true
+                return res.status(403).json({error: 'You Can not send friend request to who send friend request to you'})
+            }
+
             return firestore.collection('friend').where('sender', '==', req.user.username).get()
         })
         .then((snapshot) => {
             
-            if(snapshot.docs.length == 0) {
+            if(!snapshot.docs && !friendSendReq) {
                 const data = {
                     requestDate: new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),
                     sender: req.user.username,

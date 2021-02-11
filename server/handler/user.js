@@ -105,9 +105,16 @@ exports.login = (req, res) => {
 
 exports.checkAuthen = (req, res) => {
   console.log('check')
+  let username
   let userData = {}
   let events = []
   let notifications = []
+  let friendRequest = []
+  let friendList = []
+
+  let friendListToFetch = []
+  let friendRequestToFetch = []
+
   firebase.auth().onAuthStateChanged((user) => {
     if(user) {
       let userId = user.uid
@@ -116,7 +123,8 @@ exports.checkAuthen = (req, res) => {
           snapshot.forEach(function(doc){
             userData = doc.data()
           })
-          return firestore.collection('events').where('username', '==', userData.username).get() 
+          username = userData.username
+          return firestore.collection('events').where('username', '==', username).get() 
         })
         .then((snapshot) => {
             snapshot.forEach(function(doc){
@@ -132,7 +140,60 @@ exports.checkAuthen = (req, res) => {
                 }
                 events.push(newData)
             })
-            return firestore.collection('notifications').where('username', '==', userData.username).get() 
+            return firestore.collection('friend').where('recipient', '==', username).get()
+        })
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            if(doc.data().accept) {
+              friendListToFetch.push(doc.data().sender)
+            } else {
+              friendRequestToFetch.push(doc.data().sender)
+            }
+          })
+          return firestore.collection('friend').where('sender', '==', username).get()
+        })
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            if(doc.data().accept) {
+              friendListToFetch.push(doc.data().recipient)
+            }
+          })
+
+          console.log(friendListToFetch)
+          console.log(friendRequestToFetch)
+
+          const friendListPromise = friendListToFetch.map((username) => {
+            return firestore.doc(`/users/${username}`).get()
+          })
+
+          const friendRequestPromis = friendRequestToFetch.map((username) => {
+            return firestore.doc(`/users/${username}`).get()
+          })
+
+
+          Promise.all(friendListPromise)
+            .then((data) => {
+              data.forEach((doc) => {
+                friendList.push(doc.data())
+              })
+            })
+            .catch((err) => {
+              console.log(err)
+              return res.json({error: err})
+            })
+
+            Promise.all(friendRequestPromis)
+            .then((data) => {
+              data.forEach((doc) => {
+                friendRequest.push(doc.data())
+              })
+            })
+            .catch((err) => {
+              console.log(err)
+              return res.json({error: err})
+            })
+
+          return firestore.collection('notifications').where('username', '==', userData.username).get() 
         })
         .then((snapshot) => {
             snapshot.forEach(function(doc){
@@ -147,7 +208,14 @@ exports.checkAuthen = (req, res) => {
                 notifications.push(newData)
             })
             let sortNotifications = notifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            return res.json({eventData: events, notiData: sortNotifications, userData: userData})
+            const resData = {
+              eventData: events, 
+              notiData: sortNotifications, 
+              userData: userData, 
+              friendList: friendList, 
+              friendRequest: friendRequest
+            }
+            return res.json(resData)
         })
         .catch((err) => {
           console.log(err)
