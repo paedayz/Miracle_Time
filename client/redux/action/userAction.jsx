@@ -6,7 +6,9 @@ import {
     SET_EVENT, 
     CLEAR_SESSION, 
     SET_NOTIFICATIONS,
-    SET_UNREAD_NOTI
+    SET_UNREAD_NOTI,
+    SET_FRIEND_REQUEST,
+    SET_FRIEND_LIST
 } from '../type'
 import firebase from 'firebase'
 require('firebase/storage')
@@ -25,6 +27,14 @@ export const getAuthen = ()=> (dispatch) => {
         if(res.data.notiData) {
             // dispatch({type: SET_NOTIFICATIONS, payload: res.data.notiData})
             dispatch({type: SET_UNREAD_NOTI, payload: true})
+        }
+
+        if(res.data.friendList) {
+            dispatch({type: SET_FRIEND_LIST, payload: res.data.friendList})
+        }
+
+        if(res.data.friendRequest) {
+            dispatch({type: SET_FRIEND_REQUEST, payload: res.data.friendRequest})
         }
         dispatch({type: LOADING_COMPLETE})
     })

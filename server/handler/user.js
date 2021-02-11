@@ -159,9 +159,6 @@ exports.checkAuthen = (req, res) => {
             }
           })
 
-          console.log(friendListToFetch)
-          console.log(friendRequestToFetch)
-
           const friendListPromise = friendListToFetch.map((username) => {
             return firestore.doc(`/users/${username}`).get()
           })
@@ -207,7 +204,9 @@ exports.checkAuthen = (req, res) => {
                 }
                 notifications.push(newData)
             })
+
             let sortNotifications = notifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
             const resData = {
               eventData: events, 
               notiData: sortNotifications, 
