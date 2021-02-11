@@ -11,8 +11,18 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function RequestList({ data }) {
+// Redux
+import {useDispatch} from 'react-redux'
+import {acceptFriendRequest} from '../../redux/action/friendAction'
+
+export default function RequestList({ data, setIsList }) {
   const navigation = useNavigation();
+  const dispatch = useDispatch()
+
+  const onClickAccept = () => {
+    dispatch(acceptFriendRequest(data.docId, data.username, setIsList))
+  }
+
   return (
     <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
       <TouchableOpacity
@@ -46,7 +56,7 @@ export default function RequestList({ data }) {
             </View>
 
             <View style={{marginTop:10}}>
-                <Button title="Accept"/>
+                <Button onPress={() => onClickAccept()} title="Accept"/>
             </View>
 
             <View style={{marginTop:10, marginLeft:10}}>

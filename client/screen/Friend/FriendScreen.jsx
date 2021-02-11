@@ -20,6 +20,9 @@ import {
 import FriendList from './FriendLists'
 import FriendRequest from './FriendRequest'
 
+// Redux
+import {addFriend} from '../../redux/action/friendAction'
+
 export default function FriendScreen({ navigation }) {
     const [isList, setIsList] = useState(true)
     const [username, setUsername] = useState()
@@ -28,12 +31,12 @@ export default function FriendScreen({ navigation }) {
         if(isList) {
             return <FriendList/>
         } else {
-            return <FriendRequest/>
+            return <FriendRequest setIsList={setIsList}/>
         }
     }
 
     const onClickAdd = () => {
-        console.log(username)
+        addFriend(username)
         setUsername(null)
     }
 

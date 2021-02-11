@@ -7,14 +7,14 @@ import {useSelector} from 'react-redux'
 // Component
 import RequestList from './RequestList'
 
-export default function FriendRequest({navigation}) {
+export default function FriendRequest({navigation, setIsList}) {
     const friendList = useSelector(state => state.friend.request)
 
     const Item = ({data}) => {
         let allEventData = data
           console.log(data.item.docId)
         return (
-            <RequestList data={data.item} />
+            <RequestList data={data.item} setIsList={setIsList} />
             )
     };
       

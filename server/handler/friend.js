@@ -19,8 +19,13 @@ exports.addFriend = (req, res) => {
             return firestore.collection('friend').where('recipient', '==', req.user.username).get()
         })
         .then((snapshot) => {
+            let flag = 0
 
-            if(snapshot.docs) {
+            snapshot.forEach((doc) => {
+                if(doc.data().sender === recipient) flag = 1
+            })
+
+            if(flag === 1) {
                 friendSendReq = true
                 return res.status(403).json({error: 'You Can not send friend request to who send friend request to you'})
             }
@@ -28,8 +33,13 @@ exports.addFriend = (req, res) => {
             return firestore.collection('friend').where('sender', '==', req.user.username).get()
         })
         .then((snapshot) => {
-            
-            if(!snapshot.docs && !friendSendReq) {
+            let flag = 0
+
+            snapshot.forEach((doc) => {
+                if(doc.data().recipient === recipient) flag = 1
+            })
+
+            if(flag === 0 && !friendSendReq) {
                 const data = {
                     requestDate: new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),
                     sender: req.user.username,
@@ -40,9 +50,6 @@ exports.addFriend = (req, res) => {
             } else {
                 return res.status(403).json({error: 'Already send request'})
             }
-
-            
-            
         })
         .then(() => {
             return res.json({success: 'add success'})
