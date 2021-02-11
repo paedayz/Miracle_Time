@@ -88,3 +88,30 @@ exports.acceptFriendRequest = (req, res) => {
             return res.json({error: err})
         })
 }
+
+exports.deniedFriendRequest = (req, res) => {
+    let docId = req.body.docId
+    let recipient = req.user.username
+    let sender = req.body.sender
+
+    firestore.doc(`/friend/${docId}`).get()
+        .then((doc) => {
+            if(doc.data().recipient !== recipient) {
+                return res.status(403).json({error: 'Recipient not match'})
+            } else if(doc.data().sender !== sender) {
+                return res.status(403).json({error: 'Sender not match'})
+            }  else {
+                return firestore.doc(`/friend/${docId}`).delete()
+            }
+        })
+        .then(() => {
+            return firestore.doc(`/users/${sender}`).get()
+        })
+        .then((doc) => {
+            return res.json({data: doc.data().username})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}

@@ -1,4 +1,4 @@
-import {SET_FRIEND_LIST, SET_FRIEND_REQUEST, ACCEPT_FRIEND} from "../type"
+import {SET_FRIEND_LIST, SET_FRIEND_REQUEST, ACCEPT_FRIEND, DENIED_FRIEND} from "../type"
 
 const initialState = {
     list: [],
@@ -31,6 +31,17 @@ export default function (state = initialState, action){
           return {
             ...state,
             list: newList,
+            request: newRequest
+          }
+        case DENIED_FRIEND :
+          newRequest = []
+          state.request.map((request) => {
+            if(request.username !== action.payload){
+              newRequest.push(request)
+            }
+          })
+          return {
+            ...state,
             request: newRequest
           }
         default :

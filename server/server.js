@@ -27,7 +27,7 @@ let {
   toggleNotifications
 } = require('./handler/data')
 
-let {addFriend, acceptFriendRequest} = require('./handler/friend')
+let {addFriend, acceptFriendRequest, deniedFriendRequest} = require('./handler/friend')
 
 // User Route
 app.post('/signup',signup)
@@ -39,6 +39,7 @@ app.post('/editProfile' , FBAuth ,editProfile)
 // Friend Route
 app.post('/addFriend', FBAuth, addFriend)
 app.post('/acceptFriendRequest', FBAuth, acceptFriendRequest)
+app.post('/deniedFriendRequest', FBAuth, deniedFriendRequest)
 
 // Data Route
 app.get('/getAllEvents',FBAuth, getAllEvents)

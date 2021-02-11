@@ -13,14 +13,18 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 // Redux
 import {useDispatch} from 'react-redux'
-import {acceptFriendRequest} from '../../redux/action/friendAction'
+import {acceptFriendRequest, deniedFriendRequest} from '../../redux/action/friendAction'
 
 export default function RequestList({ data, setIsList }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   const dispatch = useDispatch()
 
   const onClickAccept = () => {
     dispatch(acceptFriendRequest(data.docId, data.username, setIsList))
+  }
+
+  const onClickDenied = () => {
+    dispatch(deniedFriendRequest(data.docId, data.username))
   }
 
   return (
@@ -60,7 +64,7 @@ export default function RequestList({ data, setIsList }) {
             </View>
 
             <View style={{marginTop:10, marginLeft:10}}>
-                <Button color='red' title="Denied"/>
+                <Button onPress={() => onClickDenied()} color='red' title="Denied"/>
             </View>
 
           </View>
