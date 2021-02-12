@@ -32,7 +32,7 @@ let {addFriend, acceptFriendRequest, deniedFriendRequest, getFriendRequest} = re
 // User Route
 app.post('/signup',signup)
 app.post('/login', login)
-app.get('/authen', checkAuthen)
+app.post('/authen', checkAuthen)
 app.get('/signout', signout)
 app.post('/editProfile' , FBAuth ,editProfile)
 

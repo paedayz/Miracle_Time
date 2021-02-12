@@ -13,9 +13,11 @@ import {
 import firebase from 'firebase'
 require('firebase/storage')
 
+let clientUserId
+
 export const getAuthen = ()=> (dispatch) => {
     dispatch({type: LOADING_DATA})
-    axios.get('/authen').then((res) => {
+    axios.post('/authen', {clientUserId : clientUserId}).then((res) => {
         // if(res.data.userData) {
         //     console.log('user')
         //     dispatch({type: SET_USER_DATA, payload: res.data.userData})
@@ -47,6 +49,7 @@ export const getAuthen = ()=> (dispatch) => {
 export const login = (userData) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/login', userData).then((res) => {
+        clientUserId = res.data.data.userId
         dispatch({type: SET_USER_DATA, payload: res.data.data})
         dispatch({type: LOADING_COMPLETE})
     })

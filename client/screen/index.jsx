@@ -31,7 +31,9 @@ export default function Screen({navigation}) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAuthen())
+        if(userData) {
+            dispatch(getAuthen())
+        }
     }, [userData])
 
     if(userData && !userEventData){
