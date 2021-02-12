@@ -4,6 +4,11 @@ const initialState = {
     userData : null
 }
 
+const startState = {
+    userData : null
+}
+
+
 export default function (state = initialState, action){
     switch (action.type) {
         case SET_USER_DATA :
@@ -13,7 +18,7 @@ export default function (state = initialState, action){
             }
 
         case CLEAR_SESSION :
-            return initialState
+            return startState
 
         default :
             return state

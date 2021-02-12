@@ -3,6 +3,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
+// Component
+import Notifications from '../../component/Notifications'
+
+// Screen
 import SocialScreen from './SocialScreen'
 
 const SocialStack = createStackNavigator()

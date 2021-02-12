@@ -1,17 +1,19 @@
-const {firebase, firestore} = require("../util/firebase")
+const {firebase, firestore, admin} = require("../util/firebase")
 
 exports.getAllEvents = (req, res) => {
     firestore.collection('events').where('username', '==', req.user.username).get()
         .then((snapshot) => {
             let data = []
-            snapshot.forEach(function(doc){
+            snapshot.forEach((doc) => {
                 let newData = {
                     date: doc.data().date,
                     detail: doc.data().detail,
                     event: doc.data().event,
                     key: doc.data().key,
                     rank: doc.data().rank,
-                    time: doc.data().time,
+                    start: doc.data().start,
+                    end: doc.data().end,
+                    catagory: doc.data().catagory,
                 }
                 data.push(newData)
             })
@@ -31,26 +33,29 @@ exports.addEvent = (req, res) => {
         event: eventData.event,
         key: eventData.key,
         rank: eventData.rank,
-        time: eventData.time,
+        start : eventData.start,
+        end : eventData.end,
+        catagory : eventData.catagory,
         username: req.user.username,
         success : eventData.success
     }
     firestore.collection('events').add(newData)
         .then(() => {
-            return firestore.collection('events').where('username', '==', req.user.username).get()
+            return firestore.collection('events').where('key', '==', newData.key).get()
         })
         .then((snapshot) => {
-            let data = []
-            snapshot.forEach(function(doc){
-                let newData = {
+            let data = {}
+            snapshot.forEach((doc) => {
+                data = {
                     date: doc.data().date,
                     detail: doc.data().detail,
                     event: doc.data().event,
                     key: doc.data().key,
                     rank: doc.data().rank,
-                    time: doc.data().time,
+                    start: doc.data().start,
+                    end: doc.data().end,
+                    catagory: doc.data().catagory,
                 }
-                data.push(newData)
             })
             return res.json({data: data})
         })
@@ -68,35 +73,152 @@ exports.editEvent = (req, res) => {
         event : req.body.event,
         key : req.body.key,
         rank : req.body.rank,
-        time : req.body.time,
+        start : req.body.start,
+        end : req.body.end,
+        catagory : req.body.catagory,
         username : username,
     }
     firestore.collection('events').where('key', '==', updateData.key).limit(1).get()
         .then((snapshot) => {
-            snapshot.forEach(function(doc){
+            snapshot.forEach((doc) => {
                 return firestore.collection('events').doc(doc.id).set(updateData)
             })
         })
         .then(() => {
-            return firestore.collection('events').where('username', '==', username).get()
+            return firestore.collection('events').where('key', '==', updateData.key).get()
         })
         .then((snapshot) => {
-            let data = []
-            snapshot.forEach(function(doc){
-                let newData = {
+            let data
+            snapshot.forEach((doc) => {
+                data = {
                     date: doc.data().date,
                     detail: doc.data().detail,
                     event: doc.data().event,
                     key: doc.data().key,
                     rank: doc.data().rank,
-                    time: doc.data().time,
+                    start: doc.data().start,
+                    end: doc.data().end,
+                    catagory: doc.data().catagory,
                 }
-                data.push(newData)
             })
             return res.json({data: data})
         })
         .catch((err) => {
             console.log(err)
             return res.json({error: err})
-          })
+        })
+}
+
+exports.deleteEvent = (req, res) => {
+    let batch = firestore.batch()
+    let path = firestore.collection('events')
+
+    firestore.collection('events').where('key', '==', req.body.eventKey).get()
+        .then((snapshot) => {
+            let resKey
+            snapshot.forEach((doc) => {
+                if(doc.data().username === req.user.username) {
+                    dataID = doc.id;
+                    batch.delete(path.doc(dataID));
+                    resKey = doc.data().key
+                } else {
+                    return res.status(403).json({error: 'No permission to delete this event'})
+                }
+                
+            })
+            batch.commit();
+            return res.status(200).json({data : resKey})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
+
+exports.addNotifications = (req, res) => {
+    const notiData = {
+        createdAt : new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),
+        username : req.user.username,
+        read : false,
+        toggle : false,
+        type : req.body.type,
+        data : req.body.data,
+    }
+
+    let docId
+
+    firestore.collection('notifications').add(notiData)
+        .then((doc) => {
+            docId = doc.id
+            return firestore.doc(`/notifications/${docId}`).get()
+        })
+        .then((snapshot) => {
+            const resData = {
+                createdAt : snapshot.data().createdAt,
+                read : snapshot.data().read,
+                toggle : snapshot.data().toggle,
+                type : snapshot.data().type,
+                data : snapshot.data().data,
+                docId : docId
+            }
+            return res.json({data : resData})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
+
+exports.readNotifications = (req, res) => {
+    const docId = req.body.docId
+    firestore.collection('notifications').doc(docId).update({read : true})
+        .then(() => {
+            return firestore.doc(`/notifications/${docId}`).get()
+        })
+        .then((snapshot) => {
+            const username = snapshot.data().username
+
+            if(username !== req.user.username) return res.status(403).json({error: 'No permission to delete this event'})
+
+            const resData = {
+                createdAt : snapshot.data().createdAt,
+                read : snapshot.data().read,
+                toggle : snapshot.data().toggle,
+                type : snapshot.data().type,
+                data : snapshot.data().data,
+                docId : docId
+            }
+            return res.json({data : resData})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
+
+exports.toggleNotifications = (req, res) => {
+    const docId = req.body.docId
+    firestore.collection('notifications').doc(docId).update({toggle : true})
+        .then(() => {
+            return firestore.doc(`/notifications/${docId}`).get()
+        })
+        .then((snapshot) => {
+            const username = snapshot.data().username
+
+            if(username !== req.user.username) return res.status(403).json({error: 'No permission to delete this event'})
+
+            const resData = {
+                createdAt : snapshot.data().createdAt,
+                read : snapshot.data().read,
+                toggle : snapshot.data().toggle,
+                type : snapshot.data().type,
+                data : snapshot.data().data,
+                docId : docId
+            }
+            return res.json({data : resData})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
 }
