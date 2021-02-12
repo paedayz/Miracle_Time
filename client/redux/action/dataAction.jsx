@@ -10,9 +10,13 @@ import {
     SET_UNREAD_NOTI
 } from "../type"
 
+import {getClientUserId} from './userAction'
+
+let clientUserId = getClientUserId()
+
 export const getAllEvents = () => (dispatch) => {
     dispatch({type: LOADING_DATA})
-    axios.get('/getAllEvents')
+    axios.post('/getAllEvents', {clientUserId : clientUserId})
         .then((res) => {
             dispatch({type: "SET_EVENT", payload: res.data.data})
             dispatch({type: LOADING_COMPLETE})
@@ -25,6 +29,7 @@ export const getAllEvents = () => (dispatch) => {
 
 export const addEvent = (eventData) => (dispatch) => {
     dispatch({type: LOADING_DATA})
+    eventData.clientUserId = clientUserId
     axios.post('/addEvent', eventData)
         .then((res) => {
             dispatch({type: ADD_EVENT, payload: res.data.data})
@@ -38,6 +43,7 @@ export const addEvent = (eventData) => (dispatch) => {
 
 export const editEvent = (eventData) => (dispatch) => {
     dispatch({type: LOADING_DATA})
+    eventData.clientUserId = clientUserId
     axios.post('/editEvent', eventData)
         .then((res) => {
             dispatch({type: EDIT_EVENT, payload: res.data.data})
@@ -51,7 +57,7 @@ export const editEvent = (eventData) => (dispatch) => {
 
 export const deleteEvent = (eventKey) => (dispatch) => {
     dispatch({type: LOADING_DATA})
-    axios.post('/deleteEvent', {eventKey : eventKey})
+    axios.post('/deleteEvent', {eventKey : eventKey, clientUserId: clientUserId})
         .then((res) => {
             dispatch({type: DELETE_EVENT, payload: res.data.data})
             dispatch({type: LOADING_COMPLETE})
@@ -63,7 +69,7 @@ export const deleteEvent = (eventKey) => (dispatch) => {
 }
 
 export const addNotifications = (type, data) => (dispatch) => {
-    axios.post('/addNotifications', {type:type, data:data})
+    axios.post('/addNotifications', {type:type, data:data, clientUserId: clientUserId})
         .then((res) => {
             dispatch({type: ADD_NOTIFICATIONS, payload: res.data.data})
             dispatch({type: SET_UNREAD_NOTI, payload: false})

@@ -37,13 +37,13 @@ app.get('/signout', signout)
 app.post('/editProfile' , FBAuth ,editProfile)
 
 // Friend Route
-app.get('/getFriendRequest', FBAuth, getFriendRequest)
+app.post('/getFriendRequest', FBAuth, getFriendRequest)
 app.post('/addFriend', FBAuth, addFriend)
 app.post('/acceptFriendRequest', FBAuth, acceptFriendRequest)
 app.post('/deniedFriendRequest', FBAuth, deniedFriendRequest)
 
 // Data Route
-app.get('/getAllEvents',FBAuth, getAllEvents)
+app.post('/getAllEvents',FBAuth, getAllEvents)
 app.post('/addEvent', FBAuth, addEvent)
 app.post('/editEvent', FBAuth, editEvent)
 app.post('/deleteEvent', FBAuth, deleteEvent)

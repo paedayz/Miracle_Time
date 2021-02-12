@@ -18,10 +18,6 @@ let clientUserId
 export const getAuthen = ()=> (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/authen', {clientUserId : clientUserId}).then((res) => {
-        // if(res.data.userData) {
-        //     console.log('user')
-        //     dispatch({type: SET_USER_DATA, payload: res.data.userData})
-        // }
         if(res.data.eventData) {
             dispatch({type: SET_EVENT, payload: res.data.eventData})
         }
@@ -91,6 +87,7 @@ export const editProfile = (blob, updateData) => (dispatch) => {
     if(blob) {
         const imageName = blob._data.name
         updateData.imageName = imageName
+        updateData.clientUserId = clientUserId
 
         const task = firebase.storage().ref().child(imageName).put(blob);
 
@@ -131,10 +128,8 @@ export const editProfile = (blob, updateData) => (dispatch) => {
                     console.log(err)
                 })
     }
+}
 
-
-
-    
-    
-    
+export const getClientUserId = () => {
+    return clientUserId
 }

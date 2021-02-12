@@ -1,8 +1,14 @@
 import axios from 'axios'
 import { LOADING_DATA, LOADING_COMPLETE ,ACCEPT_FRIEND, DENIED_FRIEND, SET_FRIEND_REQUEST} from '../type'
 
+import {getClientUserId} from './userAction'
+
+let clientUserId = getClientUserId()
+
 export const getFriendRequest = () => (dispatch) => {
-    axios.get('/getFriendRequest')
+    console.log('getFriendReqqqq')
+    console.log(clientUserId)
+    axios.post('/getFriendRequest', {clientUserId: clientUserId})
         .then((res) => {
             console.log(res.data)
             dispatch({type: SET_FRIEND_REQUEST, payload: res.data.data})
@@ -13,7 +19,7 @@ export const getFriendRequest = () => (dispatch) => {
 }
 
 export const addFriend = (recipient) => {
-    axios.post('/addFriend',{recipient: recipient})
+    axios.post('/addFriend',{recipient: recipient, clientUserId: clientUserId})
         .then((res) => {
             console.log(res.data)
         })
@@ -23,7 +29,7 @@ export const addFriend = (recipient) => {
 }
 
 export const acceptFriendRequest = (docId, sender, setIsList) => (dispatch) =>{
-    axios.post('/acceptFriendRequest', {docId:docId, sender:sender})
+    axios.post('/acceptFriendRequest', {docId:docId, sender:sender, clientUserId: clientUserId})
         .then((res) => {
             dispatch({type:ACCEPT_FRIEND, payload: res.data.data})
             setIsList(true)
@@ -34,7 +40,7 @@ export const acceptFriendRequest = (docId, sender, setIsList) => (dispatch) =>{
 }
 
 export const deniedFriendRequest = (docId, sender) => (dispatch) =>{
-    axios.post('/deniedFriendRequest', {docId:docId, sender:sender})
+    axios.post('/deniedFriendRequest', {docId:docId, sender:sender, clientUserId: clientUserId})
         .then((res) => {
             dispatch({type:DENIED_FRIEND, payload: res.data.data})
         })
