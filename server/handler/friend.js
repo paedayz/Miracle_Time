@@ -118,8 +118,6 @@ exports.deniedFriendRequest = (req, res) => {
 
 exports.getFriendRequest = (req, res) => {
     const username = req.user.username
-    console.log('getttttttt')
-    console.log(username)
 
     let friendRequest = []
     let friendRequestToFetch = []

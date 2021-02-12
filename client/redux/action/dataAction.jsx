@@ -15,6 +15,7 @@ import {getClientUserId} from './userAction'
 let clientUserId = getClientUserId()
 
 export const getAllEvents = () => (dispatch) => {
+    let clientUserId = getClientUserId()
     dispatch({type: LOADING_DATA})
     axios.post('/getAllEvents', {clientUserId : clientUserId})
         .then((res) => {
@@ -28,6 +29,7 @@ export const getAllEvents = () => (dispatch) => {
 }
 
 export const addEvent = (eventData) => (dispatch) => {
+    let clientUserId = getClientUserId()
     dispatch({type: LOADING_DATA})
     eventData.clientUserId = clientUserId
     axios.post('/addEvent', eventData)
@@ -42,6 +44,7 @@ export const addEvent = (eventData) => (dispatch) => {
 }
 
 export const editEvent = (eventData) => (dispatch) => {
+    let clientUserId = getClientUserId()
     dispatch({type: LOADING_DATA})
     eventData.clientUserId = clientUserId
     axios.post('/editEvent', eventData)
@@ -56,6 +59,7 @@ export const editEvent = (eventData) => (dispatch) => {
 }
 
 export const deleteEvent = (eventKey) => (dispatch) => {
+    let clientUserId = getClientUserId()
     dispatch({type: LOADING_DATA})
     axios.post('/deleteEvent', {eventKey : eventKey, clientUserId: clientUserId})
         .then((res) => {
@@ -69,6 +73,7 @@ export const deleteEvent = (eventKey) => (dispatch) => {
 }
 
 export const addNotifications = (type, data) => (dispatch) => {
+    let clientUserId = getClientUserId()
     axios.post('/addNotifications', {type:type, data:data, clientUserId: clientUserId})
         .then((res) => {
             dispatch({type: ADD_NOTIFICATIONS, payload: res.data.data})

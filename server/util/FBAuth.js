@@ -2,7 +2,6 @@ const { firebase, firestore } = require("./firebase");
 
 module.exports = (req, res, next) => {
     let uid = req.body.clientUserId
-    console.log(req.body)
     req.user = {
         username : null,
         userImage : null
