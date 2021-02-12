@@ -11,8 +11,6 @@ export default function FriendList({navigation}) {
     const friendList = useSelector(state => state.friend.list)
 
     const Item = ({data}) => {
-        let allEventData = data
-          console.log(data.item.nickname)
         return (
             <ShowList data={data.item} />
             )

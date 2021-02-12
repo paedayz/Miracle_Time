@@ -18,9 +18,6 @@ export default function FriendRequest({navigation, setIsList}) {
     },[])
 
     const Item = ({data}) => {
-        let allEventData = data
-        console.log('friend request')
-          console.log(data.item.docId)
         return (
             <RequestList data={data.item} setIsList={setIsList} />
             )

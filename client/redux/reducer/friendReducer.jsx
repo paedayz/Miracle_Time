@@ -13,7 +13,6 @@ export default function (state = initialState, action){
             list: action.payload
           }
         case SET_FRIEND_REQUEST :
-          console.log(action.payload)
           return {
             ...state,
             request: action.payload
