@@ -10,86 +10,14 @@ import {
 } from 'react-native-paper'
 
 import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function AdminScreen({navigation}) {
-      const [modalOpenAdd, setModalOpenAdd] = useState(false)
+export function Quest () {
       const [modalOpenEdit, setModalOpenEdit] = useState(false)
       const [modalOpenDelete, setModalOpenDelete] = useState(false)
     
       return (
         <SafeAreaView style={styles.container}>
-          <View style={styles.headerBoxWrapper}>
-            <TouchableOpacity style={[styles.headerBox, {
-                borderRightColor: '#dddddd',
-                borderRightWidth: 1
-              }]}>
-              <View>
-                <Title>Quest</Title>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.headerBox}>
-              <View>
-                <Title>Archeivement</Title>
-              </View>
-            </TouchableOpacity>
-        </View>
-
-          <View style={styles.addButton}>
-            <Button
-              icon={
-                <Icon
-                  name="plus"
-                  size={20}
-                  color='white'
-                />
-              }
-              title='Add Quest'
-              onPress={() => setModalOpenAdd(true)}/>
-              <Modal transparent={true} visible={modalOpenAdd}>
-                <View style={styles.modal}>
-                <Icon 
-                        name="close"
-                        size={20} 
-                        style={styles.closeIcon}
-                        onPress={() => setModalOpenAdd(false)}
-                    />
-                  <View style={styles.questBox}>
-                    <Title style={styles.headerTitle}>Add Quest</Title>
-                    <Text>Quest name</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
-                    <Text>Quest detail</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
-                    <Text>Quest EXP</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
-                    <Text>Quest coin</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
-                    <Text>Quest start</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
-                    <Text>Quest end</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
-                    <View style={styles.modalButton}>
-                      <Button 
-                          title="Add"
-                      />
-                    </View>
-                  </View>
-                </View>
-              </Modal>
-          </View>
-          
           <View style={styles.questBoxWrapper}>
             <View style={styles.demo}>
               <Icon 
@@ -99,7 +27,7 @@ export default function AdminScreen({navigation}) {
             <View style={styles.questBox}>
               <Title style={styles.headerTitle}>Quest</Title>
               <Text>Quest detail</Text>
-              <Text>Quest start - Quest end</Text>
+              <Text>Quest time</Text>
             </View>
             <View style={styles.editButton}>
               <Button
@@ -132,17 +60,13 @@ export default function AdminScreen({navigation}) {
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
                     />
-                    <Text>Quest start</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
-                    <Text>Quest end</Text>
+                    <Text>Quest time</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
                     />
                     <View style={styles.modalButton}>
                       <Button 
-                          title="Edit"
+                          title="Save"
                       />
                     </View>
                   </View>
@@ -156,12 +80,6 @@ export default function AdminScreen({navigation}) {
                 onPress={() => setModalOpenDelete(true)}/>
                 <Modal transparent={true} visible={modalOpenDelete}>
                   <View style={styles.deleteModal}>
-                  <Icon 
-                          name="close"
-                          size={20} 
-                          style={styles.closeIcon}
-                          onPress={() => setModalOpenDelete(false)}
-                      />
                     <View style={styles.questBox}>
                       <Title style={styles.headerTitle}>Are you sure to delete quest?</Title>
                       <View style={styles.deleteBox}>
@@ -185,6 +103,252 @@ export default function AdminScreen({navigation}) {
         </SafeAreaView>
       );
 }
+
+export function Archeivement () {
+  const [modalOpenEdit, setModalOpenEdit] = useState(false)
+  const [modalOpenDelete, setModalOpenDelete] = useState(false)
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.questBoxWrapper}>
+        <View style={styles.demo}>
+          <Icon 
+            name='trophy'
+            size={50}/>
+        </View>
+        <View style={styles.questBox}>
+          <Title style={styles.headerTitle}>Archeivement</Title>
+          <Text>Archeivement detail</Text>
+          <Text>Archeivement time</Text>
+        </View>
+        <View style={styles.editButton}>
+          <Button
+            buttonStyle = {{backgroundColor: 'green', width: 70, height: 30}}
+            title='Edit'
+            onPress={() => setModalOpenEdit(true)}/>
+          <Modal transparent={true} visible={modalOpenEdit}>
+            <View style={styles.modal}>
+            <Icon 
+                    name="close"
+                    size={20} 
+                    style={styles.closeIcon}
+                    onPress={() => setModalOpenEdit(false)}
+                />
+              <View style={styles.questBox}>
+                <Title style={styles.headerTitle}>Edit Archeivement</Title>
+                <Text>Archeivement name</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <Text>Archeivement detail</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <Text>Archeivement EXP</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <Text>Archeivement coin</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <Text>Archeivement time</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <View style={styles.modalButton}>
+                  <Button 
+                      title="Save"
+                  />
+                </View>
+              </View>
+            </View>
+          </Modal>
+        </View>
+        <View style={styles.deleteButton}>
+          <Button
+            buttonStyle = {{backgroundColor: 'red', width: 70, height: 30}}
+            title='Delete'
+            onPress={() => setModalOpenDelete(true)}/>
+            <Modal transparent={true} visible={modalOpenDelete}>
+              <View style={styles.deleteModal}>
+                <View style={styles.questBox}>
+                  <Title style={styles.headerTitle}>Are you sure to delete archeivement?</Title>
+                  <View style={styles.deleteBox}>
+                      <View style={{margin: 5, width: 70, height: 30}}>
+                      <Button 
+                          title="Yes"
+                      />
+                      </View>
+                      <View style={{margin: 5, width: 70, height: 30}}>
+                      <Button 
+                          title="No"
+                          onPress={() => setModalOpenDelete(false)}
+                      />
+                      </View>
+                  </View>
+                </View>
+              </View>
+            </Modal>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+export default function admin () {
+  const [mode, setMode] = useState(true)
+  const [modalOpenAdd, setModalOpenAdd] = useState(false)
+
+  const changeMode = () => {
+      setMode(!mode)
+  }
+
+  if(mode) {
+      return (
+        <View>
+          <View style={styles.headerBoxWrapper}>
+            <TouchableOpacity style={[styles.headerBox, {
+                borderRightColor: '#dddddd',
+                borderRightWidth: 1
+              }]}>
+              <View>
+                <Title onPress={() => changeMode()}>Quest</Title>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.headerBox}>
+              <View>
+                <Title>Archeivement</Title>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.addButton}>
+        <Button
+          icon={
+            <Icon
+              name="plus"
+              size={20}
+              color='white'
+            />
+          }
+          title='New Archeivement'
+          onPress={() => setModalOpenAdd(true)}/>
+          <Modal transparent={true} visible={modalOpenAdd}>
+            <View style={styles.modal}>
+            <Icon 
+                    name="close"
+                    size={20} 
+                    style={styles.closeIcon}
+                    onPress={() => setModalOpenAdd(false)}
+                />
+              <View style={styles.questBox}>
+                <Title style={styles.headerTitle}>Add Archeivement</Title>
+                <Text>Archeivement name</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <Text>Archeivement detail</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <Text>Archeivement EXP</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <Text>Archeivement coin</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <Text>Archeivement time</Text>
+                <TextInput style={styles.input}
+                  placeholder="Please enter your text"
+                />
+                <View style={styles.modalButton}>
+                  <Button 
+                      title="Add"
+                  />
+                </View>
+              </View>
+            </View>
+          </Modal>
+      </View>
+          <Archeivement />
+        </View>
+      )
+  } else {
+      return (
+        <View>
+          <View style={styles.headerBoxWrapper}>
+            <TouchableOpacity style={[styles.headerBox, {
+                borderRightColor: '#dddddd',
+                borderRightWidth: 1
+              }]}>
+              <View>
+                <Title>Quest</Title>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.headerBox}>
+              <View>
+              <Title onPress={() => changeMode()}>Archeivement</Title>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.addButton}>
+            <Button
+              icon={
+                <Icon
+                  name="plus"
+                  size={20}
+                  color='white'
+                />
+              }
+              title='New Quest'
+              onPress={() => setModalOpenAdd(true)}/>
+              <Modal transparent={true} visible={modalOpenAdd}>
+                <View style={styles.modal}>
+                <Icon 
+                        name="close"
+                        size={20} 
+                        style={styles.closeIcon}
+                        onPress={() => setModalOpenAdd(false)}
+                    />
+                  <View style={styles.questBox}>
+                    <Title style={styles.headerTitle}>Add Quest</Title>
+                    <Text>Quest name</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <Text>Quest detail</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <Text>Quest EXP</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <Text>Quest coin</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <Text>Quest time</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <View style={styles.modalButton}>
+                      <Button 
+                          title="Add"
+                      />
+                    </View>
+                  </View>
+                </View>
+              </Modal>
+          </View>
+          <Quest/>
+        </View>
+      )
+  }
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -264,9 +428,9 @@ const styles = StyleSheet.create({
   deleteModal:
   {
     backgroundColor: '#dddddd',
-    marginVertical: 290,
-    marginHorizontal: 25,
-    padding: 30,
+    marginVertical: 300,
+    marginHorizontal: 10,
+    padding: 10,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center'

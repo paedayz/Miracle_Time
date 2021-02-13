@@ -9,7 +9,7 @@ import {
 } from 'react-native-paper'
 
 import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function QuestArchieveScreen({navigation}) {
     

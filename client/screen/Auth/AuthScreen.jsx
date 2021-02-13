@@ -6,7 +6,7 @@ import { Button } from 'react-native-elements';
 import {useDispatch} from "react-redux"
 import {login, register} from "../../redux/action/userAction"
 
-export function Login  () {
+export function Login () {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
