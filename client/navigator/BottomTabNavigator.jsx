@@ -26,41 +26,41 @@ import {addNotifications} from '../redux/action/dataAction'
 const Tab = createMaterialBottomTabNavigator();
 
 export default function TabFunction () {
-  const [isNoti, setIsNoti] = useState(true);
   const userEvents = useSelector(state => state.data.events)
   const unRead = useSelector(state => state.data.unreadNoti)
   const currentWillNoti = useSelector(state => state.data.will_noti)
   const currentNowNoti = useSelector(state => state.data.now_noti)
   const currentEndNoti = useSelector(state => state.data.end_noti)
   const navigation = useNavigation()
-  const notiData = useSelector(state => state.data.notifications)
   const dispatch = useDispatch()
 
-  let now = new Date()
   dayjs.extend(relativeTime);
   
   const checkSendNoti = () => {
     userEvents.map((event) => {
-      const dateTime = new Date(`${event.date}T${event.start}`)
-      const stringDateTime = dayjs(formatAMPM(dateTime)).fromNow()
-      const nowdatetime = dayjs("2/13/2021, 4:27:00 PM").fromNow()
-      const seperateDayjs = stringDateTime.split(" ")
-      console.log(notiData)
+      const startDateTime = `${event.date} ${event.start}`
+      const endDateTime = `${event.date} ${event.end}`
 
-      if(seperateDayjs[0] === 'in' && seperateDayjs[2] === 'few' && seperateDayjs[3] === 'seconds') {
+      const stringStartDateTime = dayjs(startDateTime).fromNow()
+      const stringEndDateTime = dayjs(endDateTime).fromNow()
+
+      const seperateStartDayjs = stringStartDateTime.split(" ")
+      const seperateEndDayjs = stringEndDateTime.split(" ")
+
+      if(seperateStartDayjs[0] === 'in' && seperateStartDayjs[2] === 'few' && seperateStartDayjs[3] === 'seconds') {
         if(!checkHaveNoti(event.key, currentNowNoti)) {
-          let willNotiAddData
-          willNotiAddData = {
+          let nowNotiAddData
+          nowNotiAddData = {
             status : "now", 
             eventData: event
           }
           dispatch({type: 'ADD_NOW_NOTI', payload: event.key})
-          dispatch(addNotifications('event', willNotiAddData))
+          dispatch(addNotifications('event', nowNotiAddData))
         }
       }
 
-      if(seperateDayjs[0] === 'in' && seperateDayjs[2] === 'minutes') {
-        const minute = stringDateTime.split(' ')[1]
+      if(seperateStartDayjs[0] === 'in' && seperateStartDayjs[2] === 'minutes') {
+        const minute = stringStartDateTime.split(' ')[1]
         const intMinute = parseInt(minute, 10);
         let willNotiAddData ={}
         let haveWillNoti = checkHaveNoti(event.key, currentWillNoti)
@@ -72,6 +72,22 @@ export default function TabFunction () {
             eventData: event
           }
           dispatch(addNotifications('event', willNotiAddData))
+        }
+      }
+
+      if(seperateEndDayjs[0] === 'in' && seperateEndDayjs[2] === 'minutes') {
+        const minute = stringStartDateTime.split(' ')[1]
+        const intMinute = parseInt(minute, 10);
+        let endNotiAddData ={}
+        let haveEndNoti = checkHaveNoti(event.key, currentEndNoti)
+        if (intMinute === 15 && haveEndNoti === false) {
+          endNotiAddData = {
+            status : "end", 
+            time : "15 minute", 
+            eventData: event
+          }
+          dispatch({type: 'ADD_END_NOTI', payload: event.key})
+          dispatch(addNotifications('event', endNotiAddData))
         }
       }
     })
@@ -88,24 +104,6 @@ export default function TabFunction () {
       return true
     }
   }
-
-  function formatAMPM(date) {
-    var day = date.getDate()
-    var month = date.getMonth() + 1
-    var year = date.getFullYear()
-    var hours = date.getHours() - 7;
-    var minutes = date.getMinutes();
-
-    var ampm = hours >= 12 ? 'pm' : 'am';
-
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strDateTime = `${month}/${day}/${year}, ${hours}:${minutes}:00 ${ampm}`
-    return strDateTime;
-  }
-
-  checkSendNoti()
 
   const renderNotification = (
     <Fragment>
