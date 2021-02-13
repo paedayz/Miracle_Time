@@ -29,8 +29,11 @@ export default function TabFunction () {
   const [isNoti, setIsNoti] = useState(true);
   const userEvents = useSelector(state => state.data.events)
   const unRead = useSelector(state => state.data.unreadNoti)
-  const nowWillNoti = useSelector(state => state.data.will_noti)
+  const currentWillNoti = useSelector(state => state.data.will_noti)
+  const currentNowNoti = useSelector(state => state.data.now_noti)
+  const currentEndNoti = useSelector(state => state.data.end_noti)
   const navigation = useNavigation()
+  const notiData = useSelector(state => state.data.notifications)
   const dispatch = useDispatch()
 
   let now = new Date()
@@ -40,31 +43,44 @@ export default function TabFunction () {
     userEvents.map((event) => {
       const dateTime = new Date(`${event.date}T${event.start}`)
       const stringDateTime = dayjs(formatAMPM(dateTime)).fromNow()
+      const nowdatetime = dayjs("2/13/2021, 4:27:00 PM").fromNow()
+      const seperateDayjs = stringDateTime.split(" ")
+      console.log(notiData)
 
-      if(stringDateTime.startsWith('in') && stringDateTime.endsWith('minutes')) {
+      if(seperateDayjs[0] === 'in' && seperateDayjs[2] === 'few' && seperateDayjs[3] === 'seconds') {
+        if(!checkHaveNoti(event.key, currentNowNoti)) {
+          let willNotiAddData
+          willNotiAddData = {
+            status : "now", 
+            eventData: event
+          }
+          dispatch({type: 'ADD_NOW_NOTI', payload: event.key})
+          dispatch(addNotifications('event', willNotiAddData))
+        }
+      }
+
+      if(seperateDayjs[0] === 'in' && seperateDayjs[2] === 'minutes') {
         const minute = stringDateTime.split(' ')[1]
         const intMinute = parseInt(minute, 10);
-
-        let notiAddData ={}
-        let haveWillNoti = checkhaveWillNoti(event.key)
-        console.log(stringDateTime)
+        let willNotiAddData ={}
+        let haveWillNoti = checkHaveNoti(event.key, currentWillNoti)
         if (intMinute === 15 && haveWillNoti === false) {
           dispatch({type: 'ADD_WILL_NOTI', payload: event.key})
-          notiAddData = {
+          willNotiAddData = {
             status : "will", 
             time : "15 minute", 
             eventData: event
           }
-          dispatch(addNotifications('event', notiAddData))
+          dispatch(addNotifications('event', willNotiAddData))
         }
       }
     })
   }
 
-  const checkhaveWillNoti = (eventKey) => {
+  const checkHaveNoti = (eventKey, currentNoti) => {
     let flag = 0
-    nowWillNoti.map((willNotiKey) => {
-      if(willNotiKey === eventKey) flag = 1
+    currentNoti.map((notiKey) => {
+      if(notiKey === eventKey) flag = 1
     })
     if (flag === 0) {
       return false

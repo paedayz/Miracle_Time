@@ -7,7 +7,9 @@ import {
     ADD_NOTIFICATIONS,
     SET_NOTIFICATIONS,
     SET_UNREAD_NOTI,
-    ADD_WILL_NOTI
+    ADD_WILL_NOTI,
+    ADD_NOW_NOTI,
+    ADD_END_NOTI
 } from "../type"
 
 const initialState = {
@@ -16,7 +18,9 @@ const initialState = {
     events: [],
     notifications: [],
     unreadNoti : 0,
-    will_noti : []
+    will_noti : [],
+    now_noti : [],
+    end_noti : []
 }
 
 const startState = {
@@ -25,7 +29,9 @@ const startState = {
     events: [],
     notifications: [],
     unreadNoti : 0,
-    will_noti : []
+    will_noti : [],
+    now_noti : [],
+    end_noti : []
 }
 
 export default function (state = initialState, action){
@@ -103,6 +109,22 @@ export default function (state = initialState, action){
                 ...state,
                 will_noti: new_will_noti
             }
+
+        case ADD_NOW_NOTI :
+            let new_now_noti = state.now_noti
+            new_now_noti.push(action.payload)
+            return {
+                ...state,
+                now_noti: new_now_noti
+            }
+
+        case ADD_END_NOTI :
+        let new_end_noti = state.end_noti
+        new_end_noti.push(action.payload)
+        return {
+            ...state,
+            end_noti: new_end_noti
+        }
             
         case CLEAR_SESSION :
             return startState
