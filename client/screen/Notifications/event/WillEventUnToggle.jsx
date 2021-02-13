@@ -24,7 +24,7 @@ export default function NowEvent({data, eventData, createdAt}) {
                           size={18} 
                           style={{
                             padding: 6,
-                            color: "#ff9900"
+                            color: "#ffff00"
                           }}
                       />
               </View>
@@ -32,11 +32,11 @@ export default function NowEvent({data, eventData, createdAt}) {
                 <View style={{flexDirection:'column'}}>
                   <View style={{flexDirection:'row'}}>
                     <View style={{width:280}}>
-                    <Text style={styles.title}> ถึงเวลาที่ต้องทำ {data.eventData.event} แล้ว </Text>
+                      <Text style={styles.title}>คุณมี {data.eventData.event} ต้องทำในอีก {data.time}</Text>
                     </View>
                     <Icon 
                         name="ellipsis-h" 
-                        size={19}
+                        size={19} 
                         style={{
                           padding: 5,
                           marginTop: -24,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
       borderRadius:100, 
       width:30,
       height:30,
-      backgroundColor:"green" , 
+      backgroundColor:"blue" , 
       marginLeft:-20,
       marginTop:35
     }
