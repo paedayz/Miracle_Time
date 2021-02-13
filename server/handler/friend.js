@@ -20,10 +20,12 @@ exports.addFriend = (req, res) => {
         })
         .then((snapshot) => {
             let flag = 0
-
-            snapshot.forEach((doc) => {
-                if(doc.data().sender === recipient) flag = 1
-            })
+            if(snapshot) {
+                snapshot.forEach((doc) => {
+                    if(doc.data().sender === recipient) flag = 1
+                })
+            }
+            
 
             if(flag === 1) {
                 friendSendReq = true
@@ -34,10 +36,11 @@ exports.addFriend = (req, res) => {
         })
         .then((snapshot) => {
             let flag = 0
-
-            snapshot.forEach((doc) => {
-                if(doc.data().recipient === recipient) flag = 1
-            })
+            if(snapshot) {
+                snapshot.forEach((doc) => {
+                    if(doc.data().recipient === recipient) flag = 1
+                })
+            }
 
             if(flag === 0 && !friendSendReq) {
                 const data = {

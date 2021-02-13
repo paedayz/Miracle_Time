@@ -6,6 +6,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {useNavigation} from '@react-navigation/native'
+import dayjs from 'dayjs'
+import relativeTime from "dayjs/plugin/relativeTime";
 
 // Stack Screen
 import CalendarStackScreen from '../screen/Calendar/CalendarStack'
@@ -18,15 +20,76 @@ import PetStackScreen from '../screen/Pet/PetStack'
 import Notifications from '../component/Notifications'
 
 // Redux
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {addNotifications} from '../redux/action/dataAction'
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function TabFunction () {
   const [isNoti, setIsNoti] = useState(true);
-  const userNoti = useSelector(state => state.data.notifications)
+  const userEvents = useSelector(state => state.data.events)
   const unRead = useSelector(state => state.data.unreadNoti)
+  const nowWillNoti = useSelector(state => state.data.will_noti)
   const navigation = useNavigation()
+  const dispatch = useDispatch()
+
+  let now = new Date()
+  dayjs.extend(relativeTime);
+  
+  const checkSendNoti = () => {
+    userEvents.map((event) => {
+      const dateTime = new Date(`${event.date}T${event.start}`)
+      const stringDateTime = dayjs(formatAMPM(dateTime)).fromNow()
+
+      if(stringDateTime.startsWith('in') && stringDateTime.endsWith('minutes')) {
+        const minute = stringDateTime.split(' ')[1]
+        const intMinute = parseInt(minute, 10);
+
+        let notiAddData ={}
+        let haveWillNoti = checkhaveWillNoti(event.key)
+        console.log(stringDateTime)
+        if (intMinute === 15 && haveWillNoti === false) {
+          dispatch({type: 'ADD_WILL_NOTI', payload: event.key})
+          notiAddData = {
+            status : "will", 
+            time : "15 minute", 
+            eventData: event
+          }
+          dispatch(addNotifications('event', notiAddData))
+        }
+      }
+    })
+  }
+
+  const checkhaveWillNoti = (eventKey) => {
+    let flag = 0
+    nowWillNoti.map((willNotiKey) => {
+      if(willNotiKey === eventKey) flag = 1
+    })
+    if (flag === 0) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  function formatAMPM(date) {
+    var day = date.getDate()
+    var month = date.getMonth() + 1
+    var year = date.getFullYear()
+    var hours = date.getHours() - 7;
+    var minutes = date.getMinutes();
+
+    var ampm = hours >= 12 ? 'pm' : 'am';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strDateTime = `${month}/${day}/${year}, ${hours}:${minutes}:00 ${ampm}`
+    return strDateTime;
+  }
+
+  checkSendNoti()
 
   const renderNotification = (
     <Fragment>

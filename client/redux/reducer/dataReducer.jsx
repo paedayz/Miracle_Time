@@ -6,58 +6,17 @@ import {
     CLEAR_SESSION,
     ADD_NOTIFICATIONS,
     SET_NOTIFICATIONS,
-    SET_UNREAD_NOTI
+    SET_UNREAD_NOTI,
+    ADD_WILL_NOTI
 } from "../type"
 
 const initialState = {
     user: {},
     data: [],
     events: [],
-    notifications: [
-        {
-        "createdAt": "2/9/2021, 6:25:51 PM",
-        "data":  {
-          "eventData":  {
-            "catagory": "ทั่วไป",
-            "date": "2021-02-25",
-            "detail": "with family",
-            "end": "15:20",
-            "event": "Eat lunch",
-            "key": "0.5724287889047687",
-            "rank": "3",
-            "start": "20:52",
-          },
-          "status": "now",
-          "time": "20 minute",
-        },
-        "docId": "qFYl7HhTABsSaTPylUUo",
-        "read": false,
-        "toggle": false,
-        "type": "event",
-      },
-      {
-        "createdAt": "2/9/2021, 6:25:51 PM",
-        "data":  {
-          "eventData":  {
-            "catagory": "ทั่วไป",
-            "date": "2021-02-25",
-            "detail": "with family",
-            "end": "15:20",
-            "event": "Eat lunch",
-            "key": "0.57242878890547687",
-            "rank": "3",
-            "start": "20:52",
-          },
-          "status": "now",
-          "time": "20 minute",
-        },
-        "docId": "qFYl7HhTABsSaTPy5lUUo",
-        "read": false,
-        "toggle": false,
-        "type": "event",
-      },
-    ],
-    unreadNoti : 0
+    notifications: [],
+    unreadNoti : 0,
+    will_noti : []
 }
 
 const startState = {
@@ -65,7 +24,8 @@ const startState = {
     data: [],
     events: [],
     notifications: [],
-    unreadNoti : 0
+    unreadNoti : 0,
+    will_noti : []
 }
 
 export default function (state = initialState, action){
@@ -132,10 +92,16 @@ export default function (state = initialState, action){
                 num = num + 1
                 }
             })
-
             return {
                 ...state,
                 unreadNoti : num
+            }
+        case ADD_WILL_NOTI :
+            let new_will_noti = state.will_noti
+            new_will_noti.push(action.payload)
+            return {
+                ...state,
+                will_noti: new_will_noti
             }
             
         case CLEAR_SESSION :
