@@ -213,83 +213,14 @@ export default function admin () {
                 borderRightWidth: 1
               }]}>
               <View>
-                <Title onPress={() => changeMode()}>Quest</Title>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.headerBox}>
-              <View>
-                <Title>Archeivement</Title>
-              </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.addButton}>
-        <Button
-          icon={
-            <Icon
-              name="plus"
-              size={20}
-              color='white'
-            />
-          }
-          title='New Archeivement'
-          onPress={() => setModalOpenAdd(true)}/>
-          <Modal transparent={true} visible={modalOpenAdd}>
-            <View style={styles.modal}>
-            <Icon 
-                    name="close"
-                    size={20} 
-                    style={styles.closeIcon}
-                    onPress={() => setModalOpenAdd(false)}
-                />
-              <View style={styles.questBox}>
-                <Title style={styles.headerTitle}>Add Archeivement</Title>
-                <Text>Archeivement name</Text>
-                <TextInput style={styles.input}
-                  placeholder="Please enter your text"
-                />
-                <Text>Archeivement detail</Text>
-                <TextInput style={styles.input}
-                  placeholder="Please enter your text"
-                />
-                <Text>Archeivement EXP</Text>
-                <TextInput style={styles.input}
-                  placeholder="Please enter your text"
-                />
-                <Text>Archeivement coin</Text>
-                <TextInput style={styles.input}
-                  placeholder="Please enter your text"
-                />
-                <Text>Archeivement time</Text>
-                <TextInput style={styles.input}
-                  placeholder="Please enter your text"
-                />
-                <View style={styles.modalButton}>
-                  <Button 
-                      title="Add"
-                  />
-                </View>
-              </View>
-            </View>
-          </Modal>
-      </View>
-          <Archeivement />
-        </View>
-      )
-  } else {
-      return (
-        <View>
-          <View style={styles.headerBoxWrapper}>
-            <TouchableOpacity style={[styles.headerBox, {
-                borderRightColor: '#dddddd',
-                borderRightWidth: 1
-              }]}>
-              <View>
                 <Title>Quest</Title>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.headerBox}>
+            <TouchableOpacity 
+              style={styles.headerBox}
+              onPress={() => changeMode()}>
               <View>
-              <Title onPress={() => changeMode()}>Archeivement</Title>
+              <Title>Archeivement</Title>
               </View>
             </TouchableOpacity>
           </View>
@@ -344,6 +275,78 @@ export default function admin () {
               </Modal>
           </View>
           <Quest/>
+        </View>
+      )
+  } else {
+      return (
+        <View>
+          <View style={styles.headerBoxWrapper}>
+            <TouchableOpacity  onPress={() => changeMode()}
+                style={[styles.headerBox, {
+                borderRightColor: '#dddddd',
+                borderRightWidth: 1
+              }]}>
+              <View>
+                <Title>Quest</Title>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.headerBox}>
+              <View>
+                <Title>Archeivement</Title>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.addButton}>
+            <Button
+              icon={
+                <Icon
+                  name="plus"
+                  size={20}
+                  color='white'
+                />
+              }
+              title='New Archeivement'
+              onPress={() => setModalOpenAdd(true)}/>
+              <Modal transparent={true} visible={modalOpenAdd}>
+                <View style={styles.modal}>
+                <Icon 
+                        name="close"
+                        size={20} 
+                        style={styles.closeIcon}
+                        onPress={() => setModalOpenAdd(false)}
+                    />
+                  <View style={styles.questBox}>
+                    <Title style={styles.headerTitle}>Add Archeivement</Title>
+                    <Text>Archeivement name</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <Text>Archeivement detail</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <Text>Archeivement EXP</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <Text>Archeivement coin</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <Text>Archeivement time</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+                    <View style={styles.modalButton}>
+                      <Button 
+                          title="Add"
+                      />
+                    </View>
+                  </View>
+                </View>
+              </Modal>
+          </View>
+          <Archeivement />
         </View>
       )
   }
