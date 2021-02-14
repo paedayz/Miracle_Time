@@ -12,12 +12,14 @@ export default function NotificationScreen({navigation}) {
   const dispatch = useDispatch()
   const allNotifications = useSelector(state => state.data.notifications)
   const [update, setUpdate] = useState(true)
+
+  let sortNoti = allNotifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
   
   navigation.addListener('focus', () => {
     setUpdate(!update)
     let notiNotRead = []
-    console.log(allNotifications)
-    allNotifications.map((noti) => {
+    console.log(sortNoti)
+    sortNoti.map((noti) => {
       console.log(noti.docId)
       if(noti.read === false) {
         notiNotRead.push(noti.docId)
@@ -36,13 +38,13 @@ export default function NotificationScreen({navigation}) {
 };
   
 
-  const renderItem = (allNotifications) => (
-    <Item data={allNotifications} />
+  const renderItem = (sortNoti) => (
+    <Item data={sortNoti} />
   );
   return (
     <SafeAreaView style={{ flex: 1 }}>
     <FlatList
-        data={allNotifications}
+        data={sortNoti}
         renderItem={renderItem}
         keyExtractor={item => item.docId}
       />
