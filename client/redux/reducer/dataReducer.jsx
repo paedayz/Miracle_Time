@@ -11,7 +11,8 @@ import {
     ADD_NOW_NOTI,
     ADD_END_NOTI,
     READ_NOTI,
-    TOGGLE_NOTI
+    TOGGLE_NOTI,
+    DELETE_NOTI
 } from "../type"
 
 const initialState = {
@@ -166,6 +167,19 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 notifications : buff_noti
+            }
+        
+        case DELETE_NOTI :
+            buff_noti = state.notifications
+            let new_noti = []
+            buff_noti.map((noti) => {
+                if(noti.docId !== action.payload) {
+                    new_noti.push(noti)
+                }
+            })
+            return {
+                ...state,
+                notifications : new_noti
             }
             
         case CLEAR_SESSION :

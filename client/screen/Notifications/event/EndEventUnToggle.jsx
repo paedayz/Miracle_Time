@@ -7,7 +7,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 // Redux
 import {useDispatch} from 'react-redux'
-import {toggleNotifications} from '../../../redux/action/dataAction'
+import {toggleNotifications, deleteNotifications} from '../../../redux/action/dataAction'
 
 export default function NowEvent({data, eventData, createdAt, docId}) {
     const navigation = useNavigation()
@@ -45,13 +45,14 @@ export default function NowEvent({data, eventData, createdAt, docId}) {
                       <Text style={styles.title}> เหลือเวลาอีก {data.time} ในการทำ {data.eventData.event}</Text>
                     </View>
                     <Icon 
-                        name="ellipsis-h" 
+                        name="times" 
                         size={19} 
                         style={{
                           padding: 5,
                           marginTop: -24,
                           color: "#aaa"
                         }}
+                        onPress={() => {dispatch(deleteNotifications(docId))}}
                     />
                   </View>  
                   <View style={{marginTop:5}}>

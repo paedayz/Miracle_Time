@@ -9,7 +9,8 @@ import {
     ADD_NOTIFICATIONS, 
     SET_UNREAD_NOTI,
     READ_NOTI,
-    TOGGLE_NOTI
+    TOGGLE_NOTI,
+    DELETE_NOTI
 } from "../type"
 
 import {getClientUserId} from './userAction'
@@ -103,6 +104,18 @@ export const toggleNotifications = (notiDocId) => (dispatch) => {
     axios.post('/toggleNotifications', {clientUserId: clientUserId, docId: notiDocId})
         .then((res) => {
             dispatch({type: TOGGLE_NOTI, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const deleteNotifications = (notiDocId) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    dispatch({type: DELETE_NOTI, payload: notiDocId})
+    axios.post('/deleteNotifications', {clientUserId: clientUserId, docId: notiDocId})
+        .then((res) => {
+            console.log('delete success')
         })
         .catch((err) => {
             console.log(err)

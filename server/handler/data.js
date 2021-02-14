@@ -197,3 +197,15 @@ exports.toggleNotifications = (req, res) => {
             return res.json({error: err})
         })
 }
+
+exports.deleteNotifications = (req, res) => {
+    const docId = req.body.docId
+    firestore.collection('notifications').doc(docId).delete()
+        .then(() => {
+            return res.json({data : docId})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
