@@ -3,6 +3,7 @@ import { SafeAreaView, Text, View, Button, FlatList, StyleSheet } from 'react-na
 
 // redux
 import {useDispatch, useSelector} from 'react-redux'
+import {readNotifications} from '../../redux/action/dataAction'
 
 // Component
 import NowEvent from './event/EventNotifications'
@@ -14,14 +15,14 @@ export default function NotificationScreen({navigation}) {
   
   navigation.addListener('focus', () => {
     setUpdate(!update)
+    let notiNotRead = []
     allNotifications.map((noti) => {
       if(noti.read === false) {
-        console.log(noti.docId)
+        notiNotRead.push(noti.docId)
       }
       
     })
-    console.log('**********************')
-    console.log(allNotifications.length)
+    dispatch(readNotifications(notiNotRead))
 });
 
   const Item = ({data}) => {

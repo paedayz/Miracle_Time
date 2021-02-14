@@ -9,7 +9,8 @@ import {
     SET_UNREAD_NOTI,
     ADD_WILL_NOTI,
     ADD_NOW_NOTI,
-    ADD_END_NOTI
+    ADD_END_NOTI,
+    READ_NOTI
 } from "../type"
 
 const initialState = {
@@ -119,12 +120,40 @@ export default function (state = initialState, action){
             }
 
         case ADD_END_NOTI :
-        let new_end_noti = state.end_noti
-        new_end_noti.push(action.payload)
-        return {
-            ...state,
-            end_noti: new_end_noti
-        }
+            let new_end_noti = state.end_noti
+            new_end_noti.push(action.payload)
+            return {
+                ...state,
+                end_noti: new_end_noti
+            }
+
+        case READ_NOTI :
+            let buff_noti = state.notifications
+            let docIds = action.payload
+            let flag_change_noti = []
+            num = 0
+            buff_noti.map((noti, index) => {
+                for (i=0; i< docIds.length; i++) {
+                    if(noti.docId === docIds[i]) flag_change_noti[i] = index
+                }
+            })
+
+            flag_change_noti.map((notiIndex) => {
+                buff_noti[notiIndex].read = true
+            })
+
+            num = 0
+            state.notifications.map((noti) => {
+                if(!noti.read) {
+                num = num + 1
+                }
+            })
+            
+            return {
+                ...state,
+                notifications : buff_noti,
+                unreadNoti : num
+            }
             
         case CLEAR_SESSION :
             return startState
