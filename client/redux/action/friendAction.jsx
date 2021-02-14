@@ -9,7 +9,6 @@ export const getFriendRequest = () => (dispatch) => {
     let clientUserId = getClientUserId()
     axios.post('/getFriendRequest', {clientUserId: clientUserId})
         .then((res) => {
-            console.log(res.data)
             dispatch({type: SET_FRIEND_REQUEST, payload: res.data.data})
         })
         .catch((err) => {

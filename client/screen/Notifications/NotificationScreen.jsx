@@ -18,9 +18,7 @@ export default function NotificationScreen({navigation}) {
   navigation.addListener('focus', () => {
     setUpdate(!update)
     let notiNotRead = []
-    console.log(sortNoti)
     sortNoti.map((noti) => {
-      console.log(noti.docId)
       if(noti.read === false) {
         notiNotRead.push(noti.docId)
       }
