@@ -182,7 +182,7 @@ exports.readNotifications = async (req, res) => {
         .catch((err) => {
             return res.json({error: err})
         })
-        
+
     return res.json({data: test})
 }
 
@@ -190,22 +190,7 @@ exports.toggleNotifications = (req, res) => {
     const docId = req.body.docId
     firestore.collection('notifications').doc(docId).update({toggle : true})
         .then(() => {
-            return firestore.doc(`/notifications/${docId}`).get()
-        })
-        .then((snapshot) => {
-            const username = snapshot.data().username
-
-            if(username !== req.user.username) return res.status(403).json({error: 'No permission to delete this event'})
-
-            const resData = {
-                createdAt : snapshot.data().createdAt,
-                read : snapshot.data().read,
-                toggle : snapshot.data().toggle,
-                type : snapshot.data().type,
-                data : snapshot.data().data,
-                docId : docId
-            }
-            return res.json({data : resData})
+            return res.json({data : docId})
         })
         .catch((err) => {
             console.log(err)

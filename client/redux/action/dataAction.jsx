@@ -8,7 +8,8 @@ import {
     EDIT_EVENT, 
     ADD_NOTIFICATIONS, 
     SET_UNREAD_NOTI,
-    READ_NOTI
+    READ_NOTI,
+    TOGGLE_NOTI
 } from "../type"
 
 import {getClientUserId} from './userAction'
@@ -91,6 +92,17 @@ export const readNotifications = (notiToRead) => (dispatch) => {
     axios.post('/readNotifications', {clientUserId: clientUserId, docIds: notiToRead})
         .then((res) => {
             dispatch({type: READ_NOTI, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const toggleNotifications = (notiDocId) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/toggleNotifications', {clientUserId: clientUserId, docId: notiDocId})
+        .then((res) => {
+            dispatch({type: TOGGLE_NOTI, payload: res.data.data})
         })
         .catch((err) => {
             console.log(err)
