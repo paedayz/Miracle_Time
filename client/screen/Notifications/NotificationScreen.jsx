@@ -3,26 +3,26 @@ import { SafeAreaView, Text, View, Button, FlatList, StyleSheet } from 'react-na
 
 // redux
 import {useDispatch, useSelector} from 'react-redux'
-import {addNotifications} from '../../redux/action/dataAction'
 
 // Component
 import NowEvent from './event/EventNotifications'
 
 export default function NotificationScreen({navigation}) {
   const dispatch = useDispatch()
-  const noti = useSelector(state => state.data.notifications)
+  const allNotifications = useSelector(state => state.data.notifications)
   const [update, setUpdate] = useState(true)
   
-  useEffect(() => {
-    navigation.addListener('focus', () => {
-        setUpdate(!update)
-    });
-
-  }, [update]);
-
-  const addNoti = () => {
-    
-  }
+  navigation.addListener('focus', () => {
+    setUpdate(!update)
+    allNotifications.map((noti) => {
+      if(noti.read === false) {
+        console.log(noti.docId)
+      }
+      
+    })
+    console.log('**********************')
+    console.log(allNotifications.length)
+});
 
   const Item = ({data}) => {
     let allEventData = data
@@ -33,17 +33,13 @@ export default function NotificationScreen({navigation}) {
 };
   
 
-  const renderItem = (noti) => (
-    <Item data={noti} />
+  const renderItem = (allNotifications) => (
+    <Item data={allNotifications} />
   );
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      
-    <View>
-        <Button title="add" onPress={() => addNoti()}/>
-    </View>
     <FlatList
-        data={noti}
+        data={allNotifications}
         renderItem={renderItem}
         keyExtractor={item => item.docId}
       />
