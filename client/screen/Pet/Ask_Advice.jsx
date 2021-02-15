@@ -72,8 +72,8 @@ export default function Ask_Advice() {
         let NotHaveTask = true
     
         Today_task.map((E) => {
-            let startEvent = Date.now(E.date+"T"+E.start)
-            let endEvent = Date.now(E.date+"T"+E.end)
+            let startEvent = new Date(E.date+"T"+E.start)
+            let endEvent = new Date(E.date+"T"+E.end)
 
             if(startEvent < Now && endEvent > Now && NotHaveTask) {
                 NextTask = E
