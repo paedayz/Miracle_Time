@@ -7,7 +7,10 @@ import {
     DELETE_EVENT, 
     EDIT_EVENT, 
     ADD_NOTIFICATIONS, 
-    SET_UNREAD_NOTI
+    SET_UNREAD_NOTI,
+    READ_NOTI,
+    TOGGLE_NOTI,
+    DELETE_NOTI
 } from "../type"
 
 import {getClientUserId} from './userAction'
@@ -79,6 +82,40 @@ export const addNotifications = (type, data) => (dispatch) => {
             dispatch({type: ADD_NOTIFICATIONS, payload: res.data.data})
             dispatch({type: SET_UNREAD_NOTI, payload: false})
             
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const readNotifications = (notiToRead) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/readNotifications', {clientUserId: clientUserId, docIds: notiToRead})
+        .then((res) => {
+            dispatch({type: READ_NOTI, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const toggleNotifications = (notiDocId) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/toggleNotifications', {clientUserId: clientUserId, docId: notiDocId})
+        .then((res) => {
+            dispatch({type: TOGGLE_NOTI, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const deleteNotifications = (notiDocId) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    dispatch({type: DELETE_NOTI, payload: notiDocId})
+    axios.post('/deleteNotifications', {clientUserId: clientUserId, docId: notiDocId})
+        .then((res) => {
+            console.log('delete success')
         })
         .catch((err) => {
             console.log(err)

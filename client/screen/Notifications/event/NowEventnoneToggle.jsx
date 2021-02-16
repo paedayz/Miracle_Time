@@ -2,12 +2,25 @@ import React from 'react'
 import { SafeAreaView, Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import dayjs from 'dayjs'
+import relativeTime from "dayjs/plugin/relativeTime";
 
-export default function NowEvent({data, eventData}) {
+// Redux
+import {useDispatch} from 'react-redux'
+import {toggleNotifications, deleteNotifications} from '../../../redux/action/dataAction'
+
+export default function NowEvent({data, eventData, createdAt, docId}) {
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    dayjs.extend(relativeTime);
+
+    const onNotiClick = () => {
+      dispatch(toggleNotifications(docId))
+      navigation.navigate('TodayListDetail', eventData)
+    }
     return (
         <SafeAreaView style={{ flex: 1 }}>
-          <TouchableOpacity onPress={() => {navigation.navigate('TodayListDetail', eventData) }}>
+          <TouchableOpacity onPress={() => { onNotiClick() }}>
             <View style={styles.unToggle}>
               <Image 
                 style={{width: 60, height: 60, borderRadius: 60/ 2}} 
@@ -21,7 +34,7 @@ export default function NowEvent({data, eventData}) {
                     size={18} 
                     style={{
                     padding: 6,
-                    color: "#ff9900"
+                    color: "#fff"
                             }}
                 />
               </View>
@@ -29,20 +42,21 @@ export default function NowEvent({data, eventData}) {
                 <View style={{flexDirection:'column'}}>
                   <View style={{flexDirection:'row'}}>
                     <View style={{width:280}}>
-                      <Text style={styles.title}>It is time to {data.eventData.event} at {data.time}</Text>
+                      <Text style={styles.title}> ถึงเวลาที่ต้องทำ {data.eventData.event} แล้ว </Text>
                     </View>
                     <Icon 
-                        name="ellipsis-h" 
+                        name="times" 
                         size={19} 
                         style={{
                           padding: 5,
                           marginTop: -24,
                           color: "#aaa"
                         }}
+                        onPress={() => {dispatch(deleteNotifications(docId))}}
                     />
                   </View>  
                   <View style={{marginTop:5}}>
-                    <Text style={styles.colorminute}>15 minute ago</Text>
+                    <Text style={styles.colorminute}>{dayjs(createdAt).fromNow()}</Text>
                   </View>
                 </View>
                   
@@ -74,7 +88,7 @@ const styles = StyleSheet.create({
       borderRadius:100, 
       width:30,
       height:30,
-      backgroundColor:"#99ff33" , 
+      backgroundColor:"#99ff" , 
       marginLeft:-20,
       marginTop:35
     }

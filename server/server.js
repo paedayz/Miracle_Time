@@ -24,7 +24,8 @@ let {
   deleteEvent, 
   addNotifications, 
   readNotifications, 
-  toggleNotifications
+  toggleNotifications,
+  deleteNotifications
 } = require('./handler/data')
 
 let {addFriend, acceptFriendRequest, deniedFriendRequest, getFriendRequest} = require('./handler/friend')
@@ -50,6 +51,7 @@ app.post('/deleteEvent', FBAuth, deleteEvent)
 app.post('/addNotifications', FBAuth, addNotifications)
 app.post('/readNotifications', FBAuth, readNotifications)
 app.post('/toggleNotifications', FBAuth, toggleNotifications)
+app.post('/deleteNotifications', FBAuth, deleteNotifications)
 
 app.listen(app.get("port"), function () {
     console.log("run at port", app.get("port"));

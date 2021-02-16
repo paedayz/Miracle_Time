@@ -24,23 +24,19 @@ const Edittodaylist = () => {
     const [startTime , setStartTime] = useState(start)
     const [endTime , setEndTime] = useState(end)
     const starthandleConfirm = (time) => {
-        // console.log(moment(time).format('HH:mm')) 
         const startString = time.toLocaleTimeString()
         const hour = startString.split(':')[0]
         const minute = startString.split(':')[1]
         const result = `${hour}:${minute}`
         setStartTime(result)
-        console.log(result)
         setIsStartDatePickerVisible(false)
       };
     const endhandleConfirm = (time) => {
-        // console.log(moment(time).format('HH:mm')) 
         const startString = time.toLocaleTimeString()
         const hour = startString.split(':')[0]
         const minute = startString.split(':')[1]
         const result = `${hour}:${minute}`
         setEndTime(result)
-        console.log(result)
         setIsEndDatePickerVisible(false)
       };
 
@@ -55,7 +51,6 @@ const Edittodaylist = () => {
                     values.catagory = catagory
                     values.rank = rank
                     values.date = date
-                    console.log(values)
                     dispatch(editEvent(values))
                     // navigation.navigate('TodayList')
                 }}
