@@ -52,11 +52,6 @@ export default function PetScreen({navigation}) {
               <Image source={require('../../assets/madarao.png')} style={{ maxHeight: 330, maxWidth: '60%'}}/>
             </TouchableOpacity>
 
-          {/* เปลี่ยนหน้า */}
-          {/* <TouchableOpacity style={styles.button1}>
-            <Button color="gray" title='ขอกำลังใจหน่อย' onPress={() => navigation.navigate("Gif-point")} />
-          </TouchableOpacity> */}
-
           <TouchableOpacity style={styles.button1}>
             <Button color="gray" title='ขอกำลังใจหน่อย' onPress={() => FirstBtnClick()} />
           </TouchableOpacity>

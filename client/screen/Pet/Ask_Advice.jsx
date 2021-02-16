@@ -30,7 +30,7 @@ export default function Ask_Advice() {
     
     const CountEvent =(Event_Name) =>{
         if (num_foreach_event.length === 0) {
-            num_foreach_event = [{Event_Name :Event_Name, start: 1}]
+            num_foreach_event = [{Event_Name :Event_Name, count_event: 1}]
         }else{
             let IsPushEvent = false
             let count = num_foreach_event.length
@@ -38,10 +38,10 @@ export default function Ask_Advice() {
             num_foreach_event.map(item => {
                 count--;
                 if(item.Event_Name == Event_Name){
-                    item.start++;
+                    item.count_event++;
                     IsPushEvent = true;
                 }else if( !IsPushEvent && count == 0 ){
-                    num_foreach_event.push({Event_Name : Event_Name, start: 1})
+                    num_foreach_event.push({Event_Name : Event_Name, count_event: 1})
                 }
             })
         } 
@@ -52,10 +52,10 @@ export default function Ask_Advice() {
             return false;
         }else{
             let Today_task = eventData.filter((E) => {
-                let timeEvent = new Date(E.date+"T"+E.end)
-                if(timeEvent > Today && timeEvent < ToMorrow && E.success === false)return true;
+                let timeEvent = new Date(E.start+"T"+E.end)
+                if(timeEvent > Today && timeEvent < ToMorrow && E.success === false)return true;    
             })
-
+            console.log(Today_task)
             if(Today_task.length !=0){
                Today_task.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
                 let Next = Next_Task(Today_task)
@@ -95,19 +95,19 @@ export default function Ask_Advice() {
                 num_foreach_event.sort((a,b) => (a.start < b.start) ? 1 : ((b.start < a.start) ? -1 : 0))
             })
             const Top_5_Event = (num_foreach_event.length < 5) ? (num_foreach_event):(num_foreach_event.slice(0,5))
-            let randomEvent = Random(Top_5_Event).Event_Name  
+            const randomEvent = Random(Top_5_Event).Event_Name  
             return ("ว่างเเล้วอยาก "+randomEvent+" ไหมละ")
         }else{
-            let randomEvent = Random(default_task);
+            const randomEvent = Random(default_task);
             return ("ว่างเเล้วอยาก "+randomEvent+" ไหมละ")
         }
     }
     
     const advice = Check_Today_Task() ? (Check_Today_Task()) : (FreeTask())
     
-    console.log("================================")
+    // console.log("================================")
     // console.log("Today is ",Today)
-    console.log("Now is ",Now.toLocaleString())
+    // console.log("Now is ",Now.toLocaleString())
     // console.log("Tomorrow is ",ToMorrow)
     return (
         <View>
