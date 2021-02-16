@@ -25,25 +25,21 @@ const Addtodaylist = (props) => {
 
 
     const starthandleConfirm = (time) => {
-        // console.log(moment(time).format('HH:mm')) 
         // const startString = time.toLocaleTimeString()
         // const hour = startString.split(':')[0]
         // const minute = startString.split(':')[1]
         // const result = `${hour}:${minute}`
         const result = moment(time).format('HH:mm')
         setStartTime(result)
-        console.log('-----start-----',result)
         setIsStartDatePickerVisible(false)
       };
     const endhandleConfirm = (time) => {
-        // console.log(moment(time).format('HH:mm')) 
         // const startString = time.toLocaleTimeString()
         // const hour = startString.split(':')[0]
         // const minute = startString.split(':')[1]
         // const result = `${hour}:${minute}`
         const result = moment(time).format('HH:mm')
         setEndTime(result)
-        console.log('-----end-----',result)
         setIsEndDatePickerVisible(false)
       };
 
@@ -59,7 +55,6 @@ const Addtodaylist = (props) => {
                     values.key = Math.random().toString()
                     values.start = startTime
                     values.end = endTime
-                    console.log('New Rank------>',values.catagory)
                     dispatch(addEvent(values))
                     props.setModalOpen(false)
                 }}
