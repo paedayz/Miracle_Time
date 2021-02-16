@@ -1,6 +1,15 @@
 import React, {useState} from 'react';
 import {StyleSheet, SafeAreaView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
 
+//dayjs
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+import localeData from 'dayjs/plugin/localeData'
+
+
+
 // Redux
 import {useSelector} from 'react-redux'
 
@@ -9,17 +18,26 @@ import {useSelector} from 'react-redux'
 export default function Ask_Advice() {
 
     const eventData = useSelector(state => state.data.events)
-
+    
     //Set time
-    let date = new Date()
-    let Now = new Date()
-    let Today = Now
+    // dayjs.extend(relativeTime);
+    dayjs.extend(localeData)
+    dayjs.extend(utc)
+    dayjs.extend(timezone)
+
+    // dayjs.tz.setDefault("Asia/Bangkok")
+    const Now = new Date()
+    const date = dayjs("2013-11-18 11:55").tz("America/Toronto", true)
+    // const date = dayjs()
+    
+    const Today = new Date(Now.toLocaleString())
     Today.setHours(0)
     Today.setMinutes(0)
     Today.setMilliseconds(0)
-    let ToMorrow = new Date();
+    const ToMorrow = new Date();
     ToMorrow.setDate(Today.getDate() + 1);
-    //use
+    
+
     let num_foreach_event = [];
     const default_task = ["อ่านหนังสือ","พักผ่อน","ดูหนัง","ฟังเพลง","เล่นเกม"]
 
@@ -52,15 +70,24 @@ export default function Ask_Advice() {
             return false;
         }else{
             let Today_task = eventData.filter((E) => {
-                let timeEvent = new Date(E.start+"T"+E.end)
-                if(timeEvent > Today && timeEvent < ToMorrow && E.success === false)return true;    
+                let timeEvent = new Date(E.date+"T"+E.end)
+                // console.log("Event is ",E)
+                // console.log("*****")
+                // console.log("Time event is ",timeEvent)
+                // console.log("*****")
+                if(timeEvent > Today && timeEvent < ToMorrow && E.success == false){
+                // if(timeEvent < ToMorrow ){
+                    // console.log("Event is ",E)
+                    return true;   
+                }
+                // console.log("Time event is ",timeEvent)
             })
-            console.log(Today_task)
+            // console.log(Today_task)
             if(Today_task.length !=0){
                Today_task.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
                 let Next = Next_Task(Today_task)
                 let words = " ไปทำ "+Next.event+" ซะนะ" 
-                return words;     
+                return " ไปทำ "+Next.event+" ซะนะ" ;     
             }else{
                 return false;
             }  
@@ -105,10 +132,13 @@ export default function Ask_Advice() {
     
     const advice = Check_Today_Task() ? (Check_Today_Task()) : (FreeTask())
     
-    // console.log("================================")
+    console.log("================================")
     // console.log("Today is ",Today)
-    // console.log("Now is ",Now.toLocaleString())
+    // console.log("Now is ",Now)
     // console.log("Tomorrow is ",ToMorrow)
+    console.log("dayjs ",date)
+    console.log(typeof date)
+    // console.log("Event",eventData)
     return (
         <View>
            <Text>{advice}</Text> 
