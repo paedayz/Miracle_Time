@@ -6,18 +6,18 @@ import {
     SET_EVENT, 
     CLEAR_SESSION, 
     SET_NOTIFICATIONS,
-    SET_UNREAD_NOTI
+    SET_UNREAD_NOTI,
+    SET_FRIEND_REQUEST,
+    SET_FRIEND_LIST
 } from '../type'
 import firebase from 'firebase'
 require('firebase/storage')
 
+let clientUserId
+
 export const getAuthen = ()=> (dispatch) => {
     dispatch({type: LOADING_DATA})
-    axios.get('/authen').then((res) => {
-        // if(res.data.userData) {
-        //     console.log('user')
-        //     dispatch({type: SET_USER_DATA, payload: res.data.userData})
-        // }
+    axios.post('/authen', {clientUserId : clientUserId}).then((res) => {
         if(res.data.eventData) {
             dispatch({type: SET_EVENT, payload: res.data.eventData})
         }
@@ -25,6 +25,14 @@ export const getAuthen = ()=> (dispatch) => {
         if(res.data.notiData) {
             dispatch({type: SET_NOTIFICATIONS, payload: res.data.notiData})
             dispatch({type: SET_UNREAD_NOTI, payload: true})
+        }
+
+        if(res.data.friendList) {
+            dispatch({type: SET_FRIEND_LIST, payload: res.data.friendList})
+        }
+
+        if(res.data.friendRequest) {
+            dispatch({type: SET_FRIEND_REQUEST, payload: res.data.friendRequest})
         }
         dispatch({type: LOADING_COMPLETE})
     })
@@ -37,6 +45,7 @@ export const getAuthen = ()=> (dispatch) => {
 export const login = (userData) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/login', userData).then((res) => {
+        clientUserId = res.data.data.userId
         dispatch({type: SET_USER_DATA, payload: res.data.data})
         dispatch({type: LOADING_COMPLETE})
     })
@@ -78,6 +87,7 @@ export const editProfile = (blob, updateData) => (dispatch) => {
     if(blob) {
         const imageName = blob._data.name
         updateData.imageName = imageName
+        updateData.clientUserId = clientUserId
 
         const task = firebase.storage().ref().child(imageName).put(blob);
 
@@ -118,10 +128,8 @@ export const editProfile = (blob, updateData) => (dispatch) => {
                     console.log(err)
                 })
     }
+}
 
-
-
-    
-    
-    
+export const getClientUserId = () => {
+    return clientUserId
 }
