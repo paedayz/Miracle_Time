@@ -5,12 +5,22 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import dayjs from 'dayjs'
 import relativeTime from "dayjs/plugin/relativeTime";
 
-export default function NowEvent({data, eventData, createdAt}) {
+// Redux
+import {useDispatch} from 'react-redux'
+import {toggleNotifications, deleteNotifications} from '../../../redux/action/dataAction'
+
+export default function NowEvent({data, eventData, createdAt, docId}) {
     const navigation = useNavigation()
+    const dispatch = useDispatch()
     dayjs.extend(relativeTime);
+
+    const onNotiClick = () => {
+      dispatch(toggleNotifications(docId))
+      navigation.navigate('TodayListDetail', eventData)
+    }
     return (
         <SafeAreaView style={{ flex: 1 }}>
-          <TouchableOpacity onPress={() => {navigation.navigate('TodayListDetail', eventData) }}>
+          <TouchableOpacity onPress={() => { onNotiClick() }}>
             <View style={styles.unToggle}>   
               <Image 
                 style={{width: 60, height: 60, borderRadius: 60/ 2}} 
@@ -35,13 +45,14 @@ export default function NowEvent({data, eventData, createdAt}) {
                     <Text style={styles.title}> ถึงเวลาที่ต้องทำ {data.eventData.event} แล้ว </Text>
                     </View>
                     <Icon 
-                        name="ellipsis-h" 
+                        name="times" 
                         size={19}
                         style={{
                           padding: 5,
                           marginTop: -24,
                           color: "#aaa"
                         }}
+                        onPress={() => {dispatch(deleteNotifications(docId))}}
                     />
                   </View>  
                   <View style={{marginTop:5}}>

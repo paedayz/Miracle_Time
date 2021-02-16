@@ -16,6 +16,7 @@ import PetScreen from './Pet/PetScreen'
 import ProfileStackScreen from './Profile/ProfileStack'
 import AdminStackScreen from './Admin/AdminStack'
 import NotificationStackScreen from './Notifications/NotificationStack'
+import FriendStackScreen from './Friend/FriendStackScreen'
 
 // Naviation
 import BottomTabNavigator from '../navigator/BottomTabNavigator'
@@ -30,7 +31,9 @@ export default function Screen({navigation}) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAuthen())
+        if(userData) {
+            dispatch(getAuthen())
+        }
     }, [userData])
 
     if(userData && !userEventData){
@@ -52,6 +55,7 @@ export default function Screen({navigation}) {
                 <Drawer.Screen name="Profile" component={ProfileStackScreen} />
                 <Drawer.Screen name="Admin" component={AdminStackScreen} />
                 <Drawer.Screen name="Notifications" component={NotificationStackScreen} />
+                <Drawer.Screen name="Friend" component={FriendStackScreen} />
             </Drawer.Navigator>
         )
         
