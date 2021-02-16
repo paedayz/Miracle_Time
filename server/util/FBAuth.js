@@ -1,14 +1,12 @@
 const { firebase, firestore } = require("./firebase");
 
 module.exports = (req, res, next) => {
-    let user = firebase.auth().currentUser;
-    let uid
+    let uid = req.body.clientUserId
     req.user = {
         username : null,
         userImage : null
     }
-    if (user != null) {
-        uid = user.uid
+    if (uid != null) {
         firestore.collection('users').where('userId', '==', uid).limit(1).get()
             .then((snapshot) => {
                 snapshot.forEach(function(doc){
@@ -22,7 +20,7 @@ module.exports = (req, res, next) => {
                 return res.status(403).json(err);
               });
     } else {
-        console.log('not have user now')
-        return res.status(404).json({error: 'not found user'})
+        console.log('Please Login First')
+        return res.status(404).json({error: 'Please Login First'})
     }
 };
