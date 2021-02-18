@@ -1,18 +1,15 @@
 import React, {useState} from 'react';
 import {StyleSheet, SafeAreaView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
 
+// Redux
+import {useSelector} from 'react-redux'
+
 //dayjs
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
 import localeData from 'dayjs/plugin/localeData'
-
-
-
-// Redux
-import {useSelector} from 'react-redux'
-
 
 
 export default function Ask_Advice() {
@@ -25,10 +22,10 @@ export default function Ask_Advice() {
     dayjs.extend(utc)
     dayjs.extend(timezone)
 
-    // dayjs.tz.setDefault("Asia/Bangkok")
+    // dayjs.tz.setDefault(ia/Bangkok")
     const Now = new Date()
-    const date = dayjs("2013-11-18 11:55").tz("America/Toronto", true)
-    // const date = dayjs()
+    const date = dayjs(Now.toLocaleString()).tz("Asia/Bangkok", true)
+    // const date = dayjs()"As
     
     const Today = new Date(Now.toLocaleString())
     Today.setHours(0)
@@ -136,8 +133,8 @@ export default function Ask_Advice() {
     // console.log("Today is ",Today)
     // console.log("Now is ",Now)
     // console.log("Tomorrow is ",ToMorrow)
-    console.log("dayjs ",date)
-    console.log(typeof date)
+    // console.log("dayjs ",Now.getTimezoneOffset())
+    // console.log(typeof date)
     // console.log("Event",eventData)
     return (
         <View>

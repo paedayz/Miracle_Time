@@ -18,6 +18,8 @@ import AdminStackScreen from './Admin/AdminStack'
 import NotificationStackScreen from './Notifications/NotificationStack'
 import FriendStackScreen from './Friend/FriendStackScreen'
 
+import TipsStack from './Tips/TipsStack'
+
 // Naviation
 import BottomTabNavigator from '../navigator/BottomTabNavigator'
 import {DrawerContent} from '../navigator/DrawerContent'
@@ -56,6 +58,7 @@ export default function Screen({navigation}) {
                 <Drawer.Screen name="Admin" component={AdminStackScreen} />
                 <Drawer.Screen name="Notifications" component={NotificationStackScreen} />
                 <Drawer.Screen name="Friend" component={FriendStackScreen} />
+                <Drawer.Screen name="Tips" component={TipsStack} />
             </Drawer.Navigator>
         )
         
