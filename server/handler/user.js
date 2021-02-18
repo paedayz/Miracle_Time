@@ -78,6 +78,9 @@ exports.login = (req, res) => {
   };
 
   let userId
+  let username
+  let last_login
+  let midnight
   //   const { valid, errors } = validateLoginData(user);
 
   //   if (!valid) return res.status(400).json(errors);
@@ -90,9 +93,33 @@ exports.login = (req, res) => {
       return firestore.collection('users').where("userId", "==", userId).get()
     })
     .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        return firestore.doc(`users/${doc.id}`).update({last_login: new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok"})});
+      midnight = (new Date()).setHours(0, 0, 0, 0)
+      snapshot.forEach( async (doc) => {
+        last_login = new Date(doc.data().last_login)
+        username = doc.id
       })
+      return firestore.collection('quest_user').where('username', '==', username).get()
+    })
+    .then(async (snapshot) => {
+      if(snapshot.size > 0 && last_login - midnight <= 0){
+        const resetQuestReqPromise = snapshot.forEach((doc) => {
+          if(doc.data().questType === 'Daily') {
+            return firestore.doc(`quest_user/${doc.id}`).update({questDone:0, questStatus: 'in_progress'})
+          } else {
+            return 'not daily'
+          }
+        })
+        Promise.all(resetQuestReqPromise)
+          .then((data) => {
+            console.log(data)
+            return null
+          })
+      } else {
+        return null
+      }
+    }) 
+    .then(() => {
+      return firestore.doc(`users/${username}`).update({last_login: new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok"})});
     })
     .then(() => {
       return firestore.collection("users").where("userId", "==", userId).get();
