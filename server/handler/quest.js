@@ -43,3 +43,27 @@ exports.addQuest = (req, res) => {
             return res.json({error: err})
           })
 }
+
+exports.adminGetQuestList = (req, res) => {
+    let adminQuestList = []
+    firestore.doc(`/users/${req.user.username}`).get()
+        .then(doc => {
+            if(doc.data().status === "admin") {
+                return firestore.collection('quests').get()
+            } else {
+                return res.status(403).json({error: 'No permission to get data'})
+            }
+        })
+        .then((snapshot) => {
+            if(snapshot.size) {
+                snapshot.forEach((doc) => {
+                    adminQuestList.push(doc.data())
+                })
+                return res.json({data: adminQuestList})
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+          })
+}
