@@ -109,9 +109,13 @@ exports.login = (req, res) => {
             return 'not daily'
           }
         })
+        
         Promise.all(resetQuestReqPromise)
           .then((data) => {
-            console.log(data)
+            return null
+          })
+          .catch((err) => {
+            console.log(err)
             return null
           })
       } else {
@@ -148,6 +152,7 @@ exports.checkAuthen = (req, res) => {
   let notifications = [];
   let friendRequest = [];
   let friendList = [];
+  let questList = []
 
   let friendListToFetch = [];
   let friendRequestToFetch = [];
@@ -238,6 +243,38 @@ exports.checkAuthen = (req, res) => {
         });
 
       return firestore
+        .collection("quest_user")
+        .where("username", "==", userData.username)
+        .get();
+    })
+    .then(async(snapshot) => {
+      let questDataPromise = snapshot.forEach((doc) => {
+        let questDone = doc.data().questDone
+        let docId = doc.id
+        let questStatus = doc.data().questStatus
+        let questType = doc.data().questType
+        return firestore.doc(`/quests/${doc.data().questId}`).get()
+                .then((data) => {
+                  let resData = data.data()
+                  resData.questDone = questDone
+                  resData.docId = docId
+                  resData.questStatus = questStatus
+                  resData.questType = questType
+                  questList.push(resData)
+                  return resData
+                })
+      })
+      let waitPromise = await Promise.all(questDataPromise)
+                          .then((data) => {
+                            return data
+                          })
+                          .catch((err) => {
+                            return err
+                          })
+      return waitPromise
+    })
+    .then(() => {
+      return firestore
         .collection("notifications")
         .where("username", "==", userData.username)
         .get();
@@ -275,6 +312,7 @@ exports.checkAuthen = (req, res) => {
         userData: userData,
         friendList: friendList,
         friendRequest: friendRequest,
+        questList: questList
       };
       return res.json(resData);
     })
