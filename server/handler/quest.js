@@ -73,7 +73,7 @@ exports.doQuest = (req, res) => {
     let questAction = req.body.questAction
     let mainQuestData = []
     let resUpdateQuest = []
-    
+
     firestore.collection('quests').where('questAction', '==', questAction).get()
         .then((snapshot) => {
             snapshot.forEach((doc) => {
@@ -94,7 +94,8 @@ exports.doQuest = (req, res) => {
                             questId: doc.data().questId,
                             questStatus: 'in_progress',
                             questType: doc.data().questType,
-                            username: doc.data().username
+                            username: doc.data().username,
+                            docId: doc.id
                         }
 
                         if(newData.questDone === data.questRequirement) {
@@ -109,6 +110,37 @@ exports.doQuest = (req, res) => {
             })
 
             return res.json({data: resUpdateQuest})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+          })
+}
+
+exports.deleteQuest = (req, res) => {
+    const questId = req.body.questId
+    let mainQuestId
+    let docIdToDelete = []
+    let batch = firestore.batch()
+    let path = firestore.collection('quest_user')
+    firestore.doc(`/quests/${questId}`).get()
+        .then((doc) => {
+            mainQuestId = doc.id
+            return firestore.doc(`/quests/${questId}`).delete()
+        })
+        .then(() => {
+            return firestore.collection('quest_user').where('questId', '==', questId).get()
+        })
+        .then((snapshot) => {
+            snapshot.forEach((doc) => {
+                docIdToDelete.push(doc.id)
+            })
+
+            docIdToDelete.map((docId) => {
+                batch.delete(path.doc(docId))
+            })
+            batch.commit()
+            return res.status(200).json({success: "delete success"})
         })
         .catch((err) => {
             console.log(err)
