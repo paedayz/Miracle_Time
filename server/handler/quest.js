@@ -67,3 +67,51 @@ exports.adminGetQuestList = (req, res) => {
             return res.json({error: err})
           })
 }
+
+exports.doQuest = (req, res) => {
+    let username = req.user.username
+    let questAction = req.body.questAction
+    let mainQuestData = []
+    let resUpdateQuest = []
+    
+    firestore.collection('quests').where('questAction', '==', questAction).get()
+        .then((snapshot) => {
+            snapshot.forEach((doc) => {
+                mainQuestData.push({
+                    questId : doc.id,
+                    questRequirement: doc.data().questRequirement
+                })
+            })
+            
+            return firestore.collection('quest_user').where('username', '==', username).get()
+        })
+        .then( async (snapshot) => {
+            snapshot.forEach((doc) => {
+                mainQuestData.map((data) => {
+                    if(doc.data().questStatus === 'in_progress' && doc.data().questId === data.questId) {
+                        let newData = {
+                            questDone: doc.data().questDone + 1,
+                            questId: doc.data().questId,
+                            questStatus: 'in_progress',
+                            questType: doc.data().questType,
+                            username: doc.data().username
+                        }
+
+                        if(newData.questDone === data.questRequirement) {
+                            newData.questStatus = 'quest_success'
+                        }
+
+                        firestore.doc(`/quest_user/${doc.id}`).set(newData)
+                        
+                        resUpdateQuest.push(newData)
+                    }
+                })
+            })
+
+            return res.json({data: resUpdateQuest})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+          })
+}
