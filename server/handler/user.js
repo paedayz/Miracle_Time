@@ -56,6 +56,9 @@ exports.signup = (req, res) => {
         createdAt: new Date().toLocaleString("en-US", {
           timeZone: "Asia/Bangkok",
         }),
+        last_login: new Date().toLocaleString("en-US", {
+          timeZone: "Asia/Bangkok",
+        }),
         userImage: `https://firebasestorage.googleapis.com/v0/b/${config.firebaseConfig.storageBucket}/o/${noImg}?alt=media`,
         userId,
         status: "user",
