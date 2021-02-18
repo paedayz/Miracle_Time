@@ -16,7 +16,7 @@ exports.signup = (req, res) => {
 
   const noImg = "no-img.png";
 
-  let token, userId;
+  let userId;
 
   firestore
     .doc(`users/${newUser.username}`)
@@ -35,11 +35,20 @@ exports.signup = (req, res) => {
     })
     .then((data) => {
       userId = data.user.uid;
-      return data.user.getIdToken();
+      return firestore.collection('quests').get()
     })
-    .then((idToken) => {
-      token = idToken;
-
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        firestore.collection('quest_user').add({
+          username: newUser.username,
+          questId: doc.id,
+          questStatus: 'in_progress',
+          questDone: 0,
+          questType: doc.data().questType
+        })
+      })
+    })
+    .then(() => {
       const userCredentials = {
         username: newUser.username,
         email: newUser.email,
