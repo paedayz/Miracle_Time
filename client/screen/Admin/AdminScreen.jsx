@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView } from 'react-native';
 import {
   Title,
 } from 'react-native-paper'
@@ -19,7 +19,7 @@ export default function admin () {
 
   if(mode) {
       return (
-        <View>
+        <SafeAreaView style={styles.container}>
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity style={[styles.headerBox, {
                 borderRightColor: '#dddddd',
@@ -39,7 +39,7 @@ export default function admin () {
           </View>
 
           <QuestScreen/>
-        </View>
+        </SafeAreaView>
       )
   } else {
       return (
@@ -70,6 +70,7 @@ export default function admin () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: StatusBar.currentHeight
   },
   headerTitle: {
     fontSize: 20,

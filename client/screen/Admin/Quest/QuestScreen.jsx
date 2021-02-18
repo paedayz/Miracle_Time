@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, ScrollResponderEvent } from 'react-native';
 import {
   Avatar,
   Title,
@@ -31,7 +31,7 @@ export default function QuestScreen (){
               }
               title='New Quest'
               onPress={() => setModalOpenAdd(true)}/>
-              <Modal transparent={true} visible={modalOpenAdd}>
+              <Modal transparent={true} visible={modalOpenAdd} >
                 <AddQuestModal setModalOpenAdd={setModalOpenAdd} />
               </Modal>
           </View>

@@ -76,6 +76,8 @@ exports.login = (req, res) => {
     email: req.body.email,
     password: req.body.password,
   };
+
+  let userId
   //   const { valid, errors } = validateLoginData(user);
 
   //   if (!valid) return res.status(400).json(errors);
@@ -84,10 +86,16 @@ exports.login = (req, res) => {
     .auth()
     .signInWithEmailAndPassword(user.email, user.password)
     .then((data) => {
-      return data.user.uid;
+      userId = data.user.uid
+      return firestore.collection('users').where("userId", "==", userId).get()
     })
-    .then((uid) => {
-      return firestore.collection("users").where("userId", "==", uid).get();
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        return firestore.doc(`users/${doc.id}`).update({last_login: new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok"})});
+      })
+    })
+    .then(() => {
+      return firestore.collection("users").where("userId", "==", userId).get();
     })
     .then((snapshot) => {
       snapshot.forEach(function (doc) {

@@ -28,7 +28,14 @@ let {
   deleteNotifications
 } = require('./handler/data')
 
-let {addFriend, acceptFriendRequest, deniedFriendRequest, getFriendRequest} = require('./handler/friend')
+let {
+  addFriend,
+  acceptFriendRequest,
+  deniedFriendRequest,
+  getFriendRequest
+} = require('./handler/friend')
+
+let {addQuest} = require('./handler/quest')
 
 // User Route
 app.post('/signup',signup)
@@ -52,6 +59,9 @@ app.post('/addNotifications', FBAuth, addNotifications)
 app.post('/readNotifications', FBAuth, readNotifications)
 app.post('/toggleNotifications', FBAuth, toggleNotifications)
 app.post('/deleteNotifications', FBAuth, deleteNotifications)
+
+// Quest Route
+app.post('/addQuest', FBAuth, addQuest)
 
 app.listen(app.get("port"), function () {
     console.log("run at port", app.get("port"));

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, ScrollView } from 'react-native';
 import {
   Avatar,
   Title,
@@ -31,6 +31,22 @@ export default function AddQuestModal({setModalOpenAdd}) {
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
                     />
+
+                    <Text>Quest type</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+
+                    <Text>Quest catagory</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+
+                    <Text>Quest request amount</Text>
+                    <TextInput style={styles.input}
+                      placeholder="Please enter your text"
+                    />
+
                     <Text>Quest EXP</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
@@ -39,10 +55,7 @@ export default function AddQuestModal({setModalOpenAdd}) {
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
                     />
-                    <Text>Quest time</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
+
                     <View style={styles.modalButton}>
                       <Button 
                           title="Add"
