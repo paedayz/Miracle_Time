@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { SafeAreaView, LogBox, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import {
   Avatar,
   Title,
@@ -7,10 +7,14 @@ import {
   Text,
   TextInput,
   TouchableRipple
-} from 'react-native-paper'
-
+} from 'react-native-paper';
+import { Formik } from 'formik'
+import RNPickerSelect from 'react-native-picker-select';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+// Quest
 
 export function Quest () {
       const [modalOpenEdit, setModalOpenEdit] = useState(false)
@@ -104,6 +108,8 @@ export function Quest () {
       );
 }
 
+//Archeivement
+
 export function Archeivement () {
   const [modalOpenEdit, setModalOpenEdit] = useState(false)
   const [modalOpenDelete, setModalOpenDelete] = useState(false)
@@ -196,17 +202,55 @@ export function Archeivement () {
   );
 }
 
+//Header & Add function
+
 export default function admin () {
   const [mode, setMode] = useState(true)
   const [modalOpenAdd, setModalOpenAdd] = useState(false)
+  const [isStartDatePickerVisible, setIsStartDatePickerVisible] = useState(false);
+  const [isEndDatePickerVisible, setIsEndDatePickerVisible] = useState(false);
+
+  const [startTime , setStartTime] = useState('00:00')
+  const [endTime , setEndTime] = useState('00:00')
+
+
+  const starthandleConfirm = (time) => {
+        // console.log(moment(time).format('HH:mm')) 
+        // const startString = time.toLocaleTimeString()
+        // const hour = startString.split(':')[0]
+        // const minute = startString.split(':')[1]
+        // const result = `${hour}:${minute}`
+    const result = moment(time).format('HH:mm')
+    setStartTime(result)
+    console.log('-----start-----',result)
+    setIsStartDatePickerVisible(false)
+  };
+  const endhandleConfirm = (time) => {
+        // console.log(moment(time).format('HH:mm')) 
+        // const startString = time.toLocaleTimeString()
+        // const hour = startString.split(':')[0]
+        // const minute = startString.split(':')[1]
+        // const result = `${hour}:${minute}`
+    const result = moment(time).format('HH:mm')
+    setEndTime(result)
+    console.log('-----end-----',result)
+    setIsEndDatePickerVisible(false)
+  };
+
+  LogBox.ignoreAllLogs()
 
   const changeMode = () => {
       setMode(!mode)
   }
 
+  
+
+
   if(mode) {
       return (
+        
         <View>
+          
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity style={[styles.headerBox, {
                 borderRightColor: '#dddddd',
@@ -224,6 +268,7 @@ export default function admin () {
               </View>
             </TouchableOpacity>
           </View>
+         
           <View style={styles.addButton}>
             <Button
               icon={
@@ -261,10 +306,60 @@ export default function admin () {
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
                     />
-                    <Text>Quest time</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
+                    <View style={{flexDirection: 'row',height:20,marginTop:-20}}>
+                            <View style={{width: 50, height: 30}}>
+                                <Text >Start :</Text>
+                               
+                            </View>
+                            <View style={{width: 50, height: 30,marginLeft:100}}>
+                                <Text >End :</Text>
+                               
+                            </View>
+                        </View>
+                        <View style={{flexDirection: 'row',height:90}}>
+                            <View style={{width: 100, height: 90}}>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='start'
+                                    defaultValue={startTime}
+                                    >
+                                </TextInput>
+                            </View>
+                            <Icon 
+                                name="calendar" 
+                                size={30} 
+                                color='gray'
+                                style={{marginTop:25,marginLeft:10}}
+                                onPress={()=> setIsStartDatePickerVisible(true)}/>
+                            <DateTimePickerModal
+                                    
+                                    isVisible={isStartDatePickerVisible}
+                                    mode="time"
+                                    onConfirm={starthandleConfirm}
+                                    onCancel={()=> setIsStartDatePickerVisible(false)}/>
+
+                            <View style={{width: 100, height: 90,marginLeft:6}}> 
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='end'
+                                    defaultValue={endTime}
+                                    >
+                                </TextInput>   
+                            </View>     
+                            <Icon 
+                                name="calendar" 
+                                size={30} 
+                                color='gray'
+                                style={{marginTop:25,marginLeft:10}}
+                                onPress={()=> setIsEndDatePickerVisible(true)}/>     
+                            <DateTimePickerModal
+                                    
+                                    isVisible={isEndDatePickerVisible}
+                                    mode="time"
+                                    onConfirm={endhandleConfirm}
+
+                                    onCancel={()=> setIsEndDatePickerVisible(false)}/>
+                        </View>
                     <View style={styles.modalButton}>
                       <Button 
                           title="Add"
@@ -274,8 +369,11 @@ export default function admin () {
                 </View>
               </Modal>
           </View>
+               
           <Quest/>
+            
         </View>
+       
       )
   } else {
       return (
