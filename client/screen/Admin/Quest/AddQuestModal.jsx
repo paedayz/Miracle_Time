@@ -12,7 +12,35 @@ import {
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// Redux
+import { useDispatch } from 'react-redux'
+import {addQuest} from '../../../redux/action/adminAction'
+
 export default function AddQuestModal({setModalOpenAdd}) {
+  const [questName, setQuestName] = useState()
+  const [questDetail, setqQuestDetail] = useState()
+  const [questType, setQuestType] = useState()
+  const [questAction, setQuestAction] = useState()
+  const [questRequirement, setQuestRequirement] = useState()
+  const [questCoin, setQuestCoin] = useState()
+  const [questExp, setQuestExp] = useState()
+
+  const dispatch = useDispatch()
+
+  const onSubmit = () => {
+    let questData = {
+      questName : questName,
+      questDetail : questDetail,
+      questType : questType,
+      questAction : questAction,
+      questRequirement : questRequirement,
+      questCoin : questCoin,
+      questExp : questExp
+    }
+
+    dispatch(addQuest(questData))
+    setModalOpenAdd(false)
+  }
     return (
         <View style={styles.modal}>
                 <Icon 
@@ -26,39 +54,47 @@ export default function AddQuestModal({setModalOpenAdd}) {
                     <Text>Quest name</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setQuestName(data)}
                     />
                     <Text>Quest detail</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setqQuestDetail(data)}
                     />
 
                     <Text>Quest type</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setQuestType(data)}
                     />
 
-                    <Text>Quest catagory</Text>
+                    <Text>Quest Action</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setQuestAction(data)}
                     />
 
                     <Text>Quest request amount</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setQuestRequirement(data)}
                     />
 
                     <Text>Quest EXP</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setQuestExp(data)}
                     />
                     <Text>Quest coin</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setQuestCoin(data)}
                     />
 
                     <View style={styles.modalButton}>
                       <Button 
-                          title="Add"
+                        onPress={() => onSubmit()}
+                        title="Add"
                       />
                     </View>
                   </View>
@@ -75,7 +111,7 @@ const styles = StyleSheet.create({
     modalButton: 
     {
       marginHorizontal: 80,
-      marginVertical: 15,
+      marginVertical: 0,
       justifyContent: 'center'
     },
     input: 

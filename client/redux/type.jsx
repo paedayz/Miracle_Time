@@ -36,3 +36,4 @@ export const DELETE_QUEST = 'DELETE_QUEST'
 
 // Admin
 export const SET_ADMIN_QUEST = 'SET_ADMIN_QUEST'
+export const ADD_QUEST = 'ADD_QUEST'
