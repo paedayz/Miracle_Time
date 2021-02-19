@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, ScrollResponderEvent } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, FlatList } from 'react-native';
 import {
   Avatar,
   Title,
@@ -24,6 +24,19 @@ export default function QuestScreen (){
     const questList = useSelector(state => state.admin.questList)
     console.log(questList)
 
+    const Item = ({data}) => {
+      let questData = data
+        
+      return (
+          <Quest questData={questData}/>
+      )
+    };
+    
+  
+    const renderItem = (sortNoti) => (
+      <Item data={sortNoti} />
+    );
+
     return (
         <View>
           <View style={styles.addButton}>
@@ -41,7 +54,11 @@ export default function QuestScreen (){
                 <AddQuestModal setModalOpenAdd={setModalOpenAdd} />
               </Modal>
           </View>
-          <Quest/>
+          <FlatList
+            data={questList}
+            renderItem={renderItem}
+            keyExtractor={item => item.docId}
+          />
         </View>
     )
 }

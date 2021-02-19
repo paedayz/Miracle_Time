@@ -15,9 +15,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // Redux
 import {useSelector} from 'react-redux'
 
-export default function Quest () {
+export default function Quest ({questData}) {
     const [modalOpenEdit, setModalOpenEdit] = useState(false)
     const [modalOpenDelete, setModalOpenDelete] = useState(false)
+    const {docId, questAction, questCoin, questDetail, questName} = questData.item
   
     return (
       <SafeAreaView style={styles.container}>
@@ -28,9 +29,11 @@ export default function Quest () {
               size={50}/>
           </View>
           <View style={styles.questBox}>
-            <Title style={styles.headerTitle}>Quest</Title>
-            <Text>Quest detail</Text>
-            <Text>Quest time</Text>
+            <Title style={styles.headerTitle}>{questName}</Title>
+            <View style={{maxWidth: 200}}>
+              <Text>{questDetail}</Text>
+            </View>
+            
           </View>
           <View style={styles.editButton}>
             <Button

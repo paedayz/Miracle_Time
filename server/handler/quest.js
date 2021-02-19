@@ -59,7 +59,9 @@ exports.adminGetQuestList = (req, res) => {
         .then((snapshot) => {
             if(snapshot.size) {
                 snapshot.forEach((doc) => {
-                    adminQuestList.push(doc.data())
+                    let buff = doc.data()
+                    buff.docId = doc.id
+                    adminQuestList.push(buff)
                 })
                 return res.json({data: adminQuestList})
             }
