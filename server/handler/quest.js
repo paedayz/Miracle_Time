@@ -173,3 +173,47 @@ exports.editQuest = (req, res) => {
             return res.json({error: err})
           })
 }
+
+exports.getUserQuest = (req, res) => {
+    let username = req.user.username
+    let questList = []
+    let userQuest = []
+
+    firestore.collection("quest_user").where("username", "==", username).get()
+        .then(async(snapshot) => {
+            snapshot.forEach((doc) => {
+                let buff = doc.data()
+                buff.docId = doc.id
+                userQuest.push(buff)
+            })
+
+            let questDataPromise = userQuest.map((quest) => {
+                return firestore.doc(`/quests/${quest.questId}`).get()
+            })
+
+            Promise.all(questDataPromise)
+                                .then((data) => {
+                                    data.map((doc) => {
+                                        questList.push(doc.data())
+                                    })
+                                    let num = 0
+                                    userQuest.map((quest) => {
+                                        questList[num].questDone = quest.questDone
+                                        questList[num].questStatus = quest.questStatus
+                                        questList[num].questType = quest.questType
+                                        questList[num].username = quest.username
+                                        questList[num].docId = quest.docId
+                                        num = num+1
+                                    })
+                                    console.log(userQuest)
+                                    return res.json({data: questList})
+                                })
+                                .catch((err) => {
+                                    return err
+                                })
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+          })
+}
