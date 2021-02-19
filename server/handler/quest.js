@@ -224,3 +224,59 @@ exports.getUserQuest = (req, res) => {
             return res.json({error: err})
           })
 }
+
+exports.claimQuest = (req, res) => {
+    const docId = req.body.docId
+    console.log(docId)
+    const questId = req.body.questId
+    let userDataCoin
+    let userDataExp
+    let userDataLevel
+    let userDoneQuest
+    firestore.doc(`/quest_user/${docId}`).update({questStatus: 'claimed'})
+        .then(() => {
+
+            return firestore.doc(`/quest_user/${docId}`).get()
+        })
+        .then((doc) => {
+            userDoneQuest = doc.data().questDone
+            return firestore.doc(`/users/${req.user.username}`).get()
+            
+        })
+        .then((doc) => {
+            userDataCoin = doc.data().coin
+            userDataExp = doc.data().exp
+            userDataLevel = doc.data().level
+            return firestore.doc(`/quests/${questId}`).get()
+        })
+        .then((doc) => {
+            if(userDoneQuest >= doc.data().questRequirement) {
+                let questCoin = doc.data().questCoin
+                let questExp = doc.data().questExp
+
+                let upDateCoin = questCoin + userDataCoin
+                let upDateExp = questExp + userDataExp
+                let upDateLevel = userDataLevel
+
+                if(upDateExp >= (upDateLevel+1) * 100) {
+                    upDateLevel = upDateLevel + 1
+                }
+
+                return firestore.doc(`/users/${req.user.username}`).update({coin: upDateCoin, exp: upDateExp, level: upDateLevel})
+            } else {
+                return res.status(403).json({err: "You are not done"})
+            }
+            
+        })
+        .then(() => {
+            return firestore.doc(`/users/${req.user.username}`).get()
+        })
+        .then((doc) => {
+            let buff = doc.data()
+            return res.json({data: buff})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+          })
+}

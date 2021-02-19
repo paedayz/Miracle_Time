@@ -35,7 +35,7 @@ let {
   getFriendRequest
 } = require('./handler/friend')
 
-let {addQuest, adminGetQuestList, doQuest, deleteQuest, editQuest, getUserQuest} = require('./handler/quest')
+let {addQuest, adminGetQuestList, doQuest, deleteQuest, editQuest, getUserQuest, claimQuest} = require('./handler/quest')
 
 // User Route
 app.post('/signup',signup)
@@ -67,6 +67,7 @@ app.post('/doQuest', FBAuth, doQuest)
 app.post('/deleteQuest', FBAuth, deleteQuest)
 app.post('/editQuest', FBAuth, editQuest)
 app.post('/getUserQuest', FBAuth, getUserQuest)
+app.post('/claimQuest', FBAuth, claimQuest)
 
 app.listen(app.get("port"), function () {
     console.log("run at port", app.get("port"));
