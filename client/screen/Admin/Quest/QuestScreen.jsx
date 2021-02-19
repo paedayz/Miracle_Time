@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, FlatList } from 'react-native';
 import {
   Avatar,
@@ -17,11 +17,17 @@ import AddQuestModal from './AddQuestModal';
 import Quest from './Quest'
 
 // Redux
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {getAdminQuestList} from '../../../redux/action/adminAction'
 
 export default function QuestScreen (){
     const [modalOpenAdd, setModalOpenAdd] = useState(false)
     const questList = useSelector(state => state.admin.questList)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+      dispatch(getAdminQuestList())
+    },[modalOpenAdd])
 
     const Item = ({data}) => {
       let questData = data
@@ -31,8 +37,8 @@ export default function QuestScreen (){
       )
     };
   
-    const renderItem = (sortNoti) => (
-      <Item data={sortNoti} />
+    const renderItem = (questList) => (
+      <Item data={questList} />
     );
 
     return (
