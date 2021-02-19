@@ -106,7 +106,6 @@ exports.doQuest = (req, res) => {
                                 questStatus: 'in_progress',
                                 questType: doc.data().questType,
                                 username: doc.data().username,
-                                docId: doc.id
                             }
     
                             if(newData.questDone === data.questRequirement) {
@@ -227,7 +226,6 @@ exports.getUserQuest = (req, res) => {
 
 exports.claimQuest = (req, res) => {
     const docId = req.body.docId
-    console.log(docId)
     const questId = req.body.questId
     let userDataCoin
     let userDataExp

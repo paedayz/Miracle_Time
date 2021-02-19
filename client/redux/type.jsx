@@ -30,6 +30,7 @@ export const TOGGLE_NOTI = 'TOGGLE_NOTI'
 export const DELETE_NOTI = 'DELETE_NOTI'
 
 // Quests
+export const DO_QUEST = 'DO_QUEST'
 export const SET_QUEST = 'SET_QUEST'
 export const EDIT_QUEST = 'EDIT_QUEST'
 export const DELETE_QUEST = 'DELETE_QUEST'

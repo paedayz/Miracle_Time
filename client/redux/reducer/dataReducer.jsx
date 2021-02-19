@@ -13,7 +13,8 @@ import {
     READ_NOTI,
     TOGGLE_NOTI,
     DELETE_NOTI,
-    SET_QUEST
+    SET_QUEST,
+    DO_QUEST
 } from "../type"
 
 const initialState = {
@@ -189,6 +190,20 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 questList: action.payload
+            }
+
+        case DO_QUEST :
+            let updateQuest = []
+            state.questList.map((quest) => {
+                if(quest.docId === action.payload.questId) {
+                    updateQuest.push(action.payload)
+                } else {
+                    updateQuest.push(quest)
+                }
+            })
+            return {
+                ...state,
+                questList: updateQuest
             }
             
         case CLEAR_SESSION :

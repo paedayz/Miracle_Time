@@ -12,6 +12,9 @@ import {
     SET_QUEST
 } from '../type'
 import firebase from 'firebase'
+
+import {doQuest} from './dataAction'
+
 require('firebase/storage')
 
 let clientUserId
@@ -54,6 +57,7 @@ export const login = (userData) => (dispatch) => {
         clientUserId = res.data.data.userId
         dispatch({type: SET_USER_DATA, payload: res.data.data})
         dispatch({type: LOADING_COMPLETE})
+        dispatch(doQuest('login'))
     })
     .catch((err) => {
         console.log(err)
