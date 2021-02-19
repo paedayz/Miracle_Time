@@ -76,40 +76,48 @@ exports.doQuest = (req, res) => {
 
     firestore.collection('quests').where('questAction', '==', questAction).get()
         .then((snapshot) => {
-            snapshot.forEach((doc) => {
-                mainQuestData.push({
-                    questId : doc.id,
-                    questRequirement: doc.data().questRequirement
+            if(snapshot.size !== 0) {
+                snapshot.forEach((doc) => {
+                    mainQuestData.push({
+                        questId : doc.id,
+                        questRequirement: doc.data().questRequirement
+                    })
                 })
-            })
-            
-            return firestore.collection('quest_user').where('username', '==', username).get()
+                
+                return firestore.collection('quest_user').where('username', '==', username).get()
+            } else {
+                return res.status(403).json({err: 'That quest is delete already'})
+            }
+           
         })
         .then( async (snapshot) => {
-            snapshot.forEach((doc) => {
-                mainQuestData.map((data) => {
-                    if(doc.data().questStatus === 'in_progress' && doc.data().questId === data.questId) {
-                        let newData = {
-                            questDone: doc.data().questDone + 1,
-                            questId: doc.data().questId,
-                            questStatus: 'in_progress',
-                            questType: doc.data().questType,
-                            username: doc.data().username,
-                            docId: doc.id
+            
+            if(snapshot.size) {
+                snapshot.forEach((doc) => {
+                    mainQuestData.map((data) => {
+                        if(doc.data().questStatus === 'in_progress' && doc.data().questId === data.questId) {
+                            let newData = {
+                                questDone: doc.data().questDone + 1,
+                                questId: doc.data().questId,
+                                questStatus: 'in_progress',
+                                questType: doc.data().questType,
+                                username: doc.data().username,
+                                docId: doc.id
+                            }
+    
+                            if(newData.questDone === data.questRequirement) {
+                                newData.questStatus = 'quest_success'
+                            }
+    
+                            firestore.doc(`/quest_user/${doc.id}`).set(newData)
+                            
+                            resUpdateQuest.push(newData)
                         }
-
-                        if(newData.questDone === data.questRequirement) {
-                            newData.questStatus = 'quest_success'
-                        }
-
-                        firestore.doc(`/quest_user/${doc.id}`).set(newData)
-                        
-                        resUpdateQuest.push(newData)
-                    }
+                    })
                 })
-            })
-
-            return res.json({data: resUpdateQuest})
+                return res.json({data: resUpdateQuest})
+            }
+            
         })
         .catch((err) => {
             console.log(err)
@@ -140,7 +148,7 @@ exports.deleteQuest = (req, res) => {
                 batch.delete(path.doc(docId))
             })
             batch.commit()
-            return res.status(200).json({success: "delete success"})
+            return res.status(200).json({data: questId})
         })
         .catch((err) => {
             console.log(err)
