@@ -14,14 +14,21 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Redux
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {deleteQuest} from '../../../redux/action/adminAction'
 
 export default function Quest ({questData}) {
     const [modalOpenEdit, setModalOpenEdit] = useState(false)
     const [modalOpenDelete, setModalOpenDelete] = useState(false)
-    const {questDetail, questName} = questData.item
+    const {questDetail, questName, docId} = questData.item
 
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+
+    const onDeleteSubmit = () => {
+      dispatch(deleteQuest(docId))
+      setModalOpenDelete(false)
+    }
   
     return (
       <SafeAreaView style={styles.container}>
@@ -95,6 +102,7 @@ export default function Quest ({questData}) {
                         <View style={{margin: 5, width: 70, height: 30}}>
                         <Button 
                             title="Yes"
+                            onPress={() => onDeleteSubmit()}
                         />
                         </View>
                         <View style={{margin: 5, width: 70, height: 30}}>

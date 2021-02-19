@@ -3,7 +3,8 @@ import {
     LOADING_DATA, 
     LOADING_COMPLETE, 
     SET_ADMIN_QUEST,
-    ADD_QUEST
+    ADD_QUEST,
+    DELETE_QUEST
 } from "../type"
 
 import {getClientUserId} from './userAction'
@@ -24,6 +25,17 @@ export const addQuest = (questData) => (dispatch) => {
     axios.post('/addQuest', {clientUserId: clientUserId, questData: questData})
         .then((res) => {
             dispatch({type: ADD_QUEST, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const deleteQuest = (questId) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/deleteQuest', {clientUserId: clientUserId, questId: questId})
+        .then((res) => {
+            dispatch({type: DELETE_QUEST, payload: res.data.data})
         })
         .catch((err) => {
             console.log(err)

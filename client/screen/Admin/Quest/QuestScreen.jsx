@@ -22,7 +22,6 @@ import {useSelector} from 'react-redux'
 export default function QuestScreen (){
     const [modalOpenAdd, setModalOpenAdd] = useState(false)
     const questList = useSelector(state => state.admin.questList)
-    console.log(questList)
 
     const Item = ({data}) => {
       let questData = data
@@ -31,7 +30,6 @@ export default function QuestScreen (){
           <Quest questData={questData}/>
       )
     };
-    
   
     const renderItem = (sortNoti) => (
       <Item data={sortNoti} />
