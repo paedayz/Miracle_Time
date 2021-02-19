@@ -12,7 +12,8 @@ import {
     ADD_END_NOTI,
     READ_NOTI,
     TOGGLE_NOTI,
-    DELETE_NOTI
+    DELETE_NOTI,
+    SET_QUEST
 } from "../type"
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
     unreadNoti : 0,
     will_noti : [],
     now_noti : [],
-    end_noti : []
+    end_noti : [],
+    questList: []
 }
 
 const startState = {
@@ -34,7 +36,8 @@ const startState = {
     unreadNoti : 0,
     will_noti : [],
     now_noti : [],
-    end_noti : []
+    end_noti : [],
+    questList: []
 }
 
 export default function (state = initialState, action){
@@ -180,6 +183,12 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 notifications : new_noti
+            }
+        
+        case SET_QUEST :
+            return {
+                ...state,
+                questList: action.payload
             }
             
         case CLEAR_SESSION :

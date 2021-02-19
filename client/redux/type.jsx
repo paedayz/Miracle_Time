@@ -28,3 +28,11 @@ export const ADD_END_NOTI = 'ADD_END_NOTI'
 export const READ_NOTI = 'READ_NOTI'
 export const TOGGLE_NOTI = 'TOGGLE_NOTI'
 export const DELETE_NOTI = 'DELETE_NOTI'
+
+// Quests
+export const SET_QUEST = 'SET_QUEST'
+export const EDIT_QUEST = 'EDIT_QUEST'
+export const DELETE_QUEST = 'DELETE_QUEST'
+
+// Admin
+export const SET_ADMIN_QUEST = 'SET_ADMIN_QUEST'

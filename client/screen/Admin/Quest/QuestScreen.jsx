@@ -16,8 +16,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AddQuestModal from './AddQuestModal';
 import Quest from './Quest'
 
+// Redux
+import {useSelector} from 'react-redux'
+
 export default function QuestScreen (){
     const [modalOpenAdd, setModalOpenAdd] = useState(false)
+    const questList = useSelector(state => state.admin.questList)
+    console.log(questList)
+
     return (
         <View>
           <View style={styles.addButton}>

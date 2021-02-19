@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {useSelector, useDispatch} from 'react-redux'
 import {getAuthen} from '../redux/action/userAction'
 import {getAllEvents} from '../redux/action/dataAction'
+import {getAdminQuestList} from '../redux/action/adminAction'
 
 // Screen
 import AuthScreen from './Auth/AuthScreen'
@@ -33,6 +34,10 @@ export default function Screen({navigation}) {
     useEffect(() => {
         if(userData) {
             dispatch(getAuthen())
+        }
+
+        if(userData && userData.status === 'admin') {
+            dispatch(getAdminQuestList())
         }
     }, [userData])
 

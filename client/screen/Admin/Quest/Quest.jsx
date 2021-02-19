@@ -12,6 +12,9 @@ import {
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// Redux
+import {useSelector} from 'react-redux'
+
 export default function Quest () {
     const [modalOpenEdit, setModalOpenEdit] = useState(false)
     const [modalOpenDelete, setModalOpenDelete] = useState(false)
