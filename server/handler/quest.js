@@ -168,7 +168,12 @@ exports.editQuest = (req, res) => {
 
     firestore.doc(`/quests/${mainQuestId}`).update(updateQuestData)
         .then(() => {
-            return res.json({data: resData})
+            return firestore.doc(`/quests/${mainQuestId}`).get()
+        })
+        .then((doc) => {
+            let buff = doc.data()
+            buff.docId = doc.id
+            return res.json({data: buff})
         })
         .catch((err) => {
             console.log(err)

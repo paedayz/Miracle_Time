@@ -4,10 +4,15 @@ import {
     CLEAR_SESSION,
     SET_ADMIN_QUEST,
     ADD_QUEST,
-    DELETE_QUEST
+    DELETE_QUEST,
+    EDIT_QUEST
 } from "../type"
 
 const initialState = {
+    questList: [],
+}
+
+const startState = {
     questList: [],
 }
 
@@ -39,8 +44,22 @@ export default function (state = initialState, action){
                 questList: buffQuestList
             }
         
+        case EDIT_QUEST:
+            let updateQuest = []
+            state.questList.map((quest) => {
+                if(quest.docId === action.payload.questId) {
+                    updateQuest.push(action.payload)
+                } else {
+                    updateQuest.push(quest)
+                }
+            })
+            return {
+                ...state,
+                questList: updateQuest
+            }
+        
         case CLEAR_SESSION :
-            return initialState
+            return startState
 
         default :
             return state

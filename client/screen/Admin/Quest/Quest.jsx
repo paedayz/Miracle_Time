@@ -13,6 +13,9 @@ import {
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// Component
+import EditQuestModal from './EditQuestModal'
+
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
 import {deleteQuest} from '../../../redux/action/adminAction'
@@ -51,42 +54,7 @@ export default function Quest ({questData}) {
               title='Edit'
               onPress={() => setModalOpenEdit(true)}/>
             <Modal transparent={true} visible={modalOpenEdit}>
-              <View style={styles.modal}>
-              <Icon 
-                      name="close"
-                      size={20} 
-                      style={styles.closeIcon}
-                      onPress={() => setModalOpenEdit(false)}
-                  />
-                <View style={styles.questBox}>
-                  <Title style={styles.headerTitle}>Edit Quest</Title>
-                  <Text>Quest name</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <Text>Quest detail</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <Text>Quest EXP</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <Text>Quest coin</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <Text>Quest time</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <View style={styles.modalButton}>
-                    <Button 
-                        title="Save"
-                    />
-                  </View>
-                </View>
-              </View>
+              <EditQuestModal setModalOpenEdit={setModalOpenEdit} questData={questData.item} />
             </Modal>
           </View>
           <View style={styles.deleteButton}>
