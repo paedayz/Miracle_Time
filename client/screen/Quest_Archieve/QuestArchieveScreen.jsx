@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import {
   Avatar,
   Title,
@@ -11,30 +11,12 @@ import {
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export function Quest() {
-    
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.questBoxWrapper}>
-        <View style={styles.demo}>
-          <Icon 
-              name='trophy'
-              size={50}/>
-        </View>
-        <View style={styles.questBox}>
-          <Title style={styles.headerTitle}>Quest</Title>
-          <Text>Quest detail</Text>
-          <Text>Quest time</Text>
-        </View>
-        <View style={styles.claimButton}>
-          <Button
-            buttonStyle = {{width: 70, height: 30}}
-            title='Claim'/>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-}
+// Component
+import Quest from './Quest/Quest'
+
+// Redux
+import {getUserQuest} from '../../redux/action/dataAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 export function Archeivement() {
     
@@ -61,8 +43,29 @@ export function Archeivement() {
   );
 }
 
-export default function admin () {
+export default function QuestArchieveScreen () {
   const [mode, setMode] = useState(true)
+  const questList = useSelector(state => state.data.questList)
+
+  const dispatch = useDispatch()
+  console.log(questList)
+
+  useEffect(() => {
+    dispatch(getUserQuest())
+  },[])
+
+  const Item = ({data}) => {
+    let questData = data
+    console.log(questData)
+      
+    return (
+        <Quest questData={questData.item}/>
+    )
+  };
+
+  const renderItem = (questList) => (
+    <Item data={questList} />
+  );
 
   const changeMode = () => {
       setMode(!mode)
@@ -88,7 +91,11 @@ export default function admin () {
               </View>
             </TouchableOpacity>
           </View>
-          <Quest/>
+          <FlatList
+            data={questList}
+            renderItem={renderItem}
+            keyExtractor={item => item.docId}
+          />
         </View>
       )
   } else {
