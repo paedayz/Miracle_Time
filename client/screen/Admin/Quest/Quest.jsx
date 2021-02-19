@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigation} from '@react-navigation/native'
 import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import {
   Avatar,
@@ -18,11 +19,13 @@ import {useSelector} from 'react-redux'
 export default function Quest ({questData}) {
     const [modalOpenEdit, setModalOpenEdit] = useState(false)
     const [modalOpenDelete, setModalOpenDelete] = useState(false)
-    const {docId, questAction, questCoin, questDetail, questName} = questData.item
+    const {questDetail, questName} = questData.item
+
+    const navigation = useNavigation()
   
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.questBoxWrapper}>
+        <TouchableOpacity style={styles.questBoxWrapper} onPress={() => navigation.navigate('adminQuestDetail', questData.item)}>
           <View style={styles.demo}>
             <Icon 
               name='trophy'
@@ -105,7 +108,7 @@ export default function Quest ({questData}) {
                 </View>
               </Modal>
           </View>
-        </View>
+        </TouchableOpacity>
       </SafeAreaView>
     );
 }
