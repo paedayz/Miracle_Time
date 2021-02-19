@@ -29,7 +29,9 @@ exports.addQuest = (req, res) => {
                                     return firestore.doc(`quests/${questId}`).get()
                                 })
                                 .then((doc) => {
-                                    return doc.data()
+                                    let buff = doc.data()
+                                    buff.docId = doc.id
+                                    return buff
                                 })
                                 .catch((err) => {
                                     console.log(err)
@@ -149,6 +151,22 @@ exports.deleteQuest = (req, res) => {
             })
             batch.commit()
             return res.status(200).json({data: questId})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+          })
+}
+
+exports.editQuest = (req, res) => {
+    const mainQuestId = req.body.questId
+    const updateQuestData = req.body.updateQuestData
+    const resData = updateQuestData
+    resData.questId = mainQuestId
+
+    firestore.doc(`/quests/${mainQuestId}`).update(updateQuestData)
+        .then(() => {
+            return res.json({data: resData})
         })
         .catch((err) => {
             console.log(err)
