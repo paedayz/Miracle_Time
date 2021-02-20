@@ -182,6 +182,7 @@ exports.checkAuthen = (req, res) => {
   let friendRequest = [];
   let friendList = [];
   let questList = []
+  let achievementList = []
 
   let friendListToFetch = [];
   let friendRequestToFetch = [];
@@ -300,6 +301,35 @@ exports.checkAuthen = (req, res) => {
                           .catch((err) => {
                             return err
                           })
+      return firestore
+      .collection("achievement_user")
+      .where("username", "==", userData.username)
+      .get();
+    })
+    .then(async(snapshot) => {
+      let achievementDataPromise = snapshot.forEach((doc) => {
+        let achievementDone = doc.data().achievementDone
+        let docId = doc.id
+        let achievementStatus = doc.data().achievementStatus
+        let achievementType = doc.data().achievementType
+        return firestore.doc(`/achievements/${doc.data().achievementId}`).get()
+                .then((data) => {
+                  let resData = data.data()
+                  resData.achievementDone = achievementDone
+                  resData.docId = docId
+                  resData.achievementStatus = achievementStatus
+                  resData.achievementType = achievementType
+                  achievementList.push(resData)
+                  return resData
+                })
+      })
+      let waitPromise = await Promise.all(achievementDataPromise)
+                          .then((data) => {
+                            return data
+                          })
+                          .catch((err) => {
+                            return err
+                          })
       return waitPromise
     })
     .then(() => {
@@ -341,7 +371,8 @@ exports.checkAuthen = (req, res) => {
         userData: userData,
         friendList: friendList,
         friendRequest: friendRequest,
-        questList: questList
+        questList: questList,
+        achievementList: achievementList
       };
       return res.json(resData);
     })
