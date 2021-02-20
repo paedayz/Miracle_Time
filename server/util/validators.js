@@ -7,7 +7,7 @@ const isEmail = (email) => {
   };
   
 const isEmpty = (string) => {
-    if (string.trim() === "") return true;
+    if (string=== "") return true;
     else return false;
 };
 

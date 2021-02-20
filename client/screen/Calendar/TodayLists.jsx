@@ -63,29 +63,29 @@ export default function Todaylist({route, navigation}) {
             </Modal>
             
             <View style={{flexDirection: 'row'}}>
-              <Text style={{marginTop:15,marginRight:8,fontSize:15}}>sort</Text>
+              <Text style={{marginTop:15,marginHorizontal:8,fontSize:16}}>Sort</Text>
             <Icon 
                   name="history" 
                   size={30} 
                   color='gray'
-                  style={{marginTop:10, marginBottom:10, marginRight:10}}
+                  style={{marginVertical: 10, marginRight:10}}
                   onPress={() => sortTime()}
               />
               <Icon 
                   name="heart" 
                   size={30} 
                   color='gray'
-                  style={{marginTop:10, marginBottom:10, marginRight:200}}
+                  style={{marginVertical: 10, marginRight:200}}
                   onPress={() => sortRank()}
               />
               <Icon 
                   name="plus-square" 
                   size={30} 
                   color='gray'
-                  style={{marginTop:10, marginBottom:10, marginLeft:20}}
+                  style={{marginVertical: 10, marginLeft:10}}
                   onPress={() => setModalOpen()}
               />
-              <Text style={{fontSize:18, marginTop: 13, marginLeft: 5}}>ADD</Text>
+              <Text style={{fontSize:18, marginTop: 13, marginHorizontal: 5}}>Add</Text>
             </View>
             
             <FlatList
@@ -105,6 +105,7 @@ export default function Todaylist({route, navigation}) {
                               borderLeftWidth:10,
                               borderLeftColor:'#ABFFA6',
                               borderBottomLeftRadius:10,
+                              borderTopLeftRadius: 10
                             }}
                             >
                                <View style={{flexDirection: 'row'}}>
@@ -133,7 +134,14 @@ export default function Todaylist({route, navigation}) {
                                     </View>
                                     <View>
                                       {item.rank === "1" &&
-                                        <View style={{ backgroundColor: '#ABFFA6', width: 13,height: 13, marginLeft:10,borderRadius:1000,marginTop:20 }} />
+                                        <View>
+                                          <Icon 
+                                            name="check-square" 
+                                            size={30} 
+                                            color='gray'
+                                            style={{marginVertical: 10}}
+                                          />
+                                        </View>
                                       }
                                     </View>
 
@@ -150,6 +158,7 @@ export default function Todaylist({route, navigation}) {
                               borderLeftWidth:10,
                               borderLeftColor:'#FFC300',
                               borderBottomLeftRadius:10,
+                              borderTopLeftRadius: 10
                             }}
                             >
                                 <View style={{flexDirection: 'row'}}>
@@ -179,7 +188,14 @@ export default function Todaylist({route, navigation}) {
                                     
                                     <View>
                                       {item.rank === "2" &&
-                                        <View style={{ backgroundColor: '#FFC300', width: 13,height: 13, marginLeft:10,borderRadius:1000,marginTop:20 }} />
+                                        <View>
+                                        <Icon 
+                                          name="check-square" 
+                                          size={30} 
+                                          color='gray'
+                                          style={{marginVertical: 10}}
+                                        />
+                                      </View>
                                       }
                                     </View>
 
@@ -196,6 +212,7 @@ export default function Todaylist({route, navigation}) {
                               borderLeftWidth:10,
                               borderLeftColor:'#FF5733',
                               borderBottomLeftRadius:10,
+                              borderTopLeftRadius: 10
                             }}
                             >
                               <View style={{flexDirection: 'row'}}>
@@ -224,7 +241,14 @@ export default function Todaylist({route, navigation}) {
                                     </View>
                                   <View>
                                     {item.rank === "3" &&
-                                      <View style={{ backgroundColor: '#FF5733', width: 13,height: 13, marginLeft:10,borderRadius:1000,marginTop:20 }} />
+                                      <View>
+                                      <Icon 
+                                        name="check-square" 
+                                        size={30} 
+                                        color='gray'
+                                        style={{marginVertical: 10}}
+                                      />
+                                    </View>
                                     }
                                   </View>
 
@@ -266,20 +290,19 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   card: {
-    borderRadius: 6,
+    borderRadius: 10,
     elevation: 3,
     backgroundColor: '#fff',
     shadowOffset: { width: 1 , height: 1 },
     shadowColor: '#333',
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    marginHorizontal: 4,
+    marginHorizontal: 3,
     marginVertical: 6
   },
   cardcon: {
-    marginHorizontal: 18,
-    marginVertical: 10, 
-    
+    // marginHorizontal: 18,
+    // marginVertical: 10, 
   },
   fontSize:{
     fontSize: 17,
@@ -292,7 +315,6 @@ const style = StyleSheet.create({
     padding: 12,
     borderRadius: 100,
     alignSelf: 'center',
-    marginTop: 15
 },
   
 
