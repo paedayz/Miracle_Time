@@ -9,7 +9,7 @@ export default function TipsScreen({navigation}) {
                 <View><Text>IMG</Text></View>
                 <View >
                     <Text style={styles.headtext}>Tip #1 :</Text>
-                    <Text style={styles.contenttext}>Test</Text>
+                    <Text style={styles.contenttext}>10 วิธีจัดการเวลา ให้คุณจัดการสิ่งต่างๆ ได้อย่างมีประสิทธิภาพ</Text>
                 </View>                    
             </View>
         </TouchableOpacity>
