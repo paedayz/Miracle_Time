@@ -80,12 +80,12 @@ export default function FriendScreen({ navigation }) {
       useNativeDriver: true
     }).start();
 
-    setTimeout(() => {
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        useNativeDriver: true
-      }).start();
-    }, 290);
+    // setTimeout(() => {
+    //   Animated.timing(fadeAnim, {
+    //     toValue: 0,
+    //     useNativeDriver: true
+    //   }).start();
+    // }, 290);
   };
 
   return (
