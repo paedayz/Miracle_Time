@@ -9,7 +9,7 @@ import moment from 'moment'
 
 // Redux
 import { useDispatch } from 'react-redux'
-import {addEvent} from '../../redux/action/dataAction'
+import {addEvent, doQuest} from '../../redux/action/dataAction'
 
 const Addtodaylist = (props) => {
 
@@ -56,6 +56,7 @@ const Addtodaylist = (props) => {
                     values.start = startTime
                     values.end = endTime
                     dispatch(addEvent(values))
+                    dispatch(doQuest('createEvent'))
                     props.setModalOpen(false)
                 }}
             >
