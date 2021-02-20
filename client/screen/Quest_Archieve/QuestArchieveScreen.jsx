@@ -48,7 +48,6 @@ export default function QuestArchieveScreen () {
   const questList = useSelector(state => state.data.questList)
 
   const dispatch = useDispatch()
-  console.log(questList)
 
   useEffect(() => {
     dispatch(getUserQuest())
@@ -56,7 +55,6 @@ export default function QuestArchieveScreen () {
 
   const Item = ({data}) => {
     let questData = data
-    console.log(questData)
       
     return (
         <Quest questData={questData.item}/>

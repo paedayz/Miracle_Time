@@ -231,7 +231,7 @@ exports.claimQuest = (req, res) => {
     let userDataExp
     let userDataLevel
     let userDoneQuest
-    firestore.doc(`/quest_user/${docId}`).update({questStatus: 'claimed'})
+    firestore.doc(`/quest_user/${docId}`).update({questStatus: 'quest_claim'})
         .then(() => {
 
             return firestore.doc(`/quest_user/${docId}`).get()

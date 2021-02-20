@@ -23,7 +23,6 @@ exports.signup = (req, res) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        console.log("username same");
         return res.status(400).json({
           username: "This username is already taken",
         });
@@ -93,6 +92,7 @@ exports.login = (req, res) => {
   let username
   let last_login
   let midnight
+  let loginQuestId
   //   const { valid, errors } = validateLoginData(user);
 
   //   if (!valid) return res.status(400).json(errors);
@@ -110,12 +110,18 @@ exports.login = (req, res) => {
         last_login = new Date(doc.data().last_login)
         username = doc.id
       })
+      return firestore.collection('quests').where('questAction', '==', 'login').get()
+    })
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        loginQuestId = doc.id
+      })
       return firestore.collection('quest_user').where('username', '==', username).get()
     })
     .then(async (snapshot) => {
       if(snapshot.size > 0 && last_login - midnight <= 0){
         const resetQuestReqPromise = snapshot.forEach((doc) => {
-          if(doc.data().questType === 'Daily') {
+          if((doc.data().questType === 'Daily' && doc.data().questId !== loginQuestId) || doc.data().questStatus === 'quest_claim') {
             return firestore.doc(`quest_user/${doc.id}`).update({questDone:0, questStatus: 'in_progress'})
           } else {
             return 'not daily'
