@@ -46,6 +46,17 @@ exports.signup = (req, res) => {
           questType: doc.data().questType
         })
       })
+      return firestore.collection('achievements').get()
+    })
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        firestore.collection('achievement_user').add({
+          username: newUser.username,
+          achievementId: doc.id,
+          achievementStatus: 'in_progress',
+          achievementDone: 0,
+        })
+      })
     })
     .then(() => {
       const userCredentials = {
