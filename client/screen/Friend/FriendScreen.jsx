@@ -1,11 +1,14 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import {
   SafeAreaView,
   View,
   Button,
   StyleSheet,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Alert,
+  Animated,
+  Image
 } from "react-native";
 
 import {
@@ -22,10 +25,16 @@ import FriendRequest from './FriendRequest'
 
 // Redux
 import {addFriend} from '../../redux/action/friendAction'
+import {useDispatch, useSelector} from "react-redux"
 
 export default function FriendScreen({ navigation }) {
     const [isList, setIsList] = useState(true)
     const [username, setUsername] = useState()
+
+    const suc = useSelector(state => state.friend.success)
+    const err = useSelector(state => state.friend.error)
+
+    const dispatch = useDispatch()
 
     const showPage = () => {
         if(isList) {
@@ -36,16 +45,55 @@ export default function FriendScreen({ navigation }) {
     }
 
     const onClickAdd = () => {
-        addFriend(username)
+        fadeIn()
+        dispatch(addFriend(username))
         setUsername(null)
     }
+
+    
+    
+    console.log('ffffffffffffffffffffff',suc)
+    if(suc) {
+      Alert.alert(
+          "Alert !!",
+          suc,
+          [
+              { text: "OK", onPress: () => dispatch({type: 'CLEAR_SUCCESS'}) }
+            ],
+        );
+  }
+  if(err) {
+    Alert.alert(
+        "Alert !!",
+        err,
+        [
+            { text: "OK", onPress: () => dispatch({type: 'CLEAR_FRIEND_ERROR'}) }
+          ],
+      );
+}
+
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      useNativeDriver: true
+    }).start();
+
+    setTimeout(() => {
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        useNativeDriver: true
+      }).start();
+    }, 290);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
         <View style={{flexDirection:'row', justifyContent:'center'}}>
             <View>
             <TextInput
-                onChangeText={username => setUsername(username)}
+                onChangeText={data => setUsername(data)}
                 placeholder="username"
                 placeholderTextColor="#666666"
                 autoCorrect={false}
@@ -54,9 +102,31 @@ export default function FriendScreen({ navigation }) {
                 clearButtonMode="always"
             />
             </View>
-            <View style={{marginTop:17, marginLeft:30}}>
-            <Button onPress={() => onClickAdd()} title="ADD"/>
+            <View style={{flexDirection: 'row'}}>
+              <View style={{marginTop:17, marginLeft:30}}>
+                <Button onPress={() => onClickAdd()} title="ADD"/>
+              </View>
+                <Animated.View
+                    style={[
+                      styles.fadingContainer,
+                      {
+                        opacity: fadeAnim // Bind opacity to animated value
+                      }
+                    ]}
+                  >
+                  <View style={{borderRadius:100, 
+                  width:10,
+                  height:10,
+                  marginLeft:-29,
+                  marginTop:-17}}>
+                    <Image 
+                      style={{width: 100, height: 100,}} 
+                      source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Loader.gif'}} />
+                  </View>
+                  </Animated.View>
+              
             </View>
+            
             
         </View>
       <View style={styles.headerBoxWrapper}>
