@@ -26,10 +26,10 @@ export default function NowEvent({data, eventData, createdAt, docId}) {
         [
           
           { 
-            text: "OK", onPress: () => {dispatch(deleteNotifications(docId))} 
-          },
+            text: "YES", onPress: () => {dispatch(deleteNotifications(docId))} 
+          },{},
           {
-            text: "Cancel",
+            text: "NO",
             onPress: () => console.log("Cancel Pressed"),
             style: "cancel"
           },

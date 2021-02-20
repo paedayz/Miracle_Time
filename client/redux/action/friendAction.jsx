@@ -31,13 +31,13 @@ export const addFriend = (recipient) => (dispatch) => {
     axios.post('/addFriend',{recipient: recipient, clientUserId: clientUserId})
         .then((res) => {
             console.log(res.data)
-            dispatch({type: SET_SUCCESS, payload: 'AddFriend success'})
             dispatch({type: LOADING_FRIEND_COMPLETE})
+            dispatch({type: SET_SUCCESS, payload: 'AddFriend success'})
         })
         .catch((err) => {
-            dispatch({type: SET_FRIEND_ERROR, payload: 'AddFriend error'})
             console.log(err)
             dispatch({type: LOADING_FRIEND_COMPLETE})
+            dispatch({type: SET_FRIEND_ERROR, payload: 'AddFriend error'})
         })
 }
 

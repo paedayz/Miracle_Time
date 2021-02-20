@@ -33,6 +33,8 @@ export default function FriendScreen({ navigation }) {
 
     const suc = useSelector(state => state.friend.success)
     const err = useSelector(state => state.friend.error)
+    const loading = useSelector(state => state.friend.loading)
+
 
     const dispatch = useDispatch()
 
@@ -45,7 +47,7 @@ export default function FriendScreen({ navigation }) {
     }
 
     const onClickAdd = () => {
-        fadeIn()
+        // fadeIn()
         dispatch(addFriend(username))
         setUsername(null)
     }
@@ -72,22 +74,83 @@ export default function FriendScreen({ navigation }) {
       );
 }
 
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  // const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  const fadeIn = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      useNativeDriver: true
-    }).start();
+  // const fadeIn = () => {
+  //   Animated.timing(fadeAnim, {
+  //     toValue: 1,
+  //     useNativeDriver: true
+  //   }).start();
 
-    // setTimeout(() => {
-    //   Animated.timing(fadeAnim, {
-    //     toValue: 0,
-    //     useNativeDriver: true
-    //   }).start();
-    // }, 290);
-  };
+  //   setTimeout(() => {
+  //     Animated.timing(fadeAnim, {
+  //       toValue: 0,
+  //       useNativeDriver: true
+  //     }).start();
+  //   }, 290);
+  // };
 
+  if(loading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={{flexDirection:'row', justifyContent:'center'}}>
+            <View>
+            <TextInput
+                onChangeText={data => setUsername(data)}
+                placeholder="username"
+                placeholderTextColor="#666666"
+                autoCorrect={false}
+                style={styles.textInput}
+                value={username}
+                clearButtonMode="always"
+            />
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <View style={{marginTop:17, marginLeft:30,height:10,width:45}}>
+                <Button onPress={() => onClickAdd()} title="ADD"/>
+              </View>
+              <View style={{borderRadius:100, 
+                  width:28,
+                  height:28,
+                  marginLeft:-29,
+                  marginTop:-17}}>
+                    <Image 
+                      style={{width: 100, height: 100,}} 
+                      source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Loader.gif'}} />
+                  </View>  
+              
+            </View>
+            
+            
+        </View>
+      <View style={styles.headerBoxWrapper}>
+        <TouchableOpacity
+            onPress={() => setIsList(true)}
+            style={[
+                styles.headerBox,
+                {
+                borderRightColor: "#dddddd",
+                borderRightWidth: 1,
+                },
+            ]}
+        >
+          <View>
+            <Title>List</Title>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsList(false)} style={styles.headerBox}>
+          <View>
+            <Title>Request</Title>
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      <View>
+          {showPage()}
+      </View>
+    </SafeAreaView>
+    )
+  }
   return (
     <SafeAreaView style={styles.container}>
         <View style={{flexDirection:'row', justifyContent:'center'}}>
@@ -106,25 +169,6 @@ export default function FriendScreen({ navigation }) {
               <View style={{marginTop:17, marginLeft:30}}>
                 <Button onPress={() => onClickAdd()} title="ADD"/>
               </View>
-                <Animated.View
-                    style={[
-                      styles.fadingContainer,
-                      {
-                        opacity: fadeAnim // Bind opacity to animated value
-                      }
-                    ]}
-                  >
-                  <View style={{borderRadius:100, 
-                  width:10,
-                  height:10,
-                  marginLeft:-29,
-                  marginTop:-17}}>
-                    <Image 
-                      style={{width: 100, height: 100,}} 
-                      source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Loader.gif'}} />
-                  </View>
-                  </Animated.View>
-              
             </View>
             
             
