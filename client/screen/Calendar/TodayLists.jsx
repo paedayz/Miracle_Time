@@ -1,20 +1,35 @@
 import React, {useState, useEffect}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
+import { useRoute }  from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux' //ดึงข้อมูล
+import { useSelector, useDispatch } from 'react-redux'
+import {deleteEvent} from '../../redux/action/dataAction' //ดึงข้อมูล
 
 // Component
 import Addtoday from './TodayListAdd'
 
 
-export default function Todaylist({route, navigation}) {
-  const {date} = route.params
+export default function Todaylist({navigation}) {
+  const route = useRoute()
+  const {date, key} = route.params
 
+  const dispatch = useDispatch()
   const [modalOpen, setModalOpen] = useState(false)
-  const [showData, setShowData] = useState()
 
+  const [showData, setShowData] = useState()
+  
+  const [complete, setcomplete] = useState(false);
+  const eventComplete = () => {
+    setcomplete(!complete);
+  };
+
+  const [open, setopen] = useState(false);
+  const eventOpen = () => {
+    setopen(!open);
+  };
+  
   const allList = useSelector((state) => state.data.events)
 
   const todaylist = []
@@ -64,27 +79,32 @@ export default function Todaylist({route, navigation}) {
             
             <View style={{flexDirection: 'row'}}>
               <Text style={{marginTop:15,marginHorizontal:8,fontSize:16}}>Sort</Text>
-            <Icon 
-                  name="history" 
-                  size={30} 
-                  color='gray'
-                  style={{marginVertical: 10, marginRight:10}}
-                  onPress={() => sortTime()}
-              />
-              <Icon 
-                  name="heart" 
-                  size={30} 
-                  color='gray'
-                  style={{marginVertical: 10, marginRight:200}}
-                  onPress={() => sortRank()}
-              />
-              <Icon 
-                  name="plus-square" 
-                  size={30} 
-                  color='gray'
-                  style={{marginVertical: 10, marginLeft:10}}
-                  onPress={() => setModalOpen()}
-              />
+              <TouchableOpacity onPress={() => sortTime()}>
+                <Icon 
+                    name="history" 
+                    size={30} 
+                    color= 'gray'
+                    style={{marginVertical: 10, marginRight:10}}
+                    
+                />
+              </TouchableOpacity>
+              
+              <TouchableOpacity onPress={() => sortRank()}>
+                <Icon 
+                    name="heart" 
+                    size={30} 
+                    color='gray'
+                    style={{marginVertical: 10, marginRight:200}}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setModalOpen()}>
+                <Icon 
+                    name="plus-square" 
+                    size={30} 
+                    color='gray'
+                    style={{marginVertical: 10, marginLeft:10}}
+                />
+              </TouchableOpacity>
               <Text style={{fontSize:18, marginTop: 13, marginHorizontal: 5}}>Add</Text>
             </View>
             
@@ -135,16 +155,27 @@ export default function Todaylist({route, navigation}) {
                                     <View>
                                       {item.rank === "1" &&
                                         <View>
-                                          <Icon 
-                                            name="check-square" 
-                                            size={30} 
-                                            color='gray'
-                                            style={{marginVertical: 10}}
-                                          />
+                                          <TouchableOpacity onPress = {() => eventComplete()}>
+                                            <Icon 
+                                              name="check-square" 
+                                              size={30} 
+                                              color={!complete ? 'gray' : 'green'}
+                                              style={{marginVertical: 10}}
+                                            />
+                                          </TouchableOpacity>
                                         </View>
                                       }
                                     </View>
-
+                                  <View>
+                                    <Icon 
+                                      name="close"
+                                      size={20}
+                                      color='red'
+                                      style={{bottom: 17,
+                                              marginHorizontal: 7}}
+                                      onPress={() => dispatch(deleteEvent(key))}
+                                    />
+                                  </View>
                                 </View>
                             
                             </View>
@@ -189,16 +220,27 @@ export default function Todaylist({route, navigation}) {
                                     <View>
                                       {item.rank === "2" &&
                                         <View>
-                                        <Icon 
-                                          name="check-square" 
-                                          size={30} 
-                                          color='gray'
-                                          style={{marginVertical: 10}}
-                                        />
-                                      </View>
+                                          <TouchableOpacity onPress = {() => eventComplete()}>
+                                            <Icon 
+                                              name="check-square" 
+                                              size={30} 
+                                              color={!complete ? 'gray' : 'green'}
+                                              style={{marginVertical: 10}}
+                                            />
+                                          </TouchableOpacity>
+                                        </View>
                                       }
                                     </View>
-
+                                  <View>
+                                    <Icon 
+                                      name="close"
+                                      size={20}
+                                      color='red'
+                                      style={{bottom: 17,
+                                              marginHorizontal: 7}}
+                                      onPress={() => dispatch(deleteEvent(key))}
+                                      />
+                                  </View>
                                 </View>
                             </View>
                 
@@ -242,16 +284,27 @@ export default function Todaylist({route, navigation}) {
                                   <View>
                                     {item.rank === "3" &&
                                       <View>
-                                      <Icon 
-                                        name="check-square" 
-                                        size={30} 
-                                        color='gray'
-                                        style={{marginVertical: 10}}
-                                      />
-                                    </View>
+                                        <TouchableOpacity onPress = {() => eventComplete()}>
+                                            <Icon 
+                                              name="check-square" 
+                                              size={30} 
+                                              color={!complete ? 'gray' : 'green'}
+                                              style={{marginVertical: 10}}
+                                            />
+                                          </TouchableOpacity>
+                                      </View>
                                     }
                                   </View>
-
+                                <View>
+                                  <Icon 
+                                    name="close"
+                                    size={20}
+                                    color='red'
+                                    style={{bottom: 17,
+                                            marginHorizontal: 7}}
+                                    onPress={() => dispatch(deleteEvent(key))}
+                                    />
+                                  </View>  
                               </View>
                             </View>
                         }
@@ -297,7 +350,7 @@ const style = StyleSheet.create({
     shadowColor: '#333',
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    marginHorizontal: 3,
+    marginHorizontal: 4,
     marginVertical: 6
   },
   cardcon: {
