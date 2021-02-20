@@ -40,3 +40,6 @@ export const CLAIM_QUEST = 'CLAIM_QUEST'
 // Admin
 export const SET_ADMIN_QUEST = 'SET_ADMIN_QUEST'
 export const ADD_QUEST = 'ADD_QUEST'
+
+// Achieve
+export const SET_ACHIEVE = 'SET_ACHIEVE'

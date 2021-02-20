@@ -10,7 +10,8 @@ import {
     SET_FRIEND_REQUEST,
     SET_FRIEND_LIST,
     SET_QUEST,
-    SET_COIN_EXP_LVL
+    SET_COIN_EXP_LVL,
+    SET_ACHIEVE
 } from '../type'
 import firebase from 'firebase'
 
@@ -40,6 +41,10 @@ export const getAuthen = ()=> (dispatch) => {
 
         if(res.data.questList) {
             dispatch({type: SET_QUEST, payload: res.data.questList})
+        }
+
+        if(res.data.achievementList) {
+            dispatch({type: SET_ACHIEVE, payload: res.data.achievementList})
         }
 
         dispatch({type: LOADING_COMPLETE})

@@ -16,7 +16,8 @@ import {
     SET_QUEST,
     DO_QUEST,
     CLAIM_QUEST,
-    SET_COIN_EXP_LVL
+    SET_COIN_EXP_LVL,
+    SET_ACHIEVE
 } from "../type"
 
 const initialState = {
@@ -31,7 +32,8 @@ const initialState = {
     will_noti : [],
     now_noti : [],
     end_noti : [],
-    questList: []
+    questList: [],
+    achievementList: []
 }
 
 const startState = {
@@ -46,7 +48,8 @@ const startState = {
     will_noti : [],
     now_noti : [],
     end_noti : [],
-    questList: []
+    questList: [],
+    achievementList: []
 }
 
 export default function (state = initialState, action){
@@ -233,6 +236,11 @@ export default function (state = initialState, action){
                 coin: action.payload.coin,
                 exp: action.payload.exp,
                 level: action.payload.level
+            }
+        case SET_ACHIEVE :
+            return {
+                ...state,
+                achievementList: action.payload
             }
             
         case CLEAR_SESSION :

@@ -13,39 +13,17 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Component
 import Quest from './Quest/Quest'
+import Achieve from './Achieve/Achieve'
 
 // Redux
 import {getUserQuest} from '../../redux/action/dataAction'
 import {useDispatch, useSelector} from 'react-redux'
 
-export function Archeivement() {
-    
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.questBoxWrapper}>
-        <View style={styles.demo}>
-          <Icon 
-              name='trophy'
-              size={50}/>
-        </View>
-        <View style={styles.questBox}>
-          <Title style={styles.headerTitle}>Archeivement</Title>
-          <Text>Archeivement detail</Text>
-          <Text>Archeivement time</Text>
-        </View>
-        <View style={styles.claimButton}>
-          <Button
-            buttonStyle = {{width: 70, height: 30}}
-            title='Claim'/>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-}
-
 export default function QuestArchieveScreen ({navigation}) {
   const [mode, setMode] = useState(true)
   const questList = useSelector(state => state.data.questList)
+  const achievementList = useSelector(state => state.data.achievementList)
+  console.log(achievementList)
 
   const dispatch = useDispatch()
 
@@ -53,7 +31,7 @@ export default function QuestArchieveScreen ({navigation}) {
     dispatch(getUserQuest())
   });
 
-  const Item = ({data}) => {
+  const QuestItem = ({data}) => {
     let questData = data
       
     return (
@@ -61,8 +39,20 @@ export default function QuestArchieveScreen ({navigation}) {
     )
   };
 
-  const renderItem = (questList) => (
-    <Item data={questList} />
+  const renderQuestItem = (questList) => (
+    <QuestItem data={questList} />
+  );
+
+  const AchieveItem = ({data}) => {
+    let achieveData = data
+      
+    return (
+        <Achieve achievementData={achieveData.item}/>
+    )
+  };
+
+  const renderAchieveItem = (AchieveList) => (
+    <AchieveItem data={AchieveList} />
   );
 
   const changeMode = () => {
@@ -92,7 +82,7 @@ export default function QuestArchieveScreen ({navigation}) {
           </View>
           <FlatList
             data={questList}
-            renderItem={renderItem}
+            renderItem={renderQuestItem}
             keyExtractor={item => item.docId}
           />
         </View>
@@ -118,7 +108,11 @@ export default function QuestArchieveScreen ({navigation}) {
               </View>
             </TouchableOpacity>
           </View>
-          <Archeivement />
+          <FlatList
+            data={achievementList}
+            renderItem={renderAchieveItem}
+            keyExtractor={item => item.docId}
+          />
         </View>
       )
   }
