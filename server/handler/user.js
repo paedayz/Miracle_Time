@@ -16,7 +16,7 @@ exports.signup = (req, res) => {
 
   const noImg = "no-img.png";
 
-  let token, userId;
+  let userId;
 
   firestore
     .doc(`users/${newUser.username}`)
@@ -35,16 +35,28 @@ exports.signup = (req, res) => {
     })
     .then((data) => {
       userId = data.user.uid;
-      return data.user.getIdToken();
+      return firestore.collection('quests').get()
     })
-    .then((idToken) => {
-      token = idToken;
-
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        firestore.collection('quest_user').add({
+          username: newUser.username,
+          questId: doc.id,
+          questStatus: 'in_progress',
+          questDone: 0,
+          questType: doc.data().questType
+        })
+      })
+    })
+    .then(() => {
       const userCredentials = {
         username: newUser.username,
         email: newUser.email,
         nickname: newUser.nickname,
         createdAt: new Date().toLocaleString("en-US", {
+          timeZone: "Asia/Bangkok",
+        }),
+        last_login: new Date().toLocaleString("en-US", {
           timeZone: "Asia/Bangkok",
         }),
         userImage: `https://firebasestorage.googleapis.com/v0/b/${config.firebaseConfig.storageBucket}/o/${noImg}?alt=media`,
@@ -76,6 +88,11 @@ exports.login = (req, res) => {
     email: req.body.email,
     password: req.body.password,
   };
+
+  let userId
+  let username
+  let last_login
+  let midnight
   //   const { valid, errors } = validateLoginData(user);
 
   //   if (!valid) return res.status(400).json(errors);
@@ -84,10 +101,44 @@ exports.login = (req, res) => {
     .auth()
     .signInWithEmailAndPassword(user.email, user.password)
     .then((data) => {
-      return data.user.uid;
+      userId = data.user.uid
+      return firestore.collection('users').where("userId", "==", userId).get()
     })
-    .then((uid) => {
-      return firestore.collection("users").where("userId", "==", uid).get();
+    .then((snapshot) => {
+      midnight = (new Date()).setHours(0, 0, 0, 0)
+      snapshot.forEach( async (doc) => {
+        last_login = new Date(doc.data().last_login)
+        username = doc.id
+      })
+      return firestore.collection('quest_user').where('username', '==', username).get()
+    })
+    .then(async (snapshot) => {
+      if(snapshot.size > 0 && last_login - midnight <= 0){
+        const resetQuestReqPromise = snapshot.forEach((doc) => {
+          if(doc.data().questType === 'Daily') {
+            return firestore.doc(`quest_user/${doc.id}`).update({questDone:0, questStatus: 'in_progress'})
+          } else {
+            return 'not daily'
+          }
+        })
+        
+        Promise.all(resetQuestReqPromise)
+          .then((data) => {
+            return null
+          })
+          .catch((err) => {
+            console.log(err)
+            return null
+          })
+      } else {
+        return null
+      }
+    }) 
+    .then(() => {
+      return firestore.doc(`users/${username}`).update({last_login: new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok"})});
+    })
+    .then(() => {
+      return firestore.collection("users").where("userId", "==", userId).get();
     })
     .then((snapshot) => {
       snapshot.forEach(function (doc) {
@@ -113,6 +164,7 @@ exports.checkAuthen = (req, res) => {
   let notifications = [];
   let friendRequest = [];
   let friendList = [];
+  let questList = []
 
   let friendListToFetch = [];
   let friendRequestToFetch = [];
@@ -203,6 +255,38 @@ exports.checkAuthen = (req, res) => {
         });
 
       return firestore
+        .collection("quest_user")
+        .where("username", "==", userData.username)
+        .get();
+    })
+    .then(async(snapshot) => {
+      let questDataPromise = snapshot.forEach((doc) => {
+        let questDone = doc.data().questDone
+        let docId = doc.id
+        let questStatus = doc.data().questStatus
+        let questType = doc.data().questType
+        return firestore.doc(`/quests/${doc.data().questId}`).get()
+                .then((data) => {
+                  let resData = data.data()
+                  resData.questDone = questDone
+                  resData.docId = docId
+                  resData.questStatus = questStatus
+                  resData.questType = questType
+                  questList.push(resData)
+                  return resData
+                })
+      })
+      let waitPromise = await Promise.all(questDataPromise)
+                          .then((data) => {
+                            return data
+                          })
+                          .catch((err) => {
+                            return err
+                          })
+      return waitPromise
+    })
+    .then(() => {
+      return firestore
         .collection("notifications")
         .where("username", "==", userData.username)
         .get();
@@ -240,6 +324,7 @@ exports.checkAuthen = (req, res) => {
         userData: userData,
         friendList: friendList,
         friendRequest: friendRequest,
+        questList: questList
       };
       return res.json(resData);
     })

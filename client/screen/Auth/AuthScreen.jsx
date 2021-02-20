@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements';
 // Redux
 import {useDispatch} from "react-redux"
 import {login, register} from "../../redux/action/userAction"
+import {doQuest} from "../../redux/action/dataAction"
 
 export function Login () {
     const [email, setEmail] = useState('')
@@ -17,7 +18,7 @@ export function Login () {
             email : email,
             password : password
         }
-        
+        dispatch(doQuest('login'))
         dispatch(login(userData))
     }
 

@@ -8,9 +8,11 @@ import {
     SET_NOTIFICATIONS,
     SET_UNREAD_NOTI,
     SET_FRIEND_REQUEST,
-    SET_FRIEND_LIST
+    SET_FRIEND_LIST,
+    SET_QUEST
 } from '../type'
 import firebase from 'firebase'
+
 require('firebase/storage')
 
 let clientUserId
@@ -34,6 +36,11 @@ export const getAuthen = ()=> (dispatch) => {
         if(res.data.friendRequest) {
             dispatch({type: SET_FRIEND_REQUEST, payload: res.data.friendRequest})
         }
+
+        if(res.data.questList) {
+            dispatch({type: SET_QUEST, payload: res.data.questList})
+        }
+
         dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {

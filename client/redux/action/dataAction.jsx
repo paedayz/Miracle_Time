@@ -10,12 +10,12 @@ import {
     SET_UNREAD_NOTI,
     READ_NOTI,
     TOGGLE_NOTI,
-    DELETE_NOTI
+    DELETE_NOTI,
+    DO_QUEST,
+    SET_QUEST
 } from "../type"
 
 import {getClientUserId} from './userAction'
-
-let clientUserId = getClientUserId()
 
 export const getAllEvents = () => (dispatch) => {
     let clientUserId = getClientUserId()
@@ -116,6 +116,28 @@ export const deleteNotifications = (notiDocId) => (dispatch) => {
     axios.post('/deleteNotifications', {clientUserId: clientUserId, docId: notiDocId})
         .then((res) => {
             console.log('delete success')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const doQuest = (questAction) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/doQuest', {clientUserId: clientUserId, questAction: questAction})
+        .then((res) => {
+            dispatch({type: DO_QUEST, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const getUserQuest = () => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/getUserQuest', {clientUserId: clientUserId})
+        .then((res) => {
+            dispatch({type: SET_QUEST, payload: res.data.data})
         })
         .catch((err) => {
             console.log(err)
