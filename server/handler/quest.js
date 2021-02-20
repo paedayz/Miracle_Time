@@ -163,10 +163,10 @@ exports.editQuest = (req, res) => {
     const mainQuestId = req.body.questId
     const updateQuestData = req.body.updateQuestData
     const resData = updateQuestData
-    resData.questId = mainQuestId
 
     firestore.doc(`/quests/${mainQuestId}`).update(updateQuestData)
         .then(() => {
+            resData.questId = mainQuestId
             return firestore.doc(`/quests/${mainQuestId}`).get()
         })
         .then((doc) => {
