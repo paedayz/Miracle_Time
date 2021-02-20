@@ -7,9 +7,16 @@ import {
 // Component
 import ArcheivementScreen from './Archieve/ArcheivementScreen'
 import QuestScreen from './Quest/QuestScreen'
+
+export default function admin () {
+  const [mode, setMode] = useState(true)
+
   const changeMode = () => {
       setMode(!mode)
   }
+
+  
+
   if(mode) {
       return (
         <SafeAreaView style={styles.container}>
@@ -30,6 +37,7 @@ import QuestScreen from './Quest/QuestScreen'
               </View>
             </TouchableOpacity>
           </View>
+
           <QuestScreen/>
         </SafeAreaView>
       )

@@ -24,7 +24,7 @@ import {signout} from '../redux/action/userAction'
 
 export function DrawerContent(props){
     const userData = useSelector(state => state.user.userData)
-    const {username, nickname, userImage} = userData
+    const {username, nickname, userImage, status} = userData
     const dispatch = useDispatch()
 
     return (
@@ -91,6 +91,8 @@ export function DrawerContent(props){
                             label="Settings"
                             // onPress={() => {props.navigation.navigate('Calendar')}}
                         />
+                        {status === "admin"
+                        &&
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
@@ -102,6 +104,8 @@ export function DrawerContent(props){
                             label="Admin"
                             onPress={() => {props.navigation.navigate('Admin')}}
                         />
+                        }
+                        
                     </Drawer.Section>
                 </View>
             </DrawerContentScrollView>
