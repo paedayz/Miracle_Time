@@ -95,6 +95,7 @@ export const editProfile = (blob, updateData) => (dispatch) => {
         const imageName = blob._data.name
         updateData.imageName = imageName
         updateData.clientUserId = clientUserId
+        console.log('have blob')
 
         const task = firebase.storage().ref().child(imageName).put(blob);
 
@@ -106,6 +107,7 @@ export const editProfile = (blob, updateData) => (dispatch) => {
             task.snapshot.ref.getDownloadURL().then((snapshot) => {
                 console.log('success')
             })
+            console.log(imageName)
             axios.post('/editProfile', updateData)
                 .then((res) => {
                     dispatch({type: SET_USER_DATA, payload: res.data.data})
@@ -125,6 +127,8 @@ export const editProfile = (blob, updateData) => (dispatch) => {
         
     } else {
         updateData.imageName = null
+        updateData.clientUserId = clientUserId
+        console.log('dont have blob')
         axios.post('/editProfile', updateData)
                 .then((res) => {
                     dispatch({type: SET_USER_DATA, payload: res.data.data})

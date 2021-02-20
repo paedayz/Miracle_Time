@@ -8,7 +8,7 @@ import {
   TouchableRipple
 } from 'react-native-paper'
 
-import { Button } from 'react-native-elements';
+import { Button, colors } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Component
@@ -77,10 +77,11 @@ export default function QuestArchieveScreen () {
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity style={[styles.headerBox, {
               borderRightColor: '#dddddd',
-              borderRightWidth: 1
+              borderRightWidth: 1,
+              backgroundColor: '#2289DC'
               }]}>
               <View>
-                <Title>Quest</Title>
+                <Title style={{color:'white'}}>Quest</Title>
               </View>
             </TouchableOpacity>
             <TouchableOpacity 
@@ -111,9 +112,11 @@ export default function QuestArchieveScreen () {
                 <Title>Quest</Title>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.headerBox}>
+            <TouchableOpacity style={[styles.headerBox, {
+              backgroundColor: '#2289DC'
+              }]}>
               <View>
-                <Title>Archeivement</Title>
+                <Title style={{color:'white'}}>Archeivement</Title>
               </View>
             </TouchableOpacity>
           </View>
