@@ -41,17 +41,27 @@ export default function Quest({questData}) {
             </View>
           </View>
           {questStatus === 'quest_success' 
-            ?
+            &&
           <View style={styles.claimButton}>
             <Button
                 buttonStyle = {{width: 70, height: 30}}
                 title='Claim'
             />
           </View>
-            :
-          <View >
-            <Text style={styles.questDone}>{questDone}/{questRequirement}</Text>
-          </View>
+          }
+
+          {questStatus === 'in_progress'
+            && 
+            <View >
+              <Text style={styles.questDone}>{questDone}/{questRequirement}</Text>
+            </View>
+          }
+
+          {questStatus === 'quest_claim'
+            && 
+            <View >
+              <Text style={styles.questClaim}>Already Claim</Text>
+            </View>
           }
           
         </View>
@@ -113,5 +123,11 @@ export default function Quest({questData}) {
         fontSize: 20,
         marginLeft: 55,
         marginTop: 30
+    },
+    questClaim: {
+      fontSize: 15,
+      marginLeft: 40,
+      marginTop: 30,
+      maxWidth: 80
     }
   });

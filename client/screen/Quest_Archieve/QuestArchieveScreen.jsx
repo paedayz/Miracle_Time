@@ -43,15 +43,15 @@ export function Archeivement() {
   );
 }
 
-export default function QuestArchieveScreen () {
+export default function QuestArchieveScreen ({navigation}) {
   const [mode, setMode] = useState(true)
   const questList = useSelector(state => state.data.questList)
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  navigation.addListener('focus', () => {
     dispatch(getUserQuest())
-  },[])
+  });
 
   const Item = ({data}) => {
     let questData = data

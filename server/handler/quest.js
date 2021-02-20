@@ -211,7 +211,7 @@ exports.getUserQuest = (req, res) => {
                                         questList[num].docId = quest.docId
                                         num = num+1
                                     })
-                                    console.log(userQuest)
+                                    console.log('xxxxxx', userQuest)
                                     return res.json({data: questList})
                                 })
                                 .catch((err) => {
