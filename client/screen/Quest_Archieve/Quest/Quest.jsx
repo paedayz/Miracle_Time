@@ -11,7 +11,13 @@ import {
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// Redux
+import {useDispatch} from 'react-redux'
+import {claimQuest} from '../../../redux/action/dataAction'
+
 export default function Quest({questData}) {
+
+  const dispatch = useDispatch()
 
   const {
     docId, 
@@ -23,8 +29,13 @@ export default function Quest({questData}) {
     questName, 
     questRequirement, 
     questStatus, 
-    questType
+    questType,
+    questId
     } = questData
+
+    const cliamClick = () => {
+      dispatch(claimQuest(docId, questId))
+    }
 
     return (
       <SafeAreaView style={styles.container}>
@@ -46,6 +57,7 @@ export default function Quest({questData}) {
             <Button
                 buttonStyle = {{width: 70, height: 30}}
                 title='Claim'
+                onPress={() => cliamClick()}
             />
           </View>
           }

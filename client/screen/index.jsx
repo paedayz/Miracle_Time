@@ -31,18 +31,21 @@ export default function Screen({navigation}) {
     const userEventData = useSelector(state => state.data.events)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if(userData) {
-            dispatch(getAuthen())
-        }
+    // useEffect(() => {
+    //     if(userData) {
+    //         dispatch(getAuthen())
+    //     }
 
-        if(userData && userData.status === 'admin') {
+    //     if(userData && userData.status === 'admin') {
+    //         dispatch(getAdminQuestList())
+    //     }
+    // }, [userData])
+    if(userData && userEventData.length == 0){
+        if(userData.status === 'admin') {
             dispatch(getAdminQuestList())
         }
-    }, [userData])
-
-    if(userData && !userEventData){
-        dispatch(getAllEvents())
+        // dispatch(getAllEvents())
+        dispatch(getAuthen())
     }
 
     if(loading) {

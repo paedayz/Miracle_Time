@@ -15,7 +15,9 @@ import {useSelector} from 'react-redux'
 
 export default function ProfileScreen({navigation}) {
 
-  const {username, nickname, email, userImage, level, exp, coin, bio, phone, website} = useSelector(state => state.user.userData)
+  const {username, nickname, email, userImage, exp, bio, phone, website} = useSelector(state => state.user.userData)
+  const coin = useSelector(state => state.data.coin)
+  const level = useSelector(state => state.data.level)
     
       return (
         <SafeAreaView style={styles.container}>

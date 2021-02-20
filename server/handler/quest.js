@@ -208,10 +208,10 @@ exports.getUserQuest = (req, res) => {
                                         questList[num].questStatus = quest.questStatus
                                         questList[num].questType = quest.questType
                                         questList[num].username = quest.username
-                                        questList[num].docId = quest.docId
+                                        questList[num].docId = quest.docId,
+                                        questList[num].questId = quest.questId
                                         num = num+1
                                     })
-                                    console.log('xxxxxx', userQuest)
                                     return res.json({data: questList})
                                 })
                                 .catch((err) => {

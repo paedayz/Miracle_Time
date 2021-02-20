@@ -5,6 +5,7 @@ export const CLEAR_SESSION = 'CLEAR_SESSION'
 
 // User
 export const SET_USER_DATA = 'SET_USER_DATA'
+export const SET_COIN_EXP_LVL = 'SET_COIN_EXP_LVL'
 
 // Friend
 export const SET_FRIEND_REQUEST = 'SET_FRIEND_REQUEST'
@@ -34,6 +35,7 @@ export const DO_QUEST = 'DO_QUEST'
 export const SET_QUEST = 'SET_QUEST'
 export const EDIT_QUEST = 'EDIT_QUEST'
 export const DELETE_QUEST = 'DELETE_QUEST'
+export const CLAIM_QUEST = 'CLAIM_QUEST'
 
 // Admin
 export const SET_ADMIN_QUEST = 'SET_ADMIN_QUEST'
