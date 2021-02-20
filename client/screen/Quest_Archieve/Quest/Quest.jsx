@@ -33,6 +33,7 @@ export default function Quest({questData}) {
     questId
     } = questData
 
+
     const cliamClick = () => {
       dispatch(claimQuest(docId, questId))
     }

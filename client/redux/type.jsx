@@ -43,3 +43,4 @@ export const ADD_QUEST = 'ADD_QUEST'
 
 // Achieve
 export const SET_ACHIEVE = 'SET_ACHIEVE'
+export const DO_ACHIEVE = 'DO_ACHIEVE'

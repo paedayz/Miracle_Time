@@ -32,10 +32,6 @@ export default function Achievement({achievementData}) {
     achievementId
     } = achievementData
 
-    const cliamClick = () => {
-      dispatch(claimachievement(docId, achievementId))
-    }
-
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.achievementBoxWrapper}>

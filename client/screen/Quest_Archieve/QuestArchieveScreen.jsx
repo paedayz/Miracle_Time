@@ -14,21 +14,25 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 // Component
 import Quest from './Quest/Quest'
 import Achieve from './Achieve/Achieve'
+import QuestBuff from './Quest/QuestBuff'
+import AchieveBuff from './Achieve/AchieveBuff'
 
 // Redux
-import {getUserQuest} from '../../redux/action/dataAction'
+import {getUserQuest, getUserAchievement} from '../../redux/action/dataAction'
 import {useDispatch, useSelector} from 'react-redux'
 
 export default function QuestArchieveScreen ({navigation}) {
   const [mode, setMode] = useState(true)
-  const questList = useSelector(state => state.data.questList)
-  const achievementList = useSelector(state => state.data.achievementList)
-  console.log(achievementList)
 
   const dispatch = useDispatch()
 
+  console.log('qa')
+  // dispatch(getUserQuest())
+    // dispatch(getUserAchievement())
+
   navigation.addListener('focus', () => {
-    dispatch(getUserQuest())
+    // dispatch(getUserQuest())
+    // dispatch(getUserAchievement())
   });
 
   const QuestItem = ({data}) => {
@@ -80,11 +84,7 @@ export default function QuestArchieveScreen ({navigation}) {
               </View>
             </TouchableOpacity>
           </View>
-          <FlatList
-            data={questList}
-            renderItem={renderQuestItem}
-            keyExtractor={item => item.docId}
-          />
+          <QuestBuff/>
         </View>
       )
   } else {
@@ -108,11 +108,7 @@ export default function QuestArchieveScreen ({navigation}) {
               </View>
             </TouchableOpacity>
           </View>
-          <FlatList
-            data={achievementList}
-            renderItem={renderAchieveItem}
-            keyExtractor={item => item.docId}
-          />
+          <AchieveBuff/>
         </View>
       )
   }

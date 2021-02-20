@@ -15,7 +15,9 @@ import {
     SET_QUEST,
     SET_USER_DATA,
     CLAIM_QUEST,
-    SET_COIN_EXP_LVL
+    SET_COIN_EXP_LVL,
+    SET_ACHIEVE,
+    DO_ACHIEVE
 } from "../type"
 
 import {getClientUserId} from './userAction'
@@ -158,6 +160,29 @@ export const claimQuest = (docId, questId) => (dispatch) => {
             }
             dispatch({type: SET_COIN_EXP_LVL, payload: coin_exp_lvl})
             dispatch({type: CLAIM_QUEST, payload: docId})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const doAchievement = (achievementAction) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/doAchievement', {clientUserId: clientUserId, achievementAction: achievementAction})
+        .then((res) => {
+            dispatch({type: DO_ACHIEVE, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const getUserAchievement = () => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/getUserAchievement', {clientUserId: clientUserId})
+        .then((res) => {
+            console.log(res.data.data)
+            dispatch({type: SET_ACHIEVE, payload: res.data.data})
         })
         .catch((err) => {
             console.log(err)
