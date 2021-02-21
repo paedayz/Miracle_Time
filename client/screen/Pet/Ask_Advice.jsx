@@ -4,19 +4,39 @@ import {StyleSheet, SafeAreaView, Text, Image, View, TouchableOpacity, Button } 
 // Redux
 import {useSelector} from 'react-redux'
 
+//dayjs
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+import localeData from 'dayjs/plugin/localeData'
 
 
 export default function Ask_Advice() {
 
     const eventData = useSelector(state => state.data.events)
+    
+    //Set time
+    // dayjs.extend(relativeTime);
+    dayjs.extend(localeData)
+    dayjs.extend(utc)
+    dayjs.extend(timezone)
 
-    //test
-    let Now = new Date()
-    let Today = new Date()
-    let ToMorrow = new Date()
-    ToMorrow.setDate(ToMorrow.getDate() + 1)
-    //use
+    // dayjs.tz.setDefault(ia/Bangkok")
+    const Now = new Date()
+    const date = dayjs(Now.toLocaleString()).tz("Asia/Bangkok", true)
+    // const date = dayjs()"As
+    
+    const Today = new Date(Now.toLocaleString())
+    Today.setHours(0)
+    Today.setMinutes(0)
+    Today.setMilliseconds(0)
+    const ToMorrow = new Date();
+    ToMorrow.setDate(Today.getDate() + 1);
+    
+
     let num_foreach_event = [];
+    const default_task = ["อ่านหนังสือ","พักผ่อน","ดูหนัง","ฟังเพลง","เล่นเกม"]
 
     const Random =(data) =>{
         const random = data[Math.floor(Math.random()*data.length)]
@@ -25,7 +45,7 @@ export default function Ask_Advice() {
     
     const CountEvent =(Event_Name) =>{
         if (num_foreach_event.length === 0) {
-            num_foreach_event = [{Event_Name :Event_Name, start: 1}]
+            num_foreach_event = [{Event_Name :Event_Name, count_event: 1}]
         }else{
             let IsPushEvent = false
             let count = num_foreach_event.length
@@ -33,56 +53,52 @@ export default function Ask_Advice() {
             num_foreach_event.map(item => {
                 count--;
                 if(item.Event_Name == Event_Name){
-                    item.start++;
+                    item.count_event++;
                     IsPushEvent = true;
                 }else if( !IsPushEvent && count == 0 ){
-                    num_foreach_event.push({Event_Name : Event_Name, start: 1})
+                    num_foreach_event.push({Event_Name : Event_Name, count_event: 1})
                 }
             })
         } 
     }
     
     const Check_Today_Task = () =>{
-        let Today_task = eventData.filter((E) => {
-            let timeEvent = new Date(E.date+"T"+E.end)
-            if(timeEvent > Today && timeEvent < ToMorrow && E.success === false)return true;
-        })
-        if(Today_task.length == 0 )return false;
-        else {
-            Today_task.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
-        
-            let Next = Next_Task(Today_task)
-    
-            return Next;
-        }
+        if(eventData.length == 0){
+            return false;
+        }else{
+            let Today_task = eventData.filter((E) => {
+                let timeEvent = new Date(E.date+"T"+E.end)
+                // console.log("Event is ",E)
+                // console.log("*****")
+                // console.log("Time event is ",timeEvent)
+                // console.log("*****")
+                if(timeEvent > Today && timeEvent < ToMorrow && E.success == false){
+                // if(timeEvent < ToMorrow ){
+                    // console.log("Event is ",E)
+                    return true;   
+                }
+                // console.log("Time event is ",timeEvent)
+            })
+            // console.log(Today_task)
+            if(Today_task.length !=0){
+               Today_task.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
+                let Next = Next_Task(Today_task)
+                let words = " ไปทำ "+Next.event+" ซะนะ" 
+                return " ไปทำ "+Next.event+" ซะนะ" ;     
+            }else{
+                return false;
+            }  
+        }        
     }
     
     const Next_Task = (Today_task) => {
-    
-        // const [NextTask, setNextTask] = useState('')
-        // const [NotHaveTask, setNotHaveTask] = useState(true)
-    
-        // Today_task.map((E) => {
-        //     let startEvent = Date.now(E.date+"T"+E.start)
-        //     let endEvent = Date.now(E.date+"T"+E.end)
-    
-        //     if(startEvent < Now && endEvent > Now && NotHaveTask) {
-        //         setNextTask(E)
-        //         setNotHaveTask(false)
-        //     }
-        //     else if(startEvent > Now && endEvent > Now && NotHaveTask){
-        //         setNextTask(E)
-        //         setNotHaveTask(false)
-        //     }
-        // })
-    
         let NextTask = "not thing"
         let NotHaveTask = true
     
         Today_task.map((E) => {
-            let startEvent = Date.now(E.date+"T"+E.start)
-            let endEvent = Date.now(E.date+"T"+E.end)
-    
+            let startEvent = new Date(E.date+"T"+E.start)
+            let endEvent = new Date(E.date+"T"+E.end)
+
             if(startEvent < Now && endEvent > Now && NotHaveTask) {
                 NextTask = E
                 NotHaveTask = false
@@ -93,21 +109,33 @@ export default function Ask_Advice() {
             }
             else{}
         })
-    
         return NextTask;
     }
 
-    eventData.map( item => {
-        CountEvent(item.event)
-        num_foreach_event.sort((a,b) => (a.start < b.start) ? 1 : ((b.start < a.start) ? -1 : 0))
-    })
-
-    const Top_5_Event = num_foreach_event.slice(0,5)
-    const randomEvent = Random(Top_5_Event)
-
-    const advice = Check_Today_Task() ? (" ไปทำ "+Check_Today_Task().event+" ซะนะ" ) 
-    : ("ว่างเเล้วอยาก "+randomEvent.Event_Name+" ไหมละ")
+    const FreeTask=()=> {
+        if(eventData.length != 0){
+            eventData.map( item => {
+                CountEvent(item.event)
+                num_foreach_event.sort((a,b) => (a.start < b.start) ? 1 : ((b.start < a.start) ? -1 : 0))
+            })
+            const Top_5_Event = (num_foreach_event.length < 5) ? (num_foreach_event):(num_foreach_event.slice(0,5))
+            const randomEvent = Random(Top_5_Event).Event_Name  
+            return ("ว่างเเล้วอยาก "+randomEvent+" ไหมละ")
+        }else{
+            const randomEvent = Random(default_task);
+            return ("ว่างเเล้วอยาก "+randomEvent+" ไหมละ")
+        }
+    }
     
+    const advice = Check_Today_Task() ? (Check_Today_Task()) : (FreeTask())
+    
+    console.log("================================")
+    // console.log("Today is ",Today)
+    // console.log("Now is ",Now)
+    // console.log("Tomorrow is ",ToMorrow)
+    // console.log("dayjs ",Now.getTimezoneOffset())
+    // console.log(typeof date)
+    // console.log("Event",eventData)
     return (
         <View>
            <Text>{advice}</Text> 
