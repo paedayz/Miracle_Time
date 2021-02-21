@@ -48,7 +48,7 @@ export default function Quest({questData}) {
           </View>
           <View style={styles.questBox}>
             <Title style={styles.headerTitle}>{questName}</Title>
-            <View style={{maxWidth:200}}>
+            <View style={{maxWidth:200, minWidth: 180}}>
                 <Text>{questDetail}</Text>
             </View>
           </View>

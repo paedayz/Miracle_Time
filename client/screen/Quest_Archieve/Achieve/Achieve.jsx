@@ -37,12 +37,12 @@ export default function Achievement({achievementData}) {
         <View style={styles.achievementBoxWrapper}>
           <View style={styles.demo}>
             <Icon 
-                name='trophy'
+                name='medal-outline'
                 size={50}/>
           </View>
           <View style={styles.achievementBox}>
             <Title style={styles.headerTitle}>{achievementName}</Title>
-            <View style={{maxWidth:200}}>
+            <View style={{maxWidth:200, minWidth: 180}}>
                 <Text>{achievementDetail}</Text>
             </View>
           </View>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigation} from '@react-navigation/native'
 import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import {
   Avatar,
@@ -24,6 +25,8 @@ export default function Acheivement ({achievementData}) {
     const [modalOpenDelete, setModalOpenDelete] = useState(false)
     const {achievementDetail, achievementName, docId} = achievementData.item
 
+    const navigation = useNavigation()
+
     const dispatch = useDispatch()
 
     const onDeleteSubmit = () => {
@@ -33,6 +36,7 @@ export default function Acheivement ({achievementData}) {
   
     return (
       <SafeAreaView style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate('adminAchievementDetail', achievementData.item)}>
         <View style={styles.questBoxWrapper}>
           <View style={styles.demo}>
             <Icon 
@@ -82,6 +86,7 @@ export default function Acheivement ({achievementData}) {
               </Modal>
           </View>
         </View>
+        </TouchableOpacity>
       </SafeAreaView>
     );
   }
