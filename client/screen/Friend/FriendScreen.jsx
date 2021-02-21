@@ -71,7 +71,13 @@ export default function FriendScreen({ navigation }) {
             ]}
         >
           <View>
+            {isList 
+            ?
+            <Title style={{color:"red"}}>List</Title>
+            :
             <Title>List</Title>
+          }
+            
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIsList(false)} style={styles.headerBox}>

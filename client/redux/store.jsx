@@ -5,6 +5,7 @@ import userReducer from "./reducer/userReducer";
 import systemReducer from "./reducer/systemReducer"
 import dataReducer from "./reducer/dataReducer";
 import friendReducer from './reducer/friendReducer'
+import adminReducer from './reducer/adminReducer'
 
 
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -16,7 +17,8 @@ const reducers = combineReducers({
   system : systemReducer,
   user: userReducer,
   data: dataReducer,
-  friend: friendReducer
+  friend: friendReducer,
+  admin: adminReducer
 });
 
 // const store = createStore(

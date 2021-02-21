@@ -12,29 +12,44 @@ import {
     ADD_END_NOTI,
     READ_NOTI,
     TOGGLE_NOTI,
-    DELETE_NOTI
+    DELETE_NOTI,
+    SET_QUEST,
+    DO_QUEST,
+    CLAIM_QUEST,
+    SET_COIN_EXP_LVL,
+    SET_ACHIEVE
 } from "../type"
 
 const initialState = {
     user: {},
+    coin: 0,
+    exp: 0,
+    level: 0,
     data: [],
     events: [],
     notifications: [],
     unreadNoti : 0,
     will_noti : [],
     now_noti : [],
-    end_noti : []
+    end_noti : [],
+    questList: [],
+    achievementList: []
 }
 
 const startState = {
     user: {},
+    coin: 0,
+    exp: 0,
+    level: 0,
     data: [],
     events: [],
     notifications: [],
     unreadNoti : 0,
     will_noti : [],
     now_noti : [],
-    end_noti : []
+    end_noti : [],
+    questList: [],
+    achievementList: []
 }
 
 export default function (state = initialState, action){
@@ -180,6 +195,52 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 notifications : new_noti
+            }
+        
+        case SET_QUEST :
+            return {
+                ...state,
+                questList: action.payload
+            }
+
+        case DO_QUEST :
+            let updateQuest = []
+            state.questList.map((quest) => {
+                if(quest.docId === action.payload.questId) {
+                    updateQuest.push(action.payload)
+                } else {
+                    updateQuest.push(quest)
+                }
+            })
+            return {
+                ...state,
+                questList: updateQuest
+            }
+        
+        case CLAIM_QUEST :
+            let claimQuestBuff = []
+            state.questList.map((quest) => {
+                if(quest.docId === action.payload) {
+                    quest.questStatus = 'quest_claim'
+                }
+                claimQuestBuff.push(quest)
+            })
+            return {
+                ...state,
+                questList: claimQuestBuff
+            }
+
+        case SET_COIN_EXP_LVL :
+            return {
+                ...state,
+                coin: action.payload.coin,
+                exp: action.payload.exp,
+                level: action.payload.level
+            }
+        case SET_ACHIEVE :
+            return {
+                ...state,
+                achievementList: action.payload
             }
             
         case CLEAR_SESSION :

@@ -6,11 +6,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
 import {getAuthen} from '../redux/action/userAction'
-import {getAllEvents} from '../redux/action/dataAction'
+import {getAdminQuestList, getAdminAchievementList} from '../redux/action/adminAction'
 
 // Screen
 import AuthScreen from './Auth/AuthScreen'
-import PetScreen from './Pet/PetScreen'
 
 // Stack
 import ProfileStackScreen from './Profile/ProfileStack'
@@ -32,19 +31,17 @@ export default function Screen({navigation}) {
     const userEventData = useSelector(state => state.data.events)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if(userData) {
-            dispatch(getAuthen())
+    if(userData && userEventData.length == 0){
+        if(userData.status === 'admin') {
+            dispatch(getAdminQuestList())
+            dispatch(getAdminAchievementList())
         }
-    }, [userData])
-
-    if(userData && !userEventData){
-        dispatch(getAllEvents())
+        dispatch(getAuthen())
     }
 
     if(loading) {
         return (
-            <SafeAreaView style={{ flex: 1 , marginTop: 20}}>
+            <SafeAreaView style={{ flex: 1 , justifyContent: 'center', alignItems: 'center'}}>
                 <Text>Loading</Text>
             </SafeAreaView>
         )

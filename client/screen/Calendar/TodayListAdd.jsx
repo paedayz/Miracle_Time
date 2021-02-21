@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View,Button, LogBox , Platform ,KeyboardAvoidingView} from 'react-native'
+import { StyleSheet, Text, View, Button, LogBox , Platform ,KeyboardAvoidingView} from 'react-native'
 import { Formik } from 'formik'
 import { TextInput } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -9,7 +9,7 @@ import moment from 'moment'
 
 // Redux
 import { useDispatch } from 'react-redux'
-import {addEvent} from '../../redux/action/dataAction'
+import {addEvent, doQuest} from '../../redux/action/dataAction'
 
 const Addtodaylist = (props) => {
 
@@ -56,6 +56,7 @@ const Addtodaylist = (props) => {
                     values.start = startTime
                     values.end = endTime
                     dispatch(addEvent(values))
+                    dispatch(doQuest('createEvent'))
                     props.setModalOpen(false)
                 }}
             >
