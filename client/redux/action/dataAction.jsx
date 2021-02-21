@@ -181,7 +181,6 @@ export const getUserAchievement = () => (dispatch) => {
     let clientUserId = getClientUserId()
     axios.post('/getUserAchievement', {clientUserId: clientUserId})
         .then((res) => {
-            console.log(res.data.data)
             dispatch({type: SET_ACHIEVE, payload: res.data.data})
         })
         .catch((err) => {

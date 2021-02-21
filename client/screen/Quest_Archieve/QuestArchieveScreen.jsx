@@ -8,56 +8,14 @@ import {
   TouchableRipple
 } from 'react-native-paper'
 
-import { Button, colors } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 // Component
-import Quest from './Quest/Quest'
-import Achieve from './Achieve/Achieve'
 import QuestBuff from './Quest/QuestBuff'
 import AchieveBuff from './Achieve/AchieveBuff'
 
 // Redux
-import {getUserQuest, getUserAchievement} from '../../redux/action/dataAction'
-import {useDispatch, useSelector} from 'react-redux'
 
 export default function QuestArchieveScreen ({navigation}) {
   const [mode, setMode] = useState(true)
-
-  const dispatch = useDispatch()
-
-  console.log('qa')
-  // dispatch(getUserQuest())
-    // dispatch(getUserAchievement())
-
-  navigation.addListener('focus', () => {
-    // dispatch(getUserQuest())
-    // dispatch(getUserAchievement())
-  });
-
-  const QuestItem = ({data}) => {
-    let questData = data
-      
-    return (
-        <Quest questData={questData.item}/>
-    )
-  };
-
-  const renderQuestItem = (questList) => (
-    <QuestItem data={questList} />
-  );
-
-  const AchieveItem = ({data}) => {
-    let achieveData = data
-      
-    return (
-        <Achieve achievementData={achieveData.item}/>
-    )
-  };
-
-  const renderAchieveItem = (AchieveList) => (
-    <AchieveItem data={AchieveList} />
-  );
 
   const changeMode = () => {
       setMode(!mode)

@@ -6,12 +6,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
 import {getAuthen} from '../redux/action/userAction'
-import {getAllEvents} from '../redux/action/dataAction'
-import {getAdminQuestList} from '../redux/action/adminAction'
+import {getAdminQuestList, getAdminAchievementList} from '../redux/action/adminAction'
 
 // Screen
 import AuthScreen from './Auth/AuthScreen'
-import PetScreen from './Pet/PetScreen'
 
 // Stack
 import ProfileStackScreen from './Profile/ProfileStack'
@@ -31,20 +29,11 @@ export default function Screen({navigation}) {
     const userEventData = useSelector(state => state.data.events)
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     if(userData) {
-    //         dispatch(getAuthen())
-    //     }
-
-    //     if(userData && userData.status === 'admin') {
-    //         dispatch(getAdminQuestList())
-    //     }
-    // }, [userData])
     if(userData && userEventData.length == 0){
         if(userData.status === 'admin') {
             dispatch(getAdminQuestList())
+            dispatch(getAdminAchievementList())
         }
-        // dispatch(getAllEvents())
         dispatch(getAuthen())
     }
 

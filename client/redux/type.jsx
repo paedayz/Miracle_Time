@@ -33,13 +33,18 @@ export const DELETE_NOTI = 'DELETE_NOTI'
 // Quests
 export const DO_QUEST = 'DO_QUEST'
 export const SET_QUEST = 'SET_QUEST'
-export const EDIT_QUEST = 'EDIT_QUEST'
-export const DELETE_QUEST = 'DELETE_QUEST'
 export const CLAIM_QUEST = 'CLAIM_QUEST'
 
 // Admin
 export const SET_ADMIN_QUEST = 'SET_ADMIN_QUEST'
 export const ADD_QUEST = 'ADD_QUEST'
+export const EDIT_QUEST = 'EDIT_QUEST'
+export const DELETE_QUEST = 'DELETE_QUEST'
+
+export const SET_ADMIN_ACHIEVE = 'SET_ADMIN_ACHIEVE'
+export const ADD_ACHIEVE = 'SET_ADMIN_ACHIEVE'
+export const EDIT_ACHIEVE = 'EDIT_ACHIEVE'
+export const DELETE_ACHIEVE = 'DELETE_QUEST'
 
 // Achieve
 export const SET_ACHIEVE = 'SET_ACHIEVE'

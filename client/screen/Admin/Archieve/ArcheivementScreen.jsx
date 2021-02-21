@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, FlatList } from 'react-native';
 import {
   Avatar,
   Title,
@@ -16,8 +16,31 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Archeivement from './Archeivement';
 import AddArchievementModal from './AddArchievementModal'
 
-export default function ArcheivementScreen (){
+// Redux
+import {useSelector, useDispatch} from 'react-redux'
+import {getAdminAchievementList} from '../../../redux/action/adminAction'
+
+export default function QuestScreen (){
     const [modalOpenAdd, setModalOpenAdd] = useState(false)
+    const achievementList = useSelector(state => state.admin.achievementList)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+      dispatch(getAdminAchievementList())
+    },[modalOpenAdd])
+
+    const Item = ({data}) => {
+      let achievementData = data
+        
+      return (
+          <Archeivement achievementData={achievementData}/>
+      )
+    };
+  
+    const renderItem = (achievementData) => (
+      <Item data={achievementData} />
+    );
+    
     return (
         <View>
           <View style={styles.addButton}>
@@ -35,7 +58,11 @@ export default function ArcheivementScreen (){
                 <AddArchievementModal setModalOpenAdd={setModalOpenAdd}/>
               </Modal>
           </View>
-          <Archeivement />
+          <FlatList
+            data={achievementList}
+            renderItem={renderItem}
+            keyExtractor={item => item.docId}
+          />
         </View>
     )
 }
