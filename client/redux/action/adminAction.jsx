@@ -84,6 +84,7 @@ export const deleteAchievement = (achievementId) => (dispatch) => {
     let clientUserId = getClientUserId()
     axios.post('/deleteAchievement', {clientUserId: clientUserId, achievementId: achievementId})
         .then((res) => {
+            console.log(res.data.data)
             dispatch({type: DELETE_ACHIEVE, payload: res.data.data})
         })
         .catch((err) => {

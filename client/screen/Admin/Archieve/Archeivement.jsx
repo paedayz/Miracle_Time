@@ -12,6 +12,10 @@ import {
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// Redux
+import {useDispatch} from 'react-redux'
+import {deleteAchievement} from '../../../redux/action/adminAction'
+
 // Component
 import EditAchievementModal from './EditAchievementModal'
 
@@ -19,6 +23,13 @@ export default function Acheivement ({achievementData}) {
     const [modalOpenEdit, setModalOpenEdit] = useState(false)
     const [modalOpenDelete, setModalOpenDelete] = useState(false)
     const {achievementDetail, achievementName, docId} = achievementData.item
+
+    const dispatch = useDispatch()
+
+    const onDeleteSubmit = () => {
+      dispatch(deleteAchievement(docId))
+      setModalOpenDelete(false)
+    }
   
     return (
       <SafeAreaView style={styles.container}>
@@ -56,6 +67,7 @@ export default function Acheivement ({achievementData}) {
                         <View style={{margin: 5, width: 70, height: 30}}>
                         <Button 
                             title="Yes"
+                            onPress={() => onDeleteSubmit()}
                         />
                         </View>
                         <View style={{margin: 5, width: 70, height: 30}}>
