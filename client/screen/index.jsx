@@ -2,6 +2,17 @@ import React, {useEffect, useState} from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import {
+    BallIndicator,
+    BarIndicator,
+    DotIndicator,
+    MaterialIndicator,
+    PacmanIndicator,
+    PulseIndicator,
+    SkypeIndicator,
+    UIActivityIndicator,
+    WaveIndicator,
+  } from 'react-native-indicators';
 
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
@@ -42,7 +53,7 @@ export default function Screen({navigation}) {
     if(loading) {
         return (
             <SafeAreaView style={{ flex: 1 , justifyContent: 'center', alignItems: 'center'}}>
-                <Text>Loading</Text>
+                <PacmanIndicator color='#2289DC' />
             </SafeAreaView>
         )
     }

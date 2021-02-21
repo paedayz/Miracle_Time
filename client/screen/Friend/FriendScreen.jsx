@@ -60,6 +60,22 @@ export default function FriendScreen({ navigation }) {
             
         </View>
       <View style={styles.headerBoxWrapper}>
+      {isList 
+        ?
+        <TouchableOpacity
+            onPress={() => setIsList(true)}
+            style={[
+                styles.headerBox,
+                {
+                borderRightColor: "#dddddd",
+                borderRightWidth: 1,
+                backgroundColor: '#2289DC'
+                },
+            ]}
+        >
+          <Title style={{color: 'white'}}>List</Title>
+        </TouchableOpacity>
+        :
         <TouchableOpacity
             onPress={() => setIsList(true)}
             style={[
@@ -70,21 +86,31 @@ export default function FriendScreen({ navigation }) {
                 },
             ]}
         >
+          <Title>List</Title>
+        </TouchableOpacity>
+      }
+        {!isList 
+          ?
+        <TouchableOpacity 
+          onPress={() => setIsList(false)} 
+          style={[
+            styles.headerBox,
+            {
+            backgroundColor: '#2289DC'
+            },
+          ]}
+        >
           <View>
-            {isList 
-            ?
-            <Title style={{color:"red"}}>List</Title>
-            :
-            <Title>List</Title>
-          }
-            
+            <Title style={{color: 'white'}}>Request</Title>
           </View>
         </TouchableOpacity>
+          :
         <TouchableOpacity onPress={() => setIsList(false)} style={styles.headerBox}>
           <View>
             <Title>Request</Title>
           </View>
         </TouchableOpacity>
+        }
       </View>
 
       <View>
