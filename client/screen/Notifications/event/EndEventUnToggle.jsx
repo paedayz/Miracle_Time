@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, View, Image, TouchableOpacity , Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import dayjs from 'dayjs'
@@ -18,6 +18,26 @@ export default function NowEvent({data, eventData, createdAt, docId}) {
       dispatch(toggleNotifications(docId))
       navigation.navigate('TodayListDetail', eventData)
     }
+
+    const onAlert = () => {
+      Alert.alert(
+        "Alert Title",
+        "My Alert Msg",
+        [
+          
+          { 
+            text: "YES", onPress: () => {dispatch(deleteNotifications(docId))} 
+          },{},
+          {
+            text: "NO",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+        ],
+    
+      );
+    }
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
           <TouchableOpacity onPress={() => { onNotiClick() }}>
@@ -52,7 +72,7 @@ export default function NowEvent({data, eventData, createdAt, docId}) {
                           marginTop: -24,
                           color: "#aaa"
                         }}
-                        onPress={() => {dispatch(deleteNotifications(docId))}}
+                        onPress={onAlert}
                     />
                   </View>  
                   <View style={{marginTop:5}}>
