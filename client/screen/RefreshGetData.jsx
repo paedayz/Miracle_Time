@@ -89,7 +89,7 @@ export default function RefreshGetData()  {
         setTimeout(function(){
             setBuff(!buff)
             checkSendNoti()
-            console.log('get data')
+            // console.log('get data')
           },4000);
     }, [buff])
     return (

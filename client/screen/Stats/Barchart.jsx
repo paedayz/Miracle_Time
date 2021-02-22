@@ -2,34 +2,75 @@ import React from 'react';
 import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, Button, Alert,View, Dimensions} from 'react-native';
 import { VictoryChart, VictoryGroup, VictoryBar, VictoryPie, VictoryLegend, VictoryAxis } from 'victory-native';
 
-//chartgraphic
-const graphicData = { 
-  work: [
-    {x: 'Week1', y: 40},
-    //{x: 'Week2', y: 20},
-    //{x: 'Week3', y: 35}
-  ], 
-  play: [
-    {x: 'Week1', y: 20},
-    //{x: 'Week2', y: 4}
-  ],
-  rest: [
-    {x: 'Week1', y: 30},
-    //{x: 'Week2', y: 4}
-  ],
-  other: [
-    {x: 'Week1', y: 10},
-    //{x: 'Week2', y: 4}
-  ],
-};
-const graphicColor = ['#008891', '#41aea9', '#a8dda8', '#d2f5e3', '#2ec1ac', "#ade498" ];
+//chartdata
+const eventData = [
+    {
+      date : "2021-01-19",
+      detail : "with family",
+      event : "Running",
+      key : "0.9971451494954678",
+      rank : "1",
+      start: "10.00",
+      end: "12.00",
+      total: 2,
+      category: "rest"
+    },
+    {
+      date : "2021-01-19",
+      detail : "with family",
+      event : "Running",
+      key : "0.9971451494954678",
+      rank : "1",
+      start: "15.00",
+      end: "18.00",
+      total: 3,
+      category: "work"
+    },
+    {
+      date : "2021-01-20",
+      detail : "LOL",
+      event : "game",
+      key : "0.9971451494954678",
+      rank : "1",
+      start: "00.00",
+      end: "04.00",
+      total: 4,
+      category: "play"
+    },
+    {
+      date : "2021-01-19",
+      detail : "with family",
+      event : "Running",
+      key : "0.9971451494954678",
+      rank : "1",
+      start: "19.00",
+      end: "20.00",
+      total: 1,
+      category: "other"
+    },
+    {
+      date : "2021-01-21",
+      detail : "1234",
+      event : "running",
+      key : "0.9971451494954678",
+      rank : "1",
+      start: "08.00",
+      end: "09.00",
+      total: 1,
+      category: "exercire"
+      },
+  ];
+
+  
+  
 
 export default function Barchart({navigation}) {
     
       return (
         <SafeAreaView style={styles.container}>
           
-          <VictoryChart>
+          <VictoryChart domainPadding={{x: 70}}>
+            
             <VictoryAxis label=""/>
             <VictoryAxis 
               dependentAxis 
@@ -40,70 +81,14 @@ export default function Barchart({navigation}) {
                 },
               }}
             />
-            <VictoryGroup offset={50}>
+            <VictoryGroup offset={20}>
               <VictoryBar
-                data={graphicData.work}
-                style={{
-                  data: {
-                    fill: '#008891',
-                  },
-                }} 
-              />
-              <VictoryBar
-                data={graphicData.play}
-                style={{
-                  data: {
-                    fill: '#41aea9',
-                  },
-                }}  
-              />
-              <VictoryBar
-                data={graphicData.rest}
-                style={{
-                  data: {
-                    fill: '#a8dda8',
-                  },
-                }}  
-              />
-              <VictoryBar
-                data={graphicData.other}
-                style={{
-                  data: {
-                    fill: '#d2f5e3',
-                  },
-                }}  
+                style={{ data: { fill: "#41aea9" } }}
+                data={eventData}
+                x="category"
+                y="total"
               />
             </VictoryGroup>
-            <VictoryLegend
-              x={Dimensions.get('screen').width / 2 - 100}
-              orientation="horizontal"
-              data={[
-                {
-                  name: 'work',
-                  symbol: {
-                    fill: '#008891'
-                  },
-                },
-                {
-                  name: 'play',
-                  symbol: {
-                    fill: '#41aea9'
-                  },
-                },
-                {
-                  name: 'rest',
-                  symbol: {
-                    fill: '#a8dda8'
-                  },
-                },
-                {
-                  name: 'other',
-                  symbol: {
-                    fill: '#d2f5e3'
-                  },
-                },
-              ]} 
-            />       
           </VictoryChart>
         </SafeAreaView>
       );
@@ -116,3 +101,4 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 });
+
