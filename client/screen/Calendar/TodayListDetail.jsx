@@ -20,17 +20,17 @@ export default function DetailToday({navigation}) {
     return (
         <View style={style.container}>
             <View style={{  borderRadius: 10,
-                  width: 320 ,
-                  height: 60,
-                  elevation: 3,
-                  backgroundColor: '#fff',
-                  shadowOffset: { width: 1 , height: 1 },
-                  shadowColor: '',
-                  shadowOpacity: 0.3,
-                  shadowRadius: 2,
-                  marginHorizontal: 4,
-                  marginVertical: 6,
-                  borderLeftWidth:10}}>
+                            width: 320 ,
+                            height: 60,
+                            elevation: 3,
+                            backgroundColor: '#fff',
+                            shadowOffset: { width: 1 , height: 1 },
+                            shadowColor: '#333',
+                            shadowOpacity: 0.3,
+                            shadowRadius: 2,
+                            marginHorizontal: 4,
+                            marginVertical: 6,
+                            borderLeftWidth:10}}>
                 <View style={style.cardcon}>
                     <Text style={{ fontSize: 25}}>{event}</Text>
                 </View>

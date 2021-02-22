@@ -43,7 +43,7 @@ export default function Ask_Volitation() {
         <View>
             <Text>{Randomed.words}</Text>
             
-            { !give_A_Point ? 
+            {/* { !give_A_Point ? 
                 <View style={styles.answerBox}>
                     <Text style={styles.answerText}> คุณรู้สึกอย่างไรบ้าง </Text>
                     
@@ -65,7 +65,7 @@ export default function Ask_Volitation() {
                         
                 </View>
               :null
-            }
+            } */}
 
         </View>
     );

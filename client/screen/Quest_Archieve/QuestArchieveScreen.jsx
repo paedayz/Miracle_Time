@@ -1,5 +1,5 @@
-import React from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import {
   Avatar,
   Title,
@@ -8,48 +8,73 @@ import {
   TouchableRipple
 } from 'react-native-paper'
 
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+// Component
+import QuestBuff from './Quest/QuestBuff'
+import AchieveBuff from './Achieve/AchieveBuff'
 
-export default function QuestArchieveScreen({navigation}) {
-    
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerBoxWrapper}>
-        <TouchableOpacity style={[styles.headerBox, {
-            borderRightColor: '#dddddd',
-            borderRightWidth: 1
-          }]}>
-          <View>
-            <Title>Quest</Title>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.headerBox}>
-          <View>
-            <Title>Archeivement</Title>
-          </View>
-        </TouchableOpacity>
-      </View>
+// Redux
 
-      <View style={styles.questBoxWrapper}>
-        <View style={styles.demo}>
-          <Icon 
-              name='trophy'
-              size={50}/>
-        </View>
-        <View style={styles.questBox}>
-          <Title style={styles.headerTitle}>Quest</Title>
-          <Text>Quest detail</Text>
-          <Text>Quest start - Quest end</Text>
+export default function QuestArchieveScreen ({navigation}) {
+  const [mode, setMode] = useState(true)
+
+  const changeMode = () => {
+      setMode(!mode)
+  }
+
+  if(mode) {
+      return (
+        <View>
+          <View style={styles.headerBoxWrapper}>
+            <TouchableOpacity style={[styles.headerBox, {
+              borderRightColor: '#dddddd',
+              borderRightWidth: 1,
+              backgroundColor: '#2289DC'
+              }]}>
+              <View>
+                <Title style={{color:'white'}}>Quest</Title>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.headerBox}
+              onPress={() => changeMode()}>
+              <View>
+              <Title>Archeivement</Title>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <QuestBuff/>
         </View>
         <View style={styles.claimButton}>
           <Button
             buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
             title='Claim'/>
+
+      )
+  } else {
+      return (
+        <View>
+          <View style={styles.headerBoxWrapper}>
+            <TouchableOpacity onPress={() => changeMode()}
+              style={[styles.headerBox, {
+              borderRightColor: '#dddddd',
+              borderRightWidth: 1
+              }]}>
+              <View>
+                <Title>Quest</Title>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.headerBox, {
+              backgroundColor: '#2289DC'
+              }]}>
+              <View>
+                <Title style={{color:'white'}}>Archeivement</Title>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <AchieveBuff/>
         </View>
-      </View>
-    </SafeAreaView>
-  );
+      )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -71,6 +96,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: 'row',
     height: 50,
+    marginBottom: 5
   },
   headerBox: {
     width: '50%',
