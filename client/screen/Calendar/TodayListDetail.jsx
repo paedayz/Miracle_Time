@@ -20,17 +20,17 @@ export default function DetailToday({navigation}) {
     return (
         <View style={style.container}>
             <View style={{  borderRadius: 10,
-                  width: 320 ,
-                  height: 60,
-                  elevation: 3,
-                  backgroundColor: '#fff',
-                  shadowOffset: { width: 1 , height: 1 },
-                  shadowColor: '',
-                  shadowOpacity: 0.3,
-                  shadowRadius: 2,
-                  marginHorizontal: 4,
-                  marginVertical: 6,
-                  borderLeftWidth:10}}>
+                            width: 320 ,
+                            height: 60,
+                            elevation: 3,
+                            backgroundColor: '#fff',
+                            shadowOffset: { width: 1 , height: 1 },
+                            shadowColor: '#333',
+                            shadowOpacity: 0.3,
+                            shadowRadius: 2,
+                            marginHorizontal: 4,
+                            marginVertical: 6,
+                            borderLeftWidth:10}}>
                 <View style={style.cardcon}>
                     <Text style={{ fontSize: 25}}>{event}</Text>
                 </View>
@@ -66,18 +66,20 @@ export default function DetailToday({navigation}) {
             <View style={{marginBottom:10, marginTop: 10, flexDirection:'row'}}>
               <View style={{width:70,height:10}}>
                 <Button
-                  color="#7686CA"
-                  title="Edit"
-                  onPress={() => setModalOpen()}
-                />
-              </View>
-              
-              <View style={{width:70,height:10,marginLeft: 20}}>
-                <Button
-                  color="#FB8888"
+                  color="#FC7C7C"
                   title="Delete"
+                  buttonStyle = {{borderRadius: 10}}
                   // onPress={() => dispatch({type: 'DELETE_EVENT', payload: values}, navigation.navigate('Todaylist'))}
                   onPress={() => dispatch(deleteEvent(key))}
+                />
+              </View>
+
+              <View style={{width:70,height:10,marginLeft: 20}}>
+                <Button
+                  color="#8C92AC"
+                  title="Edit"
+                  buttonStyle = {{borderRadius: 10}}
+                  onPress={() => setModalOpen()}
                 />
               </View>
             </View>

@@ -28,7 +28,16 @@ let {
   deleteNotifications
 } = require('./handler/data')
 
-let {addFriend, acceptFriendRequest, deniedFriendRequest, getFriendRequest} = require('./handler/friend')
+let {
+  addFriend,
+  acceptFriendRequest,
+  deniedFriendRequest,
+  getFriendRequest
+} = require('./handler/friend')
+
+let {addQuest, adminGetQuestList, doQuest, deleteQuest, editQuest, getUserQuest, claimQuest} = require('./handler/quest')
+
+let {addAchievement, adminGetAchievementList, doAchievement, deleteAchievement, editAchievement, getUserAchievement,} = require('./handler/achievement')
 
 // User Route
 app.post('/signup',signup)
@@ -52,6 +61,24 @@ app.post('/addNotifications', FBAuth, addNotifications)
 app.post('/readNotifications', FBAuth, readNotifications)
 app.post('/toggleNotifications', FBAuth, toggleNotifications)
 app.post('/deleteNotifications', FBAuth, deleteNotifications)
+
+// Quest Route
+app.post('/addQuest', FBAuth, addQuest)
+app.post('/adminGetQuestList', FBAuth, adminGetQuestList)
+app.post('/doQuest', FBAuth, doQuest)
+app.post('/deleteQuest', FBAuth, deleteQuest)
+app.post('/editQuest', FBAuth, editQuest)
+app.post('/getUserQuest', FBAuth, getUserQuest)
+app.post('/claimQuest', FBAuth, claimQuest)
+
+// Achievement Route
+app.post('/addAchievement', FBAuth, addAchievement)
+app.post('/adminGetAchievementList', FBAuth, adminGetAchievementList)
+app.post('/doAchievement', FBAuth, doAchievement)
+app.post('/deleteAchievement', FBAuth, deleteAchievement)
+app.post('/editAchievement', FBAuth, editAchievement)
+app.post('/getUserAchievement', FBAuth, getUserAchievement)
+
 
 app.listen(app.get("port"), function () {
     console.log("run at port", app.get("port"));

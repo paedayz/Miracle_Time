@@ -9,9 +9,13 @@ import {
     SET_UNREAD_NOTI,
     SET_FRIEND_REQUEST,
     SET_FRIEND_LIST,
+    SET_QUEST,
+    SET_COIN_EXP_LVL,
+    SET_ACHIEVE
     SET_ERROR,
 } from '../type'
 import firebase from 'firebase'
+
 require('firebase/storage')
 
 let clientUserId
@@ -35,6 +39,15 @@ export const getAuthen = ()=> (dispatch) => {
         if(res.data.friendRequest) {
             dispatch({type: SET_FRIEND_REQUEST, payload: res.data.friendRequest})
         }
+
+        if(res.data.questList) {
+            dispatch({type: SET_QUEST, payload: res.data.questList})
+        }
+
+        if(res.data.achievementList) {
+            dispatch({type: SET_ACHIEVE, payload: res.data.achievementList})
+        }
+
         dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {
@@ -47,7 +60,13 @@ export const login = (userData) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/login', userData).then((res) => {
         clientUserId = res.data.data.userId
+        let coin_exp_lvl = {
+            coin : res.data.data.coin,
+            exp : res.data.data.exp,
+            level : res.data.data.level
+        }
         dispatch({type: SET_USER_DATA, payload: res.data.data})
+        dispatch({type: SET_COIN_EXP_LVL, payload: coin_exp_lvl})
         dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {
@@ -89,6 +108,7 @@ export const editProfile = (blob, updateData) => (dispatch) => {
         const imageName = blob._data.name
         updateData.imageName = imageName
         updateData.clientUserId = clientUserId
+        console.log('have blob')
 
         const task = firebase.storage().ref().child(imageName).put(blob);
 
@@ -100,6 +120,7 @@ export const editProfile = (blob, updateData) => (dispatch) => {
             task.snapshot.ref.getDownloadURL().then((snapshot) => {
                 console.log('success')
             })
+            console.log(imageName)
             axios.post('/editProfile', updateData)
                 .then((res) => {
                     dispatch({type: SET_USER_DATA, payload: res.data.data})
@@ -119,6 +140,8 @@ export const editProfile = (blob, updateData) => (dispatch) => {
         
     } else {
         updateData.imageName = null
+        updateData.clientUserId = clientUserId
+        console.log('dont have blob')
         axios.post('/editProfile', updateData)
                 .then((res) => {
                     dispatch({type: SET_USER_DATA, payload: res.data.data})

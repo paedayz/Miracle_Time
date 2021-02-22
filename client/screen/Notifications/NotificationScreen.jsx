@@ -9,6 +9,7 @@ import {readNotifications} from '../../redux/action/dataAction'
 import NowEvent from './event/EventNotifications'
 
 export default function NotificationScreen({navigation}) {
+  const [isTest , setIsTest]= useState(false)
   const dispatch = useDispatch()
   const allNotifications = useSelector(state => state.data.notifications)
   const [update, setUpdate] = useState(true)

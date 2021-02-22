@@ -11,7 +11,9 @@ import RequestList from './RequestList'
 export default function FriendRequest({navigation, setIsList}) {
     const dispatch = useDispatch()
     
-    const friendList = useSelector(state => state.friend.request)
+    const friendRequest = useSelector(state => state.friend.request)
+
+    const sortFriendRequest = friendRequest.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
     useEffect(() => {
         dispatch(getFriendRequest())
@@ -30,7 +32,7 @@ export default function FriendRequest({navigation, setIsList}) {
     return (
         <View>
             <FlatList
-                data={friendList}
+                data={sortFriendRequest}
                 renderItem={renderItem}
                 keyExtractor={item => item.userId}
             />

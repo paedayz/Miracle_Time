@@ -1,22 +1,52 @@
-import React from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView } from 'react-native';
 import {
-  Avatar,
   Title,
-  Caption,
-  Text,
-  TouchableRipple
 } from 'react-native-paper'
 
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+// Component
+import ArcheivementScreen from './Archieve/ArcheivementScreen'
+import QuestScreen from './Quest/QuestScreen'
 
-export default function AdminScreen({navigation}) {
-    
+export default function admin () {
+  const [mode, setMode] = useState(true)
+
+  const changeMode = () => {
+      setMode(!mode)
+  }
+
+  
+
+  if(mode) {
       return (
         <SafeAreaView style={styles.container}>
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity style={[styles.headerBox, {
+                borderRightColor: '#dddddd',
+                borderRightWidth: 1
+              }]}>
+              <View>
+                <Title>Quest</Title>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.headerBox}
+              onPress={() => changeMode()}>
+              <View>
+              <Title>Archeivement</Title>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <QuestScreen/>
+        </SafeAreaView>
+      )
+  } else {
+      return (
+        <View>
+          <View style={styles.headerBoxWrapper}>
+            <TouchableOpacity  onPress={() => changeMode()}
+                style={[styles.headerBox, {
                 borderRightColor: '#dddddd',
                 borderRightWidth: 1
               }]}>
@@ -29,6 +59,7 @@ export default function AdminScreen({navigation}) {
                 <Title>Archeivement</Title>
               </View>
             </TouchableOpacity>
+
         </View>
 
           <View style={styles.addButton}>
@@ -40,7 +71,9 @@ export default function AdminScreen({navigation}) {
                   color='white'
                 />
               }
-              title='Add Quest'/>
+              title='Add Quest'
+              buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
+              />
           </View>
           
           <View style={styles.questBoxWrapper}>
@@ -56,25 +89,30 @@ export default function AdminScreen({navigation}) {
             </View>
             <View style={styles.editButton}>
               <Button
-                buttonStyle = {{backgroundColor: 'green', width: 70, height: 30}}
+                buttonStyle = {{backgroundColor: '#8C92AC', width: 70, height: 30, borderRadius: 10,}}
                 title='Edit'/>
             </View>
             <View style={styles.deleteButton}>
               <Button
-                buttonStyle = {{backgroundColor: 'red', width: 70, height: 30}}
+                buttonStyle = {{backgroundColor: '#FC7C7C', width: 70, height: 30, borderRadius: 10,}}
                 title='Delete'/>
             </View>
+
           </View>
-        </SafeAreaView>
-      );
+          <ArcheivementScreen/>
+        </View>
+      )
+  }
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: StatusBar.currentHeight
   },
   headerTitle: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   headerBoxWrapper: {
@@ -97,12 +135,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     height: 100,
-    backgroundColor: '#dddddd'
+    backgroundColor: '#FFFFFF'
   },
   questBox: {
     justifyContent: 'flex-start',
     marginVertical: 5,
     marginLeft: 10
+  },
+  deleteBox: {
+    justifyContent: 'center',
+    marginVertical: 10,
+    flexDirection: 'row'
   },
   addButton: {
     margin: 15,
@@ -120,8 +163,47 @@ const styles = StyleSheet.create({
     top: 52,
     left: 300
   },
+  modalButton: 
+  {
+    marginHorizontal: 80,
+    marginVertical: 15,
+    justifyContent: 'center'
+  },
   demo: {
     justifyContent: 'center',
-    margin: 5
-  }
+    padding: 5,
+  },
+  modal:
+  {
+    backgroundColor: '#dddddd',
+    marginHorizontal: 25,
+    marginTop: 60,
+    padding: 30,
+    borderRadius: 10,
+    height: 585
+  },
+  deleteModal:
+  {
+    backgroundColor: '#dddddd',
+    marginVertical: 300,
+    marginHorizontal: 10,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  closeIcon:
+  {
+    color: 'red',
+    marginLeft: 265
+  },
+  input: 
+  {
+      marginBottom: 7,
+      fontSize: 16,
+      borderWidth: 1,
+      borderColor: 'gray',
+      backgroundColor: '#f2f2f2',
+      height: 40
+  },
 });

@@ -5,8 +5,9 @@ import { Button } from 'react-native-elements';
 // Redux
 import {useDispatch, useSelector} from "react-redux"
 import {login, register} from "../../redux/action/userAction"
+import {doQuest} from "../../redux/action/dataAction"
 
-export function Login  () {
+export function Login () {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -17,7 +18,7 @@ export function Login  () {
             email : email,
             password : password
         }
-        
+        dispatch(doQuest('login'))
         dispatch(login(userData))
     }
 
@@ -38,6 +39,7 @@ export function Login  () {
                 <Button
                     onPress={() => onSignUp()}
                     title="Log In"
+                    buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                 />
             </View>
         </View>
@@ -88,6 +90,7 @@ export function Register({setMode}) {
                 <Button 
                     onPress={() => onSignUp()}
                     title="Register"
+                    buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                 />
             </View>
         </View>
@@ -140,7 +143,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
         fontWeight: 'bold',
-        color: '#2289DC',
+        color: '#738FD9',
         marginBottom: 30,
     },
     headerView: {
@@ -159,7 +162,8 @@ const styles = StyleSheet.create({
     button: {
         marginHorizontal: 120,
         marginVertical: 15,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderRadius: 10,
     },
     text: {
         textAlign: 'center',
@@ -169,7 +173,7 @@ const styles = StyleSheet.create({
     footerText: {
         textAlign: 'center',
         fontSize: 16,
-        color: '#2289DC',
+        color: '#738FD9',
         marginHorizontal: 165
     },
     footerView: {

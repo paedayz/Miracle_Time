@@ -7,6 +7,7 @@ export const CLEAR_ERROR = 'CLEAR_ERROR'
 
 // User
 export const SET_USER_DATA = 'SET_USER_DATA'
+export const SET_COIN_EXP_LVL = 'SET_COIN_EXP_LVL'
 
 // Friend
 export const SET_FRIEND_REQUEST = 'SET_FRIEND_REQUEST'
@@ -36,3 +37,23 @@ export const ADD_END_NOTI = 'ADD_END_NOTI'
 export const READ_NOTI = 'READ_NOTI'
 export const TOGGLE_NOTI = 'TOGGLE_NOTI'
 export const DELETE_NOTI = 'DELETE_NOTI'
+
+// Quests
+export const DO_QUEST = 'DO_QUEST'
+export const SET_QUEST = 'SET_QUEST'
+export const CLAIM_QUEST = 'CLAIM_QUEST'
+
+// Admin
+export const SET_ADMIN_QUEST = 'SET_ADMIN_QUEST'
+export const ADD_QUEST = 'ADD_QUEST'
+export const EDIT_QUEST = 'EDIT_QUEST'
+export const DELETE_QUEST = 'DELETE_QUEST'
+
+export const SET_ADMIN_ACHIEVE = 'SET_ADMIN_ACHIEVE'
+export const ADD_ACHIEVE = 'ADD_ACHIEVE'
+export const EDIT_ACHIEVE = 'EDIT_ACHIEVE'
+export const DELETE_ACHIEVE = 'DELETE_ACHIEVE'
+
+// Achieve
+export const SET_ACHIEVE = 'SET_ACHIEVE'
+export const DO_ACHIEVE = 'DO_ACHIEVE'

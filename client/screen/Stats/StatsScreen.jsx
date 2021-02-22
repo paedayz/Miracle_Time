@@ -28,11 +28,17 @@ export default function StatsScreen({navigation}) {
       }
       <View style={styles.btnContainer}>
         <View style={styles.button}>
-          <Button title="Pie Chart" onPress={() => changeGraph(true)}/>
+          <Button 
+          title="Pie Chart" 
+          color='#00D5E3' 
+          onPress={() => changeGraph(true)}/>
         </View>
 
         <View style={styles.button}>
-          <Button title="Bar Chart" onPress={() => changeGraph(false)}/>
+          <Button 
+          title="Bar Chart" 
+          color='#00D5E3' 
+          onPress={() => changeGraph(false)}/>
         </View>
       </View>
       
@@ -53,6 +59,7 @@ const styles = StyleSheet.create({
   },
   button : {
     justifyContent: 'center',
+    borderRadius: 10,
     alignItems: 'center',
     marginBottom: 10
   },
