@@ -40,7 +40,9 @@ export default function AdminScreen({navigation}) {
                   color='white'
                 />
               }
-              title='Add Quest'/>
+              title='Add Quest'
+              buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
+              />
           </View>
           
           <View style={styles.questBoxWrapper}>
@@ -56,12 +58,12 @@ export default function AdminScreen({navigation}) {
             </View>
             <View style={styles.editButton}>
               <Button
-                buttonStyle = {{backgroundColor: 'green', width: 70, height: 30}}
+                buttonStyle = {{backgroundColor: '#8C92AC', width: 70, height: 30, borderRadius: 10,}}
                 title='Edit'/>
             </View>
             <View style={styles.deleteButton}>
               <Button
-                buttonStyle = {{backgroundColor: 'red', width: 70, height: 30}}
+                buttonStyle = {{backgroundColor: '#FC7C7C', width: 70, height: 30, borderRadius: 10,}}
                 title='Delete'/>
             </View>
           </View>
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     height: 100,
-    backgroundColor: '#dddddd'
+    backgroundColor: '#FFFFFF'
   },
   questBox: {
     justifyContent: 'flex-start',

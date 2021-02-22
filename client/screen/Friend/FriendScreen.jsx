@@ -54,8 +54,8 @@ export default function FriendScreen({ navigation }) {
                 clearButtonMode="always"
             />
             </View>
-            <View style={{marginTop:17, marginLeft:30}}>
-            <Button onPress={() => onClickAdd()} title="ADD"/>
+            <View style={{marginTop:17, marginLeft:30,borderRadius: 10}}>
+            <Button onPress={() => onClickAdd()} title="ADD" color="#738FD9" buttonStyle = {{borderRadius: 10}}/>
             </View>
             
         </View>

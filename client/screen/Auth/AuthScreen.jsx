@@ -38,6 +38,7 @@ export function Login  () {
                 <Button
                     onPress={() => onSignUp()}
                     title="Log In"
+                    buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                 />
             </View>
         </View>
@@ -89,6 +90,7 @@ export function Register() {
                 <Button 
                     onPress={() => onSignUp()}
                     title="Register"
+                    buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                 />
             </View>
         </View>
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
         fontWeight: 'bold',
-        color: '#2289DC',
+        color: '#738FD9',
         marginBottom: 30,
     },
     headerView: {
@@ -148,7 +150,8 @@ const styles = StyleSheet.create({
     button: {
         marginHorizontal: 120,
         marginVertical: 15,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderRadius: 10,
     },
     text: {
         textAlign: 'center',
@@ -158,7 +161,7 @@ const styles = StyleSheet.create({
     footerText: {
         textAlign: 'center',
         fontSize: 16,
-        color: '#2289DC',
+        color: '#738FD9',
         marginHorizontal: 165
     },
     footerView: {
