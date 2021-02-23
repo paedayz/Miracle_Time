@@ -20,48 +20,9 @@ const eventData = [
     }
   ];
 
-export default function Barchart({navigation}) {
-  const [visualizeData , setVisualizeData] = useState(eventData)
-  const userEventData = useSelector(state => state.data.events)
+export default function Barchart({navigation, visualizeData}) {
+  const [showData , setShowData] = useState(visualizeData)
 
-  useEffect(() => {
-    countData()
-  },[])
-
-  const countData = () => {
-    let eventTotal = []
-    userEventData.map((event, num) => {
-      if(eventTotal.length !== 0) {
-        let flag = 0
-        let position = 0
-        let cat = ""
-        let totalNow = 0
-        eventTotal.map((data, index) => {
-          if(data.category === event.catagory) {
-            flag = 1
-            position = index
-            cat = data.category
-            totalNow = data.total + 1
-          }
-        })
-
-        if(flag==1) {
-          eventTotal[position] = {category: cat, total: totalNow}
-        } else {
-          eventTotal.push({total: 1, category: event.catagory})
-        }
-
-      } else {
-        eventTotal.push({total: 1, category: event.catagory})
-      }
-    })
-
-    setVisualizeData(eventTotal)
-    
-  }
-
-  
-    
       return (
         <SafeAreaView style={styles.container}>
           
@@ -80,7 +41,7 @@ export default function Barchart({navigation}) {
             <VictoryGroup offset={20}>
               <VictoryBar
                 style={{ data: { fill: "#41aea9" } }}
-                data={visualizeData}
+                data={showData}
                 x="category"
                 y="total"
               />

@@ -1,12 +1,53 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { SafeAreaView, Text, Button, View, StyleSheet } from 'react-native';
 
 // Component
 import Piechart from './Piechart'
 import Barchart from './Barchart'
 
+// Redux
+import {useSelector} from 'react-redux'
+
 export default function StatsScreen({navigation}) {
   const [isPie , setIsPie] = useState(true)
+  const [visualizeBarData , setVisualizeBarData] = useState()
+  const userEventData = useSelector(state => state.data.events)
+
+  useEffect(() => {
+    countBarData()
+  },[])
+
+  const countBarData = () => {
+    let eventTotal = []
+    userEventData.map((event, num) => {
+      if(eventTotal.length !== 0) {
+        let flag = 0
+        let position = 0
+        let cat = ""
+        let totalNow = 0
+        eventTotal.map((data, index) => {
+          if(data.category === event.catagory) {
+            flag = 1
+            position = index
+            cat = data.category
+            totalNow = data.total + 1
+          }
+        })
+
+        if(flag==1) {
+          eventTotal[position] = {category: cat, total: totalNow}
+        } else {
+          eventTotal.push({total: 1, category: event.catagory})
+        }
+
+      } else {
+        eventTotal.push({total: 1, category: event.catagory})
+      }
+    })
+
+    setVisualizeBarData(eventTotal)
+    
+  }
 
   const changeGraph = (data) => {
     setIsPie(data)
@@ -23,7 +64,7 @@ export default function StatsScreen({navigation}) {
       :
         <View>
           <Text style={styles.header}>Bar Chart</Text>
-          <Barchart/>
+          <Barchart visualizeData={visualizeBarData}/>
         </View>
       }
       <View style={styles.btnContainer}>

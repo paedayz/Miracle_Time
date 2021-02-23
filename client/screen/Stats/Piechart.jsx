@@ -6,7 +6,7 @@ import { VictoryChart, VictoryGroup, VictoryBar, VictoryPie } from 'victory-nati
 import {useSelector} from 'react-redux'
 
 //chartgraphic
-const graphicData = [{ y: 40, x: 'work' }, { y: 20, x: 'play' }, { y: 30, x: 'rest' }, { y: 10, x: 'other' }];
+const graphicData = [{ y: 40, x: 'loading' }];
 const graphicColor = ['#008891', '#41aea9', '#a8dda8', '#d2f5e3', '#2ec1ac', "#ade498" ];
 
 export default function Piechart({navigation}) {
