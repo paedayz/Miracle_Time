@@ -37,7 +37,6 @@ export default function admin () {
               </View>
             </TouchableOpacity>
           </View>
-
           <QuestScreen/>
         </SafeAreaView>
       )
@@ -70,7 +69,6 @@ export default function admin () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight
   },
   headerTitle: {
     fontSize: 20,
