@@ -4,22 +4,37 @@ import {StyleSheet, SafeAreaView, Text, Image, View, TouchableOpacity, Button } 
 // Redux
 import {useSelector} from 'react-redux'
 
+//dayjs
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+import localeData from 'dayjs/plugin/localeData'
 
 
 export default function Ask_Advice() {
 
     const eventData = useSelector(state => state.data.events)
-
+    
     //Set time
-    let date = new Date()
-    let Now = new Date()
-    let Today = Now
+    // dayjs.extend(relativeTime);
+    dayjs.extend(localeData)
+    dayjs.extend(utc)
+    dayjs.extend(timezone)
+
+    // dayjs.tz.setDefault(ia/Bangkok")
+    const Now = new Date()
+    const date = dayjs(Now.toLocaleString()).tz("Asia/Bangkok", true)
+    // const date = dayjs()"As
+    
+    const Today = new Date(Now.toLocaleString())
     Today.setHours(0)
     Today.setMinutes(0)
     Today.setMilliseconds(0)
-    let ToMorrow = new Date();
+    const ToMorrow = new Date();
     ToMorrow.setDate(Today.getDate() + 1);
-    //use
+    
+
     let num_foreach_event = [];
     const default_task = ["อ่านหนังสือ","พักผ่อน","ดูหนัง","ฟังเพลง","เล่นเกม"]
 
@@ -30,7 +45,7 @@ export default function Ask_Advice() {
     
     const CountEvent =(Event_Name) =>{
         if (num_foreach_event.length === 0) {
-            num_foreach_event = [{Event_Name :Event_Name, start: 1}]
+            num_foreach_event = [{Event_Name :Event_Name, count_event: 1}]
         }else{
             let IsPushEvent = false
             let count = num_foreach_event.length
@@ -38,10 +53,10 @@ export default function Ask_Advice() {
             num_foreach_event.map(item => {
                 count--;
                 if(item.Event_Name == Event_Name){
-                    item.start++;
+                    item.count_event++;
                     IsPushEvent = true;
                 }else if( !IsPushEvent && count == 0 ){
-                    num_foreach_event.push({Event_Name : Event_Name, start: 1})
+                    num_foreach_event.push({Event_Name : Event_Name, count_event: 1})
                 }
             })
         } 
@@ -53,14 +68,23 @@ export default function Ask_Advice() {
         }else{
             let Today_task = eventData.filter((E) => {
                 let timeEvent = new Date(E.date+"T"+E.end)
-                if(timeEvent > Today && timeEvent < ToMorrow && E.success === false)return true;
+                // console.log("Event is ",E)
+                // console.log("*****")
+                // console.log("Time event is ",timeEvent)
+                // console.log("*****")
+                if(timeEvent > Today && timeEvent < ToMorrow && E.success == false){
+                // if(timeEvent < ToMorrow ){
+                    // console.log("Event is ",E)
+                    return true;   
+                }
+                // console.log("Time event is ",timeEvent)
             })
-
+            // console.log(Today_task)
             if(Today_task.length !=0){
                Today_task.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
                 let Next = Next_Task(Today_task)
                 let words = " ไปทำ "+Next.event+" ซะนะ" 
-                return words;     
+                return " ไปทำ "+Next.event+" ซะนะ" ;     
             }else{
                 return false;
             }  
@@ -95,10 +119,10 @@ export default function Ask_Advice() {
                 num_foreach_event.sort((a,b) => (a.start < b.start) ? 1 : ((b.start < a.start) ? -1 : 0))
             })
             const Top_5_Event = (num_foreach_event.length < 5) ? (num_foreach_event):(num_foreach_event.slice(0,5))
-            let randomEvent = Random(Top_5_Event).Event_Name  
+            const randomEvent = Random(Top_5_Event).Event_Name  
             return ("ว่างเเล้วอยาก "+randomEvent+" ไหมละ")
         }else{
-            let randomEvent = Random(default_task);
+            const randomEvent = Random(default_task);
             return ("ว่างเเล้วอยาก "+randomEvent+" ไหมละ")
         }
     }
@@ -107,8 +131,11 @@ export default function Ask_Advice() {
     
     console.log("================================")
     // console.log("Today is ",Today)
-    console.log("Now is ",Now.toLocaleString())
+    // console.log("Now is ",Now)
     // console.log("Tomorrow is ",ToMorrow)
+    // console.log("dayjs ",Now.getTimezoneOffset())
+    // console.log(typeof date)
+    // console.log("Event",eventData)
     return (
         <View>
            <Text>{advice}</Text> 

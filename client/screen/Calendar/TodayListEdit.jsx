@@ -149,7 +149,7 @@ const Edittodaylist = () => {
                 </View>   
 
                 <View  style={{width: 95, height: 50,alignItems:'center',marginLeft: 93,marginTop:10}}>
-                        <Button title='submit' color='#90ee90' onPress={props.handleSubmit}></Button>
+                        <Button title='submit' color='#29AB87' onPress={props.handleSubmit}></Button>
                 </View>
 
                 </View>

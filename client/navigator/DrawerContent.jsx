@@ -82,6 +82,17 @@ export function DrawerContent(props){
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
+                                <Icon 
+                                name="crown-outline" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Tips"
+                            onPress={() => {props.navigation.navigate('Tips')}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
                                 <FontAwesome 
                                 name="gears" 
                                 color={color}

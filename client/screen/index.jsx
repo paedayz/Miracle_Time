@@ -2,6 +2,17 @@ import React, {useEffect, useState} from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import {
+    BallIndicator,
+    BarIndicator,
+    DotIndicator,
+    MaterialIndicator,
+    PacmanIndicator,
+    PulseIndicator,
+    SkypeIndicator,
+    UIActivityIndicator,
+    WaveIndicator,
+  } from 'react-native-indicators';
 
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
@@ -16,6 +27,8 @@ import ProfileStackScreen from './Profile/ProfileStack'
 import AdminStackScreen from './Admin/AdminStack'
 import NotificationStackScreen from './Notifications/NotificationStack'
 import FriendStackScreen from './Friend/FriendStackScreen'
+
+import TipsStack from './Tips/TipsStack'
 
 // Naviation
 import BottomTabNavigator from '../navigator/BottomTabNavigator'
@@ -40,7 +53,7 @@ export default function Screen({navigation}) {
     if(loading) {
         return (
             <SafeAreaView style={{ flex: 1 , justifyContent: 'center', alignItems: 'center'}}>
-                <Text>Loading</Text>
+                <PacmanIndicator color='#2289DC' />
             </SafeAreaView>
         )
     }
@@ -53,6 +66,7 @@ export default function Screen({navigation}) {
                 <Drawer.Screen name="Admin" component={AdminStackScreen} />
                 <Drawer.Screen name="Notifications" component={NotificationStackScreen} />
                 <Drawer.Screen name="Friend" component={FriendStackScreen} />
+                <Drawer.Screen name="Tips" component={TipsStack} />
             </Drawer.Navigator>
         )
         

@@ -44,6 +44,11 @@ export default function QuestArchieveScreen ({navigation}) {
           </View>
           <QuestBuff/>
         </View>
+        <View style={styles.claimButton}>
+          <Button
+            buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
+            title='Claim'/>
+
       )
   } else {
       return (
@@ -105,7 +110,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     height: 100,
-    backgroundColor: '#dddddd'
+    backgroundColor: '#FFFFFF'
   },
   questBox: {
     justifyContent: 'flex-start',

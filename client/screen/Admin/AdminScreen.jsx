@@ -58,6 +58,45 @@ export default function admin () {
                 <Title>Archeivement</Title>
               </View>
             </TouchableOpacity>
+
+        </View>
+
+          <View style={styles.addButton}>
+            <Button
+              icon={
+                <Icon
+                  name="plus"
+                  size={20}
+                  color='white'
+                />
+              }
+              title='Add Quest'
+              buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
+              />
+          </View>
+          
+          <View style={styles.questBoxWrapper}>
+            <View style={styles.demo}>
+              <Icon 
+                name='trophy'
+                size={50}/>
+            </View>
+            <View style={styles.questBox}>
+              <Title style={styles.headerTitle}>Quest</Title>
+              <Text>Quest detail</Text>
+              <Text>Quest start - Quest end</Text>
+            </View>
+            <View style={styles.editButton}>
+              <Button
+                buttonStyle = {{backgroundColor: '#8C92AC', width: 70, height: 30, borderRadius: 10,}}
+                title='Edit'/>
+            </View>
+            <View style={styles.deleteButton}>
+              <Button
+                buttonStyle = {{backgroundColor: '#FC7C7C', width: 70, height: 30, borderRadius: 10,}}
+                title='Delete'/>
+            </View>
+
           </View>
           <ArcheivementScreen/>
         </View>
@@ -94,7 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     height: 100,
-    backgroundColor: '#dddddd'
+    backgroundColor: '#FFFFFF'
   },
   questBox: {
     justifyContent: 'flex-start',
