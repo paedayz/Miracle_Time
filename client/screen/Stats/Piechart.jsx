@@ -1,93 +1,71 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, Button, Alert,View} from 'react-native';
-import { VictoryChart, VictoryGroup, VictoryBar, VictoryPie, VictoryTooltip } from 'victory-native';
+import { VictoryChart, VictoryGroup, VictoryBar, VictoryPie } from 'victory-native';
+
+// Redux
+import {useSelector} from 'react-redux'
 
 //chartgraphic
 const graphicData = [{ y: 40, x: 'work' }, { y: 20, x: 'play' }, { y: 30, x: 'rest' }, { y: 10, x: 'other' }];
 const graphicColor = ['#008891', '#41aea9', '#a8dda8', '#d2f5e3', '#2ec1ac', "#ade498" ];
 
-const eventData = [
-    {
-      date : "2021-01-19",
-      detail : "with family",
-      event : "Running",
-      key : "0.9971451494954678",
-      rank : "1",
-      start: "10.00",
-      end: "12.00",
-      total: 2,
-      category: "rest"
-    },
-    {
-      date : "2021-01-19",
-      detail : "with family",
-      event : "Running",
-      key : "0.9971451494954678",
-      rank : "1",
-      start: "15.00",
-      end: "18.00",
-      total: 3,
-      category: "work"
-    },
-    {
-      date : "2021-01-20",
-      detail : "LOL",
-      event : "game",
-      key : "0.9971451494954678",
-      rank : "1",
-      start: "00.00",
-      end: "04.00",
-      total: 4,
-      category: "play"
-    },
-    {
-      date : "2021-01-19",
-      detail : "with family",
-      event : "Running",
-      key : "0.9971451494954678",
-      rank : "1",
-      start: "19.00",
-      end: "20.00",
-      total: 1,
-      category: "other"
-    },
-    {
-      date : "2021-01-21",
-      detail : "1234",
-      event : "running",
-      key : "0.9971451494954678",
-      rank : "1",
-      start: "08.00",
-      end: "09.00",
-      total: 1,
-      category: "exercire"
-      },
-  ];
-
 export default function Piechart({navigation}) {
+  const [visualizeData , setVisualizeData] = useState(graphicData)
+  const userEventData = useSelector(state => state.data.events)
+
+  useEffect(() => {
+    countData()
+  },[])
+
+  const countData = () => {
+    let eventTotal = []
+    userEventData.map((event, num) => {
+      if(eventTotal.length !== 0) {
+        let flag = 0
+        let position = 0
+        let cat = ""
+        let totalNow = 0
+        eventTotal.map((data, index) => {
+          if(data.x === event.catagory) {
+            flag = 1
+            position = index
+            cat = data.x
+            totalNow = data.y + 1
+          }
+        })
+
+        if(flag==1) {
+          eventTotal[position] = {x: cat, y: totalNow}
+        } else {
+          eventTotal.push({y: 1, x: event.catagory})
+        }
+
+      } else {
+        eventTotal.push({y: 1, x: event.catagory})
+      }
+    })
+
+    setVisualizeData(eventTotal)
     
+  }
       return (
         <SafeAreaView style={styles.container}>
-            <VictoryGroup>
             <VictoryPie 
-                data={eventData}
-                x="category" 
-                y="total"
-                labels={c => `${c.category}`}
+                data={visualizeData} 
                 width={330} 
                 height={330} 
                 colorScale={graphicColor} 
                 innerRadius={85} 
-                
+                labels={({ datum }) => `${datum.x}`}
             />
-            </VictoryGroup>
         </SafeAreaView>
       );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 2/4,
+    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 30
   },
 });
