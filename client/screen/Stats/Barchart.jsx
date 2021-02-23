@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, Button, Alert,View, Dimensions} from 'react-native';
 import { VictoryChart, VictoryGroup, VictoryBar, VictoryPie, VictoryLegend, VictoryAxis } from 'victory-native';
+
+// Redux
+import {useSelector} from 'react-redux'
 
 //chartdata
 const eventData = [
@@ -12,59 +15,52 @@ const eventData = [
       rank : "1",
       start: "10.00",
       end: "12.00",
-      total: 2,
+      total: 0,
       category: "rest"
-    },
-    {
-      date : "2021-01-19",
-      detail : "with family",
-      event : "Running",
-      key : "0.9971451494954678",
-      rank : "1",
-      start: "15.00",
-      end: "18.00",
-      total: 3,
-      category: "work"
-    },
-    {
-      date : "2021-01-20",
-      detail : "LOL",
-      event : "game",
-      key : "0.9971451494954678",
-      rank : "1",
-      start: "00.00",
-      end: "04.00",
-      total: 4,
-      category: "play"
-    },
-    {
-      date : "2021-01-19",
-      detail : "with family",
-      event : "Running",
-      key : "0.9971451494954678",
-      rank : "1",
-      start: "19.00",
-      end: "20.00",
-      total: 1,
-      category: "other"
-    },
-    {
-      date : "2021-01-21",
-      detail : "1234",
-      event : "running",
-      key : "0.9971451494954678",
-      rank : "1",
-      start: "08.00",
-      end: "09.00",
-      total: 1,
-      category: "exercire"
-      },
+    }
   ];
 
-  
-  
-
 export default function Barchart({navigation}) {
+  const [visualizeData , setVisualizeData] = useState(eventData)
+  const userEventData = useSelector(state => state.data.events)
+
+  useEffect(() => {
+    countData()
+  },[])
+
+  const countData = () => {
+    let eventTotal = []
+    userEventData.map((event, num) => {
+      if(eventTotal.length !== 0) {
+        let flag = 0
+        let position = 0
+        let cat = ""
+        let totalNow = 0
+        eventTotal.map((data, index) => {
+          if(data.category === event.catagory) {
+            flag = 1
+            position = index
+            cat = data.category
+            totalNow = data.total + 1
+          }
+        })
+
+        if(flag==1) {
+          eventTotal[position] = {category: cat, total: totalNow}
+        } else {
+          eventTotal.push({total: 1, category: event.catagory})
+        }
+
+      } else {
+        eventTotal.push({total: 1, category: event.catagory})
+      }
+    })
+
+    setVisualizeData(eventTotal)
+    
+  }
+
+  
     
       return (
         <SafeAreaView style={styles.container}>
@@ -74,7 +70,7 @@ export default function Barchart({navigation}) {
             <VictoryAxis label=""/>
             <VictoryAxis 
               dependentAxis 
-              label="Hours"
+              label="amount"
               style={{
                 axisLabel: {
                 padding: 35,
@@ -84,7 +80,7 @@ export default function Barchart({navigation}) {
             <VictoryGroup offset={20}>
               <VictoryBar
                 style={{ data: { fill: "#41aea9" } }}
-                data={eventData}
+                data={visualizeData}
                 x="category"
                 y="total"
               />

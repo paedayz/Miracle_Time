@@ -6,7 +6,7 @@ import Piechart from './Piechart'
 import Barchart from './Barchart'
 
 export default function StatsScreen({navigation}) {
-  const [isPie , setIsPie] = useState(true)
+  const [isPie , setIsPie] = useState(false)
 
   const changeGraph = (data) => {
     setIsPie(data)
