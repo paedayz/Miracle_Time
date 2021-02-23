@@ -8,64 +8,14 @@ import {
   TouchableRipple
 } from 'react-native-paper'
 
-import { Button, colors } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 // Component
-import Quest from './Quest/Quest'
+import QuestBuff from './Quest/QuestBuff'
+import AchieveBuff from './Achieve/AchieveBuff'
 
 // Redux
-import {getUserQuest} from '../../redux/action/dataAction'
-import {useDispatch, useSelector} from 'react-redux'
 
-export function Archeivement() {
-    
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.questBoxWrapper}>
-        <View style={styles.demo}>
-          <Icon 
-              name='trophy'
-              size={50}/>
-        </View>
-        <View style={styles.questBox}>
-          <Title style={styles.headerTitle}>Archeivement</Title>
-          <Text>Archeivement detail</Text>
-          <Text>Archeivement time</Text>
-        </View>
-        <View style={styles.claimButton}>
-          <Button
-            buttonStyle = {{width: 70, height: 30}}
-            title='Claim'/>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-}
-
-export default function QuestArchieveScreen () {
+export default function QuestArchieveScreen ({navigation}) {
   const [mode, setMode] = useState(true)
-  const questList = useSelector(state => state.data.questList)
-
-  const dispatch = useDispatch()
-  console.log(questList)
-
-  useEffect(() => {
-    dispatch(getUserQuest())
-  },[])
-
-  const Item = ({data}) => {
-    let questData = data
-    console.log(questData)
-      
-    return (
-        <Quest questData={questData.item}/>
-    )
-  };
-
-  const renderItem = (questList) => (
-    <Item data={questList} />
-  );
 
   const changeMode = () => {
       setMode(!mode)
@@ -92,12 +42,13 @@ export default function QuestArchieveScreen () {
               </View>
             </TouchableOpacity>
           </View>
-          <FlatList
-            data={questList}
-            renderItem={renderItem}
-            keyExtractor={item => item.docId}
-          />
+          <QuestBuff/>
         </View>
+        <View style={styles.claimButton}>
+          <Button
+            buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
+            title='Claim'/>
+
       )
   } else {
       return (
@@ -120,7 +71,7 @@ export default function QuestArchieveScreen () {
               </View>
             </TouchableOpacity>
           </View>
-          <Archeivement />
+          <AchieveBuff/>
         </View>
       )
   }
@@ -159,7 +110,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     height: 100,
-    backgroundColor: '#dddddd'
+    backgroundColor: '#FFFFFF'
   },
   questBox: {
     justifyContent: 'flex-start',

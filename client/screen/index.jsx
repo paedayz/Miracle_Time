@@ -17,18 +17,18 @@ import {
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
 import {getAuthen} from '../redux/action/userAction'
-import {getAllEvents} from '../redux/action/dataAction'
-import {getAdminQuestList} from '../redux/action/adminAction'
+import {getAdminQuestList, getAdminAchievementList} from '../redux/action/adminAction'
 
 // Screen
 import AuthScreen from './Auth/AuthScreen'
-import PetScreen from './Pet/PetScreen'
 
 // Stack
 import ProfileStackScreen from './Profile/ProfileStack'
 import AdminStackScreen from './Admin/AdminStack'
 import NotificationStackScreen from './Notifications/NotificationStack'
 import FriendStackScreen from './Friend/FriendStackScreen'
+
+import TipsStack from './Tips/TipsStack'
 
 // Naviation
 import BottomTabNavigator from '../navigator/BottomTabNavigator'
@@ -42,18 +42,12 @@ export default function Screen({navigation}) {
     const userEventData = useSelector(state => state.data.events)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if(userData) {
-            dispatch(getAuthen())
-        }
-
-        if(userData && userData.status === 'admin') {
+    if(userData && userEventData.length == 0){
+        if(userData.status === 'admin') {
             dispatch(getAdminQuestList())
+            dispatch(getAdminAchievementList())
         }
-    }, [userData])
-
-    if(userData && !userEventData){
-        dispatch(getAllEvents())
+        dispatch(getAuthen())
     }
 
     if(loading) {
@@ -72,6 +66,7 @@ export default function Screen({navigation}) {
                 <Drawer.Screen name="Admin" component={AdminStackScreen} />
                 <Drawer.Screen name="Notifications" component={NotificationStackScreen} />
                 <Drawer.Screen name="Friend" component={FriendStackScreen} />
+                <Drawer.Screen name="Tips" component={TipsStack} />
             </Drawer.Navigator>
         )
         

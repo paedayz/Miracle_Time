@@ -23,7 +23,6 @@ exports.signup = (req, res) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        console.log("username same");
         return res.status(400).json({
           username: "This username is already taken",
         });
@@ -45,6 +44,17 @@ exports.signup = (req, res) => {
           questStatus: 'in_progress',
           questDone: 0,
           questType: doc.data().questType
+        })
+      })
+      return firestore.collection('achievements').get()
+    })
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        firestore.collection('achievement_user').add({
+          username: newUser.username,
+          achievementId: doc.id,
+          achievementStatus: 'in_progress',
+          achievementDone: 0,
         })
       })
     })
@@ -93,6 +103,7 @@ exports.login = (req, res) => {
   let username
   let last_login
   let midnight
+  let loginQuestId
   //   const { valid, errors } = validateLoginData(user);
 
   //   if (!valid) return res.status(400).json(errors);
@@ -110,12 +121,18 @@ exports.login = (req, res) => {
         last_login = new Date(doc.data().last_login)
         username = doc.id
       })
+      return firestore.collection('quests').where('questAction', '==', 'login').get()
+    })
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        loginQuestId = doc.id
+      })
       return firestore.collection('quest_user').where('username', '==', username).get()
     })
     .then(async (snapshot) => {
       if(snapshot.size > 0 && last_login - midnight <= 0){
         const resetQuestReqPromise = snapshot.forEach((doc) => {
-          if(doc.data().questType === 'Daily') {
+          if((doc.data().questType === 'Daily' && doc.data().questId !== loginQuestId) || doc.data().questStatus === 'quest_claim') {
             return firestore.doc(`quest_user/${doc.id}`).update({questDone:0, questStatus: 'in_progress'})
           } else {
             return 'not daily'
@@ -165,6 +182,7 @@ exports.checkAuthen = (req, res) => {
   let friendRequest = [];
   let friendList = [];
   let questList = []
+  let achievementList = []
 
   let friendListToFetch = [];
   let friendRequestToFetch = [];
@@ -283,6 +301,35 @@ exports.checkAuthen = (req, res) => {
                           .catch((err) => {
                             return err
                           })
+      return firestore
+      .collection("achievement_user")
+      .where("username", "==", userData.username)
+      .get();
+    })
+    .then(async(snapshot) => {
+      let achievementDataPromise = snapshot.forEach((doc) => {
+        let achievementDone = doc.data().achievementDone
+        let docId = doc.id
+        let achievementStatus = doc.data().achievementStatus
+        let achievementType = doc.data().achievementType
+        return firestore.doc(`/achievements/${doc.data().achievementId}`).get()
+                .then((data) => {
+                  let resData = data.data()
+                  resData.achievementDone = achievementDone
+                  resData.docId = docId
+                  resData.achievementStatus = achievementStatus
+                  resData.achievementType = achievementType
+                  achievementList.push(resData)
+                  return resData
+                })
+      })
+      let waitPromise = await Promise.all(achievementDataPromise)
+                          .then((data) => {
+                            return data
+                          })
+                          .catch((err) => {
+                            return err
+                          })
       return waitPromise
     })
     .then(() => {
@@ -324,7 +371,8 @@ exports.checkAuthen = (req, res) => {
         userData: userData,
         friendList: friendList,
         friendRequest: friendRequest,
-        questList: questList
+        questList: questList,
+        achievementList: achievementList
       };
       return res.json(resData);
     })

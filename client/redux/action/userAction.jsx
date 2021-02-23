@@ -9,7 +9,9 @@ import {
     SET_UNREAD_NOTI,
     SET_FRIEND_REQUEST,
     SET_FRIEND_LIST,
-    SET_QUEST
+    SET_QUEST,
+    SET_COIN_EXP_LVL,
+    SET_ACHIEVE
 } from '../type'
 import firebase from 'firebase'
 
@@ -41,6 +43,10 @@ export const getAuthen = ()=> (dispatch) => {
             dispatch({type: SET_QUEST, payload: res.data.questList})
         }
 
+        if(res.data.achievementList) {
+            dispatch({type: SET_ACHIEVE, payload: res.data.achievementList})
+        }
+
         dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {
@@ -53,7 +59,13 @@ export const login = (userData) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/login', userData).then((res) => {
         clientUserId = res.data.data.userId
+        let coin_exp_lvl = {
+            coin : res.data.data.coin,
+            exp : res.data.data.exp,
+            level : res.data.data.level
+        }
         dispatch({type: SET_USER_DATA, payload: res.data.data})
+        dispatch({type: SET_COIN_EXP_LVL, payload: coin_exp_lvl})
         dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {

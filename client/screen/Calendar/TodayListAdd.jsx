@@ -9,7 +9,7 @@ import moment from 'moment'
 
 // Redux
 import { useDispatch } from 'react-redux'
-import {addEvent} from '../../redux/action/dataAction'
+import {addEvent, doQuest} from '../../redux/action/dataAction'
 
 const Addtodaylist = (props) => {
 
@@ -56,6 +56,7 @@ const Addtodaylist = (props) => {
                     values.start = startTime
                     values.end = endTime
                     dispatch(addEvent(values))
+                    dispatch(doQuest('createEvent'))
                     props.setModalOpen(false)
                 }}
             >
@@ -193,7 +194,11 @@ const Addtodaylist = (props) => {
                        
                         
                         <View  style={{width: 95, height: 50,alignItems:'center',marginLeft: 93,marginTop:10}}>
-                                <Button title='submit' color='#90ee90' onPress={props.handleSubmit}></Button>
+                                <Button 
+                                title='submit' 
+                                color='#29AB87'
+                                buttonStyle = {{borderRadius: 10}} 
+                                onPress={props.handleSubmit}></Button>
                         </View>
                        
                 </View>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigation} from '@react-navigation/native'
 import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import {
   Avatar,
@@ -12,12 +13,30 @@ import {
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function Archeivement () {
+// Redux
+import {useDispatch} from 'react-redux'
+import {deleteAchievement} from '../../../redux/action/adminAction'
+
+// Component
+import EditAchievementModal from './EditAchievementModal'
+
+export default function Acheivement ({achievementData}) {
     const [modalOpenEdit, setModalOpenEdit] = useState(false)
     const [modalOpenDelete, setModalOpenDelete] = useState(false)
+    const {achievementDetail, achievementName, docId} = achievementData.item
+
+    const navigation = useNavigation()
+
+    const dispatch = useDispatch()
+
+    const onDeleteSubmit = () => {
+      dispatch(deleteAchievement(docId))
+      setModalOpenDelete(false)
+    }
   
     return (
       <SafeAreaView style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate('adminAchievementDetail', achievementData.item)}>
         <View style={styles.questBoxWrapper}>
           <View style={styles.demo}>
             <Icon 
@@ -25,9 +44,10 @@ export default function Archeivement () {
               size={50}/>
           </View>
           <View style={styles.questBox}>
-            <Title style={styles.headerTitle}>Archeivement</Title>
-            <Text>Archeivement detail</Text>
-            <Text>Archeivement time</Text>
+            <Title style={styles.headerTitle}>{achievementName}</Title>
+            <View style={{maxWidth: 200}}>
+              <Text>{achievementDetail}</Text>
+            </View>
           </View>
           <View style={styles.editButton}>
             <Button
@@ -35,42 +55,7 @@ export default function Archeivement () {
               title='Edit'
               onPress={() => setModalOpenEdit(true)}/>
             <Modal transparent={true} visible={modalOpenEdit}>
-              <View style={styles.modal}>
-              <Icon 
-                      name="close"
-                      size={20} 
-                      style={styles.closeIcon}
-                      onPress={() => setModalOpenEdit(false)}
-                  />
-                <View style={styles.questBox}>
-                  <Title style={styles.headerTitle}>Edit Archeivement</Title>
-                  <Text>Archeivement name</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <Text>Archeivement detail</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <Text>Archeivement EXP</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <Text>Archeivement coin</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <Text>Archeivement time</Text>
-                  <TextInput style={styles.input}
-                    placeholder="Please enter your text"
-                  />
-                  <View style={styles.modalButton}>
-                    <Button 
-                        title="Save"
-                    />
-                  </View>
-                </View>
-              </View>
+              <EditAchievementModal setModalOpenEdit={setModalOpenEdit} achievementData={achievementData.item}/>
             </Modal>
           </View>
           <View style={styles.deleteButton}>
@@ -86,6 +71,7 @@ export default function Archeivement () {
                         <View style={{margin: 5, width: 70, height: 30}}>
                         <Button 
                             title="Yes"
+                            onPress={() => onDeleteSubmit()}
                         />
                         </View>
                         <View style={{margin: 5, width: 70, height: 30}}>
@@ -100,6 +86,7 @@ export default function Archeivement () {
               </Modal>
           </View>
         </View>
+        </TouchableOpacity>
       </SafeAreaView>
     );
   }

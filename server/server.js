@@ -37,6 +37,8 @@ let {
 
 let {addQuest, adminGetQuestList, doQuest, deleteQuest, editQuest, getUserQuest, claimQuest} = require('./handler/quest')
 
+let {addAchievement, adminGetAchievementList, doAchievement, deleteAchievement, editAchievement, getUserAchievement,} = require('./handler/achievement')
+
 // User Route
 app.post('/signup',signup)
 app.post('/login', login)
@@ -68,6 +70,15 @@ app.post('/deleteQuest', FBAuth, deleteQuest)
 app.post('/editQuest', FBAuth, editQuest)
 app.post('/getUserQuest', FBAuth, getUserQuest)
 app.post('/claimQuest', FBAuth, claimQuest)
+
+// Achievement Route
+app.post('/addAchievement', FBAuth, addAchievement)
+app.post('/adminGetAchievementList', FBAuth, adminGetAchievementList)
+app.post('/doAchievement', FBAuth, doAchievement)
+app.post('/deleteAchievement', FBAuth, deleteAchievement)
+app.post('/editAchievement', FBAuth, editAchievement)
+app.post('/getUserAchievement', FBAuth, getUserAchievement)
+
 
 app.listen(app.get("port"), function () {
     console.log("run at port", app.get("port"));

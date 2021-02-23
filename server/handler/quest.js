@@ -163,10 +163,10 @@ exports.editQuest = (req, res) => {
     const mainQuestId = req.body.questId
     const updateQuestData = req.body.updateQuestData
     const resData = updateQuestData
-    resData.questId = mainQuestId
 
     firestore.doc(`/quests/${mainQuestId}`).update(updateQuestData)
         .then(() => {
+            resData.questId = mainQuestId
             return firestore.doc(`/quests/${mainQuestId}`).get()
         })
         .then((doc) => {
@@ -208,10 +208,10 @@ exports.getUserQuest = (req, res) => {
                                         questList[num].questStatus = quest.questStatus
                                         questList[num].questType = quest.questType
                                         questList[num].username = quest.username
-                                        questList[num].docId = quest.docId
+                                        questList[num].docId = quest.docId,
+                                        questList[num].questId = quest.questId
                                         num = num+1
                                     })
-                                    console.log(userQuest)
                                     return res.json({data: questList})
                                 })
                                 .catch((err) => {
@@ -231,7 +231,7 @@ exports.claimQuest = (req, res) => {
     let userDataExp
     let userDataLevel
     let userDoneQuest
-    firestore.doc(`/quest_user/${docId}`).update({questStatus: 'claimed'})
+    firestore.doc(`/quest_user/${docId}`).update({questStatus: 'quest_claim'})
         .then(() => {
 
             return firestore.doc(`/quest_user/${docId}`).get()

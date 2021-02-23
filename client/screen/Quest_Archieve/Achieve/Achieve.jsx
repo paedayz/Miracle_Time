@@ -13,67 +13,53 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Redux
 import {useDispatch} from 'react-redux'
-import {claimQuest} from '../../../redux/action/dataAction'
 
-export default function Quest({questData}) {
+export default function Achievement({achievementData}) {
 
   const dispatch = useDispatch()
 
   const {
     docId, 
-    questAction, 
-    questCoin, 
-    questDetail, 
-    questDone, 
-    questExp, 
-    questName, 
-    questRequirement, 
-    questStatus, 
-    questType,
-    questId
-    } = questData
-
-
-    const cliamClick = () => {
-      dispatch(claimQuest(docId, questId))
-    }
+    achievementAction, 
+    achievementCoin, 
+    achievementDetail, 
+    achievementDone, 
+    achievementExp, 
+    achievementName, 
+    achievementRequirement, 
+    achievementStatus, 
+    achievementType,
+    achievementId
+    } = achievementData
 
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.questBoxWrapper}>
+        <View style={styles.achievementBoxWrapper}>
           <View style={styles.demo}>
             <Icon 
-                name='trophy'
+                name='medal-outline'
                 size={50}/>
           </View>
-          <View style={styles.questBox}>
-            <Title style={styles.headerTitle}>{questName}</Title>
+          <View style={styles.achievementBox}>
+            <Title style={styles.headerTitle}>{achievementName}</Title>
             <View style={{maxWidth:200, minWidth: 180}}>
-                <Text>{questDetail}</Text>
+                <Text>{achievementDetail}</Text>
             </View>
           </View>
-          {questStatus === 'quest_success' 
+          {achievementStatus === 'achievement_success' 
             &&
           <View style={styles.claimButton}>
             <Button
                 buttonStyle = {{width: 70, height: 30}}
-                title='Claim'
-                onPress={() => cliamClick()}
+                title='Success'
             />
           </View>
           }
 
-          {questStatus === 'in_progress'
+          {achievementStatus === 'in_progress'
             && 
             <View >
-              <Text style={styles.questDone}>{questDone}/{questRequirement}</Text>
-            </View>
-          }
-
-          {questStatus === 'quest_claim'
-            && 
-            <View >
-              <Text style={styles.questClaim}>Already Claim</Text>
+              <Text style={styles.achievementDone}>{achievementDone}/{achievementRequirement}</Text>
             </View>
           }
           
@@ -108,7 +94,7 @@ export default function Quest({questData}) {
       alignItems: 'center',
       justifyContent: 'center',
     },
-    questBoxWrapper: {
+    achievementBoxWrapper: {
       margin: 5,
       borderColor: '#dddddd',
       borderWidth: 1,
@@ -117,7 +103,7 @@ export default function Quest({questData}) {
       height: 100,
       backgroundColor: '#dddddd'
     },
-    questBox: {
+    achievementBox: {
       justifyContent: 'flex-start',
       marginVertical: 5,
       marginLeft: 10
@@ -132,12 +118,12 @@ export default function Quest({questData}) {
       justifyContent: 'center',
       margin: 5
     },
-    questDone: {
+    achievementDone: {
         fontSize: 20,
         marginLeft: 55,
         marginTop: 30
     },
-    questClaim: {
+    achievementClaim: {
       fontSize: 15,
       marginLeft: 40,
       marginTop: 30,

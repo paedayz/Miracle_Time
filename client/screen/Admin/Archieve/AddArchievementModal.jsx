@@ -12,7 +12,30 @@ import {
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// Redux
+import {useDispatch} from 'react-redux'
+import {addAchievement} from '../../../redux/action/adminAction'
+
 export default function AddQuestModal({setModalOpenAdd}) {
+  const [achievementName, setAchievementName] = useState()
+  const [achievementDetail, setAchievementDetail] = useState()
+  const [achievementAction, setAchievementAction] = useState()
+  const [achievementRequirement, setAchievementRequirement] = useState()
+
+  const dispatch = useDispatch()
+
+  const onSubmit = () => {
+    let achievementData = {
+      achievementName : achievementName,
+      achievementDetail : achievementDetail,
+      achievementAction : achievementAction,
+      achievementRequirement : achievementRequirement,
+    }
+
+    dispatch(addAchievement(achievementData))
+    setModalOpenAdd(false)
+  }
+
     return (
         <View style={styles.modal}>
                 <Icon 
@@ -23,29 +46,36 @@ export default function AddQuestModal({setModalOpenAdd}) {
                     />
                   <View style={styles.questBox}>
                     <Title style={styles.headerTitle}>Add Archeivement</Title>
+
                     <Text>Archeivement name</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setAchievementName(data)}
                     />
+
                     <Text>Archeivement detail</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setAchievementDetail(data)}
                     />
-                    <Text>Archeivement EXP</Text>
+
+                    <Text>Archeivement action</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      onChangeText={(data) => setAchievementAction(data)}
                     />
-                    <Text>Archeivement coin</Text>
+
+                    <Text>Archeivement requirement</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      keyboardType="numeric"
+                      onChangeText={(data) => setAchievementRequirement(data)}
                     />
-                    <Text>Archeivement time</Text>
-                    <TextInput style={styles.input}
-                      placeholder="Please enter your text"
-                    />
+
                     <View style={styles.modalButton}>
                       <Button 
                           title="Add"
+                          onPress={() => onSubmit()}
                       />
                     </View>
                   </View>
