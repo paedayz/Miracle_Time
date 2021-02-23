@@ -10,6 +10,7 @@ import moment from 'moment'
 // Redux
 import { useDispatch } from 'react-redux'
 import {addEvent, doQuest} from '../../redux/action/dataAction'
+import { color } from 'react-native-reanimated';
 
 const Addtodaylist = (props) => {
 
@@ -83,6 +84,7 @@ const Addtodaylist = (props) => {
                             
                             
                             <RNPickerSelect 
+                                placeholder={{}}
                                 value={props.values.rank}
                                 onValueChange={props.handleChange('rank')}
                                 items={[
@@ -97,12 +99,13 @@ const Addtodaylist = (props) => {
                         </View>
                         <View style={{width: 280, height: 50, borderColor: '#ddd', borderWidth: 1,}} >
                             <RNPickerSelect 
+                                placeholder={{}}
                                 value={props.values.catagory}
                                 onValueChange={props.handleChange('catagory')}
                                 items={[
-                                    { label: 'งาน', value: 'งาน' },
-                                    { label: 'ทั่วไป', value: 'ทั่วไป' },
-                                    { label: 'นัดสำคัญ', value: 'นัดสำคัญ' },
+                                    { label: 'งาน', value: 'งาน' ,color: '#ff3399'},
+                                    { label: 'ทั่วไป', value: 'ทั่วไป' ,color:'#009900' },
+                                    { label: 'นัดสำคัญ', value: 'นัดสำคัญ' ,color:'#993300'},
                                 ]} />
                         </View>
                         <View style={{width: 50, height: 17,marginTop:10}}>

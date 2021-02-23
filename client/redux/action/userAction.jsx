@@ -11,7 +11,7 @@ import {
     SET_FRIEND_LIST,
     SET_QUEST,
     SET_COIN_EXP_LVL,
-    SET_ACHIEVE
+    SET_ACHIEVE,
     SET_ERROR,
 } from '../type'
 import firebase from 'firebase'
