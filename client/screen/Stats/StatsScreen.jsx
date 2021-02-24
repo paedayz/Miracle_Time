@@ -16,7 +16,6 @@ export default function StatsScreen({navigation}) {
   const [pickerLabel, setPickerLabel] = useState([{label:'All', value: 0}])
 
   useEffect(() => {
-    console.log(pickerLabel.length)
     if(pickerLabel.length === 1) {
       let weekArray = []
       let startDate = new Date(userStartDate)
@@ -35,6 +34,9 @@ export default function StatsScreen({navigation}) {
           }
           
       }
+
+      weekLater = new Date(weekLater.getTime() + 604800000)
+      weekArray.push(weekLater)
 
       let buffPicker = pickerLabel
       for(let i=1; i<= weekArray.length - 1 ; i++) {

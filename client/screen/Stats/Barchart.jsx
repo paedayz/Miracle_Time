@@ -87,6 +87,8 @@ export default function Barchart({navigation, visualizeData, testPickerLabel}) {
         }
         
     }
+    weekLater = new Date(weekLater.getTime() + 604800000)
+    weekArray.push(weekLater)
 
     const isInWeek = (firstWeek, secondWeek, focusDate) => {
         if(firstWeek <= focusDate && focusDate < secondWeek) return true
@@ -124,6 +126,7 @@ export default function Barchart({navigation, visualizeData, testPickerLabel}) {
             selectData.push(event)
         }
     })
+    console.log(newData)
 
     countBarData(selectData)
   }
