@@ -12,8 +12,36 @@ export default function StatsScreen({navigation}) {
   const [isPie , setIsPie] = useState(true)
   const [visualizeBarData , setVisualizeBarData] = useState()
   const userEventData = useSelector(state => state.data.events)
+  const userStartDate = useSelector((state) => state.user.userData.createdAt.split(',')[0])
+  const [pickerLabel, setPickerLabel] = useState([{label:'All', value: 0}])
 
   useEffect(() => {
+    console.log(pickerLabel.length)
+    if(pickerLabel.length === 1) {
+      let weekArray = []
+      let startDate = new Date(userStartDate)
+      let weekLater = new Date(startDate.getTime() + 604800000)
+
+      weekArray.push(startDate)
+      weekArray.push(weekLater)
+
+      let flag = 0
+      while(flag === 0) {
+          weekLater = new Date(weekLater.getTime() + 604800000)
+          if(weekLater - new Date() < 0) {
+              weekArray.push(weekLater)
+          } else {
+              flag = 1
+          }
+          
+      }
+
+      let buffPicker = pickerLabel
+      for(let i=1; i<= weekArray.length - 1 ; i++) {
+        buffPicker.push({label:`Week ${i}`, value: i})
+      }
+      setPickerLabel(buffPicker)
+    }
     countBarData()
   },[])
 
@@ -64,7 +92,7 @@ export default function StatsScreen({navigation}) {
       :
         <View>
           <Text style={styles.header}>Bar Chart</Text>
-          <Barchart visualizeData={visualizeBarData}/>
+          <Barchart testPickerLabel={pickerLabel} visualizeData={visualizeBarData}/>
         </View>
       }
       <View style={styles.btnContainer}>

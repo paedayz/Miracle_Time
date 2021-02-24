@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity, Button, Alert,View, Dimensions} from 'react-native';
 import { VictoryChart, VictoryGroup, VictoryBar, VictoryPie, VictoryLegend, VictoryAxis } from 'victory-native';
+import RNPickerSelect from 'react-native-picker-select';
 
 // Redux
 import {useSelector} from 'react-redux'
@@ -20,10 +21,11 @@ const eventData = [
     }
   ];
 
-export default function Barchart({navigation, visualizeData}) {
+export default function Barchart({navigation, visualizeData, testPickerLabel}) {
   const [showData , setShowData] = useState(visualizeData)
   const userStartDate = useSelector((state) => state.user.userData.createdAt.split(',')[0])
   const userEventData = useSelector(state => state.data.events)
+  const [pickerLabel, setPickerLabel] = useState(testPickerLabel)
   const [weekSelect , setWeekSelect] = useState(0)
 
   useEffect(() => {
@@ -126,12 +128,15 @@ export default function Barchart({navigation, visualizeData}) {
     countBarData(selectData)
   }
 
+  
       return (
         <SafeAreaView style={styles.container}>
-          <View>
-          <Button title="week 1" onPress={() => {setWeekSelect(1)}}/>
-          <Button title="week 2" onPress={() => {setWeekSelect(2)}}/>
-          <Button title="week 0" onPress={() => {setWeekSelect(0)}}/>
+          <View style={{width: 280, height: 50, borderColor: '#ddd', borderWidth: 1,}}>
+            <RNPickerSelect 
+              value={weekSelect}
+              defaultValue={weekSelect}
+              onValueChange={(value) => setWeekSelect(value)}
+              items={pickerLabel} />
           </View>
           
           
