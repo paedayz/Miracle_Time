@@ -22,9 +22,118 @@ const eventData = [
 
 export default function Barchart({navigation, visualizeData}) {
   const [showData , setShowData] = useState(visualizeData)
+  const userStartDate = useSelector((state) => state.user.userData.createdAt.split(',')[0])
+  const userEventData = useSelector(state => state.data.events)
+  const [weekSelect , setWeekSelect] = useState(0)
+
+  useEffect(() => {
+    if(weekSelect !== 0) {
+      makeWeek()
+    } else {
+      setShowData(visualizeData)
+    }
+  }, [weekSelect])
+
+  const countBarData = (selectData) => {
+    let eventTotal = []
+    selectData.map((event, num) => {
+      if(eventTotal.length !== 0) {
+        let flag = 0
+        let position = 0
+        let cat = ""
+        let totalNow = 0
+        eventTotal.map((data, index) => {
+          if(data.category === event.catagory) {
+            flag = 1
+            position = index
+            cat = data.category
+            totalNow = data.total + 1
+          }
+        })
+
+        if(flag==1) {
+          eventTotal[position] = {category: cat, total: totalNow}
+        } else {
+          eventTotal.push({total: 1, category: event.catagory})
+        }
+
+      } else {
+        eventTotal.push({total: 1, category: event.catagory})
+      }
+    })
+
+    setShowData(eventTotal)
+    
+  }
+
+  const makeWeek = () => {
+    let weekArray = []
+    let startDate = new Date(userStartDate)
+    let weekLater = new Date(startDate.getTime() + 604800000)
+    let data = userEventData
+
+    weekArray.push(startDate)
+    weekArray.push(weekLater)
+
+    let flag = 0
+    while(flag === 0) {
+        weekLater = new Date(weekLater.getTime() + 604800000)
+        if(weekLater - new Date() < 0) {
+            weekArray.push(weekLater)
+        } else {
+            flag = 1
+        }
+        
+    }
+
+    const isInWeek = (firstWeek, secondWeek, focusDate) => {
+        if(firstWeek <= focusDate && focusDate < secondWeek) return true
+        else return false
+    }
+
+    let weekNum
+
+    let newData = []
+
+    data = data.sort((a, b) => new Date(a.date) - new Date(b.date))
+
+    data.map((event) => {
+        let eventWeekNum
+        let eventDate = new Date(event.date)
+
+        weekArray.map((week, index) => {
+            let flag = false
+            if(index !== 0) {
+                flag = isInWeek(weekArray[index - 1], weekArray[index], eventDate)
+            }
+
+            if(flag) {
+                eventWeekNum = index
+                event.week = eventWeekNum
+                newData.push(event)
+            }
+        })
+    })
+
+    let selectData = []
+
+    newData.map((event) => {
+        if(event.week === weekSelect) {
+            selectData.push(event)
+        }
+    })
+
+    countBarData(selectData)
+  }
 
       return (
         <SafeAreaView style={styles.container}>
+          <View>
+          <Button title="week 1" onPress={() => {setWeekSelect(1)}}/>
+          <Button title="week 2" onPress={() => {setWeekSelect(2)}}/>
+          <Button title="week 0" onPress={() => {setWeekSelect(0)}}/>
+          </View>
+          
           
           <VictoryChart domainPadding={{x: 70}}>
             
@@ -53,7 +162,6 @@ export default function Barchart({navigation, visualizeData}) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2/4,
     backgroundColor: '#fff',
     alignItems: 'center'
   },
