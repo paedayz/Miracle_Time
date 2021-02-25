@@ -12,15 +12,33 @@ export default function PetScreen({navigation}) {
   const [isSecondBtnClick, setIsSecondBtnClick] = useState(false)
 
   const FirstBtnClick = () => {
-    setTextBox(true)
-    setIsFirsBtnClick(true)
-    setIsSecondBtnClick(false)
+    if(isFirsBtnClick) {
+      setIsFirsBtnClick(false)
+      setTimeout(() => {
+        setIsFirsBtnClick(true)
+      }, 500);
+      
+    } else {
+      setTextBox(true)
+      setIsFirsBtnClick(true)
+      setIsSecondBtnClick(false)
+    }
+    
   }
 
   const SecondBtnClick = () => {
-    setTextBox(true)
-    setIsSecondBtnClick(true)
-    setIsFirsBtnClick(false)
+    if(isSecondBtnClick) {
+      setIsSecondBtnClick(false)
+      setTimeout(() => {
+        setIsSecondBtnClick(true)
+      }, 500);
+      
+    } else {
+      setTextBox(true)
+      setIsSecondBtnClick(true)
+      setIsFirsBtnClick(false)
+    }
+    
   }
 
   const CloseTextBox = () => {
