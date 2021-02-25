@@ -179,6 +179,7 @@ export const claimQuest = (docId, questId) => (dispatch) => {
 }
 
 export const doAchievement = (achievementAction) => (dispatch) => {
+    console.log(achievementAction)
     let clientUserId = getClientUserId()
     axios.post('/doAchievement', {clientUserId: clientUserId, achievementAction: achievementAction})
         .then((res) => {

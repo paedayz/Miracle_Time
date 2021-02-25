@@ -1,24 +1,30 @@
 import React, {useState} from 'react';
 import {StyleSheet, SafeAreaView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
 
-
+// Component
 import Ask_Volitation from './Ask_Volitation'
 import Ask_Advice from './Ask_Advice'
 
+//Redux
+import {doAchievement} from '../../redux/action/dataAction'
+import {useDispatch} from 'react-redux'
 
 export default function PetScreen({navigation}) {
   const [textBox, setTextBox] = useState(false)
   const [isFirsBtnClick, setIsFirsBtnClick] = useState(false)
   const [isSecondBtnClick, setIsSecondBtnClick] = useState(false)
+  const dispatch = useDispatch()
 
   const FirstBtnClick = () => {
     if(isFirsBtnClick) {
+      dispatch(doAchievement('getHealing'))
       setIsFirsBtnClick(false)
       setTimeout(() => {
         setIsFirsBtnClick(true)
       }, 500);
       
     } else {
+      dispatch(doAchievement('getHealing'))
       setTextBox(true)
       setIsFirsBtnClick(true)
       setIsSecondBtnClick(false)
