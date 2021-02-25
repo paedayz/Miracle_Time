@@ -132,9 +132,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 10
+    marginBottom: 10,
+    marginLeft:20
   },
   btnContainer : {
-    marginTop: 300
+    flexDirection: 'row',
+    justifyContent: 'center'
   }
 });

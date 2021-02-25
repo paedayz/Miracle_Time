@@ -63,7 +63,6 @@ export default function Piechart({navigation}) {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     marginBottom: 30

@@ -126,7 +126,6 @@ export default function Barchart({navigation, visualizeData, testPickerLabel}) {
             selectData.push(event)
         }
     })
-    console.log(newData)
 
     countBarData(selectData)
   }
