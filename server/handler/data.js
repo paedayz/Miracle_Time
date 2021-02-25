@@ -135,6 +135,18 @@ exports.deleteEvent = (req, res) => {
         })
 }
 
+exports.toggleEventSuccess = (req, res) => {
+    const docId = req.body.docId
+    firestore.doc(`/events/${docId}`).update({success: true})
+        .then(() => {
+            return res.json({data: docId})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
+
 exports.addNotifications = (req, res) => {
     const notiData = {
         createdAt : new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),

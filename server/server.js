@@ -25,7 +25,8 @@ let {
   addNotifications, 
   readNotifications, 
   toggleNotifications,
-  deleteNotifications
+  deleteNotifications,
+  toggleEventSuccess
 } = require('./handler/data')
 
 let {
@@ -35,9 +36,24 @@ let {
   getFriendRequest
 } = require('./handler/friend')
 
-let {addQuest, adminGetQuestList, doQuest, deleteQuest, editQuest, getUserQuest, claimQuest} = require('./handler/quest')
+let {
+  addQuest, 
+  adminGetQuestList, 
+  doQuest, 
+  deleteQuest, 
+  editQuest, 
+  getUserQuest, 
+  claimQuest
+} = require('./handler/quest')
 
-let {addAchievement, adminGetAchievementList, doAchievement, deleteAchievement, editAchievement, getUserAchievement,} = require('./handler/achievement')
+let {
+  addAchievement, 
+  adminGetAchievementList, 
+  doAchievement, 
+  deleteAchievement, 
+  editAchievement, 
+  getUserAchievement,
+} = require('./handler/achievement')
 
 // User Route
 app.post('/signup',signup)
@@ -57,6 +73,7 @@ app.post('/getAllEvents',FBAuth, getAllEvents)
 app.post('/addEvent', FBAuth, addEvent)
 app.post('/editEvent', FBAuth, editEvent)
 app.post('/deleteEvent', FBAuth, deleteEvent)
+app.post('/toggleEventSuccess', FBAuth, toggleEventSuccess)
 app.post('/addNotifications', FBAuth, addNotifications)
 app.post('/readNotifications', FBAuth, readNotifications)
 app.post('/toggleNotifications', FBAuth, toggleNotifications)
