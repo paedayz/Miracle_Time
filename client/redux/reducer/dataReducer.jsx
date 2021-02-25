@@ -17,7 +17,8 @@ import {
     DO_QUEST,
     CLAIM_QUEST,
     SET_COIN_EXP_LVL,
-    SET_ACHIEVE
+    SET_ACHIEVE,
+    TOGGLE_EVENT_SUCCESS
 } from "../type"
 
 const initialState = {
@@ -92,6 +93,19 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 events: newEvent
+            }
+
+        case TOGGLE_EVENT_SUCCESS :
+            let eventBuff = []
+            state.events.map((event) => {
+                if(event.docId === action.payload) {
+                    event.success = true
+                }
+                eventBuff.push(event)
+            })
+            return {
+                ...state,
+                events: eventBuff
             }
 
         case ADD_NOTIFICATIONS :

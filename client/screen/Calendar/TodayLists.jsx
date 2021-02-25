@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import {deleteEvent} from '../../redux/action/dataAction' //ดึงข้อมูล
+import {deleteEvent, toggleEventSuccess} from '../../redux/action/dataAction' //ดึงข้อมูล
 
 // Component
 import Addtoday from './TodayListAdd'
@@ -21,7 +21,10 @@ export default function Todaylist({navigation}) {
   const [showData, setShowData] = useState()
   
   const [complete, setcomplete] = useState(false);
-  const eventComplete = () => {
+  const eventComplete = (success, docId) => {
+    if(!success) {
+      dispatch(toggleEventSuccess(docId))
+    }
     setcomplete(!complete);
   };
 
@@ -155,7 +158,7 @@ export default function Todaylist({navigation}) {
                                     <View>
                                       {item.rank === "1" &&
                                         <View>
-                                          <TouchableOpacity onPress = {() => eventComplete()}>
+                                          <TouchableOpacity onPress = {() => eventComplete(item.success, item.docId)}>
                                             <Icon 
                                               name="check-square" 
                                               size={30} 
@@ -210,7 +213,7 @@ export default function Todaylist({navigation}) {
                                     <View>
                                       {item.rank === "2" &&
                                         <View>
-                                          <TouchableOpacity onPress = {() => eventComplete()}>
+                                          <TouchableOpacity onPress = {() => eventComplete(item.success, item.docId)}>
                                             <Icon 
                                               name="check-square" 
                                               size={30} 
@@ -264,7 +267,7 @@ export default function Todaylist({navigation}) {
                                   <View>
                                     {item.rank === "3" &&
                                       <View>
-                                        <TouchableOpacity onPress = {() => eventComplete()}>
+                                        <TouchableOpacity onPress = {() => eventComplete(item.success, item.docId)}>
                                             <Icon 
                                               name="check-square" 
                                               size={30} 

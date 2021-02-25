@@ -213,7 +213,8 @@ exports.checkAuthen = (req, res) => {
           start: doc.data().start,
           end: doc.data().end,
           catagory: doc.data().catagory,
-          success: doc.data().success
+          success: doc.data().success,
+          docId: doc.id
         };
         events.push(newData);
       });
