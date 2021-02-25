@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import {deleteEvent, toggleEventSuccess} from '../../redux/action/dataAction' //ดึงข้อมูล
+import {doQuest, toggleEventSuccess} from '../../redux/action/dataAction' //ดึงข้อมูล
 
 // Component
 import Addtoday from './TodayListAdd'
@@ -21,9 +21,11 @@ export default function Todaylist({navigation}) {
   const [showData, setShowData] = useState()
   
   const [complete, setcomplete] = useState(false);
+
   const eventComplete = (success, docId) => {
     if(!success) {
       dispatch(toggleEventSuccess(docId))
+      dispatch(doQuest('doEvent'))
     }
     setcomplete(!complete);
   };
