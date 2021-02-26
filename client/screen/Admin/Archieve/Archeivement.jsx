@@ -72,12 +72,14 @@ export default function Acheivement ({achievementData}) {
                         <View style={{margin: 5, width: 70, height: 30}}>
                         <Button 
                             title="Yes"
+                            buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                             onPress={() => onDeleteSubmit()}
                         />
                         </View>
                         <View style={{margin: 5, width: 70, height: 30}}>
                         <Button 
                             title="No"
+                            buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                             onPress={() => setModalOpenDelete(false)}
                         />
                         </View>
