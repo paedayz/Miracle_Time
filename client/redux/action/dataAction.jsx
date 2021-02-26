@@ -72,7 +72,7 @@ export const deleteEvent = (eventKey) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/deleteEvent', {eventKey : eventKey, clientUserId: clientUserId})
         .then((res) => {
-            dispatch({type: DELETE_EVENT, payload: res.data.data})
+            dispatch({type: DELETE_EVENT, payload: res.data.data, notiArray: res.data.notiDelArray})
             dispatch({type: LOADING_COMPLETE})
         })
         .catch((err) => {

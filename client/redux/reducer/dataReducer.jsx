@@ -85,14 +85,29 @@ export default function (state = initialState, action){
         case DELETE_EVENT :
             let  nowEvent = state.events
             let  newEvent = []
+            let newNoti = []
             nowEvent.map((event) => {
                 if(event.key !== action.payload) {
                     newEvent.push(event)
                 }
             })
+
+            state.notifications.map((noti) => {
+                let flag = 0
+                action.notiArray.map((notId) => {
+                    if(noti.docId === notId) {
+                        flag = 1
+                    }
+                })
+                if(flag === 0) {
+                    newNoti.push(noti)
+                }
+                
+            })
             return {
                 ...state,
-                events: newEvent
+                events: newEvent,
+                notifications: newNoti
             }
 
         case TOGGLE_EVENT_SUCCESS :
