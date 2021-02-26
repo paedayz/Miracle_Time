@@ -10,14 +10,42 @@ export default function TipsScreen({navigation}) {
                 <View style={styles.img_box}>
                     <Image  
                         style={{width: 60, height: 60 }}
-                        source={{
-                        uri: 'https://apollo.imgix.net/content/uploads/2016/05/3-1.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=1025&h=685',
-                        }}
+                        source={require('../../assets/Tip_pic/Tip#1.jpg')}
                     />
                 </View >
                 <View style={styles.text_box}>
                     <Text style={styles.headtext}>Tip #1 :</Text>
                     <Text style={styles.contenttext}>10 วิธีจัดการเวลา ให้คุณจัดการสิ่งต่างๆ ได้อย่างมีประสิทธิภาพ</Text>
+                </View>                    
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity  onPress={() => navigation.navigate('Tip #2')}>
+            <View style={styles.container}>
+                <View style={styles.img_box}>
+                    <Image  
+                        style={{width: 60, height: 60 }}
+                        source={require('../../assets/Tip_pic/Tip#2.jpg')}
+                    />
+                </View >
+                <View style={styles.text_box}>
+                    <Text style={styles.headtext}>Tip #2 :</Text>
+                    <Text style={styles.contenttext}>7 วิธี ที่จะทำให้คุณเลิกเป็นคนฟุ้งซ่าน คิดมาก ขี้กังวล</Text>
+                </View>                    
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity  onPress={() => navigation.navigate('Tip #3')}>
+            <View style={styles.container}>
+                <View style={styles.img_box}>
+                    <Image  
+                        style={{width: 60, height: 60 }}
+                        source={require('../../assets/Tip_pic/Tip#3.jpg')}
+                    />
+                </View >
+                <View style={styles.text_box}>
+                    <Text style={styles.headtext}>Tip #3 :</Text>
+                    <Text style={styles.contenttext}>ทำไม “ทัศนคติ” ถึงมีความสำคัญมากกว่า “ความฉลาดทางปัญญา(IQ)” ? </Text>
                 </View>                    
             </View>
         </TouchableOpacity>
