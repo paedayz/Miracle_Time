@@ -28,7 +28,7 @@ export default function QuestArchieveScreen ({navigation}) {
             <TouchableOpacity style={[styles.headerBox, {
               borderRightColor: '#dddddd',
               borderRightWidth: 1,
-              backgroundColor: '#2289DC'
+              backgroundColor: '#738FD9'
               }]}>
               <View>
                 <Title style={{color:'white'}}>Quest</Title>
@@ -44,10 +44,10 @@ export default function QuestArchieveScreen ({navigation}) {
           </View>
           <QuestBuff/>
         </View>
-        <View style={styles.claimButton}>
-          <Button
-            buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
-            title='Claim'/>
+        //<View style={styles.claimButton}>
+          //<Button
+          //  buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
+          //  title='Claim'/>
 
       )
   } else {
@@ -64,7 +64,7 @@ export default function QuestArchieveScreen ({navigation}) {
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.headerBox, {
-              backgroundColor: '#2289DC'
+              backgroundColor: '#738FD9'
               }]}>
               <View>
                 <Title style={{color:'white'}}>Archeivement</Title>

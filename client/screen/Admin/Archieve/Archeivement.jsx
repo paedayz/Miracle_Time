@@ -40,8 +40,9 @@ export default function Acheivement ({achievementData}) {
         <View style={styles.questBoxWrapper}>
           <View style={styles.demo}>
             <Icon 
-              name='trophy'
-              size={50}/>
+              name='medal'
+              size={50}
+              color='gold'/>
           </View>
           <View style={styles.questBox}>
             <Title style={styles.headerTitle}>{achievementName}</Title>
@@ -51,7 +52,7 @@ export default function Acheivement ({achievementData}) {
           </View>
           <View style={styles.editButton}>
             <Button
-              buttonStyle = {{backgroundColor: 'green', width: 70, height: 30}}
+              buttonStyle = {{backgroundColor: '#8C92AC', width: 70, height: 30, borderRadius: 10}}
               title='Edit'
               onPress={() => setModalOpenEdit(true)}/>
             <Modal transparent={true} visible={modalOpenEdit}>
@@ -60,7 +61,7 @@ export default function Acheivement ({achievementData}) {
           </View>
           <View style={styles.deleteButton}>
             <Button
-              buttonStyle = {{backgroundColor: 'red', width: 70, height: 30}}
+              buttonStyle = {{backgroundColor: '#FC7C7C', width: 70, height: 30, borderRadius: 10}}
               title='Delete'
               onPress={() => setModalOpenDelete(true)}/>
               <Modal transparent={true} visible={modalOpenDelete}>
@@ -119,7 +120,6 @@ export default function Acheivement ({achievementData}) {
       borderRadius: 10,
       flexDirection: 'row',
       height: 100,
-      backgroundColor: '#dddddd'
     },
     questBox: {
       justifyContent: 'flex-start',
