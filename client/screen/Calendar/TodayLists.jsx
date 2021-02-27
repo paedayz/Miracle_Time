@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import {deleteEvent} from '../../redux/action/dataAction' //ดึงข้อมูล
+import {doQuest, toggleEventSuccess} from '../../redux/action/dataAction' //ดึงข้อมูล
 
 // Component
 import Addtoday from './TodayListAdd'
@@ -21,7 +21,12 @@ export default function Todaylist({navigation}) {
   const [showData, setShowData] = useState()
   
   const [complete, setcomplete] = useState(false);
-  const eventComplete = () => {
+
+  const eventComplete = (success, docId) => {
+    if(!success) {
+      dispatch(toggleEventSuccess(docId))
+      dispatch(doQuest('doEvent'))
+    }
     setcomplete(!complete);
   };
 
@@ -138,27 +143,17 @@ export default function Todaylist({navigation}) {
                                     <View>
                                       {item.rank === "1" &&
                                         <View>
-                                          <TouchableOpacity onPress = {() => eventComplete()}>
+                                          <TouchableOpacity onPress = {() => eventComplete(item.success, item.docId)}>
                                             <Icon 
                                               name="check-square" 
                                               size={30} 
-                                              color={!complete ? 'gray' : 'green'}
+                                              color={!item.success ? '#D1D1D1' : 'green'}
                                               style={{marginVertical: 10}}
                                             />
                                           </TouchableOpacity>
                                         </View>
                                       }
                                     </View>
-                                  <View>
-                                    <Icon 
-                                      name="close"
-                                      size={20}
-                                      color='red'
-                                      style={{bottom: 17,
-                                              marginHorizontal: 7}}
-                                      onPress={() => dispatch(deleteEvent(key))}
-                                    />
-                                  </View>
                                 </View>
                             
                             </View>
@@ -203,27 +198,17 @@ export default function Todaylist({navigation}) {
                                     <View>
                                       {item.rank === "2" &&
                                         <View>
-                                          <TouchableOpacity onPress = {() => eventComplete()}>
+                                          <TouchableOpacity onPress = {() => eventComplete(item.success, item.docId)}>
                                             <Icon 
                                               name="check-square" 
                                               size={30} 
-                                              color={!complete ? 'gray' : 'green'}
+                                              color={!item.success ? '#D1D1D1' : 'green'}
                                               style={{marginVertical: 10}}
                                             />
                                           </TouchableOpacity>
                                         </View>
                                       }
                                     </View>
-                                  <View>
-                                    <Icon 
-                                      name="close"
-                                      size={20}
-                                      color='red'
-                                      style={{bottom: 17,
-                                              marginHorizontal: 7}}
-                                      onPress={() => dispatch(deleteEvent(key))}
-                                      />
-                                  </View>
                                 </View>
                             </View>
                 
@@ -267,27 +252,17 @@ export default function Todaylist({navigation}) {
                                   <View>
                                     {item.rank === "3" &&
                                       <View>
-                                        <TouchableOpacity onPress = {() => eventComplete()}>
+                                        <TouchableOpacity onPress = {() => eventComplete(item.success, item.docId)}>
                                             <Icon 
                                               name="check-square" 
                                               size={30} 
-                                              color={!complete ? 'gray' : 'green'}
+                                              color={!item.success ? '#D1D1D1' : 'green'}
                                               style={{marginVertical: 10}}
                                             />
                                           </TouchableOpacity>
                                       </View>
                                     }
                                   </View>
-                                <View>
-                                  <Icon 
-                                    name="close"
-                                    size={20}
-                                    color='red'
-                                    style={{bottom: 17,
-                                            marginHorizontal: 7}}
-                                    onPress={() => dispatch(deleteEvent(key))}
-                                    />
-                                  </View>  
                               </View>
                             </View>
                         }

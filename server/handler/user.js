@@ -132,8 +132,11 @@ exports.login = (req, res) => {
     .then(async (snapshot) => {
       if(snapshot.size > 0 && last_login - midnight <= 0){
         const resetQuestReqPromise = snapshot.forEach((doc) => {
-          if((doc.data().questType === 'Daily' && doc.data().questId !== loginQuestId) || doc.data().questStatus === 'quest_claim') {
+          if((doc.data().questType === 'Daily' && doc.data().questId !== loginQuestId) || (doc.data().questStatus === 'quest_claim' && doc.data().questId !== loginQuestId)) {
             return firestore.doc(`quest_user/${doc.id}`).update({questDone:0, questStatus: 'in_progress'})
+          } else if(doc.data().questType === 'Daily' && doc.data().questId === loginQuestId) {
+            console.log('yesssss')
+            return firestore.doc(`quest_user/${doc.id}`).update({questDone:1, questStatus: 'quest_success'})
           } else {
             return 'not daily'
           }
@@ -213,6 +216,8 @@ exports.checkAuthen = (req, res) => {
           start: doc.data().start,
           end: doc.data().end,
           catagory: doc.data().catagory,
+          success: doc.data().success,
+          docId: doc.id
         };
         events.push(newData);
       });

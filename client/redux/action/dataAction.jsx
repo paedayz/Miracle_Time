@@ -17,7 +17,8 @@ import {
     CLAIM_QUEST,
     SET_COIN_EXP_LVL,
     SET_ACHIEVE,
-    DO_ACHIEVE
+    DO_ACHIEVE,
+    TOGGLE_EVENT_SUCCESS
 } from "../type"
 
 import {getClientUserId} from './userAction'
@@ -71,12 +72,23 @@ export const deleteEvent = (eventKey) => (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/deleteEvent', {eventKey : eventKey, clientUserId: clientUserId})
         .then((res) => {
-            dispatch({type: DELETE_EVENT, payload: res.data.data})
+            dispatch({type: DELETE_EVENT, payload: res.data.data, notiArray: res.data.notiDelArray})
             dispatch({type: LOADING_COMPLETE})
         })
         .catch((err) => {
             console.log(err)
             dispatch({type: LOADING_COMPLETE})
+        })
+}
+
+export const toggleEventSuccess = (docId) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/toggleEventSuccess', {docId : docId, clientUserId: clientUserId})
+        .then((res) => {
+            dispatch({type: TOGGLE_EVENT_SUCCESS, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
         })
 }
 
@@ -167,6 +179,7 @@ export const claimQuest = (docId, questId) => (dispatch) => {
 }
 
 export const doAchievement = (achievementAction) => (dispatch) => {
+    console.log(achievementAction)
     let clientUserId = getClientUserId()
     axios.post('/doAchievement', {clientUserId: clientUserId, achievementAction: achievementAction})
         .then((res) => {

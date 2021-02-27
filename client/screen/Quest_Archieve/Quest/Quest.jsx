@@ -44,7 +44,8 @@ export default function Quest({questData}) {
           <View style={styles.demo}>
             <Icon 
                 name='trophy'
-                size={50}/>
+                size={50}
+                color='gold'/>
           </View>
           <View style={styles.questBox}>
             <Title style={styles.headerTitle}>{questName}</Title>
@@ -114,7 +115,6 @@ export default function Quest({questData}) {
       borderRadius: 10,
       flexDirection: 'row',
       height: 100,
-      backgroundColor: '#dddddd'
     },
     questBox: {
       justifyContent: 'flex-start',
