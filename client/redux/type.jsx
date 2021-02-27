@@ -26,6 +26,8 @@ export const SET_EVENT = 'SET_EVENT'
 export const ADD_EVENT = 'ADD_EVENT'
 export const DELETE_EVENT = 'DELETE_EVENT'
 export const EDIT_EVENT = 'EDIT_EVENT'
+export const SET_DATA_ERROR = 'SET_DATA_ERROR'
+export const SET_DATA_CLEAR = 'SET_DATA_CLEAR'
 
 // Notifications
 export const SET_NOTIFICATIONS = 'SET_NOTIFICATIONS'
