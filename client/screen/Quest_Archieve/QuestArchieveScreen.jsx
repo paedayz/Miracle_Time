@@ -51,6 +51,7 @@ export default function QuestArchieveScreen ({navigation}) {
           </View>
           <QuestBuff/>
         </View>
+        </View>
       )
   } else {
       return (
