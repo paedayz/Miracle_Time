@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { SafeAreaView, Text, View, Button, FlatList, StyleSheet } from 'react-native';
+import { SafeAreaView, Text, View, Button, FlatList, StyleSheet, Dimensions } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 // redux
 import {useDispatch, useSelector} from 'react-redux'
@@ -42,12 +43,13 @@ export default function NotificationScreen({navigation}) {
   );
   return (
     <SafeAreaView style={{ flex: 1 }}>
+    <View style={styles.responsiveBox}>
     <FlatList
         data={sortNoti}
         renderItem={renderItem}
         keyExtractor={item => item.docId}
       />
-
+    </View>
     </SafeAreaView>
   );
 }
@@ -61,5 +63,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+  },
+  responsiveBox: {
+    width: wp('100%'),
+    height: hp('100%'),
+    flexDirection: 'column',
   },
 });
