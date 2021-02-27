@@ -45,12 +45,6 @@ export default function QuestArchieveScreen ({navigation}) {
           </View>
           <QuestBuff/>
         </View>
-        
-          <Button
-            buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
-            title='Claim'/>
-            </View>
-      
       )
   } else {
       return (
