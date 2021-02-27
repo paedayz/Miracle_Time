@@ -149,16 +149,6 @@ export default function Todaylist({navigation}) {
                                         </View>
                                       }
                                     </View>
-                                  <View>
-                                    <Icon 
-                                      name="close"
-                                      size={20}
-                                      color='red'
-                                      style={{bottom: 17,
-                                              marginHorizontal: 7}}
-                                      onPress={() => dispatch(deleteEvent(key))}
-                                    />
-                                  </View>
                                 </View>
                             
                             </View>
@@ -214,16 +204,6 @@ export default function Todaylist({navigation}) {
                                         </View>
                                       }
                                     </View>
-                                  <View>
-                                    <Icon 
-                                      name="close"
-                                      size={20}
-                                      color='red'
-                                      style={{bottom: 17,
-                                              marginHorizontal: 7}}
-                                      onPress={() => dispatch(deleteEvent(key))}
-                                      />
-                                  </View>
                                 </View>
                             </View>
                 
@@ -278,16 +258,6 @@ export default function Todaylist({navigation}) {
                                       </View>
                                     }
                                   </View>
-                                <View>
-                                  <Icon 
-                                    name="close"
-                                    size={20}
-                                    color='red'
-                                    style={{bottom: 17,
-                                            marginHorizontal: 7}}
-                                    onPress={() => dispatch(deleteEvent(key))}
-                                    />
-                                  </View>  
                               </View>
                             </View>
                         }

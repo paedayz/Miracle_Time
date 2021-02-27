@@ -29,7 +29,7 @@ export default function QuestArchieveScreen ({navigation}) {
             <TouchableOpacity style={[styles.headerBox, {
               borderRightColor: '#dddddd',
               borderRightWidth: 1,
-              backgroundColor: '#2289DC'
+              backgroundColor: '#738FD9'
               }]}>
               <View>
                 <Title style={{color:'white'}}>Quest</Title>
@@ -60,7 +60,7 @@ export default function QuestArchieveScreen ({navigation}) {
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.headerBox, {
-              backgroundColor: '#2289DC'
+              backgroundColor: '#738FD9'
               }]}>
               <View>
                 <Title style={{color:'white'}}>Archeivement</Title>
