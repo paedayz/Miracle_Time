@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, FlatList ,Button} from 'react-native';
 import {
   Avatar,
   Title,
@@ -23,6 +23,7 @@ export default function QuestArchieveScreen ({navigation}) {
 
   if(mode) {
       return (
+      <View>
         <View>
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity style={[styles.headerBox, {
@@ -44,9 +45,6 @@ export default function QuestArchieveScreen ({navigation}) {
           </View>
           <QuestBuff/>
         </View>
-        
-         
-
       )
   } else {
       return (

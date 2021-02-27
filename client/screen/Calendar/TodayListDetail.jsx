@@ -1,5 +1,5 @@
 import React, {useState}  from 'react'
-import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity, Alert } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -9,6 +9,7 @@ import Edittodaylist from './TodayListEdit'
 // Redux
 import {useDispatch} from 'react-redux'
 import {deleteEvent} from '../../redux/action/dataAction'
+import { colors } from 'react-native-elements'
 
 export default function DetailToday({navigation}) {
     const route = useRoute() 
@@ -16,6 +17,25 @@ export default function DetailToday({navigation}) {
     const dispatch = useDispatch()
     const [modalOpen, setModalOpen] = useState(false)
     
+
+    const onAlert = () => {
+      Alert.alert(
+        "Alert Title",
+        "My Alert Msg",
+        [
+          
+          { 
+            text: "YES", onPress: () => {dispatch(deleteEvent(key))} ,
+          },{},
+          {
+            text: "NO",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+        ],
+    
+      );
+    }
 
     return (
         <View style={style.container}>
@@ -29,8 +49,7 @@ export default function DetailToday({navigation}) {
                             shadowOpacity: 0.3,
                             shadowRadius: 2,
                             marginHorizontal: 4,
-                            marginVertical: 6,
-                            borderLeftWidth:10}}>
+                            marginVertical: 6,}}>
                 <View style={style.cardcon}>
                     <Text style={{ fontSize: 25}}>{event}</Text>
                 </View>
@@ -70,7 +89,7 @@ export default function DetailToday({navigation}) {
                   title="Delete"
                   buttonStyle = {{borderRadius: 10}}
                   // onPress={() => dispatch({type: 'DELETE_EVENT', payload: values}, navigation.navigate('Todaylist'))}
-                  onPress={() => dispatch(deleteEvent(key))}
+                  onPress={() => onAlert()}
                 />
               </View>
 
