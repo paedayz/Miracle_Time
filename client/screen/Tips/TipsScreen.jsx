@@ -10,7 +10,7 @@ export default function TipsScreen({navigation}) {
                 <View style={styles.img_box}>
                     <Image  
                         style={{width: 60, height: 60 }}
-                        source={require('../../assets/Tip_pic/Tip#1.jpg')}
+                        source={require('../../assets/Tip_pic/test-logo.png')}
                     />
                 </View >
                 <View style={styles.text_box}>
@@ -25,7 +25,7 @@ export default function TipsScreen({navigation}) {
                 <View style={styles.img_box}>
                     <Image  
                         style={{width: 60, height: 60 }}
-                        source={require('../../assets/Tip_pic/Tip#2.jpg')}
+                        source={require('../../assets/Tip_pic/test-logo.png')}
                     />
                 </View >
                 <View style={styles.text_box}>
@@ -40,7 +40,7 @@ export default function TipsScreen({navigation}) {
                 <View style={styles.img_box}>
                     <Image  
                         style={{width: 60, height: 60 }}
-                        source={require('../../assets/Tip_pic/Tip#3.jpg')}
+                        source={require('../../assets/Tip_pic/test-logo.png')}
                     />
                 </View >
                 <View style={styles.text_box}>
@@ -49,7 +49,12 @@ export default function TipsScreen({navigation}) {
                 </View>                    
             </View>
         </TouchableOpacity>
-        
+        {/* <Image  
+            style={{width: 200, height: 200 ,resizeMode: 'stretch'}}
+            source={{
+                uri: 'https://reactnative.dev/img/tiny_logo.png',
+            }}
+        /> */}
     </View>
     );
 }
