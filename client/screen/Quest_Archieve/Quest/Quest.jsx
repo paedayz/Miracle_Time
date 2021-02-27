@@ -44,7 +44,8 @@ export default function Quest({questData}) {
           <View style={styles.demo}>
             <Icon 
                 name='trophy'
-                size={50}/>
+                size={50}
+                color='gold'/>
           </View>
           <View style={styles.questBox}>
             <Title style={styles.headerTitle}>{questName}</Title>
@@ -55,11 +56,10 @@ export default function Quest({questData}) {
           {questStatus === 'quest_success' 
             &&
           <View style={styles.claimButton}>
-            <Button
-              buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
-              title='Claim'
-              onPress={() => cliamClick()}
-              />
+             <Button
+            buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
+            title='Claim'
+            onPress={() => cliamClick()}/>
           </View>
           }
 
@@ -115,7 +115,6 @@ export default function Quest({questData}) {
       borderRadius: 10,
       flexDirection: 'row',
       height: 100,
-      backgroundColor: '#dddddd'
     },
     questBox: {
       justifyContent: 'flex-start',

@@ -18,7 +18,9 @@ import {
     CLAIM_QUEST,
     SET_COIN_EXP_LVL,
     SET_ACHIEVE,
-    TOGGLE_EVENT_SUCCESS
+    TOGGLE_EVENT_SUCCESS,
+    SET_DATA_CLEAR,
+    SET_DATA_ERROR,
 } from "../type"
 
 const initialState = {
@@ -34,7 +36,8 @@ const initialState = {
     now_noti : [],
     end_noti : [],
     questList: [],
-    achievementList: []
+    achievementList: [],
+    error: null,
 }
 
 const startState = {
@@ -270,6 +273,18 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 achievementList: action.payload
+            }
+        
+        case SET_DATA_CLEAR :
+            return {
+                ...state,
+                error: null
+            }
+
+        case SET_DATA_ERROR :
+            return {
+                ...state,
+                error: action.payload
             }
             
         case CLEAR_SESSION :

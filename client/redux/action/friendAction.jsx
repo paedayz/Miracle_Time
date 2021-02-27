@@ -1,5 +1,14 @@
 import axios from 'axios'
-import { LOADING_DATA, LOADING_COMPLETE ,ACCEPT_FRIEND, DENIED_FRIEND, SET_FRIEND_REQUEST} from '../type'
+import { LOADING_DATA, 
+    LOADING_COMPLETE ,
+    ACCEPT_FRIEND, 
+    DENIED_FRIEND, 
+    SET_FRIEND_REQUEST,
+    SET_SUCCESS,
+    SET_FRIEND_ERROR,
+    LOADING_FRIEND_DATA,
+    LOADING_FRIEND_COMPLETE,
+} from '../type'
 
 import {getClientUserId} from './userAction'
 
@@ -16,14 +25,19 @@ export const getFriendRequest = () => (dispatch) => {
         })
 }
 
-export const addFriend = (recipient) => {
+export const addFriend = (recipient) => (dispatch) => {
     let clientUserId = getClientUserId()
+    dispatch({type: LOADING_FRIEND_DATA})
     axios.post('/addFriend',{recipient: recipient, clientUserId: clientUserId})
         .then((res) => {
             console.log(res.data)
+            dispatch({type: LOADING_FRIEND_COMPLETE})
+            dispatch({type: SET_SUCCESS, payload: 'AddFriend success'})
         })
         .catch((err) => {
             console.log(err)
+            dispatch({type: LOADING_FRIEND_COMPLETE})
+            dispatch({type: SET_FRIEND_ERROR, payload: 'AddFriend error'})
         })
 }
 

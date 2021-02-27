@@ -76,13 +76,19 @@ export default function PetScreen({navigation}) {
               <Image source={require('../../assets/madarao.png')} style={{ maxHeight: 330, maxWidth: '60%'}}/>
             </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button1}>
-            <Button color="gray" title='ขอกำลังใจหน่อย' onPress={() => FirstBtnClick()} />
-          </TouchableOpacity>
+          <View style={styles.button_box}>
+            <TouchableOpacity style={styles.button1} onPress={() => FirstBtnClick()}>
+              
+                <Text style={styles.button_text}>ขอกำลังใจ</Text>
+              
+            </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button2} >
-            <Button color="gray" title='ทำอะไรดีน้า' onPress={() => SecondBtnClick()}/>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.button2} onPress={() => SecondBtnClick()}>
+              
+                <Text style={styles.button_text}>ขอคำเเนะนำ</Text>
+              
+            </TouchableOpacity>
+          </View>
         </SafeAreaView>
       );
 }
@@ -94,12 +100,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button1: {
-    borderRadius:100,
-    marginLeft: 223,
-    marginTop: 20
+    backgroundColor:'#FF82CC',
+    borderColor: '#dddddd',
+      borderWidth: 1,
+      borderRadius: 30,
+      shadowOffset: { width: 1 , height: 1 },
+      shadowColor: '#333',
+      shadowOpacity: 0.3,
+      shadowRadius: 2,
+    marginHorizontal:'2%',
+    padding:20,
   },
   button2: {
-    marginTop: 10,
-    marginLeft: 250
+    backgroundColor:'#61dafb',
+    borderColor: '#dddddd',
+      borderWidth: 1,
+      borderRadius: 30,
+      shadowOffset: { width: 1 , height: 1 },
+      shadowColor: '#333',
+      shadowOpacity: 0.3,
+      shadowRadius: 2,
+    marginHorizontal:'2%',
+    padding:20,
+  },
+  button_box:{
+    flexDirection: 'row',
+    flex: 2,
+    alignItems: 'center',
+  },
+  button_text: {
+    color:'white',
+    fontSize: 18,
   }
 });
