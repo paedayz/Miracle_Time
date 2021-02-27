@@ -57,6 +57,7 @@ export default function EditachievementModal({setModalOpenEdit, achievementData}
                   />
                   <View style={styles.modalButton}>
                     <Button 
+                        buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                         title="Save"
                     />
                   </View>

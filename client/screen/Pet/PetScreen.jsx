@@ -1,26 +1,50 @@
 import React, {useState} from 'react';
 import {StyleSheet, SafeAreaView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
 
-
+// Component
 import Ask_Volitation from './Ask_Volitation'
 import Ask_Advice from './Ask_Advice'
 
+//Redux
+import {doAchievement} from '../../redux/action/dataAction'
+import {useDispatch} from 'react-redux'
 
 export default function PetScreen({navigation}) {
   const [textBox, setTextBox] = useState(false)
   const [isFirsBtnClick, setIsFirsBtnClick] = useState(false)
   const [isSecondBtnClick, setIsSecondBtnClick] = useState(false)
+  const dispatch = useDispatch()
 
   const FirstBtnClick = () => {
-    setTextBox(true)
-    setIsFirsBtnClick(true)
-    setIsSecondBtnClick(false)
+    if(isFirsBtnClick) {
+      dispatch(doAchievement('getHealing'))
+      setIsFirsBtnClick(false)
+      setTimeout(() => {
+        setIsFirsBtnClick(true)
+      }, 500);
+      
+    } else {
+      dispatch(doAchievement('getHealing'))
+      setTextBox(true)
+      setIsFirsBtnClick(true)
+      setIsSecondBtnClick(false)
+    }
+    
   }
 
   const SecondBtnClick = () => {
-    setTextBox(true)
-    setIsSecondBtnClick(true)
-    setIsFirsBtnClick(false)
+    if(isSecondBtnClick) {
+      setIsSecondBtnClick(false)
+      setTimeout(() => {
+        setIsSecondBtnClick(true)
+      }, 500);
+      
+    } else {
+      setTextBox(true)
+      setIsSecondBtnClick(true)
+      setIsFirsBtnClick(false)
+    }
+    
   }
 
   const CloseTextBox = () => {
@@ -52,13 +76,19 @@ export default function PetScreen({navigation}) {
               <Image source={require('../../assets/madarao.png')} style={{ maxHeight: 330, maxWidth: '60%'}}/>
             </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button1}>
-            <Button color="gray" title='ขอกำลังใจหน่อย' onPress={() => FirstBtnClick()} />
-          </TouchableOpacity>
+          <View style={styles.button_box}>
+            <TouchableOpacity style={styles.button1} onPress={() => FirstBtnClick()}>
+              
+                <Text style={styles.button_text}>ขอกำลังใจ</Text>
+              
+            </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button2} >
-            <Button color="gray" title='ทำอะไรดีน้า' onPress={() => SecondBtnClick()}/>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.button2} onPress={() => SecondBtnClick()}>
+              
+                <Text style={styles.button_text}>ขอคำเเนะนำ</Text>
+              
+            </TouchableOpacity>
+          </View>
         </SafeAreaView>
       );
 }
@@ -70,12 +100,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button1: {
-    borderRadius:100,
-    marginLeft: 223,
-    marginTop: 20
+    backgroundColor:'#FF82CC',
+    borderColor: '#dddddd',
+      borderWidth: 1,
+      borderRadius: 30,
+      shadowOffset: { width: 1 , height: 1 },
+      shadowColor: '#333',
+      shadowOpacity: 0.3,
+      shadowRadius: 2,
+    marginHorizontal:'2%',
+    padding:20,
   },
   button2: {
-    marginTop: 10,
-    marginLeft: 250
+    backgroundColor:'#61dafb',
+    borderColor: '#dddddd',
+      borderWidth: 1,
+      borderRadius: 30,
+      shadowOffset: { width: 1 , height: 1 },
+      shadowColor: '#333',
+      shadowOpacity: 0.3,
+      shadowRadius: 2,
+    marginHorizontal:'2%',
+    padding:20,
+  },
+  button_box:{
+    flexDirection: 'row',
+    flex: 2,
+    alignItems: 'center',
+  },
+  button_text: {
+    color:'white',
+    fontSize: 18,
   }
 });

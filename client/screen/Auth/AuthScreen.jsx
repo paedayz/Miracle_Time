@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { View, TextInput, Text, StyleSheet, KeyboardAvoidingView} from 'react-native'
+import { View, TextInput, Text, StyleSheet, Alert } from 'react-native'
 import { Button } from 'react-native-elements';
 
 // Redux
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {login, register} from "../../redux/action/userAction"
 import {doQuest} from "../../redux/action/dataAction"
 
@@ -47,14 +47,13 @@ export function Login () {
     
 }
 
-export function Register() {
+export function Register({setMode}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userName, setUsername] = useState('')
     const [nickname, setNickname] = useState('')
 
     const dispatch = useDispatch()
-
     const onSignUp = () => {
         let userData = {
             email : email,
@@ -63,7 +62,7 @@ export function Register() {
             nickname : nickname
         }
         
-        dispatch(register(userData))
+        dispatch(register(userData, setMode))
     }
 
     return (
@@ -101,6 +100,18 @@ export function Register() {
 
 export default function auth() {
     const [mode, setMode] = useState(true)
+    const error = useSelector(state => state.system.error)
+    const dispatch = useDispatch()
+    console.log(error)
+    if(error) {
+        Alert.alert(
+            "Alert !!",
+            error,
+            [
+                { text: "OK", onPress: () => dispatch({type: 'CLEAR_ERROR'}) }
+              ],
+          );
+    }
 
     const changeMode = () => {
         setMode(!mode)
@@ -118,7 +129,7 @@ export default function auth() {
     } else {
         return (
             <View style={styles.footerView}>
-                <Register/>
+                <Register setMode={setMode}/>
                 <Text style={styles.text}>Have an account?</Text>
                 <Text style={styles.footerText} 
                 onPress={() => changeMode()}>Log in</Text>

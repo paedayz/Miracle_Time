@@ -38,7 +38,8 @@ export default function Achievement({achievementData}) {
           <View style={styles.demo}>
             <Icon 
                 name='medal-outline'
-                size={50}/>
+                size={50}
+                color='gold'/>
           </View>
           <View style={styles.achievementBox}>
             <Title style={styles.headerTitle}>{achievementName}</Title>
@@ -101,7 +102,6 @@ export default function Achievement({achievementData}) {
       borderRadius: 10,
       flexDirection: 'row',
       height: 100,
-      backgroundColor: '#dddddd'
     },
     achievementBox: {
       justifyContent: 'flex-start',

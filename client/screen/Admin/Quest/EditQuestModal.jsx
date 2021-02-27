@@ -87,6 +87,7 @@ export default function EditQuestModal({setModalOpenEdit, questData}) {
                   <View style={styles.modalButton}>
                     <Button 
                         onPress={() => onSubmit()}
+                        buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                         title="Save"
                     />
                   </View>

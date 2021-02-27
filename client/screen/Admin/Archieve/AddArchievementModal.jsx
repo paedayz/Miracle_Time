@@ -75,9 +75,11 @@ export default function AddQuestModal({setModalOpenAdd}) {
 
                     <View style={styles.modalButton}>
                       <Button 
-                          title="Add"
-                          onPress={() => onSubmit()}
+                        buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
+                        title="Add"
+                        onPress={() => onSubmit()}
                       />
+                      
                     </View>
                   </View>
                   </KeyboardAvoidingView>  

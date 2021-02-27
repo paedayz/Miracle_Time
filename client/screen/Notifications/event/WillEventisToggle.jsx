@@ -1,6 +1,13 @@
-import React from 'react'
-import { SafeAreaView, Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import React, { useState} from 'react'
+import { SafeAreaView, Text, StyleSheet, View, Image, TouchableOpacity, Alert, Modal ,Button} from 'react-native';
 import { useNavigation } from '@react-navigation/native'
+import {
+  Avatar,
+  Title,
+  Caption,
+  TextInput,
+  TouchableRipple
+} from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import dayjs from 'dayjs'
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -15,10 +22,32 @@ export default function NowEvent({data, eventData, createdAt, docId}) {
     const dispatch = useDispatch()
     dayjs.extend(relativeTime);
 
+    const [modalOpenDelete, setModalOpenDelete] = useState(false)
+
     const onNotiClick = () => {
       dispatch(toggleNotifications(docId))
       navigation.navigate('TodayListDetail', eventData)
     }
+
+    const onAlert = () => {
+      Alert.alert(
+        "Alert Title",
+        "My Alert Msg",
+        [
+          
+          { 
+            text: "YES", onPress: () => {dispatch(deleteNotifications(docId))} 
+          },{},
+          {
+            text: "NO",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+        ],
+    
+      );
+    }
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
           <TouchableOpacity onPress={() => { onNotiClick() }}>
@@ -53,8 +82,9 @@ export default function NowEvent({data, eventData, createdAt, docId}) {
                           marginTop: -24,
                           color: "#aaa"
                         }}
-                        onPress={() => {dispatch(deleteNotifications(docId))}}
-                    />
+                        
+                        onPress={onAlert}
+                        />
                   </View>  
                   <View style={{marginTop:5}}>
                     <Text style={styles.colorminute}>{dayjs(createdAt).fromNow()}</Text>
@@ -94,5 +124,35 @@ const styles = StyleSheet.create({
     responsiveBox: {
       width: wp('67%'),
       flexDirection: 'column',
+    deleteBox: {
+      justifyContent: 'center',
+      marginVertical: 10,
+      flexDirection: 'row'
+    },
+    headerBox: {
+      width: '50%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    headerTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    deleteButton: {
+      justifyContent: 'center',
+      position: 'absolute',
+      top: 52,
+      left: 300
+    },
+    deleteModal:
+    {
+      backgroundColor: '#dddddd',
+      marginTop:250,
+      marginVertical: 300,
+      marginHorizontal: 10,
+      padding: 20,
+      borderRadius: 10,
+      alignItems: 'center',
+      justifyContent: 'center'
     },
   });
