@@ -26,6 +26,7 @@ export const SET_EVENT = 'SET_EVENT'
 export const ADD_EVENT = 'ADD_EVENT'
 export const DELETE_EVENT = 'DELETE_EVENT'
 export const EDIT_EVENT = 'EDIT_EVENT'
+export const TOGGLE_EVENT_SUCCESS = 'TOGGLE_EVENT_SUCCESS'
 export const SET_DATA_ERROR = 'SET_DATA_ERROR'
 export const SET_DATA_CLEAR = 'SET_DATA_CLEAR'
 
