@@ -165,15 +165,13 @@ export default function FriendScreen({ navigation }) {
                 clearButtonMode="always"
             />
             </View>
-            <View style={{marginTop:17, marginLeft:30,borderRadius: 10}}>
+            <View style={{marginTop:17, marginLeft:30}}>
             <Button onPress={() => onClickAdd()} title="ADD" color="#738FD9" buttonStyle = {{borderRadius: 10}}/>
             </View>
             
             
         </View>
       <View style={styles.headerBoxWrapper}>
-      {isList 
-        ?
         <TouchableOpacity
             onPress={() => setIsList(true)}
             style={[
@@ -213,16 +211,14 @@ export default function FriendScreen({ navigation }) {
           ]}
         >
           <View>
-            <Title style={{color: 'white'}}>Request</Title>
+            <Title>List</Title>
           </View>
         </TouchableOpacity>
-          :
         <TouchableOpacity onPress={() => setIsList(false)} style={styles.headerBox}>
           <View>
             <Title>Request</Title>
           </View>
         </TouchableOpacity>
-        }
       </View>
 
       <View>
