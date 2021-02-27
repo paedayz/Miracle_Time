@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet,TouchableOpacity, Modal, StatusBar, ScrollView,Button } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView, Button, Text } from 'react-native';
 import {
   Avatar,
   Title,
@@ -9,6 +9,8 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 // Component
 import ArcheivementScreen from './Archieve/ArcheivementScreen'
@@ -76,6 +78,13 @@ export default function admin () {
 
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   headerBoxWrapper: {
     borderBottomColor: '#dddddd',
     borderBottomWidth: 1,

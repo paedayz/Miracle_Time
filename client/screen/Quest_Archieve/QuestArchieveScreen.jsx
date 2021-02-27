@@ -13,10 +13,16 @@ import QuestBuff from './Quest/QuestBuff'
 import AchieveBuff from './Achieve/AchieveBuff'
 
 // Redux
+import {getUserQuest} from '../../redux/action/dataAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 export default function QuestArchieveScreen ({navigation}) {
   const [mode, setMode] = useState(true)
+  const dispatch = useDispatch()
 
+  navigation.addListener('focus', () => {
+    dispatch(getUserQuest())
+  });
   const changeMode = () => {
       setMode(!mode)
   }

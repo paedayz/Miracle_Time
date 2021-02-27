@@ -35,7 +35,7 @@ const CalendarsScreen = ({navigation}) => {
           markedData[day] = {
             selected: false,
             dots: [
-              {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
+              {key: 'vacation', color: 'red', selectedDotColor: 'red'},
             ]
           }
         } else {
