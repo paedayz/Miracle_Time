@@ -11,7 +11,8 @@ import {
     SET_FRIEND_LIST,
     SET_QUEST,
     SET_COIN_EXP_LVL,
-    SET_ACHIEVE
+    SET_ACHIEVE,
+    SET_ERROR,
 } from '../type'
 import firebase from 'firebase'
 
@@ -70,20 +71,20 @@ export const login = (userData) => (dispatch) => {
     })
     .catch((err) => {
         console.log(err)
+        dispatch({type: SET_ERROR, payload: 'Login Failed'})
         dispatch({type: LOADING_COMPLETE})
     })
 }
 
-export const register = (userData) => (dispatch) => {
-    dispatch({type: LOADING_DATA})
+export const register = (userData, setMode) => (dispatch) => {
     axios.post('/signup', userData)
         .then((res) => {
             dispatch({type: SET_USER_DATA, payload: res.data.data})
-            dispatch({type: LOADING_COMPLETE})
         })
         .catch((err) => {
             console.log(err)
-            dispatch({type: LOADING_COMPLETE})
+            setMode(false)
+            dispatch({type: SET_ERROR, payload: 'Register Failed'})
         })
 }
 

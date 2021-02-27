@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView } from 'react-native';
+import { SafeAreaView, View, StyleSheet,TouchableOpacity, Modal, StatusBar, ScrollView,Button } from 'react-native';
 import {
   Avatar,
   Title,
-  Caption,
-  Text,
-  TextInput,
-  TouchableRipple
+  Text 
 } from 'react-native-paper'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

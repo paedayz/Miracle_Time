@@ -1,5 +1,5 @@
 import React, {useState, useEffect}  from 'react'
-import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity,Image } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -80,32 +80,15 @@ export default function Todaylist({navigation}) {
             <View style={{flexDirection: 'row'}}>
               <Text style={{marginTop:15,marginHorizontal:8,fontSize:16}}>Sort</Text>
               <TouchableOpacity onPress={() => sortTime()}>
-                <Icon 
-                    name="history" 
-                    size={30} 
-                    color= 'gray'
-                    style={{marginVertical: 10, marginRight:10}}
-                    
-                />
+                <Image  style={{marginVertical: 10, marginRight:10, height:33,width:33}} source={require('../img/clock.png')} />
               </TouchableOpacity>
               
               <TouchableOpacity onPress={() => sortRank()}>
-                <Icon 
-                    name="heart" 
-                    size={30} 
-                    color='gray'
-                    style={{marginVertical: 10, marginRight:200}}
-                />
+                <Image  style={{marginVertical: 10, marginRight:230, height:30,width:40}} source={require('../img/rank.png')} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setModalOpen()}>
-                <Icon 
-                    name="plus-square" 
-                    size={30} 
-                    color='gray'
-                    style={{marginVertical: 10, marginLeft:10}}
-                />
+                <Image  style={{marginVertical: 10, marginRight:10, height:40,width:40}} source={require('../img/add.png')} />
               </TouchableOpacity>
-              <Text style={{fontSize:18, marginTop: 13, marginHorizontal: 5}}>Add</Text>
             </View>
             
             <FlatList
