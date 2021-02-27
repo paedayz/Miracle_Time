@@ -5,16 +5,10 @@ import { SafeAreaView, View, StyleSheet, TouchableOpacity, FlatList } from 'reac
 import Quest from './Quest'
 
 // Redux
-import {getUserQuest} from '../../../redux/action/dataAction'
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector} from 'react-redux'
 
 export default function QuestBuff ({navigation}) {
     const questList = useSelector(state => state.data.questList)
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-      dispatch(getUserQuest())
-    },[])
     
     const QuestItem = ({data}) => {
         let questData = data

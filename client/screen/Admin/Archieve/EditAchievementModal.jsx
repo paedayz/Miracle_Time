@@ -44,6 +44,7 @@ export default function EditachievementModal({setModalOpenEdit, achievementData}
                       style={styles.closeIcon}
                       onPress={() => setModalOpenEdit(false)}
                   />
+                <KeyboardAvoidingView behavior={'height'} style={{flex:1}}> 
                 <View style={styles.achievementBox}>
                   <Title style={styles.headerTitle}>Edit Archeivement</Title>
                   <Text>Archeivement name</Text>
@@ -56,10 +57,12 @@ export default function EditachievementModal({setModalOpenEdit, achievementData}
                   />
                   <View style={styles.modalButton}>
                     <Button 
+                        buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                         title="Save"
                     />
                   </View>
                 </View>
+                </KeyboardAvoidingView> 
               </View>
     )
 }

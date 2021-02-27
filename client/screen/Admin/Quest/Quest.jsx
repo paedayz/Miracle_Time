@@ -39,7 +39,8 @@ export default function Quest ({questData}) {
           <View style={styles.demo}>
             <Icon 
               name='trophy'
-              size={50}/>
+              size={50}
+              color='gold'/>
           </View>
           <View style={styles.questBox}>
             <Title style={styles.headerTitle}>{questName}</Title>
@@ -50,7 +51,7 @@ export default function Quest ({questData}) {
           </View>
           <View style={styles.editButton}>
             <Button
-              buttonStyle = {{backgroundColor: 'green', width: 70, height: 30}}
+              buttonStyle = {{backgroundColor: '#8C92AC', width: 70, height: 30, borderRadius: 10}}
               title='Edit'
               onPress={() => setModalOpenEdit(true)}/>
             <Modal transparent={true} visible={modalOpenEdit}>
@@ -59,7 +60,7 @@ export default function Quest ({questData}) {
           </View>
           <View style={styles.deleteButton}>
             <Button
-              buttonStyle = {{backgroundColor: 'red', width: 70, height: 30}}
+              buttonStyle = {{backgroundColor: '#FC7C7C', width: 70, height: 30, borderRadius: 10}}
               title='Delete'
               onPress={() => setModalOpenDelete(true)}/>
               <Modal transparent={true} visible={modalOpenDelete}>
@@ -70,12 +71,14 @@ export default function Quest ({questData}) {
                         <View style={{margin: 5, width: 70, height: 30}}>
                         <Button 
                             title="Yes"
+                            buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                             onPress={() => onDeleteSubmit()}
                         />
                         </View>
                         <View style={{margin: 5, width: 70, height: 30}}>
                         <Button 
                             title="No"
+                            buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
                             onPress={() => setModalOpenDelete(false)}
                         />
                         </View>
@@ -117,7 +120,6 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       flexDirection: 'row',
       height: 100,
-      backgroundColor: '#dddddd'
     },
     questBox: {
       justifyContent: 'flex-start',

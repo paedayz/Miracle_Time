@@ -18,6 +18,7 @@ import {
     CLAIM_QUEST,
     SET_COIN_EXP_LVL,
     SET_ACHIEVE,
+    TOGGLE_EVENT_SUCCESS,
     SET_DATA_CLEAR,
     SET_DATA_ERROR,
 } from "../type"
@@ -87,14 +88,42 @@ export default function (state = initialState, action){
         case DELETE_EVENT :
             let  nowEvent = state.events
             let  newEvent = []
+            let newNoti = []
             nowEvent.map((event) => {
                 if(event.key !== action.payload) {
                     newEvent.push(event)
                 }
             })
+
+            state.notifications.map((noti) => {
+                let flag = 0
+                action.notiArray.map((notId) => {
+                    if(noti.docId === notId) {
+                        flag = 1
+                    }
+                })
+                if(flag === 0) {
+                    newNoti.push(noti)
+                }
+                
+            })
             return {
                 ...state,
-                events: newEvent
+                events: newEvent,
+                notifications: newNoti
+            }
+
+        case TOGGLE_EVENT_SUCCESS :
+            let eventBuff = []
+            state.events.map((event) => {
+                if(event.docId === action.payload) {
+                    event.success = true
+                }
+                eventBuff.push(event)
+            })
+            return {
+                ...state,
+                events: eventBuff
             }
 
         case ADD_NOTIFICATIONS :
