@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, TextInput, Text, StyleSheet } from 'react-native'
+import { View, TextInput, Text, StyleSheet, KeyboardAvoidingView} from 'react-native'
 import { Button } from 'react-native-elements';
 
 // Redux

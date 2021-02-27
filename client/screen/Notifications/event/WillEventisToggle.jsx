@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import dayjs from 'dayjs'
 import relativeTime from "dayjs/plugin/relativeTime";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 // Redux
 import {useDispatch} from 'react-redux'
@@ -41,7 +42,7 @@ export default function NowEvent({data, eventData, createdAt, docId}) {
               <View style={styles.text}>
                 <View style={{flexDirection:'column'}}>
                   <View style={{flexDirection:'row'}}>
-                    <View style={{width:280}}>
+                    <View style={styles.responsiveBox}>
                       <Text style={styles.title}>คุณมี {data.eventData.event} ต้องทำในอีก {data.time}</Text>
                     </View>
                     <Icon 
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
       marginHorizontal: 16,
       flexDirection: 'row',
       width:410,
-      marginLeft:0
+      marginLeft:-2
     },
     title: {
       fontSize: 17.5
@@ -89,5 +90,9 @@ const styles = StyleSheet.create({
       backgroundColor:"blue" , 
       marginLeft:-20,
       marginTop:35
-    }
+    },
+    responsiveBox: {
+      width: wp('67%'),
+      flexDirection: 'column',
+    },
   });
