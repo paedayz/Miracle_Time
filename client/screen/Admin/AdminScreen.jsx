@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView } from 'react-native';
+import { SafeAreaView, View, StyleSheet,TouchableOpacity, Modal, StatusBar, ScrollView,Button } from 'react-native';
 import {
   Title,
+  Text 
 } from 'react-native-paper'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 // Component
 import ArcheivementScreen from './Archieve/ArcheivementScreen'
