@@ -111,23 +111,53 @@ exports.editEvent = (req, res) => {
 
 exports.deleteEvent = (req, res) => {
     let batch = firestore.batch()
-    let path = firestore.collection('events')
+    let eventPath = firestore.collection('events')
+    let notiPath = firestore.collection('notifications')
+    let resKey
+    let resNotiArray = []
 
     firestore.collection('events').where('key', '==', req.body.eventKey).get()
         .then((snapshot) => {
-            let resKey
             snapshot.forEach((doc) => {
                 if(doc.data().username === req.user.username) {
-                    dataID = doc.id;
-                    batch.delete(path.doc(dataID));
+                    let dataID = doc.id;
+                    batch.delete(eventPath.doc(dataID));
                     resKey = doc.data().key
                 } else {
                     return res.status(403).json({error: 'No permission to delete this event'})
                 }
                 
             })
+            // batch.commit();
+            // return res.status(200).json({data : resKey})
+            return firestore.collection('notifications').where('data.eventData.key', '==', resKey).get()
+        })
+        .then((snapshot) => {
+            snapshot.forEach((doc) => {
+                if(doc.data().username === req.user.username) {
+                    let dataID = doc.id;
+                    batch.delete(notiPath.doc(dataID));
+                    resNotiArray.push(dataID)
+                } else {
+                    return res.status(403).json({error: 'No permission to delete this event'})
+                }
+                
+            })
+
             batch.commit();
-            return res.status(200).json({data : resKey})
+            return res.status(200).json({data : resKey, notiDelArray: resNotiArray})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
+
+exports.toggleEventSuccess = (req, res) => {
+    const docId = req.body.docId
+    firestore.doc(`/events/${docId}`).update({success: true})
+        .then(() => {
+            return res.json({data: docId})
         })
         .catch((err) => {
             console.log(err)

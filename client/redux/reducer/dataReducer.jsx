@@ -17,7 +17,10 @@ import {
     DO_QUEST,
     CLAIM_QUEST,
     SET_COIN_EXP_LVL,
-    SET_ACHIEVE
+    SET_ACHIEVE,
+    TOGGLE_EVENT_SUCCESS,
+    SET_DATA_CLEAR,
+    SET_DATA_ERROR,
 } from "../type"
 
 const initialState = {
@@ -33,7 +36,8 @@ const initialState = {
     now_noti : [],
     end_noti : [],
     questList: [],
-    achievementList: []
+    achievementList: [],
+    error: null,
 }
 
 const startState = {
@@ -84,14 +88,42 @@ export default function (state = initialState, action){
         case DELETE_EVENT :
             let  nowEvent = state.events
             let  newEvent = []
+            let newNoti = []
             nowEvent.map((event) => {
                 if(event.key !== action.payload) {
                     newEvent.push(event)
                 }
             })
+
+            state.notifications.map((noti) => {
+                let flag = 0
+                action.notiArray.map((notId) => {
+                    if(noti.docId === notId) {
+                        flag = 1
+                    }
+                })
+                if(flag === 0) {
+                    newNoti.push(noti)
+                }
+                
+            })
             return {
                 ...state,
-                events: newEvent
+                events: newEvent,
+                notifications: newNoti
+            }
+
+        case TOGGLE_EVENT_SUCCESS :
+            let eventBuff = []
+            state.events.map((event) => {
+                if(event.docId === action.payload) {
+                    event.success = true
+                }
+                eventBuff.push(event)
+            })
+            return {
+                ...state,
+                events: eventBuff
             }
 
         case ADD_NOTIFICATIONS :
@@ -241,6 +273,18 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 achievementList: action.payload
+            }
+        
+        case SET_DATA_CLEAR :
+            return {
+                ...state,
+                error: null
+            }
+
+        case SET_DATA_ERROR :
+            return {
+                ...state,
+                error: action.payload
             }
             
         case CLEAR_SESSION :
