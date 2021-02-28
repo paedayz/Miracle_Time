@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, FlatList ,Button} from 'react-native';
 import {
   Avatar,
   Title,
@@ -13,16 +13,23 @@ import QuestBuff from './Quest/QuestBuff'
 import AchieveBuff from './Achieve/AchieveBuff'
 
 // Redux
+import {getUserQuest} from '../../redux/action/dataAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 export default function QuestArchieveScreen ({navigation}) {
   const [mode, setMode] = useState(true)
+  const dispatch = useDispatch()
 
+  navigation.addListener('focus', () => {
+    dispatch(getUserQuest())
+  });
   const changeMode = () => {
       setMode(!mode)
   }
 
   if(mode) {
       return (
+      <View>
         <View>
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity style={[styles.headerBox, {
@@ -44,11 +51,7 @@ export default function QuestArchieveScreen ({navigation}) {
           </View>
           <QuestBuff/>
         </View>
-        //<View style={styles.claimButton}>
-          //<Button
-          //  buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
-          //  title='Claim'/>
-
+        </View>
       )
   } else {
       return (

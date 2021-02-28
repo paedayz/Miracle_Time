@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, KeyboardAvoidingView } from 'react-native';
 import {
   Avatar,
   Title,
@@ -44,6 +44,7 @@ export default function AddQuestModal({setModalOpenAdd}) {
                         style={styles.closeIcon}
                         onPress={() => setModalOpenAdd(false)}
                     />
+                  <KeyboardAvoidingView behavior={'height'} style={{flex:1}}>
                   <View style={styles.questBox}>
                     <Title style={styles.headerTitle}>Add Archeivement</Title>
 
@@ -81,6 +82,7 @@ export default function AddQuestModal({setModalOpenAdd}) {
                       
                     </View>
                   </View>
+                  </KeyboardAvoidingView>  
                 </View>
     )
 }

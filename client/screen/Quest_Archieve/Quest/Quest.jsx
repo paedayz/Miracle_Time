@@ -56,11 +56,18 @@ export default function Quest({questData}) {
           {questStatus === 'quest_success' 
             &&
           <View style={styles.claimButton}>
+<<<<<<< HEAD
             <Button
                 buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10, width: 70, height: 30}}
                 title='Claim'
                 onPress={() => cliamClick()}
             />
+=======
+             <Button
+            buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
+            title='Claim'
+            onPress={() => cliamClick()}/>
+>>>>>>> 95842098703a1bf8e93159ccfedd70b913d99874
           </View>
           }
 

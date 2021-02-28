@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView, Text } from 'react-native';
 import {
   Avatar,
-  Title,
-  Caption,
-  Text,
-  TextInput,
-  TouchableRipple
+  Title, 
 } from 'react-native-paper'
 
 // Component
@@ -73,6 +69,13 @@ export default function admin () {
 
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   headerBoxWrapper: {
     borderBottomColor: '#dddddd',
     borderBottomWidth: 1,
