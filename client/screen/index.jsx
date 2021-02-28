@@ -53,7 +53,7 @@ export default function Screen({navigation}) {
     if(loading) {
         return (
             <SafeAreaView style={{ flex: 1 , justifyContent: 'center', alignItems: 'center'}}>
-                <PacmanIndicator color='#2289DC' />
+                <PacmanIndicator color='#738FD9' />
             </SafeAreaView>
         )
     }

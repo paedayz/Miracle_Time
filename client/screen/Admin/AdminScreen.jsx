@@ -9,9 +9,6 @@ import {
   TouchableRipple
 } from 'react-native-paper'
 
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 // Component
 import ArcheivementScreen from './Archieve/ArcheivementScreen'
 import QuestScreen from './Quest/QuestScreen'
@@ -22,8 +19,6 @@ export default function admin () {
   const changeMode = () => {
       setMode(!mode)
   }
-
-  
 
   if(mode) {
       return (
@@ -90,5 +85,5 @@ const styles = StyleSheet.create({
     width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });

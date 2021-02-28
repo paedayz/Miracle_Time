@@ -57,7 +57,7 @@ export default function Quest({questData}) {
             &&
           <View style={styles.claimButton}>
             <Button
-                buttonStyle = {{width: 70, height: 30}}
+                buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10, width: 70, height: 30}}
                 title='Claim'
                 onPress={() => cliamClick()}
             />
@@ -66,16 +66,19 @@ export default function Quest({questData}) {
 
           {questStatus === 'in_progress'
             && 
-            <View >
-              <Text style={styles.questDone}>{questDone}/{questRequirement}</Text>
+            <View style={styles.questDone}>
+              <Text style={{fontSize: 20}}>{questDone}/{questRequirement}</Text>
             </View>
           }
 
           {questStatus === 'quest_claim'
             && 
-            <View >
-              <Text style={styles.questClaim}>Already Claim</Text>
-            </View>
+            <View style={styles.check}>
+            <Icon 
+                name='check'
+                size={30}
+                color='green'/>
+          </View>
           }
           
         </View>
@@ -132,10 +135,16 @@ export default function Quest({questData}) {
       justifyContent: 'center',
       margin: 5
     },
+    check: {
+      justifyContent: 'center',
+      position: 'absolute',
+      top: 35,
+      left: 320
+    },
     questDone: {
-        fontSize: 20,
-        marginLeft: 55,
-        marginTop: 30
+      position: 'absolute',
+      marginTop: 35,
+      marginLeft: 320
     },
     questClaim: {
       fontSize: 15,

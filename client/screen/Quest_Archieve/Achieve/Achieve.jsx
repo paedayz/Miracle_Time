@@ -51,7 +51,7 @@ export default function Achievement({achievementData}) {
             &&
           <View style={styles.claimButton}>
             <Button
-                buttonStyle = {{width: 70, height: 30}}
+                buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10, width: 70, height: 30}}
                 title='Success'
             />
           </View>
@@ -59,8 +59,8 @@ export default function Achievement({achievementData}) {
 
           {achievementStatus === 'in_progress'
             && 
-            <View >
-              <Text style={styles.achievementDone}>{achievementDone}/{achievementRequirement}</Text>
+            <View style={styles.achievementDone}>
+              <Text  style={{fontSize: 20}}>{achievementDone}/{achievementRequirement}</Text>
             </View>
           }
           
@@ -119,9 +119,9 @@ export default function Achievement({achievementData}) {
       margin: 5
     },
     achievementDone: {
-        fontSize: 20,
-        marginLeft: 55,
-        marginTop: 30
+      position: 'absolute',
+      marginTop: 35,
+      marginLeft: 320
     },
     achievementClaim: {
       fontSize: 15,
