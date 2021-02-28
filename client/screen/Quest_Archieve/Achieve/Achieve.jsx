@@ -45,6 +45,10 @@ export default function Achievement({achievementData}) {
             <Title style={styles.headerTitle}>{achievementName}</Title>
             <View style={{maxWidth:200, minWidth: 180}}>
                 <Text>{achievementDetail}</Text>
+                <View>
+                  <Text>{achievementExp}</Text>
+                  <Text>{achievementCoin}</Text>
+                </View>
             </View>
           </View>
           {achievementStatus === 'achievement_success' 
@@ -63,6 +67,16 @@ export default function Achievement({achievementData}) {
               <Text  style={{fontSize: 20}}>{achievementDone}/{achievementRequirement}</Text>
             </View>
           }
+
+          {achievementStatus === 'achievement_claim'
+            && 
+            <View style={styles.check}>
+            <Icon 
+                name='check'
+                size={30}
+                color='green'/>
+          </View>
+          }
           
         </View>
       </SafeAreaView>
@@ -75,7 +89,7 @@ export default function Achievement({achievementData}) {
     },
     headerTitle: {
       fontSize: 16,
-      fontWeight: 'bold',
+      fontWeight: 'bold'
     },
     caption: {
       fontSize: 16,
@@ -105,7 +119,6 @@ export default function Achievement({achievementData}) {
     },
     achievementBox: {
       justifyContent: 'flex-start',
-      marginVertical: 5,
       marginLeft: 10
     },
     claimButton: {
@@ -117,6 +130,12 @@ export default function Achievement({achievementData}) {
     demo: {
       justifyContent: 'center',
       margin: 5
+    },
+    check: {
+      justifyContent: 'center',
+      position: 'absolute',
+      top: 35,
+      left: 320
     },
     achievementDone: {
       position: 'absolute',

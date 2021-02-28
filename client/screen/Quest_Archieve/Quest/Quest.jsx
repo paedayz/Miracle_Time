@@ -51,23 +51,19 @@ export default function Quest({questData}) {
             <Title style={styles.headerTitle}>{questName}</Title>
             <View style={{maxWidth:200, minWidth: 180}}>
                 <Text>{questDetail}</Text>
+                <View style={styles.textCoinAndExp}>
+                  <Text>Exp: {questExp}  </Text>
+                  <Text>  Coin: {questCoin}</Text>
+                </View>
             </View>
           </View>
           {questStatus === 'quest_success' 
             &&
           <View style={styles.claimButton}>
-<<<<<<< HEAD
             <Button
-                buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10, width: 70, height: 30}}
-                title='Claim'
-                onPress={() => cliamClick()}
-            />
-=======
-             <Button
-            buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
-            title='Claim'
-            onPress={() => cliamClick()}/>
->>>>>>> 95842098703a1bf8e93159ccfedd70b913d99874
+              buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
+              title='Claim'
+              onPress={() => cliamClick()}/>
           </View>
           }
 
@@ -129,8 +125,12 @@ export default function Quest({questData}) {
     },
     questBox: {
       justifyContent: 'flex-start',
-      marginVertical: 5,
       marginLeft: 10
+    },
+    textCoinAndExp: {
+      flexDirection: 'row',
+      position: 'absolute',
+      top: 40
     },
     claimButton: {
       justifyContent: 'center',
