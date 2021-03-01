@@ -16,8 +16,6 @@ export default function admin () {
       setMode(!mode)
   }
 
-  
-
   if(mode) {
       return (
         <SafeAreaView>
@@ -90,5 +88,5 @@ const styles = StyleSheet.create({
     width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
