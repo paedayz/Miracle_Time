@@ -128,8 +128,6 @@ exports.deleteEvent = (req, res) => {
                 }
                 
             })
-            // batch.commit();
-            // return res.status(200).json({data : resKey})
             return firestore.collection('notifications').where('data.eventData.key', '==', resKey).get()
         })
         .then((snapshot) => {
