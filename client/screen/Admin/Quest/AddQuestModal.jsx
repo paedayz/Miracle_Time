@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, ScrollView } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, ScrollView, KeyboardAvoidingView } from 'react-native';
 import {
   Avatar,
   Title,
@@ -109,12 +109,12 @@ const styles = StyleSheet.create({
     closeIcon:
     {
         color: 'red',
-        marginLeft: 265
+        marginLeft: 275
     },
     modalButton: 
     {
       marginHorizontal: 80,
-      marginVertical: 0,
+      marginVertical: 10,
       justifyContent: 'center'
     },
     input: 
@@ -135,9 +135,9 @@ const styles = StyleSheet.create({
     {
         backgroundColor: '#dddddd',
         marginHorizontal: 25,
-        marginTop: 60,
-        padding: 30,
+        marginTop: 40,
+        padding: 25,
         borderRadius: 10,
-        height: 585
+        height: 630
     },
   });

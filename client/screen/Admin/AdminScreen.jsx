@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView, Text } from 'react-native';
 import {
   Avatar,
-  Title,
-  Text 
+  Title, 
 } from 'react-native-paper'
 
 // Component
@@ -16,8 +15,6 @@ export default function admin () {
   const changeMode = () => {
       setMode(!mode)
   }
-
-  
 
   if(mode) {
       return (
@@ -91,5 +88,5 @@ const styles = StyleSheet.create({
     width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
