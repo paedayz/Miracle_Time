@@ -23,7 +23,7 @@ import {deleteQuest} from '../../../redux/action/adminAction'
 export default function Quest ({questData}) {
     const [modalOpenEdit, setModalOpenEdit] = useState(false)
     const [modalOpenDelete, setModalOpenDelete] = useState(false)
-    const {questDetail, questName, docId} = questData.item
+    const {questDetail, questName, questCoin, questExp, docId} = questData.item
 
     const navigation = useNavigation()
     const dispatch = useDispatch()
@@ -46,6 +46,10 @@ export default function Quest ({questData}) {
             <Title style={styles.headerTitle}>{questName}</Title>
             <View style={{maxWidth: 200}}>
               <Text>{questDetail}</Text>
+              <View style={styles.textCoinAndExp}>
+                <Text>Exp: {questExp} </Text>
+                <Text>  Coins: {questCoin}</Text>
+              </View>
             </View>
             
           </View>
@@ -123,8 +127,12 @@ const styles = StyleSheet.create({
     },
     questBox: {
       justifyContent: 'flex-start',
-      marginVertical: 5,
       marginLeft: 10
+    },
+    textCoinAndExp: {
+      flexDirection: 'row',
+      position: 'absolute',
+      top: 40
     },
     deleteBox: {
       justifyContent: 'center',

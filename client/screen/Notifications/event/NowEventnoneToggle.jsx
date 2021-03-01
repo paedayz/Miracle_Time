@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     responsiveBox: {
       width: wp('67%'),
       flexDirection: 'column',
+    },
     deleteBox: {
       justifyContent: 'center',
       marginVertical: 10,
@@ -151,5 +152,5 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       alignItems: 'center',
       justifyContent: 'center'
-    },
-  });
+    }
+});
