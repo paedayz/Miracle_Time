@@ -121,35 +121,5 @@ const styles = StyleSheet.create({
     responsiveBox: {
       width: wp('67%'),
       flexDirection: 'column',
-    deleteBox: {
-      justifyContent: 'center',
-      marginVertical: 10,
-      flexDirection: 'row'
-    },
-    headerBox: {
-      width: '50%',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    headerTitle: {
-      fontSize: 20,
-      fontWeight: 'bold',
-    },
-    deleteButton: {
-      justifyContent: 'center',
-      position: 'absolute',
-      top: 52,
-      left: 300
-    },
-    deleteModal:
-    {
-      backgroundColor: '#dddddd',
-      marginTop:250,
-      marginVertical: 300,
-      marginHorizontal: 10,
-      padding: 20,
-      borderRadius: 10,
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
+    }
   });

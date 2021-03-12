@@ -165,13 +165,15 @@ export default function FriendScreen({ navigation }) {
                 clearButtonMode="always"
             />
             </View>
-            <View style={{marginTop:17, marginLeft:30}}>
+            <View style={{marginTop:17, marginLeft:30,borderRadius: 10}}>
             <Button onPress={() => onClickAdd()} title="ADD" color="#738FD9" buttonStyle = {{borderRadius: 10}}/>
             </View>
             
             
         </View>
       <View style={styles.headerBoxWrapper}>
+      {isList 
+        ?
         <TouchableOpacity
             onPress={() => setIsList(true)}
             style={[
@@ -179,7 +181,7 @@ export default function FriendScreen({ navigation }) {
                 {
                 borderRightColor: "#dddddd",
                 borderRightWidth: 1,
-                backgroundColor: '#738FD9'
+                backgroundColor: '#2289DC'
                 },
             ]}
         >
@@ -206,19 +208,21 @@ export default function FriendScreen({ navigation }) {
           style={[
             styles.headerBox,
             {
-            backgroundColor: '#738FD9'
+            backgroundColor: '#2289DC'
             },
           ]}
         >
           <View>
-            <Title>List</Title>
+            <Title style={{color: 'white'}}>Request</Title>
           </View>
         </TouchableOpacity>
+          :
         <TouchableOpacity onPress={() => setIsList(false)} style={styles.headerBox}>
           <View>
             <Title>Request</Title>
           </View>
         </TouchableOpacity>
+        }
       </View>
 
       <View>

@@ -51,6 +51,7 @@ export default function QuestArchieveScreen ({navigation}) {
           </View>
           <QuestBuff/>
         </View>
+        </View>
       )
   } else {
       return (
@@ -129,4 +130,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 5
   }
-});
+
+  });
+  

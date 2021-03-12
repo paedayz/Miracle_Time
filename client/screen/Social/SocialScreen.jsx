@@ -1,77 +1,71 @@
-import React, { useState, useRef }  from "react";
-import { View, StyleSheet, Button, Alert,Animated, Text } from "react-native";
 
-export default function SocialScreen({navigation}) {
-    const createTwoButtonAlert = () =>
-    Alert.alert(
-      "Alert Title",
-      "My Alert Msg",
-  
-    );
-    const fadeAnim = useRef(new Animated.Value(1)).current;
+import React, {useState, useEffect}  from 'react'
+import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity,Image } from 'react-native'
+import { useRoute }  from '@react-navigation/native'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-    const fadeIn = () => {
-      // Will change fadeAnim value to 1 in 5 seconds
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 4000,
-      }).start();
-      
-      
-      setTimeout(()=> {
-        for (let i = 0; i <1000; i++) {}
-      },1000)
-    };
 
-  const createThreeButtonAlert = () =>
-    Alert.alert(
-      "Alert Title",
-      "My Alert Msg",
-      [
-        {
-          text: "Ask me later",
-          onPress: () => console.log("Ask me later pressed")
-        },
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ],
-      { cancelable: false }
-    );
-    
+import Adddaily from './Adddaily'
+
+export default function SocialScreen() {
+
+  const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <View style={styles.container}>
-      <Button title={"2-Button Alert"} onPress={createTwoButtonAlert} />
-
-      <Button title={"3-Button Alert"} onPress={createThreeButtonAlert} />
-      <Animated.View
-        style={[
-          styles.fadingContainer,
-          {
-            opacity: fadeAnim // Bind opacity to animated value
-          }
-        ]}
-      >
-        <Text style={styles.fadingText}>Fading View!</Text>
-      </Animated.View>
-      <View style={styles.buttonRow}>
-        <Button title="Fade in " onPress={fadeIn} />
-      </View>
+    <View>
+        <Modal visible={modalOpen} animationType={'slide'}>
+                <View>
+                    <Icon 
+                        name="close" 
+                        size={24} 
+                        style={style.modalToggle}
+                        onPress={() => setModalOpen(false)}
+                    />
+                      <Adddaily setModalOpen={setModalOpen} />
+                </View>
+        </Modal>
+        <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity onPress={() => setModalOpen()}>
+                <Image  style={{marginVertical: 10, marginLeft:360, height:40,width:40}} source={require('../img/add.png')} />
+              </TouchableOpacity>
+            </View>
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-around",
-    alignItems: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  fadingText : {
-    backgroundColor:'#333'
-  }
-});
+  card: {
+    borderRadius: 10,
+    elevation: 3,
+    backgroundColor: '#fff',
+    shadowOffset: { width: 1 , height: 1 },
+    shadowColor: '#333',
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    marginHorizontal: 4,
+    marginVertical: 6
+  },
+  cardcon: {
+    // marginHorizontal: 18,
+    // marginVertical: 10, 
+  },
+  fontSize:{
+    fontSize: 17,
+    width:190
+  }, 
+  modalToggle:{
+    marginBottom: 5,
+    borderColor: '#FFF',
+    backgroundColor: '#fff',
+    padding: 12,
+    borderRadius: 100,
+    alignSelf: 'center',
+},
+  
+
+})

@@ -15,10 +15,10 @@ const SocialStackScreen = ({navigation}) => {
     return (
       <SocialStack.Navigator>
         <SocialStack.Screen 
-          name="Social" 
+          name="Daily" 
           component={SocialScreen} 
           options={{
-            title:'Social',
+            title:'Daily',
             headerLeft: () => (
               <Icon.Button 
                 name="menu" 
