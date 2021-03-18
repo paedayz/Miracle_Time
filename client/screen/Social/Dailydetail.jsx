@@ -1,69 +1,25 @@
 import React, {useState}  from 'react'
-import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity, Alert, Image } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-
-// Component
-import Edittodaylist from './TodayListEdit'
 
 // Redux
 import {useDispatch} from 'react-redux'
 import {deleteEvent} from '../../redux/action/dataAction'
 
-export default function Dailydetail({navigation}) {
-    const route = useRoute() 
-    const { event,detail,start,end,rank,key } = route.params
-    const dispatch = useDispatch()
-    const [modalOpen, setModalOpen] = useState(false)
-    
 
-    const onAlert = () => {
-      Alert.alert(
-        "Alert Title",
-        "My Alert Msg",
-        [
-          
-          { 
-            text: "YES", onPress: () => {dispatch(deleteEvent(key))} ,
-          },{},
-          {
-            text: "NO",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-        ],
-    
-      );
-    }
+import EditDailydetail from './EditDailydetail'
+
+export default function Dailydetail({navigation}) {
+  
+  const [modalOpen, setModalOpen] = useState(false)
 
     return (
-        <View style={style.container}>
-            <View style={{  borderRadius: 10,
-                            width: 320 ,
-                            height: 60,
-                            elevation: 3,
-                            backgroundColor: '#fff',
-                            shadowOffset: { width: 1 , height: 1 },
-                            shadowColor: '#333',
-                            shadowOpacity: 0.3,
-                            shadowRadius: 2,
-                            marginHorizontal: 4,
-                            marginVertical: 6,}}>
-                <View style={style.cardcon}>
-                    <Text style={{ fontSize: 25}}>{event}</Text>
-                </View>
-            </View>
-
-            
-            <View style={style.card}>
-                <View style={style.cardcon}>
-                    <Text style={{ fontSize: 5}}></Text>
-                    <Text style={{fontSize:18,color: 'gray',marginBottom: 20}}>{start}--{end}</Text>
-                    <Text style={style.fontSize}>{detail}</Text>
-                </View>
-            </View>
-
-            <Modal visible={modalOpen} animationType={'slide'}>
+        <View >
+          <View>
+            <Image  style={style.mage} source={{uri: 'https://i.pinimg.com/originals/7a/7d/cf/7a7dcfa6474ec4cbfa81113eebe3c0dc.jpg'}} />
+          </View>
+          <Modal visible={modalOpen} animationType={'slide'}>
                 <View>
                     <Icon 
                         name="close" 
@@ -77,18 +33,51 @@ export default function Dailydetail({navigation}) {
                           marginTop: 15}}
                         onPress={() => setModalOpen(false)}
                     />
-                      <Edittodaylist/>
+                      <EditDailydetail/>
                 </View>
             </Modal>
+          <View>
+            
+              <View>
+                  <Text style={{fontSize:18,marginTop:9}}> 
+                    Daily Name
+                  </Text>
+              </View>
+              <View>
+                  <Text>
+                    2/01/2564
+                  </Text>
+              </View>
+              <View>
+                  <Text style={style.fontSize}>
+                ฟ้าคืนนี้แสนเศร้า และเหงานัก
+    เหมือนความรักของเราที่เลือนหาย
+    เคยสัญญาว่าจะรัก ไม่เสื่อมคลาย
+    แต่กลับกลาย ทำเหมือน...ลืมเลือนกัน
 
-            <View style={{marginBottom:10, marginTop: 10, flexDirection:'row'}}>
+    แสนเสียดายวันเวลา...ที่ผันผ่าน
+    มันเนิ่นนานเหลือเกิน เธอกับฉัน
+    ที่เคยรัก เคยผูกพัน กันนานวัน
+    กลับแปรผัน...เป็นเพียงแค่อดีตไป
+
+    เคยได้ยิน.หลายคนพูดกันว่า
+    รักกันงาย เลิกกันง่าย นั้นจริงหรือ
+    มาวันหนึ่ง จึงได้พบเจอกับเธอ
+    ใจจึงเผลอ รักเธอ...อย่างง่ายดาย
+
+    มาวันนี้ จึงได้รู้ถึงความจริง
+    เหมือนกับสิ่งที่ได้ฟัง ในวันก่อน
+    ว่าความรัก.เป็นอะไร ที่ไม่แน่นอน
+    ใจขาดรอน เมื่อรัก...ทำช้ำใจ
+                  </Text>
+              </View>
+          </View>
+          <View style={{marginBottom:10, marginTop: 20, flexDirection:'row',marginLeft:130}}>
               <View style={{width:70,height:10}}>
                 <Button
                   color="#FC7C7C"
                   title="Delete"
                   buttonStyle = {{borderRadius: 10}}
-                  // onPress={() => dispatch({type: 'DELETE_EVENT', payload: values}, navigation.navigate('Todaylist'))}
-                  onPress={() => onAlert()}
                 />
               </View>
 
@@ -130,7 +119,13 @@ const style = StyleSheet.create({
       
     },
     fontSize:{
-      fontSize: 18
-    }
+      fontSize: 18,
+      width: 350,
+      marginLeft:25,
+      marginTop:15
+    },
+mage: {
+    width:420,height:90,
+}
   
   })

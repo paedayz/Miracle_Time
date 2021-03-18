@@ -40,12 +40,12 @@ const Adddaily = (props) => {
             <Formik
                 initialValues={{ event: '', start: '',end: '',catagory:'งาน', detail: '', key: '',rank: '1',date: props.date, success: false}}  
                 onSubmit={(values) => {
-                    values.key = Math.random().toString()
-                    values.start = startTime
-                    values.end = endTime
-                    dispatch(addEvent(values))
-                    dispatch(doQuest('createEvent'))
-                    props.setModalOpen(false)
+                    // values.key = Math.random().toString()
+                    // values.start = startTime
+                    // values.end = endTime
+                    // dispatch(addEvent(values))
+                    // dispatch(doQuest('createEvent'))
+                    // props.setModalOpen(false)
                 }}
             >
                 {(props) => (
@@ -63,46 +63,28 @@ const Adddaily = (props) => {
                             </TextInput>
                             
                         </View>
-                        <View style={{width: 50, height: 30,marginTop:60}}>
-                            <Text >Rank :</Text>
-                            
-                        </View>
-                        <View style={{width: 280, height: 50, borderColor: '#ddd', borderWidth: 1,}} >
-                            
-                            
-                            <RNPickerSelect 
-                                placeholder={{}}
-                                value={props.values.rank}
-                                onValueChange={props.handleChange('rank')}
-                                items={[
-                                    { label: 'น้อย', value: '1' },
-                                    { label: 'กลาง', value: '2' },
-                                    { label: 'มาก', value: '3' },
-                                ]} />
-                        </View>
-                        <View style={{width: 70, height: 30,marginTop:5}}>
-                            <Text>catagory :</Text>
-                           
-                        </View>
-                        <View style={{width: 280, height: 50, borderColor: '#ddd', borderWidth: 1,}} >
-                            <RNPickerSelect 
-                                placeholder={{}}
-                                value={props.values.catagory}
-                                onValueChange={props.handleChange('catagory')}
-                                items={[
-                                    { label: 'งาน', value: 'งาน' ,color: '#ff3399'},
-                                    { label: 'ทั่วไป', value: 'ทั่วไป' ,color:'#009900' },
-                                    { label: 'นัดสำคัญ', value: 'นัดสำคัญ' ,color:'#993300'},
-                                ]} />
-                        </View>
-                        <View style={{width: 50, height: 17,marginTop:10}}>
-                            <Text >Event :</Text>
+                        <View style={{width: 90, height: 17,marginTop:10}}>
+                            <Text >Image URL :</Text>
                             
                         </View>
                         <View style={{width: 280, height: 90}}>
                             <TextInput
                                 style={styles.input}
-                                placeholder='Event'
+                                placeholder='Image URL'
+                                onChangeText={props.handleChange('event')}
+                                value={props.values.event}
+                                >
+                            </TextInput>
+                        </View>
+                        
+                        <View style={{width: 90, height: 17,marginTop:-15}}>
+                            <Text >Daily Name :</Text>
+                            
+                        </View>
+                        <View style={{width: 280, height: 90}}>
+                            <TextInput
+                                style={styles.input}
+                                placeholder='Dailyname'
                                 onChangeText={props.handleChange('event')}
                                 value={props.values.event}
                                 >
@@ -110,60 +92,7 @@ const Adddaily = (props) => {
                         </View>
                         
 
-                        <View style={{flexDirection: 'row',height:20,marginTop:-20}}>
-                            <View style={{width: 50, height: 30}}>
-                                <Text >Start :</Text>
-                               
-                            </View>
-                            <View style={{width: 50, height: 30,marginLeft:100}}>
-                                <Text >End :</Text>
-                               
-                            </View>
-                        </View>
-                        <View style={{flexDirection: 'row',height:90}}>
-                            <View style={{width: 100, height: 90}}>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder='start'
-                                    defaultValue={startTime}
-                                    >
-                                </TextInput>
-                            </View>
-                            <Icon 
-                                name="calendar" 
-                                size={30} 
-                                color='gray'
-                                style={{marginTop:25,marginLeft:10}}
-                                onPress={()=> setIsStartDatePickerVisible(true)}/>
-                            <DateTimePickerModal
-                                    
-                                    isVisible={isStartDatePickerVisible}
-                                    mode="time"
-                                    onConfirm={props.handleChange('start'),starthandleConfirm}
-                                    onCancel={()=> setIsStartDatePickerVisible(false)}/>
-
-                            <View style={{width: 100, height: 90,marginLeft:6}}> 
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder='end'
-                                    defaultValue={endTime}
-                                    >
-                                </TextInput>   
-                            </View>     
-                            <Icon 
-                                name="calendar" 
-                                size={30} 
-                                color='gray'
-                                style={{marginTop:25,marginLeft:10}}
-                                onPress={()=> setIsEndDatePickerVisible(true)}/>     
-                            <DateTimePickerModal
-                                    
-                                    isVisible={isEndDatePickerVisible}
-                                    mode="time"
-                                    onConfirm={props.handleChange('end'),endhandleConfirm}
-
-                                    onCancel={()=> setIsEndDatePickerVisible(false)}/>
-                        </View>
+                       
                         
                         <View style={{width: 50, height: 20 , marginTop: -20}}>
                                 <Text >Detail :</Text>
