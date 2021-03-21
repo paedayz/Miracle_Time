@@ -16,4 +16,23 @@ exports.addDaily = (req, res) => {
             
             return res.json({data : doc.data()})
         })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
+
+exports.getUserDaily = (req, res) => {
+    firestore.collection('daily').where('username', '==', req.user.username).get()
+        .then((snapshot) => {
+            let data = []
+            snapshot.forEach((doc) => {
+                data.push(doc.data())
+            })
+            return res.json({data: data})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
 }
