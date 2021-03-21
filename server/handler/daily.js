@@ -61,3 +61,22 @@ exports.editDaily = (req, res) => {
             return res.json({error: err})
         })
 }
+
+exports.deleteDaily = (req, res) => {
+    const docId = req.body.docId
+    firestore.doc(`/daily/${docId}`).get()
+        .then((doc) => {
+            if(doc.data().username !== req.user.username) {
+                return res.status(403).json({message : 'Permission denied'})
+            } else {
+                return firestore.collection('daily').doc(docId).delete()
+            }
+        })
+        .then(() => {
+            return res.json({data : docId})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
+}
