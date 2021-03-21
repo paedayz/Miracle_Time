@@ -199,6 +199,7 @@ exports.addNotifications = (req, res) => {
 
 exports.readNotifications = async (req, res) => {
     const notificationsToUpdate = req.body.docIds
+    console.log(notificationsToUpdate)
     const notificationReadPromise = notificationsToUpdate.map((notiDocId) => {
         return firestore.doc(`/notifications/${notiDocId}`).update({read: true})
       })

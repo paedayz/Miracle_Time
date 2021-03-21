@@ -170,6 +170,7 @@ export const claimQuest = (docId, questId) => (dispatch) => {
                 exp : res.data.data.exp,
                 level : res.data.data.level
             }
+            console.log(coin_exp_lvl)
             dispatch({type: SET_COIN_EXP_LVL, payload: coin_exp_lvl})
             dispatch({type: CLAIM_QUEST, payload: docId})
         })

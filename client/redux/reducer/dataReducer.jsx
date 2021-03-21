@@ -21,6 +21,7 @@ import {
     TOGGLE_EVENT_SUCCESS,
     SET_DATA_CLEAR,
     SET_DATA_ERROR,
+    IS_GET_DATA
 } from "../type"
 
 const initialState = {
@@ -38,6 +39,7 @@ const initialState = {
     questList: [],
     achievementList: [],
     error: null,
+    isGetData: false
 }
 
 const startState = {
@@ -53,11 +55,18 @@ const startState = {
     now_noti : [],
     end_noti : [],
     questList: [],
-    achievementList: []
+    achievementList: [],
+    error: null,
+    isGetData: false
 }
 
 export default function (state = initialState, action){
     switch (action.type) {
+        case IS_GET_DATA: 
+             return {
+                 ...state,
+                 isGetData: true
+             }
         case SET_EVENT :
             return {
                 ...state,

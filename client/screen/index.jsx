@@ -39,10 +39,10 @@ const Drawer = createDrawerNavigator()
 export default function Screen({navigation}) {
     const userData = useSelector(state => state.user.userData)
     const loading = useSelector(state => state.system.loading)
-    const userEventData = useSelector(state => state.data.events)
+    const isGetData = useSelector(state => state.data.isGetData)
     const dispatch = useDispatch()
 
-    if(userData && userEventData.length == 0){
+    if(userData && isGetData === false){
         if(userData.status === 'admin') {
             dispatch(getAdminQuestList())
             dispatch(getAdminAchievementList())

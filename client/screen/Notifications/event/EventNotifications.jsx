@@ -18,6 +18,7 @@ export default function NowEvent({allEventData}) {
   const {catagory, date, detail, end, event, key, rank, start} = eventData
 
   const navigation = useNavigation()
+  console.log(status)
 
   if(status === "now" && toggle == false) {
     return(

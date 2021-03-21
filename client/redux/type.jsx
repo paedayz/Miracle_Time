@@ -8,6 +8,7 @@ export const CLEAR_ERROR = 'CLEAR_ERROR'
 // User
 export const SET_USER_DATA = 'SET_USER_DATA'
 export const SET_COIN_EXP_LVL = 'SET_COIN_EXP_LVL'
+export const IS_GET_DATA = 'IS_GET_DATA'
 
 // Friend
 export const SET_FRIEND_REQUEST = 'SET_FRIEND_REQUEST'
