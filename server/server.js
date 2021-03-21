@@ -55,11 +55,12 @@ let {
   getUserAchievement,
 } = require('./handler/achievement')
 
-let {addDaily, getUserDaily} = require('./handler/daily')
+let {addDaily, getUserDaily, editDaily} = require('./handler/daily')
 
 // Daily Route
 app.post('/addDaily', FBAuth, addDaily)
 app.post('/getUserDaily', FBAuth, getUserDaily)
+app.post('/editDaily', FBAuth, editDaily)
 
 // User Route
 app.post('/signup',signup)
