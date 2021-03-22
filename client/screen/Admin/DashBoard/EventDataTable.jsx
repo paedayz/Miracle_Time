@@ -18,6 +18,7 @@ const MyComponent = () => {
                 {data.slice((nowPage * 2) + nowPage, ((nowPage*2)+(nowPage+2)) + 1).map((event) => (
                     <DataTable.Row key={event.a}>
                         <DataTable.Cell>{`${months[event.a.getMonth()]}`}</DataTable.Cell>
+                        <DataTable.Cell numeric>{`${event.a.getFullYear()}`}</DataTable.Cell>
                         <DataTable.Cell numeric>{event.b}</DataTable.Cell>
                     </DataTable.Row>
                     
@@ -40,6 +41,7 @@ const MyComponent = () => {
             <DataTable>
                 <DataTable.Header>
                 <DataTable.Title>Month</DataTable.Title>
+                <DataTable.Title numeric>Year</DataTable.Title>
                 <DataTable.Title numeric>Amount</DataTable.Title>
                 </DataTable.Header>
 
@@ -61,6 +63,7 @@ const MyComponent = () => {
             <DataTable>
                 <DataTable.Header>
                 <DataTable.Title>Month</DataTable.Title>
+                <DataTable.Title numeric>Year</DataTable.Title>
                 <DataTable.Title numeric>Amount</DataTable.Title>
                 </DataTable.Header>
 
@@ -77,44 +80,6 @@ const MyComponent = () => {
             </DataTable>
         )
     }
-    // return (
-    //     <DataTable>
-    //         <DataTable.Header>
-    //         <DataTable.Title>Dessert</DataTable.Title>
-    //         <DataTable.Title numeric>Calories</DataTable.Title>
-    //         <DataTable.Title numeric>Fat</DataTable.Title>
-    //         </DataTable.Header>
-
-    //         <DataTable.Row>
-    //         <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-    //         <DataTable.Cell numeric>159</DataTable.Cell>
-    //         <DataTable.Cell numeric>6.0</DataTable.Cell>
-    //         </DataTable.Row>
-
-    //         <DataTable.Row>
-    //         <DataTable.Cell>Ice cream sandwich</DataTable.Cell>
-    //         <DataTable.Cell numeric>237</DataTable.Cell>
-    //         <DataTable.Cell numeric>8.0</DataTable.Cell>
-    //         </DataTable.Row>
-
-    //         <DataTable.Row>
-    //         <DataTable.Cell>Ice cream sandwich</DataTable.Cell>
-    //         <DataTable.Cell numeric>237</DataTable.Cell>
-    //         <DataTable.Cell numeric>8.0</DataTable.Cell>
-    //         </DataTable.Row>
-
-
-    //         <DataTable.Pagination
-    //         page={1}
-    //         numberOfPages={3}
-    //         onPageChange={page => {
-    //             console.log(page);
-    //         }}
-    //         label="1-2 of 6"
-    //         />
-    //     </DataTable>
-    // )
-  
 };
 
 export default MyComponent;

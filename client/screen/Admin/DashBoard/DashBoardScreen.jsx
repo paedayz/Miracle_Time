@@ -13,15 +13,14 @@ export default function App({navigation}) {
     const dispatch = useDispatch()
     
     navigation.addListener('focus', () => {
-      console.log('dash')
       dispatch(getAdminDashBoard())
         
   });
       return (
         <SafeAreaView styles={styles.container}>
-          <Text>Graph</Text>
+          <Text style={styles.headGraph}>Graph</Text>
           <BrushLineGraph/>
-          <Text>Detail</Text>
+          <Text style={styles.headDetail}>Detail</Text>
           <EventDataTable/>
         </SafeAreaView>
       );
@@ -33,4 +32,14 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    headGraph: {
+      fontSize: 25,
+      marginLeft: 15,
+      marginTop: 10
+    },
+    headDetail: {
+      fontSize: 25,
+      marginLeft: 15,
+      marginTop: 30
+    }
   });
