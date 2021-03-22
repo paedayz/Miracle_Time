@@ -1,9 +1,19 @@
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
-export default function App({navigation}) {
+import { SafeAreaView, Text, StyleSheet } from 'react-native';
+
+// Component
+export default function DashBord({navigation}) {
       return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView styles={styles.container}>
           <Text>DashBoard</Text>
         </SafeAreaView>
       );
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+  });
