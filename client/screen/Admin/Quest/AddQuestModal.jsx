@@ -42,14 +42,17 @@ export default function AddQuestModal({setModalOpenAdd}) {
     setModalOpenAdd(false)
   }
     return (
+        <KeyboardAvoidingView style={{flex:1}}>
+        <ScrollView>
         <View style={styles.modal}>
+          
                 <Icon 
                         name="close"
                         size={20} 
                         style={styles.closeIcon}
                         onPress={() => setModalOpenAdd(false)}
                     />
-                  <KeyboardAvoidingView behavior={'height'} style={{flex:1}}>
+                  
                   <View style={styles.questBox}>
                     <Title style={styles.headerTitle}>Add Quest</Title>
                     <Text>Quest name</Text>
@@ -100,8 +103,10 @@ export default function AddQuestModal({setModalOpenAdd}) {
                       />
                     </View>
                   </View>
-                  </KeyboardAvoidingView>  
+                      
                 </View>
+                </ScrollView>
+                </KeyboardAvoidingView> 
     )
 }
 

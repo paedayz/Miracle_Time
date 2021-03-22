@@ -29,7 +29,6 @@ export default function QuestArchieveScreen ({navigation}) {
 
   if(mode) {
       return (
-      <View>
         <View>
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity style={[styles.headerBox, {
