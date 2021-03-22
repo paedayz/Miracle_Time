@@ -32,6 +32,7 @@ import TipsStack from './Tips/TipsStack'
 
 // Naviation
 import BottomTabNavigator from '../navigator/BottomTabNavigator'
+import AdminBottomTabNavigator from '../navigator/AdminBottomTabNavigator'
 import {DrawerContent} from '../navigator/DrawerContent'
 const Drawer = createDrawerNavigator()
 
@@ -63,7 +64,7 @@ export default function Screen({navigation}) {
             <Drawer.Navigator initialRouteName="Calendar" drawerContent={props => <DrawerContent {...props}/>}>
                 <Drawer.Screen name="Calendar" component={BottomTabNavigator} />
                 <Drawer.Screen name="Profile" component={ProfileStackScreen} />
-                <Drawer.Screen name="Admin" component={AdminStackScreen} />
+                <Drawer.Screen name="Admin" component={AdminBottomTabNavigator} />
                 <Drawer.Screen name="Notifications" component={NotificationStackScreen} />
                 <Drawer.Screen name="Friend" component={FriendStackScreen} />
                 <Drawer.Screen name="Tips" component={TipsStack} />
