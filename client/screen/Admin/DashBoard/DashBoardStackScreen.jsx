@@ -6,12 +6,13 @@ import Icon from 'react-native-vector-icons/Ionicons'
 // Screen
 import DashBoardScreen from './DashBoardScreen'
 
-const QuestArchieveStack = createStackNavigator()
+const DashboardStack = createStackNavigator()
 
 const AdminArchieveStackScreen = ({navigation}) => {
+  
     return (
-      <QuestArchieveStack.Navigator>
-        <QuestArchieveStack.Screen 
+      <DashboardStack.Navigator>
+        <DashboardStack.Screen 
           name="AdminDashboard" 
           component={DashBoardScreen} 
           options={{
@@ -27,7 +28,7 @@ const AdminArchieveStackScreen = ({navigation}) => {
             )
           }}
         />
-      </QuestArchieveStack.Navigator>
+      </DashboardStack.Navigator>
     )
   }
 

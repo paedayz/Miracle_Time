@@ -11,9 +11,12 @@ import {getAdminDashBoard} from '../../../redux/action/dataAction'
 
 export default function App({navigation}) {
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getAdminDashBoard())
-    },[])
+    
+    navigation.addListener('focus', () => {
+      console.log('dash')
+      dispatch(getAdminDashBoard())
+        
+  });
       return (
         <SafeAreaView styles={styles.container}>
           <Text>Graph</Text>

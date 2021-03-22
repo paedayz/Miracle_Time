@@ -283,7 +283,7 @@ exports.getAdminDashBoard = async (req, res) => {
                 "b": 45
             },
             {
-                "a": "2021-07-01",
+                "a": "2021-11-01",
                 "b": 80
             }
         ]})
