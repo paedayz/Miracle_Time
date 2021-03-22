@@ -21,7 +21,8 @@ import {
     TOGGLE_EVENT_SUCCESS,
     SET_DATA_CLEAR,
     SET_DATA_ERROR,
-    IS_GET_DATA
+    IS_GET_DATA,
+    SET_DASHBOARD_EVENT
 } from "../type"
 
 const initialState = {
@@ -38,6 +39,7 @@ const initialState = {
     end_noti : [],
     questList: [],
     achievementList: [],
+    dashboardEvent: [],
     error: null,
     isGetData: false
 }
@@ -56,6 +58,7 @@ const startState = {
     end_noti : [],
     questList: [],
     achievementList: [],
+    dashboardEvent: [],
     error: null,
     isGetData: false
 }
@@ -282,6 +285,12 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 achievementList: action.payload
+            }
+        
+        case SET_DASHBOARD_EVENT : 
+            return {
+                ...state,
+                dashboardEvent: action.payload
             }
         
         case SET_DATA_CLEAR :

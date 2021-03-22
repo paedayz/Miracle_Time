@@ -18,7 +18,8 @@ import {
     SET_COIN_EXP_LVL,
     SET_ACHIEVE,
     DO_ACHIEVE,
-    TOGGLE_EVENT_SUCCESS
+    TOGGLE_EVENT_SUCCESS,
+    SET_DASHBOARD_EVENT
 } from "../type"
 
 import {getClientUserId} from './userAction'
@@ -196,6 +197,22 @@ export const getUserAchievement = () => (dispatch) => {
     axios.post('/getUserAchievement', {clientUserId: clientUserId})
         .then((res) => {
             dispatch({type: SET_ACHIEVE, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const getAdminDashBoard = () => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/getAdminDashBoard', {clientUserId: clientUserId})
+        .then((res) => {
+            let setData = []
+            res.data.data.map((data) => {
+                data.a = new Date(data.a)
+                setData.push(data)
+            })
+            dispatch({type: SET_DASHBOARD_EVENT, payload: setData})
         })
         .catch((err) => {
             console.log(err)

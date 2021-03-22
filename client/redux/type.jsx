@@ -61,3 +61,6 @@ export const DELETE_ACHIEVE = 'DELETE_ACHIEVE'
 // Achieve
 export const SET_ACHIEVE = 'SET_ACHIEVE'
 export const DO_ACHIEVE = 'DO_ACHIEVE'
+
+// Dashboard
+export const SET_DASHBOARD_EVENT = 'SET_DASHBOARD_EVENT'

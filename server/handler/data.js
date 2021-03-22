@@ -239,7 +239,7 @@ exports.deleteNotifications = (req, res) => {
         })
 }
 
-exports.adminDashBoard = async (req, res) => {
+exports.getAdminDashBoard = async (req, res) => {
     const status = req.user.status
     if(status === "admin") {
         const eventData = await firestore.collection('events').orderBy('date').get()
@@ -252,17 +252,14 @@ exports.adminDashBoard = async (req, res) => {
                     sum = sum + 1
                     if(returnData.length === 0) {
                         // returnData[`${year}-${month}`] = {}
-                        returnData.push({a: `${year}-${month}-1`, b: 1})
+                        returnData.push({a: `${year}-${month}-01`, b: 1})
                     } else {
                         if(returnData[returnData.length - 1].a.split('-')[1] === month) {
                             returnData[returnData.length - 1].b = returnData[returnData.length - 1].b + 1
                         } else {
-                            returnData.push({a: `${year}-${month}-1`, b: 1})
+                            returnData.push({a: `${year}-${month}-01`, b: 1})
                         }
                     }
-                })
-                returnData.map((data, index) => {
-                    returnData[index].a = new Date(data.a)
                 })
                 return returnData
             })

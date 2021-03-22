@@ -3,7 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import DashBoard from './DashBoard'
+// Screen
+import DashBoardScreen from './DashBoardScreen'
 
 const QuestArchieveStack = createStackNavigator()
 
@@ -12,7 +13,7 @@ const AdminArchieveStackScreen = ({navigation}) => {
       <QuestArchieveStack.Navigator>
         <QuestArchieveStack.Screen 
           name="AdminDashboard" 
-          component={DashBoard} 
+          component={DashBoardScreen} 
           options={{
             title:'Admin Dashboard',
             headerLeft: () => (
