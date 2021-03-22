@@ -238,3 +238,37 @@ exports.deleteNotifications = (req, res) => {
             return res.json({error: err})
         })
 }
+
+exports.adminDashBoard = async (req, res) => {
+    const status = req.user.status
+    if(status === "admin") {
+        const eventData = await firestore.collection('events').orderBy('date').get()
+            .then((snapshot) => {
+                let returnData = []
+                let sum = 0
+                snapshot.forEach((doc) => {
+                    const year = doc.data().date.split('-')[0]
+                    const month = doc.data().date.split('-')[1]
+                    sum = sum + 1
+                    if(returnData.length === 0) {
+                        // returnData[`${year}-${month}`] = {}
+                        returnData.push({a: `${year}-${month}-1`, b: 1})
+                    } else {
+                        if(returnData[returnData.length - 1].a.split('-')[1] === month) {
+                            returnData[returnData.length - 1].b = returnData[returnData.length - 1].b + 1
+                        } else {
+                            returnData.push({a: `${year}-${month}-1`, b: 1})
+                        }
+                    }
+                })
+                returnData.map((data, index) => {
+                    returnData[index].a = new Date(data.a)
+                })
+                return returnData
+            })
+        
+        res.json({data: eventData})
+    } else {
+        res.status(403).json({message: 'Fuck off this is only admin'})
+    }
+}

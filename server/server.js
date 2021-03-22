@@ -26,7 +26,8 @@ let {
   readNotifications, 
   toggleNotifications,
   deleteNotifications,
-  toggleEventSuccess
+  toggleEventSuccess,
+  adminDashBoard
 } = require('./handler/data')
 
 let {
@@ -86,6 +87,7 @@ app.post('/addNotifications', FBAuth, addNotifications)
 app.post('/readNotifications', FBAuth, readNotifications)
 app.post('/toggleNotifications', FBAuth, toggleNotifications)
 app.post('/deleteNotifications', FBAuth, deleteNotifications)
+app.post('/adminDashBoard', FBAuth, adminDashBoard)
 
 // Quest Route
 app.post('/addQuest', FBAuth, addQuest)
