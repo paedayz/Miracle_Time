@@ -240,6 +240,7 @@ exports.deleteNotifications = (req, res) => {
 }
 
 exports.getAdminDashBoard = async (req, res) => {
+    console.log('dash')
     const status = req.user.status
     if(status === "admin") {
         const eventData = await firestore.collection('events').orderBy('date').get()
@@ -264,7 +265,28 @@ exports.getAdminDashBoard = async (req, res) => {
                 return returnData
             })
         
-        res.json({data: eventData})
+        res.json({data: [
+            {
+                "a": "2021-02-01",
+                "b": 60
+            },
+            {
+                "a": "2021-03-01",
+                "b": 55
+            },
+            {
+                "a": "2021-04-01",
+                "b": 75
+            },
+            {
+                "a": "2021-05-01",
+                "b": 45
+            },
+            {
+                "a": "2021-07-01",
+                "b": 80
+            }
+        ]})
     } else {
         res.status(403).json({message: 'Fuck off this is only admin'})
     }

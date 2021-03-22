@@ -21,7 +21,7 @@ export default function App() {
               <VictoryZoomContainer
                 zoomDimension="x"
                 zoomDomain={zoomDomain}
-                onZoomDomainChange={() => handleZoom()}
+                onZoomDomainChange={(domain) => handleZoom(domain)}
               />
             }
           >
@@ -38,7 +38,10 @@ export default function App() {
         </Fragment>
       );
     } else {
-      <Text>Loading</Text>
+      return(
+        <Text>Loading</Text>
+      )
+      
     }
       
   }

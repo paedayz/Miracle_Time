@@ -3,6 +3,7 @@ import { SafeAreaView, Text, StyleSheet } from 'react-native';
 
 // Component
 import BrushLineGraph from './BrushLineGraph'
+import EventDataTable from './EventDataTable'
 
 // Redux
 import {useDispatch, useSelector} from 'react-redux'
@@ -15,8 +16,10 @@ export default function App({navigation}) {
     },[])
       return (
         <SafeAreaView styles={styles.container}>
-          <Text>DashBoard</Text>
+          <Text>Graph</Text>
           <BrushLineGraph/>
+          <Text>Detail</Text>
+          <EventDataTable/>
         </SafeAreaView>
       );
 }
