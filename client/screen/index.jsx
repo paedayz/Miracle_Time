@@ -13,6 +13,10 @@ import {
     UIActivityIndicator,
     WaveIndicator,
   } from 'react-native-indicators';
+import {ThemeProvider} from 'styled-components'
+
+// Themes
+import {themes} from '../utils/Theme'
 
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
@@ -61,6 +65,7 @@ export default function Screen({navigation}) {
 
     if(userData) {
         return (
+            <ThemeProvider theme={themes[userData.theme]}>
             <Drawer.Navigator initialRouteName="Calendar" drawerContent={props => <DrawerContent {...props}/>}>
                 <Drawer.Screen name="Calendar" component={BottomTabNavigator} />
                 <Drawer.Screen name="Profile" component={ProfileStackScreen} />
@@ -69,6 +74,7 @@ export default function Screen({navigation}) {
                 <Drawer.Screen name="Friend" component={FriendStackScreen} />
                 <Drawer.Screen name="Tips" component={TipsStack} />
             </Drawer.Navigator>
+            </ThemeProvider>
         )
         
     } else {
