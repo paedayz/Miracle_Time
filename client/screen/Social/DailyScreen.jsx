@@ -4,6 +4,10 @@ import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity,Image } f
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useRoute }  from '@react-navigation/native'
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux'
+
+// Component
 import Adddaily from './Adddaily'
 
 export default function DailyScreen({navigation}) {
@@ -11,8 +15,11 @@ export default function DailyScreen({navigation}) {
 
   const [modalOpen, setModalOpen] = useState(false)
 
+  const allList = useSelector((state) => state.data.daily)
+  console.log(allList)
   return (
     <View>
+        
         <Modal visible={modalOpen} animationType={'slide'}>
                 <View>
                     <Icon 
@@ -29,71 +36,29 @@ export default function DailyScreen({navigation}) {
                 <Image  style={{marginVertical: 10, marginLeft:360, height:40,width:40}} source={require('../img/add.png')} />
               </TouchableOpacity>
         </View>
-      <View style={{flexDirection: 'row'}}>
-      <TouchableOpacity onPress={() => navigation.navigate('Dailydetail')}>
-        <View style={style.card}>
-           <View>
-              <Image  style={style.mage} source={{uri: 'https://i.pinimg.com/originals/7a/7d/cf/7a7dcfa6474ec4cbfa81113eebe3c0dc.jpg'}} />
-           <Text style={{marginLeft:15}}>
-               Daily Name
-            </Text>
-            <Text style={{marginLeft:15}}>
-               2/01/2564
-            </Text>
-           </View>
-            
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Dailydetail')}>
-        <View style={style.card}>
-           <View>
-              <Image  style={style.mage} source={{uri: 'https://i.pinimg.com/originals/7a/7d/cf/7a7dcfa6474ec4cbfa81113eebe3c0dc.jpg'}} />
-           <Text style={{marginLeft:15}}>
-               Daily Name
-            </Text>
-            <Text style={{marginLeft:15}}>
-               2/01/2564
-            </Text>
-           </View>
-            
-        </View>
-      </TouchableOpacity>
-      
-      </View>
-      
-      <View style={{flexDirection: 'row',marginTop:15}}>
-      <TouchableOpacity onPress={() => navigation.navigate('Dailydetail',)}>
-        <View style={style.card}>
-           <View>
-              <Image  style={style.mage} source={{uri: 'https://i.pinimg.com/originals/7a/7d/cf/7a7dcfa6474ec4cbfa81113eebe3c0dc.jpg'}} />
-           <Text style={{marginLeft:15}}>
-               Daily Name
-            </Text>
-            <Text style={{marginLeft:15}}>
-               2/01/2564
-            </Text>
-           </View>
-            
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Dailydetail')}>
-        <View style={style.card}>
-           <View>
-              <Image  style={style.mage} source={{uri: 'https://i.pinimg.com/originals/7a/7d/cf/7a7dcfa6474ec4cbfa81113eebe3c0dc.jpg'}} />
-           <Text style={{marginLeft:15}}>
-               Daily Name
-            </Text>
-            <Text style={{marginLeft:15}}>
-               2/01/2564
-            </Text>
-           </View>
-            
-        </View>
-      </TouchableOpacity>
-      
-      </View>
-      
-    
+        <FlatList
+          data={allList}
+          numColumns={2}
+          renderItem={({item, index}) => (
+            <View style={{marginTop:10}}>
+              <TouchableOpacity onPress={() => navigation.navigate('Dailydetail', item)}>
+                <View style={style.card}>
+                  <View>
+                      <Image  key={index} style={style.mage} source={{uri: item.imag_url}} />
+                  <Text  style={{marginLeft:15}}>
+                      {item.daily}
+                      
+                    </Text>
+                    <Text  style={{marginLeft:15}}>
+                      {item.date}
+                    </Text>
+                  </View>
+                    
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+        />
       
     </View>
   )
@@ -106,7 +71,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   card: {
-    backgroundColor:"#ffdbdb",width:170,marginLeft:23,height:230,borderRadius:20
+    backgroundColor:"#ffdbdb",width:170,marginLeft:23,height:200,borderRadius:20
   },
   cardcon: {
     // marginHorizontal: 18,

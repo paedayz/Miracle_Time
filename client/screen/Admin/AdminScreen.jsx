@@ -3,7 +3,6 @@ import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, Scr
 import {
   Avatar,
   Title,
-  Text 
 } from 'react-native-paper'
 // Component
 import ArcheivementScreen from './Archieve/ArcheivementScreen'

@@ -11,13 +11,15 @@ import {deleteEvent} from '../../redux/action/dataAction'
 import EditDailydetail from './EditDailydetail'
 
 export default function Dailydetail({navigation}) {
+  const route = useRoute() 
+  const { username,detail,mood,daily,imag_url,date } = route.params
   
   const [modalOpen, setModalOpen] = useState(false)
 
     return (
         <View >
           <View>
-            <Image  style={style.mage} source={{uri: 'https://i.pinimg.com/originals/7a/7d/cf/7a7dcfa6474ec4cbfa81113eebe3c0dc.jpg'}} />
+            <Image  style={style.mage} source={{uri: imag_url }} />
           </View>
           <Modal visible={modalOpen} animationType={'slide'}>
                 <View>
@@ -40,12 +42,12 @@ export default function Dailydetail({navigation}) {
             
               <View>
                   <Text style={{fontSize:18,marginTop:9}}> 
-                    Daily Name
+                    {daily}
                   </Text>
               </View>
               <View>
                   <Text>
-                    2/01/2564
+                    {date}
                   </Text>
               </View>
               <View>

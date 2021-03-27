@@ -38,6 +38,42 @@ const initialState = {
     questList: [],
     achievementList: [],
     error: null,
+    daily:[{
+        username:'',
+        detail:'123',
+        mood:'',
+        daily:'123',
+        imag_url:'https://i.pinimg.com/originals/7a/7d/cf/7a7dcfa6474ec4cbfa81113eebe3c0dc.jpg',
+        date:'3/02/64'
+    },{
+        username:'',
+        detail:'ABC',
+        mood:'',
+        daily:'ABC',
+        imag_url:'https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/',
+        date:'2/02/64'
+    },{
+        username:'',
+        detail:'ABC',
+        mood:'',
+        daily:'ABC',
+        imag_url:'https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/',
+        date:'2/02/64'
+    },{
+        username:'',
+        detail:'ABC',
+        mood:'',
+        daily:'ABC',
+        imag_url:'https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/',
+        date:'2/02/64'
+    },{
+        username:'',
+        detail:'ABC',
+        mood:'',
+        daily:'ABC',
+        imag_url:'https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/',
+        date:'2/02/64'
+    }]
 }
 
 const startState = {
