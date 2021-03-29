@@ -50,7 +50,7 @@ export default function TipsScreen({navigation}) {
             </View>
         </TouchableOpacity>
 
-        
+        <Button onPress={() => navigation.navigate('HF')} title='Test HF'/>
         
     </View>
     );

@@ -21,38 +21,55 @@ export default function HowFeel({clickMood_func}) {
         setUseser_Emotions("angry")
         clickMood_func()
     }
-    
+
     return (
-        <View style={styles.HF_box}>
+        <SafeAreaView style={styles.HF_box}>
           <View style={styles.headerBox}>
             <Text style={styles.title}>ตอนนี้คูณรู้สึกอย่างไร</Text> 
           </View>
-          <Text>{Useser_Emotions}</Text>
+
           <View style={styles.button_box}>
               <TouchableOpacity style={styles.button1} onPress={() => Feel_good()}>
-    
-                <Text style={styles.button_text}>รู้สึกดี</Text>
-  
+
+
+                <Image source={require('../assets/Mood_pic/happy.png')} style={styles.mood_img}/>
+
+                <View style={styles.text_box}>
+                  <Text style={styles.button_text}>มีความสุข</Text>
+                </View>    
+
               </TouchableOpacity>
               <TouchableOpacity style={styles.button2} onPress={() => Feel_ok()}>
+
+                <Image source={require('../assets/Mood_pic/soso.png')} style={styles.mood_img}/>
     
-                <Text style={styles.button_text}>รู้สึกเฉยๆ</Text>
+                <View style={styles.text_box}>
+                  <Text style={styles.button_text}>เฉยๆ</Text>
+                </View>
   
               </TouchableOpacity>
           </View>
           <View style={styles.button_box}>
               <TouchableOpacity style={styles.button3} onPress={() => Feel_sad()}>
+
+                <Image source={require('../assets/Mood_pic/sad.png')} style={styles.mood_img}/>
     
-                <Text style={styles.button_text}>รู้สึกเศร้า</Text>
+                <View style={styles.text_box}>
+                  <Text style={styles.button_text}>เศร้า</Text>
+                </View>
   
               </TouchableOpacity>
               <TouchableOpacity style={styles.button4} onPress={() => Feel_angry()}>
+
+                <Image source={require('../assets/Mood_pic/angry.png')} style={styles.mood_img}/>
     
-                <Text style={styles.button_text}>รู้สึกโกรธ</Text>
+                <View style={styles.text_box}>
+                  <Text style={styles.button_text}>โกรธ</Text>
+                </View>
   
               </TouchableOpacity>
           </View>
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -63,70 +80,73 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button_text: {
-    color:'white',
-    fontSize: 18,
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 22,
+    textShadowOffset: { width: 2, height: 1 },
+    textShadowRadius: 2,
+    textShadowColor: 'gray',
+  },
+  text_box: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop:'2%',
+  },
+  mood_img:{
+    height:'60%',
+    width:'100%',
+    // borderWidth:2,
+    // borderColor:'black',
+    // borderRadius: 100,
   },
   title: {
-    color:'black',
-    fontSize: 18,
+    color: '#404040',
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 22,
   },
   HF_box:{
     backgroundColor:'#fff',
-    maxWidth:'98%',
-    maxHeight:'95%',
     alignItems: 'center',
+    width:'99%',
+    height:'99%',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    padding:10,
+    marginTop:'2%',
   },
   headerBox:{
     alignItems: 'center',
-    padding:15,
+    margin:'2%',
   },
   button1:{
     backgroundColor:'#FF33FF',
-    borderColor: '#dddddd',
-      borderWidth: 1,
-      borderRadius: 30,
-      shadowOffset: { width: 1 , height: 1 },
-      shadowColor: '#333',
-      shadowOpacity: 0.3,
-      shadowRadius: 2,
-    marginHorizontal:'2%',
-    padding:20,
+    height:'100%',
+    width:'48%',
+    borderTopStartRadius:10,
+    justifyContent: 'center',
   },
   button2: {
     backgroundColor:'#FFFF66',
-    borderColor: '#dddddd',
-      borderWidth: 1,
-      borderRadius: 30,
-      shadowOffset: { width: 1 , height: 1 },
-      shadowColor: '#333',
-      shadowOpacity: 0.3,
-      shadowRadius: 2,
-    marginHorizontal:'2%',
-    padding:20,
+    height:'100%',
+    width:'48%',
+    borderTopEndRadius:10,
+    justifyContent: 'center',
   },
   button3: {
     backgroundColor:'#3366FF',
-    borderColor: '#dddddd',
-      borderWidth: 1,
-      borderRadius: 30,
-      shadowOffset: { width: 1 , height: 1 },
-      shadowColor: '#333',
-      shadowOpacity: 0.3,
-      shadowRadius: 2,
-    marginHorizontal:'2%',
-    padding:20,
+    height:'100%',
+    width:'48%',
+    borderBottomLeftRadius:10,
+    justifyContent: 'center',
   },
   button4: {
     backgroundColor:'#FF6600',
-    borderColor: '#dddddd',
-      borderWidth: 1,
-      borderRadius: 30,
-      shadowOffset: { width: 1 , height: 1 },
-      shadowColor: '#333',
-      shadowOpacity: 0.3,
-      shadowRadius: 2,
-    marginHorizontal:'2%',
-    padding:20,
+    height:'100%',
+    width:'48%',
+    borderBottomRightRadius:10,
+    justifyContent: 'center',
   }
    
 });
