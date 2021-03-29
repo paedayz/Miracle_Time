@@ -5,7 +5,9 @@ exports.addDaily = (req, res) => {
         createdAt : new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),
         username: req.user.username,
         detail: req.body.detail,
-        mood: req.body.mood
+        mood: req.body.mood,
+        name: req.body.name,
+        image: req.body.image,
     }
 
     firestore.collection('daily').add(dailyData)
@@ -45,7 +47,7 @@ exports.editDaily = (req, res) => {
             if(doc.data().username !== req.user.username) {
                 return res.status(403).json({message : 'Permission denied'})
             } else {
-                return firestore.collection('daily').doc(doc.id).update({detail: req.body.detail})
+                return firestore.collection('daily').doc(doc.id).update({...req.body.update_data})
             }
         })
         .then(() => {

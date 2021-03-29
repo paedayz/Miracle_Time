@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View, Button, LogBox , Platform ,KeyboardAvoidingView} from 'react-native'
+import { StyleSheet, Text, View, Button, LogBox , Platform ,KeyboardAvoidingView, Switch} from 'react-native'
 import { Formik } from 'formik'
 import { TextInput } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -16,7 +16,8 @@ const Addtodaylist = (props) => {
 
     const dispatch = useDispatch()
     
-    
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isStartDatePickerVisible, setIsStartDatePickerVisible] = useState(false);
     const [isEndDatePickerVisible, setIsEndDatePickerVisible] = useState(false);
@@ -64,6 +65,16 @@ const Addtodaylist = (props) => {
                 {(props) => (
                 <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'stretch',marginTop: 470}}>
                     
+                        <View>
+                            <Switch
+                                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                                thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                                ios_backgroundColor="#3e3e3e"
+                                onValueChange={toggleSwitch}
+                                value={isEnabled}
+                            />
+                        </View>
+
                         <View >
                             
                             <TextInput
@@ -76,6 +87,7 @@ const Addtodaylist = (props) => {
                             </TextInput>
                             
                         </View>
+                        
                         <View style={{width: 50, height: 30,marginTop:60}}>
                             <Text >Rank :</Text>
                             
