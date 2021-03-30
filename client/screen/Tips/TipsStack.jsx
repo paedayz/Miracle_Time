@@ -10,6 +10,9 @@ import Tip_1 from './TIp_info/Tip_#1'
 import Tip_2 from './TIp_info/Tip_#2'
 import Tip_3 from './TIp_info/Tip_#3'
 
+
+
+
 const TipsStack = createStackNavigator()
 
 const TipsStackScreen = ({navigation}) => {
@@ -34,6 +37,10 @@ const TipsStackScreen = ({navigation}) => {
         <TipsStack.Screen name='Tip #1' component={Tip_1} />
         <TipsStack.Screen name='Tip #2' component={Tip_2} />
         <TipsStack.Screen name='Tip #3' component={Tip_3} />
+
+
+
+
       </TipsStack.Navigator>
     )
   }
