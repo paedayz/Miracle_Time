@@ -129,4 +129,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 5
   }
-});
+
+  });
+  

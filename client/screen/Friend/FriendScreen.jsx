@@ -69,7 +69,7 @@ export default function FriendScreen({ navigation }) {
                 {
                 borderRightColor: "#dddddd",
                 borderRightWidth: 1,
-                backgroundColor: '#738FD9'
+                backgroundColor: '#2289DC'
                 },
             ]}
         >
@@ -96,7 +96,7 @@ export default function FriendScreen({ navigation }) {
           style={[
             styles.headerBox,
             {
-            backgroundColor: '#738FD9'
+            backgroundColor: '#2289DC'
             },
           ]}
         >
