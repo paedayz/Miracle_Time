@@ -5,15 +5,10 @@ import { SafeAreaView, View, StyleSheet, TouchableOpacity, FlatList } from 'reac
 import Achieve from './Achieve'
 
 // Redux
-import { getUserAchievement} from '../../../redux/action/dataAction'
 import {useDispatch, useSelector} from 'react-redux'
 
 export default function AchieveBuff ({navigation}) {
     const achievementList = useSelector(state => state.data.achievementList)
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getUserAchievement())
-    },[])
     
     const AchievementItem = ({data}) => {
         let achievementData = data

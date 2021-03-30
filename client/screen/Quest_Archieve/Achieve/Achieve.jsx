@@ -45,23 +45,34 @@ export default function Achievement({achievementData}) {
             <Title style={styles.headerTitle}>{achievementName}</Title>
             <View style={{maxWidth:200, minWidth: 180}}>
                 <Text>{achievementDetail}</Text>
+                <View>
+                  <Text>{achievementExp}</Text>
+                  <Text>{achievementCoin}</Text>
+                </View>
             </View>
           </View>
           {achievementStatus === 'achievement_success' 
             &&
           <View style={styles.claimButton}>
-            <Button
-                buttonStyle = {{width: 70, height: 30}}
-                title='Success'
-            />
+            <Icon size={50} name="bookmark-check-outline"/>
           </View>
           }
 
           {achievementStatus === 'in_progress'
             && 
-            <View >
-              <Text style={styles.achievementDone}>{achievementDone}/{achievementRequirement}</Text>
+            <View style={styles.achievementDone}>
+              <Text  style={{fontSize: 20}}>{achievementDone}/{achievementRequirement}</Text>
             </View>
+          }
+
+          {achievementStatus === 'achievement_claim'
+            && 
+            <View style={styles.check}>
+            <Icon 
+                name='check'
+                size={30}
+                color='green'/>
+          </View>
           }
           
         </View>
@@ -75,7 +86,7 @@ export default function Achievement({achievementData}) {
     },
     headerTitle: {
       fontSize: 16,
-      fontWeight: 'bold',
+      fontWeight: 'bold'
     },
     caption: {
       fontSize: 16,
@@ -105,23 +116,28 @@ export default function Achievement({achievementData}) {
     },
     achievementBox: {
       justifyContent: 'flex-start',
-      marginVertical: 5,
       marginLeft: 10
     },
     claimButton: {
       justifyContent: 'center',
       position: 'absolute',
-      top: 34,
-      left: 300
+      top: "25%",
+      left: "80%"
     },
     demo: {
       justifyContent: 'center',
       margin: 5
     },
+    check: {
+      justifyContent: 'center',
+      position: 'absolute',
+      top: 35,
+      left: 320
+    },
     achievementDone: {
-        fontSize: 20,
-        marginLeft: 55,
-        marginTop: 30
+      position: 'absolute',
+      marginTop: 35,
+      marginLeft: 320
     },
     achievementClaim: {
       fontSize: 15,

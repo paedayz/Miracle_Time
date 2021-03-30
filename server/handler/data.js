@@ -128,8 +128,6 @@ exports.deleteEvent = (req, res) => {
                 }
                 
             })
-            // batch.commit();
-            // return res.status(200).json({data : resKey})
             return firestore.collection('notifications').where('data.eventData.key', '==', resKey).get()
         })
         .then((snapshot) => {
@@ -201,6 +199,7 @@ exports.addNotifications = (req, res) => {
 
 exports.readNotifications = async (req, res) => {
     const notificationsToUpdate = req.body.docIds
+    console.log(notificationsToUpdate)
     const notificationReadPromise = notificationsToUpdate.map((notiDocId) => {
         return firestore.doc(`/notifications/${notiDocId}`).update({read: true})
       })
@@ -238,4 +237,36 @@ exports.deleteNotifications = (req, res) => {
             console.log(err)
             return res.json({error: err})
         })
+}
+
+exports.getAdminDashBoard = async (req, res) => {
+    console.log('dash')
+    const status = req.user.status
+    if(status === "admin") {
+        const eventData = await firestore.collection('events').orderBy('date').get()
+            .then((snapshot) => {
+                let returnData = []
+                let sum = 0
+                snapshot.forEach((doc) => {
+                    const year = doc.data().date.split('-')[0]
+                    const month = doc.data().date.split('-')[1]
+                    sum = sum + 1
+                    if(returnData.length === 0) {
+                        // returnData[`${year}-${month}`] = {}
+                        returnData.push({a: `${year}-${month}-01`, b: 1})
+                    } else {
+                        if(returnData[returnData.length - 1].a.split('-')[1] === month) {
+                            returnData[returnData.length - 1].b = returnData[returnData.length - 1].b + 1
+                        } else {
+                            returnData.push({a: `${year}-${month}-01`, b: 1})
+                        }
+                    }
+                })
+                return returnData
+            })
+        
+        res.json({data: eventData})
+    } else {
+        res.status(403).json({message: 'Fuck off this is only admin'})
+    }
 }

@@ -51,30 +51,37 @@ export default function Quest({questData}) {
             <Title style={styles.headerTitle}>{questName}</Title>
             <View style={{maxWidth:200, minWidth: 180}}>
                 <Text>{questDetail}</Text>
+                <View style={styles.textCoinAndExp}>
+                  <Text>Exp: {questExp}  </Text>
+                  <Text>  Coin: {questCoin}</Text>
+                </View>
             </View>
           </View>
           {questStatus === 'quest_success' 
             &&
           <View style={styles.claimButton}>
-             <Button
-            buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
-            title='Claim'
-            onPress={() => cliamClick()}/>
+            <Button
+              buttonStyle = {{width: 70, height: 30, backgroundColor: '#738FD9', borderRadius: 10}}
+              title='Claim'
+              onPress={() => cliamClick()}/>
           </View>
           }
 
           {questStatus === 'in_progress'
             && 
-            <View >
-              <Text style={styles.questDone}>{questDone}/{questRequirement}</Text>
+            <View style={styles.questDone}>
+              <Text style={{fontSize: 20}}>{questDone}/{questRequirement}</Text>
             </View>
           }
 
           {questStatus === 'quest_claim'
             && 
-            <View >
-              <Text style={styles.questClaim}>Already Claim</Text>
-            </View>
+            <View style={styles.check}>
+            <Icon 
+                name='check'
+                size={30}
+                color='green'/>
+          </View>
           }
           
         </View>
@@ -118,8 +125,12 @@ export default function Quest({questData}) {
     },
     questBox: {
       justifyContent: 'flex-start',
-      marginVertical: 5,
       marginLeft: 10
+    },
+    textCoinAndExp: {
+      flexDirection: 'row',
+      position: 'absolute',
+      top: 40
     },
     claimButton: {
       justifyContent: 'center',
@@ -131,10 +142,16 @@ export default function Quest({questData}) {
       justifyContent: 'center',
       margin: 5
     },
+    check: {
+      justifyContent: 'center',
+      position: 'absolute',
+      top: 35,
+      left: 320
+    },
     questDone: {
-        fontSize: 20,
-        marginLeft: 55,
-        marginTop: 30
+      position: 'absolute',
+      marginTop: 35,
+      marginLeft: 320
     },
     questClaim: {
       fontSize: 15,

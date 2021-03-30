@@ -77,6 +77,7 @@ exports.doQuest = (req, res) => {
     let questAction = req.body.questAction
     let mainQuestData = []
     let resUpdateQuest = []
+    console.log(questAction)
 
     firestore.collection('quests').where('questAction', '==', questAction).get()
         .then((snapshot) => {
@@ -100,6 +101,7 @@ exports.doQuest = (req, res) => {
                 snapshot.forEach((doc) => {
                     mainQuestData.map((data) => {
                         if(doc.data().questStatus === 'in_progress' && doc.data().questId === data.questId) {
+                            console.log(data.questId)
                             let newData = {
                                 questDone: doc.data().questDone + 1,
                                 questId: doc.data().questId,
@@ -108,7 +110,7 @@ exports.doQuest = (req, res) => {
                                 username: doc.data().username,
                             }
     
-                            if(newData.questDone === data.questRequirement) {
+                            if(newData.questDone >= data.questRequirement) {
                                 newData.questStatus = 'quest_success'
                             }
     

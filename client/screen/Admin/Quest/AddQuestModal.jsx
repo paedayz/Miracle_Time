@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, ScrollView } from 'react-native';
+
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, ScrollView ,KeyboardAvoidingView} from 'react-native';
+
 import {
   Avatar,
   Title,
@@ -42,14 +44,17 @@ export default function AddQuestModal({setModalOpenAdd}) {
     setModalOpenAdd(false)
   }
     return (
+        <KeyboardAvoidingView style={{flex:1}}>
+        <ScrollView>
         <View style={styles.modal}>
+          
                 <Icon 
                         name="close"
                         size={20} 
                         style={styles.closeIcon}
                         onPress={() => setModalOpenAdd(false)}
                     />
-                  <KeyboardAvoidingView behavior={'height'} style={{flex:1}}>
+                  
                   <View style={styles.questBox}>
                     <Title style={styles.headerTitle}>Add Quest</Title>
                     <Text>Quest name</Text>
@@ -100,8 +105,10 @@ export default function AddQuestModal({setModalOpenAdd}) {
                       />
                     </View>
                   </View>
-                  </KeyboardAvoidingView>  
+                      
                 </View>
+                </ScrollView>
+                </KeyboardAvoidingView> 
     )
 }
 
@@ -109,12 +116,12 @@ const styles = StyleSheet.create({
     closeIcon:
     {
         color: 'red',
-        marginLeft: 265
+        marginLeft: 275
     },
     modalButton: 
     {
       marginHorizontal: 80,
-      marginVertical: 0,
+      marginVertical: 10,
       justifyContent: 'center'
     },
     input: 
@@ -135,9 +142,9 @@ const styles = StyleSheet.create({
     {
         backgroundColor: '#dddddd',
         marginHorizontal: 25,
-        marginTop: 60,
-        padding: 30,
+        marginTop: 40,
+        padding: 25,
         borderRadius: 10,
-        height: 585
+        height: 630
     },
   });

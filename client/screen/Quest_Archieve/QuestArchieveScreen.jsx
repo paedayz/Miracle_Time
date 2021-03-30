@@ -13,7 +13,7 @@ import QuestBuff from './Quest/QuestBuff'
 import AchieveBuff from './Achieve/AchieveBuff'
 
 // Redux
-import {getUserQuest} from '../../redux/action/dataAction'
+import {getUserQuest, getUserAchievement} from '../../redux/action/dataAction'
 import {useDispatch, useSelector} from 'react-redux'
 
 export default function QuestArchieveScreen ({navigation}) {
@@ -22,6 +22,7 @@ export default function QuestArchieveScreen ({navigation}) {
 
   navigation.addListener('focus', () => {
     dispatch(getUserQuest())
+    dispatch(getUserAchievement())
   });
   const changeMode = () => {
       setMode(!mode)
@@ -29,7 +30,6 @@ export default function QuestArchieveScreen ({navigation}) {
 
   if(mode) {
       return (
-      <View>
         <View>
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity style={[styles.headerBox, {
@@ -50,7 +50,6 @@ export default function QuestArchieveScreen ({navigation}) {
             </TouchableOpacity>
           </View>
           <QuestBuff/>
-        </View>
         </View>
       )
   } else {
@@ -130,4 +129,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 5
   }
-});
+
+  });
+  
