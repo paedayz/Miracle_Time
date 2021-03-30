@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+
 import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView, Button} from 'react-native';
 import {
   Avatar,
   Title,
 } from 'react-native-paper'
+
 // Component
 import ArcheivementScreen from './Archieve/ArcheivementScreen'
 import QuestScreen from './Quest/QuestScreen'
@@ -14,8 +16,6 @@ export default function admin () {
   const changeMode = () => {
       setMode(!mode)
   }
-
-  
 
   if(mode) {
       return (
@@ -89,5 +89,5 @@ const styles = StyleSheet.create({
     width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
