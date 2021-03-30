@@ -65,7 +65,7 @@ const Addtodaylist = (props) => {
                 {(props) => (
                 <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'stretch',marginTop: 470}}>
                     
-                        <View>
+                        {/* <View>
                             <Switch
                                 trackColor={{ false: "#767577", true: "#81b0ff" }}
                                 thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -73,7 +73,7 @@ const Addtodaylist = (props) => {
                                 onValueChange={toggleSwitch}
                                 value={isEnabled}
                             />
-                        </View>
+                        </View> */}
 
                         <View >
                             

@@ -15,7 +15,6 @@ import localeData from 'dayjs/plugin/localeData'
 export default function Ask_Advice() {
 
     const eventData = useSelector(state => state.data.events)
-    console.log(eventData)
     
     //Set time
     // dayjs.extend(relativeTime);
@@ -83,9 +82,7 @@ export default function Ask_Advice() {
             // console.log(Today_task)
             if(Today_task.length !=0){
                Today_task.sort((a,b) => (a.start > b.start) ? 1 : ((b.start > a.start) ? -1 : 0))
-               console.log(Today_task)
                 let Next = Next_Task(Today_task)
-                console.log(Next)
                 let words = " ไปทำ "+Next.event+" ซะนะ" 
                 return " ไปทำ "+Next.event+" ซะนะ" ;     
             }else{
@@ -134,7 +131,7 @@ export default function Ask_Advice() {
     
     const advice = Check_Today_Task() ? (Check_Today_Task()) : (FreeTask())
     
-    console.log("================================")
+    // console.log("================================")
     // console.log("Today is ",Today)
     // console.log("Now is ",Now)
     // console.log("Tomorrow is ",ToMorrow)

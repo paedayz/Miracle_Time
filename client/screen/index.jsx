@@ -13,6 +13,10 @@ import {
     UIActivityIndicator,
     WaveIndicator,
   } from 'react-native-indicators';
+import {ThemeProvider} from 'styled-components'
+
+// Themes
+import {themes} from '../utils/Theme'
 
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
@@ -61,14 +65,16 @@ export default function Screen({navigation}) {
 
     if(userData) {
         return (
-            <Drawer.Navigator initialRouteName="Calendar" drawerContent={props => <DrawerContent {...props}/>}>
-                <Drawer.Screen name="Calendar" component={BottomTabNavigator} />
-                <Drawer.Screen name="Profile" component={ProfileStackScreen} />
-                <Drawer.Screen name="Admin" component={AdminBottomTabNavigator} />
-                <Drawer.Screen name="Notifications" component={NotificationStackScreen} />
-                <Drawer.Screen name="Friend" component={FriendStackScreen} />
-                <Drawer.Screen name="Tips" component={TipsStack} />
-            </Drawer.Navigator>
+            <ThemeProvider theme={themes[userData.theme]}>
+                <Drawer.Navigator initialRouteName="Calendar" drawerContent={props => <DrawerContent {...props}/>}>
+                    <Drawer.Screen name="Calendar" component={BottomTabNavigator} />
+                    <Drawer.Screen name="Profile" component={ProfileStackScreen} />
+                    <Drawer.Screen name="Admin" component={AdminBottomTabNavigator} />
+                    <Drawer.Screen name="Notifications" component={NotificationStackScreen} />
+                    <Drawer.Screen name="Friend" component={FriendStackScreen} />
+                    <Drawer.Screen name="Tips" component={TipsStack} />
+                </Drawer.Navigator>
+            </ThemeProvider>
         )
         
     } else {

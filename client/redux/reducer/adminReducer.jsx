@@ -33,8 +33,6 @@ export default function (state = initialState, action){
         case ADD_QUEST :
             let buffQuestList = state.questList
             buffQuestList.push(action.payload)
-            console.log(buffQuestList)
-            console.log('add quest admin')
             return {
                 ...state,
                 questList: buffQuestList
@@ -47,8 +45,6 @@ export default function (state = initialState, action){
                     buffQuestList.push(quest)
                 }
             })
-            console.log(buffQuestList)
-            console.log('delete quest admin')
             return {
                 ...state,
                 questList: buffQuestList

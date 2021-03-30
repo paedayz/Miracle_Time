@@ -18,7 +18,6 @@ export const getAdminQuestList = () => (dispatch) => {
     let clientUserId = getClientUserId()
     axios.post('/adminGetQuestList',{clientUserId: clientUserId})
         .then((res) => {
-            console.log(res.data.data)
             dispatch({type: SET_ADMIN_QUEST, payload: res.data.data})
         })
         .catch((err) => {
