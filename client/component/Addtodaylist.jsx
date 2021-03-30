@@ -19,7 +19,6 @@ const Addtodaylist = () => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const handleConfirm = (time) => {
-        console.log(moment(time).format('HH:mm'))
        
         setDatePickerVisibility(false)
       };

@@ -26,7 +26,8 @@ let {
   readNotifications, 
   toggleNotifications,
   deleteNotifications,
-  toggleEventSuccess
+  toggleEventSuccess,
+  getAdminDashBoard
 } = require('./handler/data')
 
 let {
@@ -55,6 +56,14 @@ let {
   getUserAchievement,
 } = require('./handler/achievement')
 
+let {addDaily, getUserDaily, editDaily, deleteDaily} = require('./handler/daily')
+
+// Daily Route
+app.post('/addDaily', FBAuth, addDaily)
+app.post('/getUserDaily', FBAuth, getUserDaily)
+app.post('/editDaily', FBAuth, editDaily)
+app.post('/deleteDaily', FBAuth, deleteDaily)
+
 // User Route
 app.post('/signup',signup)
 app.post('/login', login)
@@ -78,6 +87,7 @@ app.post('/addNotifications', FBAuth, addNotifications)
 app.post('/readNotifications', FBAuth, readNotifications)
 app.post('/toggleNotifications', FBAuth, toggleNotifications)
 app.post('/deleteNotifications', FBAuth, deleteNotifications)
+app.post('/getAdminDashBoard', FBAuth, getAdminDashBoard)
 
 // Quest Route
 app.post('/addQuest', FBAuth, addQuest)

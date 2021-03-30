@@ -54,10 +54,7 @@ export default function Achievement({achievementData}) {
           {achievementStatus === 'achievement_success' 
             &&
           <View style={styles.claimButton}>
-            <Button
-                buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10, width: 70, height: 30}}
-                title='Success'
-            />
+            <Icon size={50} name="bookmark-check-outline"/>
           </View>
           }
 
@@ -124,8 +121,8 @@ export default function Achievement({achievementData}) {
     claimButton: {
       justifyContent: 'center',
       position: 'absolute',
-      top: 34,
-      left: 300
+      top: "25%",
+      left: "80%"
     },
     demo: {
       justifyContent: 'center',
