@@ -21,6 +21,8 @@ import {
     TOGGLE_EVENT_SUCCESS,
     SET_DATA_CLEAR,
     SET_DATA_ERROR,
+    IS_GET_DATA,
+    SET_DASHBOARD_EVENT
 } from "../type"
 
 const initialState = {
@@ -37,6 +39,7 @@ const initialState = {
     end_noti : [],
     questList: [],
     achievementList: [],
+    dashboardEvent: [],
     error: null,
     daily:[{
         username:'',
@@ -73,7 +76,8 @@ const initialState = {
         daily:'ABC',
         imag_url:'https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/',
         date:'2/02/64'
-    }]
+    }],
+    isGetData: false
 }
 
 const startState = {
@@ -89,11 +93,19 @@ const startState = {
     now_noti : [],
     end_noti : [],
     questList: [],
-    achievementList: []
+    achievementList: [],
+    dashboardEvent: [],
+    error: null,
+    isGetData: false
 }
 
 export default function (state = initialState, action){
     switch (action.type) {
+        case IS_GET_DATA: 
+             return {
+                 ...state,
+                 isGetData: true
+             }
         case SET_EVENT :
             return {
                 ...state,
@@ -309,6 +321,12 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 achievementList: action.payload
+            }
+        
+        case SET_DASHBOARD_EVENT : 
+            return {
+                ...state,
+                dashboardEvent: action.payload
             }
         
         case SET_DATA_CLEAR :

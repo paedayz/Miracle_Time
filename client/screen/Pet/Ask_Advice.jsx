@@ -94,6 +94,7 @@ export default function Ask_Advice() {
     const Next_Task = (Today_task) => {
         let NextTask = "not thing"
         let NotHaveTask = true
+        let randNum = Math.floor(Math.random() * Today_task.length)
     
         Today_task.map((E) => {
             let startEvent = new Date(E.date+"T"+E.start)
@@ -109,7 +110,8 @@ export default function Ask_Advice() {
             }
             else{}
         })
-        return NextTask;
+
+        return Today_task[randNum];
     }
 
     const FreeTask=()=> {
@@ -129,7 +131,7 @@ export default function Ask_Advice() {
     
     const advice = Check_Today_Task() ? (Check_Today_Task()) : (FreeTask())
     
-    console.log("================================")
+    // console.log("================================")
     // console.log("Today is ",Today)
     // console.log("Now is ",Now)
     // console.log("Tomorrow is ",ToMorrow)

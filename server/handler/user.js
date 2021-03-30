@@ -75,7 +75,7 @@ exports.signup = (req, res) => {
         level: 0,
         exp: 0,
         coin: 0,
-        theme: null,
+        theme: 0,
       };
 
       firestore.doc(`/users/${newUser.username}`).set(userCredentials);
