@@ -15,9 +15,10 @@ import {useSelector} from 'react-redux'
 
 export default function ProfileScreen({navigation}) {
 
-  const {username, nickname, email, userImage, exp, bio, phone, website} = useSelector(state => state.user.userData)
+  const {username, nickname, email, userImage, bio, phone, website} = useSelector(state => state.user.userData)
   const coin = useSelector(state => state.data.coin)
   const level = useSelector(state => state.data.level)
+  const exp = useSelector(state => state.data.exp)
     
       return (
         <SafeAreaView style={styles.container}>
@@ -32,6 +33,7 @@ export default function ProfileScreen({navigation}) {
               <View style={{marginLeft:15}}>
                 <Title style={styles.title, {marginBottom:5}}>{nickname}</Title>
                 <Caption style={styles.caption}>@{username}</Caption>
+                <Caption style={styles.caption,{marginTop: 10}}>EXP : {exp}/{(level+1)*100}</Caption>
               </View>
             </View>
           </View>

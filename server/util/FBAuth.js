@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
                 snapshot.forEach(function(doc){
                     req.user.username = doc.data().username;
                     req.user.userImage = doc.data().userImage;
+                    req.user.status = doc.data().status;
                 })
                 return next();
             })
