@@ -120,7 +120,8 @@ const styles = StyleSheet.create({
     },
     responsiveBox: {
       width: wp('67%'),
-      flexDirection: 'column',
+      flexDirection: 'column'
+
     },
     deleteBox: {
       justifyContent: 'center',
@@ -153,4 +154,4 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center'
     },
-  });
+    });

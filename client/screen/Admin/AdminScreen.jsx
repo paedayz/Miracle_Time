@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView, Text } from 'react-native';
+
+import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, StatusBar, ScrollView, Button} from 'react-native';
 import {
   Avatar,
-  Title, 
+  Title,
 } from 'react-native-paper'
 
 // Component
