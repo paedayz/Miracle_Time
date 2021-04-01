@@ -175,216 +175,358 @@ exports.login = (req, res) => {
     });
 };
 
-exports.checkAuthen = (req, res) => {
+exports.checkAuthen = async (req, res) => {
   console.log("check");
   const clientUserId = req.body.clientUserId;
-  let username;
+  let username = req.user.username
+
   let userData = {};
-  let events = [];
-  let notifications = [];
-  let friendRequest = [];
-  let friendList = [];
-  let questList = []
-  let achievementList = []
 
   let friendListToFetch = [];
   let friendRequestToFetch = [];
 
   let friendRequestDocId = [];
-  firestore
-    .collection("users")
-    .where("userId", "==", clientUserId)
-    .get()
-    .then((snapshot) => {
-      snapshot.forEach(function (doc) {
-        userData = doc.data();
-      });
-      username = userData.username;
-      return firestore
-        .collection("events")
-        .where("username", "==", username)
-        .get();
-    })
-    .then((snapshot) => {
-      snapshot.forEach(function (doc) {
-        let newData = {
-          date: doc.data().date,
-          detail: doc.data().detail,
-          event: doc.data().event,
-          key: doc.data().key,
-          rank: doc.data().rank,
-          start: doc.data().start,
-          end: doc.data().end,
-          catagory: doc.data().catagory,
-          success: doc.data().success,
-          docId: doc.id
-        };
-        events.push(newData);
-      });
-      return firestore
-        .collection("friend")
-        .where("recipient", "==", username)
-        .get();
-    })
-    .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        if (doc.data().accept) {
-          friendListToFetch.push(doc.data().sender);
-        } else {
-          friendRequestToFetch.push(doc.data().sender);
-          friendRequestDocId.push(doc.id);
-        }
-      });
-      return firestore
-        .collection("friend")
-        .where("sender", "==", username)
-        .get();
-    })
-    .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        if (doc.data().accept) {
-          friendListToFetch.push(doc.data().recipient);
-        }
-      });
 
-      const friendListPromise = friendListToFetch.map((username) => {
-        return firestore.doc(`/users/${username}`).get();
-      });
-
-      const friendRequestPromise = friendRequestToFetch.map((username) => {
-        return firestore.doc(`/users/${username}`).get();
-      });
-
-      Promise.all(friendListPromise)
-        .then((data) => {
-          data.forEach((doc) => {
-            friendList.push(doc.data());
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-          return res.json({ error: err });
-        });
-
-      Promise.all(friendRequestPromise)
-        .then((data) => {
-          data.forEach((doc) => {
-            friendRequest.push(doc.data());
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-          return res.json({ error: err });
-        });
-
-      return firestore
-        .collection("quest_user")
-        .where("username", "==", userData.username)
-        .get();
-    })
-    .then(async(snapshot) => {
-      let questDataPromise = snapshot.forEach((doc) => {
-        let questDone = doc.data().questDone
-        let docId = doc.id
-        let questStatus = doc.data().questStatus
-        let questType = doc.data().questType
-        return firestore.doc(`/quests/${doc.data().questId}`).get()
-                .then((data) => {
-                  let resData = data.data()
-                  resData.questDone = questDone
-                  resData.docId = docId
-                  resData.questStatus = questStatus
-                  resData.questType = questType
-                  questList.push(resData)
-                  return resData
+  let events = await firestore
+                .collection("users")
+                .where("userId", "==", clientUserId)
+                .get()
+                .then((snapshot) => {
+                  snapshot.forEach(function (doc) {
+                    userData = doc.data();
+                  });
+                  return firestore
+                    .collection("events")
+                    .where("username", "==", username)
+                    .get();
                 })
-      })
-      let waitPromise = await Promise.all(questDataPromise)
+                .then((snapshot) => {
+                  let return_events = []
+                  snapshot.forEach(function (doc) {
+                    let newData = {
+                      date: doc.data().date,
+                      detail: doc.data().detail,
+                      event: doc.data().event,
+                      key: doc.data().key,
+                      rank: doc.data().rank,
+                      start: doc.data().start,
+                      end: doc.data().end,
+                      catagory: doc.data().catagory,
+                      success: doc.data().success,
+                      docId: doc.id
+                    };
+                    return_events.push(newData);
+                  });
+                  return return_events
+                });
+
+  let notifications = await firestore
+                      .collection("notifications")
+                      .where("username", "==", userData.username)
+                      .get()
+                      .then((snapshot) => {
+                        let return_data = []
+                        snapshot.forEach(function (doc) {
+                          let newData = {
+                            createdAt: doc.data().createdAt,
+                            read: doc.data().read,
+                            toggle: doc.data().toggle,
+                            type: doc.data().type,
+                            data: doc.data().data,
+                            docId: doc.id,
+                          };
+                          return_data.push(newData);
+                        });
+
+                        let sortNotifications = return_data.sort(
+                          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                        );
+
+                        return sortNotifications
+                      });
+
+  let friendList = await firestore
+                      .collection("friend")
+                      .where("recipient", "==", username)
+                      .get()
+                      .then((snapshot) => {
+                        snapshot.forEach((doc) => {
+                          if (doc.data().accept) {
+                            friendListToFetch.push(doc.data().sender);
+                          }
+                        });
+                        return firestore
+                          .collection("friend")
+                          .where("sender", "==", username)
+                          .get();
+                        })
+                        .then((snapshot) => {
+                        snapshot.forEach((doc) => {
+                          if (doc.data().accept) {
+                            friendListToFetch.push(doc.data().recipient);
+                          }
+                        });
+
+                        const friendListPromise = friendListToFetch.map((username) => {
+                          return firestore.doc(`/users/${username}`).get();
+                        });
+
+                        return Promise.all(friendListPromise)
                           .then((data) => {
-                            return data
+                            let return_data = []
+                            data.forEach((doc) => {
+                              return_data.push(doc.data());
+                            });
+
+                            let friendRequestBuff = [];
+                            let reqNum = 0;
+                            return_data.map((request) => {
+                              request.docId = friendRequestDocId[reqNum];
+                              friendRequestBuff.push(request);
+                              reqNum = reqNum + 1;
+                            });
+
+                            return friendRequestBuff
                           })
                           .catch((err) => {
-                            return err
+                            console.log(err);
+                            return res.json({ error: err });
+                          });
+                      })
+
+  let friendRequest = await firestore
+                    .collection("friend")
+                    .where("recipient", "==", username)
+                    .get()
+                    .then((snapshot) => {
+                      snapshot.forEach((doc) => {
+                        if (!doc.data().accept) {
+                          friendRequestToFetch.push(doc.data().sender);
+                          friendRequestDocId.push(doc.id);
+                        }
+                      })
+
+                      const friendRequestPromise = friendRequestToFetch.map((username) => {
+                        return firestore.doc(`/users/${username}`).get();
+                      });
+
+                      return Promise.all(friendRequestPromise)
+                        .then((data) => {
+                          let return_data = []
+                          data.forEach((doc) => {
+                            return_data.push(doc.data());
                           })
-      return firestore
-      .collection("achievement_user")
-      .where("username", "==", userData.username)
-      .get();
-    })
-    .then(async(snapshot) => {
-      let achievementDataPromise = snapshot.forEach((doc) => {
-        let achievementDone = doc.data().achievementDone
-        let docId = doc.id
-        let achievementStatus = doc.data().achievementStatus
-        let achievementType = doc.data().achievementType
-        return firestore.doc(`/achievements/${doc.data().achievementId}`).get()
-                .then((data) => {
-                  let resData = data.data()
-                  resData.achievementDone = achievementDone
-                  resData.docId = docId
-                  resData.achievementStatus = achievementStatus
-                  resData.achievementType = achievementType
-                  achievementList.push(resData)
-                  return resData
-                })
-      })
-      let waitPromise = await Promise.all(achievementDataPromise)
-                          .then((data) => {
-                            return data
-                          })
-                          .catch((err) => {
-                            return err
-                          })
-      return waitPromise
-    })
-    .then(() => {
-      return firestore
-        .collection("notifications")
-        .where("username", "==", userData.username)
-        .get();
-    })
-    .then((snapshot) => {
-      snapshot.forEach(function (doc) {
-        let newData = {
-          createdAt: doc.data().createdAt,
-          read: doc.data().read,
-          toggle: doc.data().toggle,
-          type: doc.data().type,
-          data: doc.data().data,
-          docId: doc.id,
-        };
-        notifications.push(newData);
-      });
+                          return return_data
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                          return res.json({ error: err });
+                        })
+                    })
+                        
+  
+  return res.json({
+    eventData: events,
+    notiData: notifications,
+    userData: userData,
+    friendList: friendList,
+    friendRequest: friendRequest
+  });
 
-      let sortNotifications = notifications.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
 
-      let friendRequestBuff = [];
-      let reqNum = 0;
-      friendRequest.map((request) => {
-        request.docId = friendRequestDocId[reqNum];
-        friendRequestBuff.push(request);
-        reqNum = reqNum + 1;
-      });
+  // firestore
+  //   .collection("users")
+  //   .where("userId", "==", clientUserId)
+  //   .get()
+  //   .then((snapshot) => {
+  //     snapshot.forEach(function (doc) {
+  //       userData = doc.data();
+  //     });
+  //     return firestore
+  //       .collection("events")
+  //       .where("username", "==", username)
+  //       .get();
+  //   })
+  //   .then((snapshot) => {
+  //     snapshot.forEach(function (doc) {
+  //       let newData = {
+  //         date: doc.data().date,
+  //         detail: doc.data().detail,
+  //         event: doc.data().event,
+  //         key: doc.data().key,
+  //         rank: doc.data().rank,
+  //         start: doc.data().start,
+  //         end: doc.data().end,
+  //         catagory: doc.data().catagory,
+  //         success: doc.data().success,
+  //         docId: doc.id
+  //       };
+  //       events.push(newData);
+  //     });
+  //     return firestore
+  //       .collection("friend")
+  //       .where("recipient", "==", username)
+  //       .get();
+  //   })
+  //   .then((snapshot) => {
+  //     snapshot.forEach((doc) => {
+  //       if (doc.data().accept) {
+  //         friendListToFetch.push(doc.data().sender);
+  //       } else {
+  //         friendRequestToFetch.push(doc.data().sender);
+  //         friendRequestDocId.push(doc.id);
+  //       }
+  //     });
+  //     return firestore
+  //       .collection("friend")
+  //       .where("sender", "==", username)
+  //       .get();
+  //   })
+  //   .then((snapshot) => {
+  //     snapshot.forEach((doc) => {
+  //       if (doc.data().accept) {
+  //         friendListToFetch.push(doc.data().recipient);
+  //       }
+  //     });
 
-      friendRequest = friendRequestBuff;
+  //     const friendListPromise = friendListToFetch.map((username) => {
+  //       return firestore.doc(`/users/${username}`).get();
+  //     });
 
-      const resData = {
-        eventData: events,
-        notiData: sortNotifications,
-        userData: userData,
-        friendList: friendList,
-        friendRequest: friendRequest,
-        questList: questList,
-        achievementList: achievementList
-      };
-      return res.json(resData);
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.json({ error: err });
-    });
+  //     const friendRequestPromise = friendRequestToFetch.map((username) => {
+  //       return firestore.doc(`/users/${username}`).get();
+  //     });
+
+  //     Promise.all(friendListPromise)
+  //       .then((data) => {
+  //         data.forEach((doc) => {
+  //           friendList.push(doc.data());
+  //         });
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         return res.json({ error: err });
+  //       });
+
+  //     Promise.all(friendRequestPromise)
+  //       .then((data) => {
+  //         data.forEach((doc) => {
+  //           friendRequest.push(doc.data());
+  //         });
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         return res.json({ error: err });
+  //       });
+
+  //     return firestore
+  //       .collection("quest_user")
+  //       .where("username", "==", userData.username)
+  //       .get();
+  //   })
+  //   .then(async(snapshot) => {
+  //     let questDataPromise = snapshot.forEach((doc) => {
+  //       let questDone = doc.data().questDone
+  //       let docId = doc.id
+  //       let questStatus = doc.data().questStatus
+  //       let questType = doc.data().questType
+  //       return firestore.doc(`/quests/${doc.data().questId}`).get()
+  //               .then((data) => {
+  //                 let resData = data.data()
+  //                 resData.questDone = questDone
+  //                 resData.docId = docId
+  //                 resData.questStatus = questStatus
+  //                 resData.questType = questType
+  //                 questList.push(resData)
+  //                 return resData
+  //               })
+  //     })
+  //     let waitPromise = await Promise.all(questDataPromise)
+  //                         .then((data) => {
+  //                           return data
+  //                         })
+  //                         .catch((err) => {
+  //                           return err
+  //                         })
+  //     return firestore
+  //     .collection("achievement_user")
+  //     .where("username", "==", userData.username)
+  //     .get();
+  //   })
+  //   .then(async(snapshot) => {
+  //     let achievementDataPromise = snapshot.forEach((doc) => {
+  //       let achievementDone = doc.data().achievementDone
+  //       let docId = doc.id
+  //       let achievementStatus = doc.data().achievementStatus
+  //       let achievementType = doc.data().achievementType
+  //       return firestore.doc(`/achievements/${doc.data().achievementId}`).get()
+  //               .then((data) => {
+  //                 let resData = data.data()
+  //                 resData.achievementDone = achievementDone
+  //                 resData.docId = docId
+  //                 resData.achievementStatus = achievementStatus
+  //                 resData.achievementType = achievementType
+  //                 achievementList.push(resData)
+  //                 return resData
+  //               })
+  //     })
+  //     let waitPromise = await Promise.all(achievementDataPromise)
+  //                         .then((data) => {
+  //                           return data
+  //                         })
+  //                         .catch((err) => {
+  //                           return err
+  //                         })
+  //     return waitPromise
+  //   })
+  //   .then(() => {
+  //     return firestore
+  //       .collection("notifications")
+  //       .where("username", "==", userData.username)
+  //       .get();
+  //   })
+  //   .then((snapshot) => {
+  //     snapshot.forEach(function (doc) {
+  //       let newData = {
+  //         createdAt: doc.data().createdAt,
+  //         read: doc.data().read,
+  //         toggle: doc.data().toggle,
+  //         type: doc.data().type,
+  //         data: doc.data().data,
+  //         docId: doc.id,
+  //       };
+  //       notifications.push(newData);
+  //     });
+
+  //     let sortNotifications = notifications.sort(
+  //       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  //     );
+
+  //     let friendRequestBuff = [];
+  //     let reqNum = 0;
+  //     friendRequest.map((request) => {
+  //       request.docId = friendRequestDocId[reqNum];
+  //       friendRequestBuff.push(request);
+  //       reqNum = reqNum + 1;
+  //     });
+
+  //     friendRequest = friendRequestBuff;
+
+  //     const resData = {
+  //       eventData: events,
+  //       notiData: sortNotifications,
+  //       userData: userData,
+  //       friendList: friendList,
+  //       friendRequest: friendRequest,
+  //       questList: questList,
+  //       achievementList: achievementList
+  //     };
+  //     return res.json(resData);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     return res.json({ error: err });
+  //   });
 };
 
 exports.signout = (req, res) => {

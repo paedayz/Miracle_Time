@@ -67,7 +67,7 @@ app.post('/deleteDaily', FBAuth, deleteDaily)
 // User Route
 app.post('/signup',signup)
 app.post('/login', login)
-app.post('/authen', checkAuthen)
+app.post('/authen', FBAuth ,checkAuthen)
 app.get('/signout', signout)
 app.post('/editProfile' , FBAuth ,editProfile)
 
