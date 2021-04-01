@@ -182,11 +182,6 @@ exports.checkAuthen = async (req, res) => {
 
   let userData = {};
 
-  let friendListToFetch = [];
-  let friendRequestToFetch = [];
-
-  let friendRequestDocId = [];
-
   let events = await firestore
                 .collection("users")
                 .where("userId", "==", clientUserId)
@@ -244,93 +239,11 @@ exports.checkAuthen = async (req, res) => {
 
                         return sortNotifications
                       });
-
-  let friendList = await firestore
-                      .collection("friend")
-                      .where("recipient", "==", username)
-                      .get()
-                      .then((snapshot) => {
-                        snapshot.forEach((doc) => {
-                          if (doc.data().accept) {
-                            friendListToFetch.push(doc.data().sender);
-                          }
-                        });
-                        return firestore
-                          .collection("friend")
-                          .where("sender", "==", username)
-                          .get();
-                        })
-                        .then((snapshot) => {
-                        snapshot.forEach((doc) => {
-                          if (doc.data().accept) {
-                            friendListToFetch.push(doc.data().recipient);
-                          }
-                        });
-
-                        const friendListPromise = friendListToFetch.map((username) => {
-                          return firestore.doc(`/users/${username}`).get();
-                        });
-
-                        return Promise.all(friendListPromise)
-                          .then((data) => {
-                            let return_data = []
-                            data.forEach((doc) => {
-                              return_data.push(doc.data());
-                            });
-
-                            let friendRequestBuff = [];
-                            let reqNum = 0;
-                            return_data.map((request) => {
-                              request.docId = friendRequestDocId[reqNum];
-                              friendRequestBuff.push(request);
-                              reqNum = reqNum + 1;
-                            });
-
-                            return friendRequestBuff
-                          })
-                          .catch((err) => {
-                            console.log(err);
-                            return res.json({ error: err });
-                          });
-                      })
-
-  let friendRequest = await firestore
-                    .collection("friend")
-                    .where("recipient", "==", username)
-                    .get()
-                    .then((snapshot) => {
-                      snapshot.forEach((doc) => {
-                        if (!doc.data().accept) {
-                          friendRequestToFetch.push(doc.data().sender);
-                          friendRequestDocId.push(doc.id);
-                        }
-                      })
-
-                      const friendRequestPromise = friendRequestToFetch.map((username) => {
-                        return firestore.doc(`/users/${username}`).get();
-                      });
-
-                      return Promise.all(friendRequestPromise)
-                        .then((data) => {
-                          let return_data = []
-                          data.forEach((doc) => {
-                            return_data.push(doc.data());
-                          })
-                          return return_data
-                        })
-                        .catch((err) => {
-                          console.log(err);
-                          return res.json({ error: err });
-                        })
-                    })
-                        
   
   return res.json({
     eventData: events,
     notiData: notifications,
-    userData: userData,
-    friendList: friendList,
-    friendRequest: friendRequest
+    userData: userData
   });
 };
 

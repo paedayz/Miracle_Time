@@ -8,11 +8,21 @@ import { LOADING_DATA,
     SET_FRIEND_ERROR,
     LOADING_FRIEND_DATA,
     LOADING_FRIEND_COMPLETE,
+    SET_FRIEND_LIST
 } from '../type'
 
 import {getClientUserId} from './userAction'
 
-
+export const getFriendList = () => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/getFriendList', {clientUserId: clientUserId})
+        .then((res) => {
+            dispatch({type: SET_FRIEND_LIST, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
 
 export const getFriendRequest = () => (dispatch) => {
     let clientUserId = getClientUserId()
