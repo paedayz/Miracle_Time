@@ -34,7 +34,8 @@ let {
   addFriend,
   acceptFriendRequest,
   deniedFriendRequest,
-  getFriendRequest
+  getFriendRequest,
+  getFriendList
 } = require('./handler/friend')
 
 let {
@@ -73,6 +74,7 @@ app.post('/editProfile' , FBAuth ,editProfile)
 
 // Friend Route
 app.post('/getFriendRequest', FBAuth, getFriendRequest)
+app.post('/getFriendList', FBAuth, getFriendList)
 app.post('/addFriend', FBAuth, addFriend)
 app.post('/acceptFriendRequest', FBAuth, acceptFriendRequest)
 app.post('/deniedFriendRequest', FBAuth, deniedFriendRequest)

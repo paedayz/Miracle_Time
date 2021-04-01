@@ -167,3 +167,60 @@ exports.getFriendRequest = (req, res) => {
             return res.json({data: friendRequest})
         })
 }
+
+exports.getFriendList = (req, res) => {
+    const username = req.user.username
+
+    let friendRequest = []
+    let friendListToFetch = []
+    let friendRequestDocId = []
+
+    firestore
+    .collection("friend")
+    .where("recipient", "==", username)
+    .get()
+    .then((snapshot) => {
+    snapshot.forEach((doc) => {
+        if (doc.data().accept) {
+        friendListToFetch.push(doc.data().sender);
+        }
+    });
+    return firestore
+        .collection("friend")
+        .where("sender", "==", username)
+        .get();
+    })
+    .then((snapshot) => {
+    snapshot.forEach((doc) => {
+        if (doc.data().accept) {
+        friendListToFetch.push(doc.data().recipient);
+        }
+    });
+
+    const friendListPromise = friendListToFetch.map((username) => {
+        return firestore.doc(`/users/${username}`).get();
+    });
+
+    return Promise.all(friendListPromise)
+        .then((data) => {
+        let return_data = []
+        data.forEach((doc) => {
+            return_data.push(doc.data());
+        });
+
+        let friendRequestBuff = [];
+        let reqNum = 0;
+        return_data.map((request) => {
+            request.docId = friendRequestDocId[reqNum];
+            friendRequestBuff.push(request);
+            reqNum = reqNum + 1;
+        });
+
+        res.status(200).json({data:friendRequestBuff}) 
+        })
+        .catch((err) => {
+        console.log(err);
+        return res.json({ error: err });
+        });
+    })
+}
