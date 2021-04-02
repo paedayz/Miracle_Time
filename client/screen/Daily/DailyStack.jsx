@@ -8,7 +8,7 @@ import Notifications from '../../component/Notifications'
 
 // Screen
 import DailyScreen from './DailyScreen'
-import Dailydetail from "./Dailydetail";
+import DailyDetail from "./DailyDetail";
 
 const SocialStack = createStackNavigator()
 
@@ -32,8 +32,8 @@ const SocialStackScreen = ({navigation}) => {
           }}
         />
         <SocialStack.Screen
-        name="Dailydetail"
-        component={Dailydetail}
+        name="DailyDetail"
+        component={DailyDetail}
       />
       </SocialStack.Navigator>
     )

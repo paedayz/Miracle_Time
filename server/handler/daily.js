@@ -15,8 +15,9 @@ exports.addDaily = (req, res) => {
             return firestore.doc(`/daily/${doc.id}`).get()
         })
         .then((doc) => {
-            
-            return res.json({data : doc.data()})
+            let return_data = doc.data()
+            return_data.docId = doc.id
+            return res.json({data : return_data})
         })
         .catch((err) => {
             console.log(err)

@@ -9,36 +9,17 @@ import moment from 'moment'
 
 // Redux
 import { useDispatch } from 'react-redux'
-import {addEvent, doQuest} from '../../redux/action/dataAction'
+import { addDaily } from '../../redux/action/dailyAction'
 
 const Adddaily = (props) => {
 
     const dispatch = useDispatch()
-    
-    const [isStartDatePickerVisible, setIsStartDatePickerVisible] = useState(false);
-    const [isEndDatePickerVisible, setIsEndDatePickerVisible] = useState(false);
 
-    const [startTime , setStartTime] = useState('00:00')
-    const [endTime , setEndTime] = useState('00:00')
-
-
-    const starthandleConfirm = (time) => {
-        // const result = moment(time).format('HH:mm')
-        // setStartTime(result)
-        // setIsStartDatePickerVisible(false)
-      };
-    const endhandleConfirm = (time) => {
-        // const result = moment(time).format('HH:mm')
-        // setEndTime(result)
-        // setIsEndDatePickerVisible(false)
-      };
-
-    
       LogBox.ignoreAllLogs()
     return (
         <View style={styles.container}>
             <Formik
-                initialValues={{ event: '', start: '',end: '',catagory:'งาน', detail: '', key: '',rank: '1',date: props.date, success: false}}  
+                initialValues={{mood:'sad',detail:'',name:'',image:''}}  
                 onSubmit={(values) => {
                     // values.key = Math.random().toString()
                     // values.start = startTime
@@ -46,57 +27,43 @@ const Adddaily = (props) => {
                     // dispatch(addEvent(values))
                     // dispatch(doQuest('createEvent'))
                     // props.setModalOpen(false)
+
+                     
+                    dispatch(addDaily(values))
+                    console.log(values)
                 }}
             >
                 {(props) => (
                 <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'stretch',marginTop: 470}}>
                     
-                        <View >
-                            
-                            <TextInput
-                                style={{height:0,width:0}}
-                                placeholder='Date'
-                                onChangeText={props.handleChange('date')}
-                                value={props.values.date}
-                                editable={false}
-                                >
-                            </TextInput>
-                            
-                        </View>
                         <View style={{width: 90, height: 17,marginTop:10}}>
                             <Text >Image URL :</Text>
-                            
                         </View>
                         <View style={{width: 280, height: 90}}>
                             <TextInput
                                 style={styles.input}
                                 placeholder='Image URL'
-                                onChangeText={props.handleChange('event')}
-                                value={props.values.event}
+                                onChangeText={props.handleChange('image')}
+                                value={props.values.image}
                                 >
                             </TextInput>
                         </View>
                         
                         <View style={{width: 90, height: 17,marginTop:-15}}>
                             <Text >Daily Name :</Text>
-                            
                         </View>
                         <View style={{width: 280, height: 90}}>
                             <TextInput
                                 style={styles.input}
                                 placeholder='Dailyname'
-                                onChangeText={props.handleChange('event')}
-                                value={props.values.event}
+                                onChangeText={props.handleChange('name')}
+                                value={props.values.name}
                                 >
                             </TextInput>
-                        </View>
-                        
-
-                       
-                        
+                        </View>          
+            
                         <View style={{width: 50, height: 20 , marginTop: -20}}>
-                                <Text >Detail :</Text>
-                                
+                            <Text >Detail :</Text>
                         </View>
                         
                         <View style={{width: 280, height: 90}}>

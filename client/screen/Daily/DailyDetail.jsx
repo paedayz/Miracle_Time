@@ -5,21 +5,23 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 // Redux
 import {useDispatch} from 'react-redux'
-import {deleteEvent} from '../../redux/action/dataAction'
+// import {deleteDaily} from '../../redux/action/dairyAction'
 
 
-import EditDailydetail from './EditDailydetail'
+import EditDailydetail from './EditDailyDetail'
 
 export default function Dailydetail({navigation}) {
   const route = useRoute() 
-  const { username,detail,mood,daily,imag_url,date } = route.params
+  const { username,detail,mood,daily,image,date } = route.params
+
+  const dispatch = useDispatch()
   
   const [modalOpen, setModalOpen] = useState(false)
 
     return (
         <View >
           <View>
-            <Image  style={style.mage} source={{uri: imag_url }} />
+            <Image  style={style.mage} source={{uri: image }} />
           </View>
           <Modal visible={modalOpen} animationType={'slide'}>
                 <View>

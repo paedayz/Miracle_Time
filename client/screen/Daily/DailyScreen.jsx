@@ -6,12 +6,18 @@ import { useRoute }  from '@react-navigation/native'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
+import {getUserDaily} from '../../redux/action/dailyAction'
 
 // Component
-import Adddaily from './Adddaily'
+import Adddaily from './AddDaily'
 
 export default function DailyScreen({navigation}) {
-  const route = useRoute() 
+  const route = useRoute()
+  const dispatch = useDispatch() 
+  
+  navigation.addListener('focus', () => {
+    dispatch(getUserDaily())
+  });
 
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -44,13 +50,13 @@ export default function DailyScreen({navigation}) {
               <TouchableOpacity onPress={() => navigation.navigate('Dailydetail', item)}>
                 <View style={style.card}>
                   <View>
-                      <Image  key={index} style={style.mage} source={{uri: item.imag_url}} />
-                  <Text  style={{marginLeft:15}}>
-                      {item.daily}
+                      <Image  key={index} style={style.mage} source={{uri: item.image}} />
+                      <Text  style={{marginLeft:15}}>
+                      {item.name}
                       
                     </Text>
                     <Text  style={{marginLeft:15}}>
-                      {item.date}
+                      {item.createdAt.split(',')[0]}
                     </Text>
                   </View>
                     

@@ -64,3 +64,7 @@ export const DO_ACHIEVE = 'DO_ACHIEVE'
 
 // Dashboard
 export const SET_DASHBOARD_EVENT = 'SET_DASHBOARD_EVENT'
+
+// Daily
+export const SET_USER_DAILY = 'SET_USER_DAILY'
+export const ADD_DAILY = 'ADD_DAILY'
