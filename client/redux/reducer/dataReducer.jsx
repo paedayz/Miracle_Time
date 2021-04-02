@@ -24,7 +24,9 @@ import {
     IS_GET_DATA,
     SET_DASHBOARD_EVENT,
     SET_USER_DAILY,
-    ADD_DAILY
+    ADD_DAILY,
+    EDIT_DAILY,
+    DELETE_DAILY
 } from "../type"
 
 const initialState = {
@@ -325,8 +327,32 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 daily: newDaily
-        }
-            
+            }
+        // case EDIT_DAILY :
+        //     let nowDaily = state.Daily
+        //     let newDaily = []
+        //     nowDaily.map((daily) => {
+        //         if(Daily.key === action.payload.key) {
+        //             daily = action.payload
+        //         }
+        //         newDaily.push(daily)
+        //     })
+        //     return {
+        //         ...state,
+        //         Daily: newDaily
+        //     }
+        case DELETE_DAILY:
+            now_daily = state.daily
+            let new_daily = []
+            now_daily.map((daily) => {
+                if(daily.docId !== action.payload) {
+                    new_daily.push(daily)
+                }
+            })
+            return {
+                ...state,
+                daily : new_daily
+            }            
         case CLEAR_SESSION :
             return startState
 

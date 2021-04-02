@@ -28,9 +28,7 @@ const Adddaily = (props) => {
                     // dispatch(doQuest('createEvent'))
                     // props.setModalOpen(false)
 
-                     
                     dispatch(addDaily(values))
-                    console.log(values)
                 }}
             >
                 {(props) => (

@@ -5,14 +5,15 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 // Redux
 import {useDispatch} from 'react-redux'
-// import {deleteDaily} from '../../redux/action/dairyAction'
+import { deleteDaily } from '../../redux/action/dailyAction'
 
 
-import EditDailydetail from './EditDailyDetail'
+import EditDailyDetail from './EditDailyDetail'
 
-export default function Dailydetail({navigation}) {
+export default function DailyDetail({navigation}) {
   const route = useRoute() 
-  const { username,detail,mood,daily,image,date } = route.params
+  const { username,detail,mood,daily,image,date,createdAt,docId } = route.params
+  const dispatch = useDispatch() 
  
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -62,6 +63,7 @@ export default function Dailydetail({navigation}) {
                   color="#FC7C7C"
                   title="Delete"
                   buttonStyle = {{borderRadius: 10}}
+                  onPress={() => {dispatch(deleteDaily(docId))} }
                 />
               </View>
 
@@ -70,10 +72,11 @@ export default function Dailydetail({navigation}) {
                   color="#8C92AC"
                   title="Edit"
                   buttonStyle = {{borderRadius: 10}}
-                  onPress={() => setModalOpen()}
+                  // onPress={() => setModalOpen()}
                 />
               </View>
             </View>
+
         </View>
     )
 }
