@@ -12,7 +12,7 @@ import DailyDetail from "./DailyDetail";
 
 const SocialStack = createStackNavigator()
 
-const SocialStackScreen = ({navigation}) => {
+const DailyStackScreen = ({navigation}) => {
     return (
       <SocialStack.Navigator>
         <SocialStack.Screen 
@@ -39,4 +39,4 @@ const SocialStackScreen = ({navigation}) => {
     )
   }
 
-export default SocialStackScreen
+export default DailyStackScreen

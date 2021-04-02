@@ -47,7 +47,7 @@ export default function DailyScreen({navigation}) {
           numColumns={2}
           renderItem={({item, index}) => (
             <View style={{marginTop:10}}>
-              <TouchableOpacity onPress={() => navigation.navigate('Dailydetail', item)}>
+              <TouchableOpacity onPress={() => navigation.navigate('DailyDetail', item)}>
                 <View style={style.card}>
                   <View>
                       <Image  key={index} style={style.mage} source={{uri: item.image}} />

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, LogBox , Platform ,KeyboardAvoidingView
 import { Formik } from 'formik'
 import { TextInput } from 'react-native-gesture-handler'
 
-export default function EditDailydetail() {
+export default function EditDailyDetail() {
     return (
         <View style={styles.container}>
             <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'stretch',marginTop: 470}}>

@@ -13,9 +13,7 @@ import EditDailydetail from './EditDailyDetail'
 export default function Dailydetail({navigation}) {
   const route = useRoute() 
   const { username,detail,mood,daily,image,date } = route.params
-
-  const dispatch = useDispatch()
-  
+ 
   const [modalOpen, setModalOpen] = useState(false)
 
     return (
@@ -54,25 +52,7 @@ export default function Dailydetail({navigation}) {
               </View>
               <View>
                   <Text style={style.fontSize}>
-                ฟ้าคืนนี้แสนเศร้า และเหงานัก
-    เหมือนความรักของเราที่เลือนหาย
-    เคยสัญญาว่าจะรัก ไม่เสื่อมคลาย
-    แต่กลับกลาย ทำเหมือน...ลืมเลือนกัน
-
-    แสนเสียดายวันเวลา...ที่ผันผ่าน
-    มันเนิ่นนานเหลือเกิน เธอกับฉัน
-    ที่เคยรัก เคยผูกพัน กันนานวัน
-    กลับแปรผัน...เป็นเพียงแค่อดีตไป
-
-    เคยได้ยิน.หลายคนพูดกันว่า
-    รักกันงาย เลิกกันง่าย นั้นจริงหรือ
-    มาวันหนึ่ง จึงได้พบเจอกับเธอ
-    ใจจึงเผลอ รักเธอ...อย่างง่ายดาย
-
-    มาวันนี้ จึงได้รู้ถึงความจริง
-    เหมือนกับสิ่งที่ได้ฟัง ในวันก่อน
-    ว่าความรัก.เป็นอะไร ที่ไม่แน่นอน
-    ใจขาดรอน เมื่อรัก...ทำช้ำใจ
+                    {detail}
                   </Text>
               </View>
           </View>
