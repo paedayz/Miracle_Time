@@ -36,12 +36,13 @@ export const addDaily = (dailyData) => (dispatch) => {
         })
 }
 
-export const editDaily= (dailyData) => (dispatch) => {
+export const editDaily= (dailyData,docId) => (dispatch) => {
     let clientUserId = getClientUserId()
+    console.log('test editDaily--------')
     dispatch({type: LOADING_DATA})
-    dailyData.clientUserId = clientUserId
-    axios.post('/editDaily',dailyData)
+    axios.post('/editDaily',{update_data: dailyData, docId, clientUserId})
         .then((res) => {
+            console.log('test editDaily path')
             dispatch({type: EDIT_DAILY, payload: res.data.data})
             dispatch({type: LOADING_COMPLETE})
         })
@@ -65,31 +66,3 @@ export const deleteDaily = (dailyDocId) => (dispatch) => {
             dispatch({type: LOADING_COMPLETE})
         })
 }
-
-// export const deleteEvent = (eventKey) => (dispatch) => {
-//     let clientUserId = getClientUserId()
-//     dispatch({type: LOADING_DATA})
-//     axios.post('/deleteEvent', {eventKey : eventKey, clientUserId: clientUserId})
-//         .then((res) => {
-//             dispatch({type: DELETE_EVENT, payload: res.data.data, notiArray: res.data.notiDelArray})
-//             dispatch({type: LOADING_COMPLETE})
-//         })
-//         .catch((err) => {
-//             console.log(err)
-//             dispatch({type: LOADING_COMPLETE})
-//         })
-// }
-// export const editEvent = (eventData) => (dispatch) => {
-//     let clientUserId = getClientUserId()
-//     dispatch({type: LOADING_DATA})
-//     eventData.clientUserId = clientUserId
-//     axios.post('/editEvent', eventData)
-//         .then((res) => {
-//             dispatch({type: EDIT_EVENT, payload: res.data.data})
-//             dispatch({type: LOADING_COMPLETE})
-//         })
-//         .catch((err) => {
-//             console.log(err)
-//             dispatch({type: LOADING_COMPLETE})
-//         })
-// }

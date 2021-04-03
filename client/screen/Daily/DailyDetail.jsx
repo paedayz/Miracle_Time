@@ -17,6 +17,10 @@ export default function DailyDetail({navigation}) {
  
   const [modalOpen, setModalOpen] = useState(false)
 
+  const closeModal =()=>{
+    setModalOpen(false)
+  }
+
     return (
         <View >
           <View>
@@ -36,7 +40,7 @@ export default function DailyDetail({navigation}) {
                           marginTop: 15}}
                         onPress={() => setModalOpen(false)}
                     />
-                      <EditDailydetail/>
+                      <EditDailyDetail dailyData={route.params} closeModal={closeModal}/>
                 </View>
             </Modal>
           <View>
@@ -72,7 +76,7 @@ export default function DailyDetail({navigation}) {
                   color="#8C92AC"
                   title="Edit"
                   buttonStyle = {{borderRadius: 10}}
-                  // onPress={() => setModalOpen()}
+                  onPress={() => setModalOpen()}
                 />
               </View>
             </View>

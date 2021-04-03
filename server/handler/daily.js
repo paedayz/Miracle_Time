@@ -43,6 +43,7 @@ exports.getUserDaily = (req, res) => {
 }
 
 exports.editDaily = (req, res) => {
+    console.log(req.body)
     firestore.doc(`/daily/${req.body.docId}`).get()
         .then((doc) => {
             if(doc.data().username !== req.user.username) {

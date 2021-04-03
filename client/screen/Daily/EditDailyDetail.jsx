@@ -3,22 +3,33 @@ import { StyleSheet, Text, View, Button, LogBox , Platform ,KeyboardAvoidingView
 import { Formik } from 'formik'
 import { TextInput } from 'react-native-gesture-handler'
 
-export default function EditDailyDetail() {
+//redux
+import {useDispatch} from 'react-redux'
+import {editDaily} from '../../redux/action/dailyAction'
+
+export default function EditDailyDetail(props) {
+    
+    const dispatch = useDispatch()
+
+    const { username,detail,mood,daily,image,date,createdAt,docId,name } = props.dailyData
+    // console.log(name)
+    const [Editname,setEditname] = useState(name)
+    const [EditImgUrl,setEditImgUrl] = useState(image)
+    const [EditDetail,setEditDetail,] = useState(detail)
+
+    
+    
+    const onPressSubmit = () => {
+        let editData = { image : EditImgUrl, name :Editname, detail:EditDetail }
+        dispatch(editDaily( editData,docId))
+        props.closeModal()
+        
+    }
+
     return (
         <View style={styles.container}>
             <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'stretch',marginTop: 470}}>
                     
-                    <View >
-                        
-                        <TextInput
-                            style={{height:0,width:0}}
-                            placeholder='Date'
-                            
-                            editable={false}
-                            >
-                        </TextInput>
-                        
-                    </View>
                     <View style={{width: 90, height: 17,marginTop:10}}>
                         <Text >Image URL :</Text>
                         
@@ -27,6 +38,8 @@ export default function EditDailyDetail() {
                         <TextInput
                             style={styles.input}
                             placeholder='Image URL'
+                            value={image}
+                            onChangeText={data => setEditImgUrl(data)}
                             >
                         </TextInput>
                     </View>
@@ -39,16 +52,14 @@ export default function EditDailyDetail() {
                         <TextInput
                             style={styles.input}
                             placeholder='Dailyname'
+                            value={Editname}
+                            onChangeText={data => setEditname(data)}
                             >
                         </TextInput>
                     </View>
                     
-
-                   
-                    
                     <View style={{width: 50, height: 20 , marginTop: -20}}>
                             <Text >Detail :</Text>
-                            
                     </View>
                     
                     <View style={{width: 280, height: 90}}>
@@ -56,6 +67,8 @@ export default function EditDailyDetail() {
                             <TextInput
                                 style={styles.input}
                                 placeholder='detail'
+                                value={EditDetail}
+                                onChangeText={data => setEditDetail(data)}
                                 >
                             </TextInput>
                         </KeyboardAvoidingView>           
@@ -66,7 +79,9 @@ export default function EditDailyDetail() {
                             <Button 
                             title='submit' 
                             color='#29AB87'
-                            buttonStyle = {{borderRadius: 10}} ></Button>
+                            buttonStyle = {{borderRadius: 10}} 
+                            onPress={() => onPressSubmit()}    
+                            />
                     </View>
                    
             </View>

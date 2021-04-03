@@ -328,19 +328,19 @@ export default function (state = initialState, action){
                 ...state,
                 daily: newDaily
             }
-        // case EDIT_DAILY :
-        //     let nowDaily = state.Daily
-        //     let newDaily = []
-        //     nowDaily.map((daily) => {
-        //         if(Daily.key === action.payload.key) {
-        //             daily = action.payload
-        //         }
-        //         newDaily.push(daily)
-        //     })
-        //     return {
-        //         ...state,
-        //         Daily: newDaily
-        //     }
+        case EDIT_DAILY :
+            let nowDaily = state.daily
+            let newEditDaily = []
+            nowDaily.map((daily) => {
+                if(daily.docId === action.payload.docId ) {
+                    daily = action.payload
+                }
+                newEditDaily.push(daily)
+            })
+            return {
+                ...state,
+                Daily: newEditDaily
+            }
         case DELETE_DAILY:
             now_daily = state.daily
             let new_daily = []
