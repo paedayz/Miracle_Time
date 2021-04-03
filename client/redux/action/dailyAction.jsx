@@ -38,11 +38,9 @@ export const addDaily = (dailyData) => (dispatch) => {
 
 export const editDaily= (dailyData,docId) => (dispatch) => {
     let clientUserId = getClientUserId()
-    console.log('test editDaily--------')
     dispatch({type: LOADING_DATA})
     axios.post('/editDaily',{update_data: dailyData, docId, clientUserId})
         .then((res) => {
-            console.log('test editDaily path')
             dispatch({type: EDIT_DAILY, payload: res.data.data})
             dispatch({type: LOADING_COMPLETE})
         })
