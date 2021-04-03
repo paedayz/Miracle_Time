@@ -30,7 +30,6 @@ export const addFriend = (recipient) => (dispatch) => {
     dispatch({type: LOADING_FRIEND_DATA})
     axios.post('/addFriend',{recipient: recipient, clientUserId: clientUserId})
         .then((res) => {
-            console.log(res.data)
             dispatch({type: LOADING_FRIEND_COMPLETE})
             dispatch({type: SET_SUCCESS, payload: 'AddFriend success'})
         })

@@ -102,7 +102,6 @@ export default function auth() {
     const [mode, setMode] = useState(true)
     const error = useSelector(state => state.system.error)
     const dispatch = useDispatch()
-    console.log(error)
     if(error) {
         Alert.alert(
             "Alert !!",

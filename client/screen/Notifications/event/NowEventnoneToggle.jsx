@@ -152,5 +152,5 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       alignItems: 'center',
       justifyContent: 'center'
-    },
-  });
+    }
+});
