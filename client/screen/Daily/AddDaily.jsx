@@ -14,12 +14,13 @@ import { addDaily } from '../../redux/action/dailyAction'
 const Adddaily = (props) => {
 
     const dispatch = useDispatch()
+    const [AddMood, setAddMood] = useState()
 
       LogBox.ignoreAllLogs()
     return (
         <View style={styles.container}>
             <Formik
-                initialValues={{mood:'sad',detail:'',name:'',image:''}}  
+                initialValues={{mood:'',detail:'',name:'',image:''}}  
                 onSubmit={(values) => {
                     // values.key = Math.random().toString()
                     // values.start = startTime
@@ -28,11 +29,13 @@ const Adddaily = (props) => {
                     // dispatch(doQuest('createEvent'))
                     // props.setModalOpen(false)
 
+                    values.mood = AddMood
+
                     dispatch(addDaily(values))
                 }}
             >
                 {(props) => (
-                <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'stretch',marginTop: 470}}>
+                <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',marginTop: 400}}>
                     
                         <View style={{width: 90, height: 17,marginTop:10}}>
                             <Text >Image URL :</Text>
@@ -58,9 +61,25 @@ const Adddaily = (props) => {
                                 value={props.values.name}
                                 >
                             </TextInput>
+                        </View>
+
+                        <View style={{width: 90, height: 17,marginTop:-10}}>
+                            <Text >Your Mood :</Text>
+                        </View>
+                        <View style={{width: 280, height: 50, borderColor: '#ddd', borderWidth: 1,}} >
+                            <RNPickerSelect 
+                                placeholder={{}}
+                                value={AddMood}
+                                onValueChange={(data)=>{setAddMood(data)}}
+                                items={[
+                                    { label: 'มีความสุข', value: 'happy' ,color: '#ff3399'},
+                                    { label: 'เฉยๆ', value: 'ok' ,color:'#F5C000' },
+                                    { label: 'เศร้า', value: 'sad' ,color:'#9ACEF0'},
+                                    { label: 'โกรธ', value: 'angry' ,color:'#E71D36'},
+                                ]} />
                         </View>          
             
-                        <View style={{width: 50, height: 20 , marginTop: -20}}>
+                        <View style={{width: 50, height: 20 , marginTop: -7}}>
                             <Text >Detail :</Text>
                         </View>
                         
