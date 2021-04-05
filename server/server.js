@@ -35,7 +35,8 @@ let {
   acceptFriendRequest,
   deniedFriendRequest,
   getFriendRequest,
-  getFriendList
+  getFriendList,
+  getFriendEvent
 } = require('./handler/friend')
 
 let {
@@ -78,6 +79,7 @@ app.post('/getFriendList', FBAuth, getFriendList)
 app.post('/addFriend', FBAuth, addFriend)
 app.post('/acceptFriendRequest', FBAuth, acceptFriendRequest)
 app.post('/deniedFriendRequest', FBAuth, deniedFriendRequest)
+app.post('/getFriendEvent', FBAuth, getFriendEvent)
 
 // Data Route
 app.post('/getAllEvents',FBAuth, getAllEvents)

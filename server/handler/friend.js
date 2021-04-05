@@ -219,8 +219,26 @@ exports.getFriendList = (req, res) => {
         res.status(200).json({data:friendRequestBuff}) 
         })
         .catch((err) => {
-        console.log(err);
-        return res.json({ error: err });
+            console.log(err);
+            return res.json({ error: err });
         });
     })
+}
+
+exports.getFriendEvent = (req, res) => {
+     firestore.collection('events').where('username','==', req.body.friendUsername).get()
+        .then((snapshot) => {
+            let return_data = []
+            snapshot.forEach(doc => {
+                if(doc.data().date === req.body.date) {
+                    return_data.push(doc.data())
+                }
+            });
+
+            return res.status(200).json({data: return_data})
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.json({ error: err });
+        });
 }
