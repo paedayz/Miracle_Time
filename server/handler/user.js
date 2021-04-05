@@ -208,7 +208,9 @@ exports.checkAuthen = async (req, res) => {
                       end: doc.data().end,
                       catagory: doc.data().catagory,
                       success: doc.data().success,
-                      docId: doc.id
+                      docId: doc.id,
+                      privacy: doc.data().privacy,
+                      createdAt: doc.data().createdAt
                     };
                     return_events.push(newData);
                   });

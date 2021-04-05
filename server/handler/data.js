@@ -14,6 +14,8 @@ exports.getAllEvents = (req, res) => {
                     start: doc.data().start,
                     end: doc.data().end,
                     catagory: doc.data().catagory,
+                    privacy: doc.data().privacy,
+                    createdAt : doc.data().createdAt,
                 }
                 data.push(newData)
             })
@@ -37,7 +39,9 @@ exports.addEvent = (req, res) => {
         end : eventData.end,
         catagory : eventData.catagory,
         username: req.user.username,
-        success : eventData.success
+        success : eventData.success,
+        privacy : eventData.privacy,
+        createdAt : new Date().toLocaleString("en-US", {timeZone: "Asia/Bangkok",}),
     }
     firestore.collection('events').add(newData)
         .then(() => {
@@ -55,6 +59,8 @@ exports.addEvent = (req, res) => {
                     start: doc.data().start,
                     end: doc.data().end,
                     catagory: doc.data().catagory,
+                    privacy: doc.data().privacy,
+                    createdAt: doc.data().createdAt,
                 }
             })
             return res.json({data: data})
@@ -76,6 +82,8 @@ exports.editEvent = (req, res) => {
         start : req.body.start,
         end : req.body.end,
         catagory : req.body.catagory,
+        privacy : req.body.privacy,
+        createdAt: req.body.createdAt,
         username : username,
     }
     firestore.collection('events').where('key', '==', updateData.key).limit(1).get()
@@ -99,6 +107,8 @@ exports.editEvent = (req, res) => {
                     start: doc.data().start,
                     end: doc.data().end,
                     catagory: doc.data().catagory,
+                    privacy: doc.data().privacy,
+                    createdAt: doc.data().createdAt
                 }
             })
             return res.json({data: data})
