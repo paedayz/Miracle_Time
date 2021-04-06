@@ -27,7 +27,8 @@ let {
   toggleNotifications,
   deleteNotifications,
   toggleEventSuccess,
-  getAdminDashBoard
+  getAdminDashBoard,
+  getEventByMonth
 } = require('./handler/data')
 
 let {
@@ -83,6 +84,7 @@ app.post('/getFriendEvent', FBAuth, getFriendEvent)
 
 // Data Route
 app.post('/getAllEvents',FBAuth, getAllEvents)
+app.post('/getEventByMonth',FBAuth, getEventByMonth)
 app.post('/addEvent', FBAuth, addEvent)
 app.post('/editEvent', FBAuth, editEvent)
 app.post('/deleteEvent', FBAuth, deleteEvent)

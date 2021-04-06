@@ -27,6 +27,36 @@ exports.getAllEvents = (req, res) => {
           })
 }
 
+exports.getEventByMonth = (req, res) => {
+    let date = req.body.date
+    firestore.collection('events').where('username', '==', req.user.username).get()
+        .then((snapshot) => {
+            let return_data = []
+            snapshot.forEach((doc) => {
+                if(doc.data().date.startsWith(date)) {
+                    let newData = {
+                        date: doc.data().date,
+                        detail: doc.data().detail,
+                        event: doc.data().event,
+                        key: doc.data().key,
+                        rank: doc.data().rank,
+                        start: doc.data().start,
+                        end: doc.data().end,
+                        catagory: doc.data().catagory,
+                        privacy: doc.data().privacy,
+                        createdAt : doc.data().createdAt,
+                    }
+                    return_data.push(newData)
+                }
+            })
+            return res.status(200).json({data: return_data})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+          })
+}
+
 exports.addEvent = (req, res) => {
     let eventData = req.body
     let newData = {
