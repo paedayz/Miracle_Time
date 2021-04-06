@@ -8,7 +8,8 @@ import { LOADING_DATA,
     SET_FRIEND_ERROR,
     LOADING_FRIEND_DATA,
     LOADING_FRIEND_COMPLETE,
-    SET_FRIEND_LIST
+    SET_FRIEND_LIST,
+    SET_FRIEND_EVENT
 } from '../type'
 
 import {getClientUserId} from './userAction'
@@ -67,6 +68,17 @@ export const deniedFriendRequest = (docId, sender) => (dispatch) =>{
     axios.post('/deniedFriendRequest', {docId:docId, sender:sender, clientUserId: clientUserId})
         .then((res) => {
             dispatch({type:DENIED_FRIEND, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const getFriendEvent = (friendUsername, date) => (dispatch) =>{
+    let clientUserId = getClientUserId()
+    axios.post('/getFriendEvent', {friendUsername, date, clientUserId})
+        .then((res) => {
+            dispatch({type:SET_FRIEND_EVENT, payload: res.data.data})
         })
         .catch((err) => {
             console.log(err)

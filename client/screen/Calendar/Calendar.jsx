@@ -63,7 +63,6 @@ const CalendarsScreen = ({navigation}) => {
           current={now}
           markingType={'multi-dot'}
           markedDates={data}
-          onMonthChange={(month) => {console.log('month changed', month)}}
           onDayPress={(day) => {navigation.navigate('TodayList',{date:day.dateString}) }}
         />
       </Fragment>

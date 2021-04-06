@@ -230,7 +230,7 @@ exports.getFriendEvent = (req, res) => {
         .then((snapshot) => {
             let return_data = []
             snapshot.forEach(doc => {
-                if(doc.data().date === req.body.date) {
+                if(doc.data().date === req.body.date && doc.data().privacy === 'public') {
                     return_data.push(doc.data())
                 }
             });
