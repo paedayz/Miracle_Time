@@ -10,6 +10,9 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {useRoute} from '@react-navigation/native'
 
+// Component
+import FriendEventBox from './FriendEventBox'
+
 // Redux
 import {useSelector, useDispatch} from 'react-redux'
 import {getFriendEvent} from '../../redux/action/friendAction'
@@ -33,7 +36,9 @@ export default function FriendProfileScreen({navigation}) {
       dispatch(getFriendEvent(username, searchDate))
     }
 
-  
+    const mapFriendEvent = friendEvent.map((item) => (
+      <FriendEventBox item={item} />
+    ))
     
       return (
         <SafeAreaView style={styles.container}>
@@ -109,12 +114,12 @@ export default function FriendProfileScreen({navigation}) {
                 />
               </View>
 
-              <View style={{marginTop:17, marginLeft:30,borderRadius: 10}}>
+              <View style={{marginTop:27, marginLeft:30,borderRadius: 10}}>
                 <Button onPress={() => onClickSearch()} title="SEARCH" color="#738FD9" buttonStyle = {{borderRadius: 10}}/>
               </View>
 
             </View>
-            <Text>{friendEvent.length}</Text>
+            {mapFriendEvent}
           </View>
 
         </SafeAreaView>
@@ -126,14 +131,15 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   eventContainer : {
-    marginLeft: 20,
-    marginTop: 30
+    marginLeft: 40,
+    marginTop: 30,
+    width: '80%'
   },
   textInput: {
     marginTop: Platform.OS === 'ios' ? 0 : -2,
     paddingLeft: 10,
     color: 'black',
-    marginTop: 20,
+    marginTop: 30,
     marginBottom: 20,
     backgroundColor: 'white',
     maxWidth: 200,
