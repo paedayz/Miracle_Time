@@ -5,21 +5,26 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 // Redux
 import {useDispatch} from 'react-redux'
-import {deleteEvent} from '../../redux/action/dataAction'
+import { deleteDaily } from '../../redux/action/dailyAction'
 
 
-import EditDailydetail from './EditDailydetail'
+import EditDailyDetail from './EditDailyDetail'
 
-export default function Dailydetail({navigation}) {
+export default function DailyDetail({navigation}) {
   const route = useRoute() 
-  const { username,detail,mood,daily,imag_url,date } = route.params
-  
+  const { username,detail,mood,daily,image,date,createdAt,docId } = route.params
+  const dispatch = useDispatch() 
+ 
   const [modalOpen, setModalOpen] = useState(false)
+
+  const closeModal =()=>{
+    setModalOpen(false)
+  }
 
     return (
         <View >
           <View>
-            <Image  style={style.mage} source={{uri: imag_url }} />
+            <Image  style={style.mage} source={{uri: image }} />
           </View>
           <Modal visible={modalOpen} animationType={'slide'}>
                 <View>
@@ -35,7 +40,7 @@ export default function Dailydetail({navigation}) {
                           marginTop: 15}}
                         onPress={() => setModalOpen(false)}
                     />
-                      <EditDailydetail/>
+                      <EditDailyDetail dailyData={route.params} closeModal={closeModal}/>
                 </View>
             </Modal>
           <View>
@@ -52,25 +57,7 @@ export default function Dailydetail({navigation}) {
               </View>
               <View>
                   <Text style={style.fontSize}>
-                ฟ้าคืนนี้แสนเศร้า และเหงานัก
-    เหมือนความรักของเราที่เลือนหาย
-    เคยสัญญาว่าจะรัก ไม่เสื่อมคลาย
-    แต่กลับกลาย ทำเหมือน...ลืมเลือนกัน
-
-    แสนเสียดายวันเวลา...ที่ผันผ่าน
-    มันเนิ่นนานเหลือเกิน เธอกับฉัน
-    ที่เคยรัก เคยผูกพัน กันนานวัน
-    กลับแปรผัน...เป็นเพียงแค่อดีตไป
-
-    เคยได้ยิน.หลายคนพูดกันว่า
-    รักกันงาย เลิกกันง่าย นั้นจริงหรือ
-    มาวันหนึ่ง จึงได้พบเจอกับเธอ
-    ใจจึงเผลอ รักเธอ...อย่างง่ายดาย
-
-    มาวันนี้ จึงได้รู้ถึงความจริง
-    เหมือนกับสิ่งที่ได้ฟัง ในวันก่อน
-    ว่าความรัก.เป็นอะไร ที่ไม่แน่นอน
-    ใจขาดรอน เมื่อรัก...ทำช้ำใจ
+                    {detail}
                   </Text>
               </View>
           </View>
@@ -80,6 +67,7 @@ export default function Dailydetail({navigation}) {
                   color="#FC7C7C"
                   title="Delete"
                   buttonStyle = {{borderRadius: 10}}
+                  onPress={() => {dispatch(deleteDaily(docId))} }
                 />
               </View>
 
@@ -92,6 +80,7 @@ export default function Dailydetail({navigation}) {
                 />
               </View>
             </View>
+
         </View>
     )
 }
