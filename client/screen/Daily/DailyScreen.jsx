@@ -22,14 +22,15 @@ export default function DailyScreen({navigation}) {
   const [modalOpen, setModalOpen] = useState(false)
 
   const daily = useSelector((state) => state.data.daily)
+  const loading_daily = useSelector((state) => state.data.loading_daily)
 
   const mapDaily = daily.map((item) => {
     return (
-      <View style={{marginTop:20, width:'100%'}}>
+      <View style={{marginTop:20, width:'100%'}} key={item.docId}>
               <TouchableOpacity onPress={() => navigation.navigate('DailyDetail', item)}>
                 <View style={style.card}>
                     <View>
-                      <Image  key={item.docId} style={style.mage} source={{uri: item.image}} />
+                      <Image style={style.mage} source={{uri: item.image}} />
                     </View>
                     <View>
                     <Text  style={{marginLeft:15, fontSize:20}}>
@@ -47,35 +48,45 @@ export default function DailyScreen({navigation}) {
     )
   })
 
-  return (
-    <View>
+  if(loading_daily) {
+    return (
+      <View>
+        <Text>Loading</Text>
+      </View>
+    )
+  } else {
+    return (
+      <View>
+          
+          <Modal visible={modalOpen} animationType={'slide'}>
+                  <View>
+                      <Icon 
+                          name="close" 
+                          size={24} 
+                          style={style.modalToggle}
+                          onPress={() => setModalOpen(false)}
+                      />
+                        <Adddaily setModalOpen={setModalOpen} />
+                  </View>
+          </Modal>
+          
+          <View style={{flexDirection: 'row'}}>
+                <TouchableOpacity onPress={() => setModalOpen()}>
+                  <Image  style={{marginVertical: 10, marginLeft:360, height:40,width:40}} source={require('../img/add.png')} />
+                </TouchableOpacity>
+          </View>
+          <View style={style.dailyContainer}>
+            <ScrollView>
+              {mapDaily}
+            </ScrollView>
+          </View>
         
-        <Modal visible={modalOpen} animationType={'slide'}>
-                <View>
-                    <Icon 
-                        name="close" 
-                        size={24} 
-                        style={style.modalToggle}
-                        onPress={() => setModalOpen(false)}
-                    />
-                      <Adddaily setModalOpen={setModalOpen} />
-                </View>
-        </Modal>
         
-        <View style={{flexDirection: 'row'}}>
-              <TouchableOpacity onPress={() => setModalOpen()}>
-                <Image  style={{marginVertical: 10, marginLeft:360, height:40,width:40}} source={require('../img/add.png')} />
-              </TouchableOpacity>
-        </View>
-        <View style={style.dailyContainer}>
-          <ScrollView>
-            {mapDaily}
-          </ScrollView>
-        </View>
-      
-      
-    </View>
-  )
+      </View>
+    )
+  }
+
+  
 }
 
 const style = StyleSheet.create({
@@ -95,6 +106,15 @@ const style = StyleSheet.create({
     marginLeft:23,
     height:200,
     borderRadius:20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   cardcon: {
     // marginHorizontal: 18,

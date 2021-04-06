@@ -5,7 +5,9 @@ import {
     SET_USER_DAILY,
     ADD_DAILY,
     EDIT_DAILY,
-    DELETE_DAILY
+    DELETE_DAILY,
+    LOADING_DAILY,
+    SUCCESS_LOADING_DAILY
 } from "../type"
 
 import {getClientUserId} from './userAction'
@@ -33,15 +35,17 @@ export const getUserDaily = () => (dispatch) => {
 }
 
 export const addDaily = (dailyData) => (dispatch) => {
+    dispatch({type: LOADING_DAILY})
     let clientUserId = getClientUserId()
     dailyData.clientUserId = clientUserId
     axios.post('/addDaily',dailyData)
         .then((res) => {
-            console.log(res.data.data)
             dispatch({type: ADD_DAILY, payload: res.data.data})
+            dispatch({type:SUCCESS_LOADING_DAILY})
         })
         .catch((err) => {
             console.log(err)
+            dispatch({type:SUCCESS_LOADING_DAILY})
         })
 }
 
