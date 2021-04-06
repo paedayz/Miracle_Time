@@ -8,14 +8,14 @@ import Notifications from '../../component/Notifications'
 
 // Screen
 import DailyScreen from './DailyScreen'
-import Dailydetail from "./Dailydetail";
+import DailyDetail from "./DailyDetail"
 
-const SocialStack = createStackNavigator()
+const DailyStack = createStackNavigator()
 
-const SocialStackScreen = ({navigation}) => {
+const DailyStackScreen = ({navigation}) => {
     return (
-      <SocialStack.Navigator>
-        <SocialStack.Screen 
+      <DailyStack.Navigator>
+        <DailyStack.Screen 
           name="Daily" 
           component={DailyScreen} 
           options={{
@@ -31,12 +31,12 @@ const SocialStackScreen = ({navigation}) => {
             )
           }}
         />
-        <SocialStack.Screen
-        name="Dailydetail"
-        component={Dailydetail}
-      />
-      </SocialStack.Navigator>
+        <DailyStack.Screen
+          name="DailyDetail"
+          component={DailyDetail}
+        />
+      </DailyStack.Navigator>
     )
   }
 
-export default SocialStackScreen
+export default DailyStackScreen

@@ -22,7 +22,11 @@ import {
     SET_DATA_CLEAR,
     SET_DATA_ERROR,
     IS_GET_DATA,
-    SET_DASHBOARD_EVENT
+    SET_DASHBOARD_EVENT,
+    SET_USER_DAILY,
+    ADD_DAILY,
+    EDIT_DAILY,
+    DELETE_DAILY
 } from "../type"
 
 const initialState = {
@@ -40,43 +44,8 @@ const initialState = {
     questList: [],
     achievementList: [],
     dashboardEvent: [],
+    daily:[],
     error: null,
-    daily:[{
-        username:'',
-        detail:'123',
-        mood:'',
-        daily:'123',
-        imag_url:'https://i.pinimg.com/originals/7a/7d/cf/7a7dcfa6474ec4cbfa81113eebe3c0dc.jpg',
-        date:'3/02/64'
-    },{
-        username:'',
-        detail:'ABC',
-        mood:'',
-        daily:'ABC',
-        imag_url:'https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/',
-        date:'2/02/64'
-    },{
-        username:'',
-        detail:'ABC',
-        mood:'',
-        daily:'ABC',
-        imag_url:'https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/',
-        date:'2/02/64'
-    },{
-        username:'',
-        detail:'ABC',
-        mood:'',
-        daily:'ABC',
-        imag_url:'https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/',
-        date:'2/02/64'
-    },{
-        username:'',
-        detail:'ABC',
-        mood:'',
-        daily:'ABC',
-        imag_url:'https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/',
-        date:'2/02/64'
-    }],
     isGetData: false
 }
 
@@ -95,6 +64,7 @@ const startState = {
     questList: [],
     achievementList: [],
     dashboardEvent: [],
+    daily:[],
     error: null,
     isGetData: false
 }
@@ -340,7 +310,49 @@ export default function (state = initialState, action){
                 ...state,
                 error: action.payload
             }
-            
+        
+        case SET_EVENT :
+            return {
+                ...state,
+                events : action.payload
+            }
+        case SET_USER_DAILY:
+            return {
+                ...state,
+                daily : action.payload
+            }
+        case ADD_DAILY:
+            let newDaily = state.daily
+            newDaily.push(action.payload)
+            return {
+                ...state,
+                daily: newDaily
+            }
+        case EDIT_DAILY :
+            let nowDaily = state.daily
+            let newEditDaily = []
+            nowDaily.map((daily) => {
+                if(daily.docId === action.payload.docId ) {
+                    daily = action.payload
+                }
+                newEditDaily.push(daily)
+            })
+            return {
+                ...state,
+                Daily: newEditDaily
+            }
+        case DELETE_DAILY:
+            now_daily = state.daily
+            let new_daily = []
+            now_daily.map((daily) => {
+                if(daily.docId !== action.payload) {
+                    new_daily.push(daily)
+                }
+            })
+            return {
+                ...state,
+                daily : new_daily
+            }            
         case CLEAR_SESSION :
             return startState
 

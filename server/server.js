@@ -59,6 +59,9 @@ let {
 
 let {addDaily, getUserDaily, editDaily, deleteDaily} = require('./handler/daily')
 
+app.get('/test', function test(req, res) {
+  res.json({success: true})
+})
 // Daily Route
 app.post('/addDaily', FBAuth, addDaily)
 app.post('/getUserDaily', FBAuth, getUserDaily)
