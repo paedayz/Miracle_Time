@@ -14,7 +14,18 @@ export const getUserDaily = () => (dispatch) => {
     let clientUserId = getClientUserId()
     axios.post('/getUserDaily',{clientUserId: clientUserId})
         .then((res) => {
-            dispatch({type: SET_USER_DAILY, payload: res.data.data})
+            let set_data = []
+            res.data.data.map((item) => {
+                let time = item.createdAt.split(',')[1]
+                let date = item.createdAt.split(',')[0]
+                let month = date.split('/')[0]
+                let day = date.split('/')[1]
+                let year = date.split('/')[2]
+                let new_createdAt = `${day}/${month}/${year},${time}`
+                item.createdAt = new_createdAt
+                set_data.push(item)
+            })
+            dispatch({type: SET_USER_DAILY, payload: set_data})
         })
         .catch((err) => {
             console.log(err)
@@ -23,30 +34,25 @@ export const getUserDaily = () => (dispatch) => {
 
 export const addDaily = (dailyData) => (dispatch) => {
     let clientUserId = getClientUserId()
-    dispatch({type: LOADING_DATA})
     dailyData.clientUserId = clientUserId
     axios.post('/addDaily',dailyData)
         .then((res) => {
+            console.log(res.data.data)
             dispatch({type: ADD_DAILY, payload: res.data.data})
-            dispatch({type: LOADING_COMPLETE})
         })
         .catch((err) => {
             console.log(err)
-            dispatch({type: LOADING_COMPLETE})
         })
 }
 
 export const editDaily= (dailyData,docId) => (dispatch) => {
     let clientUserId = getClientUserId()
-    dispatch({type: LOADING_DATA})
     axios.post('/editDaily',{update_data: dailyData, docId, clientUserId})
         .then((res) => {
             dispatch({type: EDIT_DAILY, payload: res.data.data})
-            dispatch({type: LOADING_COMPLETE})
         })
         .catch((err) => {
             console.log(err)
-            dispatch({type: LOADING_COMPLETE})
         })
 }
 

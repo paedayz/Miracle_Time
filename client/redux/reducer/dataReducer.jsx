@@ -324,6 +324,7 @@ export default function (state = initialState, action){
         case ADD_DAILY:
             let newDaily = state.daily
             newDaily.push(action.payload)
+            console.log(newDaily)
             return {
                 ...state,
                 daily: newDaily

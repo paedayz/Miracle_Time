@@ -11,10 +11,10 @@ import moment from 'moment'
 import { useDispatch } from 'react-redux'
 import { addDaily } from '../../redux/action/dailyAction'
 
-const Adddaily = (props) => {
+const Adddaily = ({setModalOpen}) => {
 
     const dispatch = useDispatch()
-    const [AddMood, setAddMood] = useState()
+    const [AddMood, setAddMood] = useState('happy')
 
       LogBox.ignoreAllLogs()
     return (
@@ -30,7 +30,7 @@ const Adddaily = (props) => {
                     // props.setModalOpen(false)
 
                     values.mood = AddMood
-
+                    setModalOpen(false)
                     dispatch(addDaily(values))
                 }}
             >
