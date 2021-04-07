@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 2,
     alignItems: 'center',
+    margin:'2%'
   },
   button_text: {
     color: "white",
@@ -94,11 +95,8 @@ const styles = StyleSheet.create({
     marginTop:'2%',
   },
   mood_img:{
-    height:'60%',
-    width:'100%',
-    // borderWidth:2,
-    // borderColor:'black',
-    // borderRadius: 100,
+    height:'45%',
+    width:'80%',
   },
   title: {
     color: '#404040',
@@ -118,35 +116,43 @@ const styles = StyleSheet.create({
   },
   headerBox:{
     alignItems: 'center',
-    margin:'2%',
+    marginTop:'10%',
   },
   button1:{
-    backgroundColor:'#FF33FF',
-    height:'100%',
+    backgroundColor:'#3DCB96',
+    height:'90%',
     width:'48%',
-    borderTopStartRadius:10,
+    borderRadius:10,
     justifyContent: 'center',
+    alignItems: 'center',
+    margin:'2%',
   },
   button2: {
-    backgroundColor:'#FFFF66',
-    height:'100%',
+    backgroundColor:'#8F8F8F',
+    height:'90%',
     width:'48%',
-    borderTopEndRadius:10,
+    borderRadius:10,
     justifyContent: 'center',
+    alignItems: 'center',
+    margin:'2%',
   },
   button3: {
-    backgroundColor:'#3366FF',
-    height:'100%',
+    backgroundColor:'#1766B0',
+    height:'90%',
     width:'48%',
-    borderBottomLeftRadius:10,
+    borderRadius:10,
     justifyContent: 'center',
+    alignItems: 'center',
+    margin:'2%',
   },
   button4: {
-    backgroundColor:'#FF6600',
-    height:'100%',
+    backgroundColor:'#FC7951',
+    height:'90%',
     width:'48%',
-    borderBottomRightRadius:10,
+    borderRadius:10,
     justifyContent: 'center',
+    alignItems: 'center',
+    margin:'2%',
   }
    
 });
