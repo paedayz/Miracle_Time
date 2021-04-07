@@ -1,8 +1,34 @@
 export const themes = [
     {
-        PRIMARY_TEXT_COLOR: 'orange'
+        PRIMARY_TEXT_COLOR: 'green',
+        BUTTON_TAB_MENU_ONE: '#4A9FFF',
+        BUTTON_TAB_MENU_TWO: '#6170D7',
+        BUTTON_TAB_MENU_THREE: '#008891',
+        BUTTON_TAB_MENU_FOUR: '#20E1D4',
+        BUTTON_TAB_MENU_FIVE: '#B9CE8D',
     },
     {
-        PRIMARY_TEXT_COLOR: 'blue'
+        PRIMARY_TEXT_COLOR: 'blue',
+        BUTTON_TAB_MENU_ONE: '#957ADA',
+        BUTTON_TAB_MENU_TWO: '#E0BBE4',
+        BUTTON_TAB_MENU_THREE: '#D291BC',
+        BUTTON_TAB_MENU_FOUR: '#FEC8D8',
+        BUTTON_TAB_MENU_FIVE: '#F2E2BA',
+    },
+    {
+        PRIMARY_TEXT_COLOR: 'red',
+        BUTTON_TAB_MENU_ONE: '#CAD2C5',
+        BUTTON_TAB_MENU_TWO: '#84A98C',
+        BUTTON_TAB_MENU_THREE: '#52796F',
+        BUTTON_TAB_MENU_FOUR: '#354F52',
+        BUTTON_TAB_MENU_FIVE: '#2F3E46',
+    },
+    {
+        PRIMARY_TEXT_COLOR: 'yellow',
+        BUTTON_TAB_MENU_ONE: '#9EB3C2',
+        BUTTON_TAB_MENU_TWO: '#1C7293',
+        BUTTON_TAB_MENU_THREE: '#065A82',
+        BUTTON_TAB_MENU_FOUR: '#1B3B6F',
+        BUTTON_TAB_MENU_FIVE: '#21295C',
     }
 ]
