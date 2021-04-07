@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { SafeAreaView, Text, View, Button, FlatList } from 'react-native';
 
 // Redux
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {getFriendList} from '../../redux/action/friendAction'
 
 // Component
 import ShowList from './ShowList'
 
 export default function FriendList({navigation}) {
     const friendList = useSelector(state => state.friend.list)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getFriendList())
+    },[])
 
     const Item = ({data}) => {
         return (

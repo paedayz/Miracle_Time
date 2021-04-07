@@ -92,7 +92,7 @@ export const deleteAchievement = (achievementId) => (dispatch) => {
         })
 }
 
-export const editAchievement = (updateAchievementData, achievementId) => (dispatch) => {
+export const editAchievement =  (updateAchievementData, achievementId) => (dispatch) => {
     let clientUserId = getClientUserId()
     axios.post('/editAchievement', {clientUserId: clientUserId, updateAchievementData: updateAchievementData, achievementId:achievementId})
         .then((res) => {

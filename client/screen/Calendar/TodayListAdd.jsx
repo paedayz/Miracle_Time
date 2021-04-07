@@ -52,7 +52,7 @@ const Addtodaylist = (props) => {
     return (
         <View style={styles.container}>
             <Formik
-                initialValues={{ event: '', start: '',end: '',catagory:'งาน', detail: '', key: '',rank: '1',date: props.date, success: false}}  
+                initialValues={{ event: '', start: '',end: '',catagory:'งาน', detail: '', key: '',rank: '1',date: props.date, success: false, privacy: 'private'}}  
                 onSubmit={(values) => {
                     values.key = Math.random().toString()
                     values.start = startTime
@@ -64,16 +64,6 @@ const Addtodaylist = (props) => {
             >
                 {(props) => (
                 <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'stretch',marginTop: 470}}>
-                    
-                        {/* <View>
-                            <Switch
-                                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                                thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-                                ios_backgroundColor="#3e3e3e"
-                                onValueChange={toggleSwitch}
-                                value={isEnabled}
-                            />
-                        </View> */}
 
                         <View >
                             
@@ -88,7 +78,7 @@ const Addtodaylist = (props) => {
                             
                         </View>
                         
-                        <View style={{width: 50, height: 30,marginTop:60}}>
+                        <View style={{width: 50, height: 30,marginTop:120}}>
                             <Text >Rank :</Text>
                             
                         </View>
@@ -118,6 +108,20 @@ const Addtodaylist = (props) => {
                                     { label: 'งาน', value: 'งาน' ,color: '#ff3399'},
                                     { label: 'ทั่วไป', value: 'ทั่วไป' ,color:'#009900' },
                                     { label: 'นัดสำคัญ', value: 'นัดสำคัญ' ,color:'#993300'},
+                                ]} />
+                        </View>
+                        <View style={{width: 70, height: 30,marginTop:5}}>
+                            <Text>Privacy :</Text>
+                           
+                        </View>
+                        <View style={{width: 280, height: 50, borderColor: '#ddd', borderWidth: 1,}} >
+                            <RNPickerSelect 
+                                placeholder={{}}
+                                value={props.values.privacy}
+                                onValueChange={props.handleChange('privacy')}
+                                items={[
+                                    { label: 'Private', value: 'private' ,color: '#ff3399'},
+                                    { label: 'Public', value: 'public' ,color:'#009900' },
                                 ]} />
                         </View>
                         <View style={{width: 50, height: 17,marginTop:10}}>
