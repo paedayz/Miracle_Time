@@ -20,7 +20,7 @@ export default function App({navigation}) {
   });
       return (
         <SafeAreaView styles={styles.container}>
-          <GraphHeader>Graph</GraphHeader>
+          <Text style={styles.headGraph}>Graph</Text>
           <BrushLineGraph/>
           <Text style={styles.headDetail}>Detail</Text>
           <EventDataTable/>
