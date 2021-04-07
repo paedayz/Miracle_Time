@@ -24,7 +24,7 @@ export default function AdminBottomTabNavigator () {
             component={AdminQuestStackScreen}
             options={{
               tabBarLabel: 'Quest',
-              tabBarColor: '#4A9FFF',
+              tabBarColor: '#373737',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="target" color={color} size={26} />
               ),
@@ -35,7 +35,7 @@ export default function AdminBottomTabNavigator () {
             component={AdminAchieveStackScreen}
             options={{
               tabBarLabel: 'Achieve',
-              tabBarColor: '#6170D7',
+              tabBarColor: '#686868',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
               ),
@@ -46,7 +46,7 @@ export default function AdminBottomTabNavigator () {
             component={DashBoardStackScreen}
             options={{
               tabBarLabel: 'Dashboard',
-              tabBarColor: '#008891',
+              tabBarColor: '#909090',
               tabBarIcon: ({ color }) => (
                 <Octicons name="graph" color={color} size={26} />
               ),
@@ -57,7 +57,7 @@ export default function AdminBottomTabNavigator () {
             component={QuestArchieveStackScreen}
             options={{
               tabBarLabel: '?',
-              tabBarColor: '#20E1D4',
+              tabBarColor: '#B5B3B3',
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="cloud-question" color={color} size={22} />
               ),
