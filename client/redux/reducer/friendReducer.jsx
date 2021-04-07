@@ -1,8 +1,21 @@
-import {SET_FRIEND_LIST, SET_FRIEND_REQUEST, ACCEPT_FRIEND, DENIED_FRIEND, SET_SUCCESS, CLEAR_SUCCESS, SET_FRIEND_ERROR, CLEAR_FRIEND_ERROR,LOADING_FRIEND_DATA, LOADING_FRIEND_COMPLETE} from "../type"
+import {
+  SET_FRIEND_LIST, 
+  SET_FRIEND_REQUEST, 
+  ACCEPT_FRIEND, 
+  DENIED_FRIEND, 
+  SET_SUCCESS, 
+  CLEAR_SUCCESS, 
+  SET_FRIEND_ERROR, 
+  CLEAR_FRIEND_ERROR,LOADING_FRIEND_DATA, 
+  LOADING_FRIEND_COMPLETE,
+  SET_FRIEND_EVENT,
+  CLEAR_FRIEND_EVENT
+} from "../type"
 
 const initialState = {
     list: [],
     request: [],
+    friendEvent: [],
     error: null,
     success: null,
     loading: false,
@@ -52,6 +65,18 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 success: action.payload
+            }
+
+          case SET_FRIEND_EVENT :
+            return {
+              ...state,
+              friendEvent: action.payload
+            }
+
+          case CLEAR_FRIEND_EVENT :
+            return {
+              ...state,
+              friendEvent: []
             }
 
           case CLEAR_SUCCESS :

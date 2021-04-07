@@ -26,7 +26,9 @@ import {
     SET_USER_DAILY,
     ADD_DAILY,
     EDIT_DAILY,
-    DELETE_DAILY
+    DELETE_DAILY,
+    LOADING_DAILY,
+    SUCCESS_LOADING_DAILY
 } from "../type"
 
 const initialState = {
@@ -45,6 +47,7 @@ const initialState = {
     achievementList: [],
     dashboardEvent: [],
     daily:[],
+    loading_daily: false,
     error: null,
     isGetData: false
 }
@@ -65,6 +68,7 @@ const startState = {
     achievementList: [],
     dashboardEvent: [],
     daily:[],
+    loading_daily: false,
     error: null,
     isGetData: false
 }
@@ -322,8 +326,8 @@ export default function (state = initialState, action){
                 daily : action.payload
             }
         case ADD_DAILY:
-            let newDaily = state.daily
-            newDaily.push(action.payload)
+            let newDaily = [action.payload]
+            newDaily = newDaily.concat(state.daily)
             return {
                 ...state,
                 daily: newDaily
@@ -353,6 +357,16 @@ export default function (state = initialState, action){
                 ...state,
                 daily : new_daily
             }            
+        case LOADING_DAILY :
+            return {
+                ...state,
+                loading_daily: true,
+            }
+        case SUCCESS_LOADING_DAILY :
+            return {
+                ...state,
+                loading_daily: false,
+            }
         case CLEAR_SESSION :
             return startState
 

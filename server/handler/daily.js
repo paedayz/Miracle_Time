@@ -34,6 +34,15 @@ exports.getUserDaily = (req, res) => {
                 daily_data.docId = doc.id
                 data.push(daily_data)
             })
+            data = data.sort((a, b) => {
+                if (new Date(b.createdAt) > new Date(a.createdAt)) {
+                  return 1;
+                }
+                if (new Date(b.createdAt) < new Date(a.createdAt)) {
+                  return -1;
+                }
+                return 0;
+              })
             return res.json({data: data})
         })
         .catch((err) => {
