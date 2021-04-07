@@ -33,21 +33,6 @@ export const getAuthen = ()=> (dispatch) => {
             dispatch({type: SET_UNREAD_NOTI, payload: true})
         }
 
-        if(res.data.friendList.length !== 0) {
-            dispatch({type: SET_FRIEND_LIST, payload: res.data.friendList})
-        }
-
-        if(res.data.friendRequest.length !== 0) {
-            dispatch({type: SET_FRIEND_REQUEST, payload: res.data.friendRequest})
-        }
-
-        if(res.data.questList.length !== 0) {
-            dispatch({type: SET_QUEST, payload: res.data.questList})
-        }
-
-        if(res.data.achievementList.length !== 0) {
-            dispatch({type: SET_ACHIEVE, payload: res.data.achievementList})
-        }
         dispatch({type: IS_GET_DATA})
         dispatch({type: LOADING_COMPLETE})
     })

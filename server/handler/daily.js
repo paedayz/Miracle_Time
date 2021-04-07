@@ -15,8 +15,9 @@ exports.addDaily = (req, res) => {
             return firestore.doc(`/daily/${doc.id}`).get()
         })
         .then((doc) => {
-            
-            return res.json({data : doc.data()})
+            let return_data = doc.data()
+            return_data.docId = doc.id
+            return res.json({data : return_data})
         })
         .catch((err) => {
             console.log(err)
@@ -33,6 +34,15 @@ exports.getUserDaily = (req, res) => {
                 daily_data.docId = doc.id
                 data.push(daily_data)
             })
+            data = data.sort((a, b) => {
+                if (new Date(b.createdAt) > new Date(a.createdAt)) {
+                  return 1;
+                }
+                if (new Date(b.createdAt) < new Date(a.createdAt)) {
+                  return -1;
+                }
+                return 0;
+              })
             return res.json({data: data})
         })
         .catch((err) => {
@@ -42,6 +52,7 @@ exports.getUserDaily = (req, res) => {
 }
 
 exports.editDaily = (req, res) => {
+    console.log(req.body)
     firestore.doc(`/daily/${req.body.docId}`).get()
         .then((doc) => {
             if(doc.data().username !== req.user.username) {
