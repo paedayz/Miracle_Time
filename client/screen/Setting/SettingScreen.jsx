@@ -11,13 +11,14 @@ export default function SettingScreen({navigation}) {
         setIs_Enable_HowFeel(!Is_Enable_HowFeel)
     }
 
+    
     return (
     <SafeAreaView style={styles.container}>
         <View style={styles.bottom_box}>
             <ToggleSwitch
                 isOn={Is_Enable_HowFeel}
-                onColor="green"
-                offColor="gray"
+                onColor='#6CC841'
+                offColor="#9299A0"
                 label="Enable Select Emotion"
                 labelStyle={ {padding :11,fontSize: 23,color: "black", fontWeight: "900" }}
                 size="large"
@@ -27,13 +28,17 @@ export default function SettingScreen({navigation}) {
         <View style={styles.Theme_box}>
             <Text style={styles.Text}>Your Theme</Text>
             <SafeAreaView style={styles.Theme_Img_box}>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.Theme} >
                     <Image  
-                        source={require('../../assets/Tip_pic/test-logo.png')}
+                        style={{width: 120, height: 200}}
+                        source={require('../../assets/Theme_pic/Theme_Selected.png')}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    
+                <TouchableOpacity style={styles.Theme}>
+                    <Image  
+                        style={{width: 120, height: 200}}
+                        source={require('../../assets/Theme_pic/Theme_Idle.png')}
+                    ></Image>
                 </TouchableOpacity>
             </SafeAreaView>
         </View>
@@ -68,5 +73,8 @@ const styles = StyleSheet.create({
     Theme_Img_box:{
         flex: 1,
         flexDirection: 'row',
+    },
+    Theme: {
+        margin: 10,
     }
 });
