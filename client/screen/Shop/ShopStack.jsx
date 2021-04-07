@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/Ionicons'
 // Screen
 import Shopscreen from './Shopscreen'
 
-
 const ShopStack = createStackNavigator()
 
 const ShopStackScreen = ({navigation}) => {
