@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { SafeAreaView, Text, Button, View, StyleSheet } from 'react-native';
+import styled from 'styled-components';
 
 // Component
 import Piechart from './Piechart'
@@ -88,12 +89,12 @@ export default function StatsScreen({navigation}) {
       {isPie 
       ?
         <View>
-          <Text style={styles.header}>Pie Chart</Text>
+          <ChartHeader>Pie Chart</ChartHeader>
           <Piechart/>
         </View>
       :
         <View>
-          <Text style={styles.header}>Bar Chart</Text>
+          <ChartHeader>Bar Chart</ChartHeader>
           <Barchart testPickerLabel={pickerLabel} visualizeData={visualizeBarData}/>
         </View>
       }
@@ -116,6 +117,11 @@ export default function StatsScreen({navigation}) {
     </SafeAreaView>
   );
 }
+
+const ChartHeader = styled.Text`
+  color: ${(props) => props.theme.BUTTON_TAB_MENU_THREE};
+  font-size: 30px;
+`
 
 const styles = StyleSheet.create({
   container: {
