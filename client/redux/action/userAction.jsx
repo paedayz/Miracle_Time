@@ -13,6 +13,7 @@ import {
     SET_COIN_EXP_LVL,
     SET_ACHIEVE,
     SET_ERROR,
+    IS_GET_DATA
 } from '../type'
 import firebase from 'firebase'
 
@@ -23,31 +24,31 @@ let clientUserId
 export const getAuthen = ()=> (dispatch) => {
     dispatch({type: LOADING_DATA})
     axios.post('/authen', {clientUserId : clientUserId}).then((res) => {
-        if(res.data.eventData) {
+        if(res.data.eventData.length !== 0) {
             dispatch({type: SET_EVENT, payload: res.data.eventData})
         }
 
-        if(res.data.notiData) {
+        if(res.data.notiData.length !== 0) {
             dispatch({type: SET_NOTIFICATIONS, payload: res.data.notiData})
             dispatch({type: SET_UNREAD_NOTI, payload: true})
         }
 
-        if(res.data.friendList) {
+        if(res.data.friendList.length !== 0) {
             dispatch({type: SET_FRIEND_LIST, payload: res.data.friendList})
         }
 
-        if(res.data.friendRequest) {
+        if(res.data.friendRequest.length !== 0) {
             dispatch({type: SET_FRIEND_REQUEST, payload: res.data.friendRequest})
         }
 
-        if(res.data.questList) {
+        if(res.data.questList.length !== 0) {
             dispatch({type: SET_QUEST, payload: res.data.questList})
         }
 
-        if(res.data.achievementList) {
+        if(res.data.achievementList.length !== 0) {
             dispatch({type: SET_ACHIEVE, payload: res.data.achievementList})
         }
-
+        dispatch({type: IS_GET_DATA})
         dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {
@@ -108,7 +109,6 @@ export const editProfile = (blob, updateData) => (dispatch) => {
         const imageName = blob._data.name
         updateData.imageName = imageName
         updateData.clientUserId = clientUserId
-        console.log('have blob')
 
         const task = firebase.storage().ref().child(imageName).put(blob);
 

@@ -49,12 +49,9 @@ export default function TipsScreen({navigation}) {
                 </View>                    
             </View>
         </TouchableOpacity>
-        {/* <Image  
-            style={{width: 200, height: 200 ,resizeMode: 'stretch'}}
-            source={{
-                uri: 'https://reactnative.dev/img/tiny_logo.png',
-            }}
-        /> */}
+
+
+        
     </View>
     );
 }

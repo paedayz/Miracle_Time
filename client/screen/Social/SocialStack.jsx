@@ -7,7 +7,8 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Notifications from '../../component/Notifications'
 
 // Screen
-import SocialScreen from './SocialScreen'
+import DailyScreen from './DailyScreen'
+import Dailydetail from "./Dailydetail";
 
 const SocialStack = createStackNavigator()
 
@@ -15,10 +16,10 @@ const SocialStackScreen = ({navigation}) => {
     return (
       <SocialStack.Navigator>
         <SocialStack.Screen 
-          name="Social" 
-          component={SocialScreen} 
+          name="Daily" 
+          component={DailyScreen} 
           options={{
-            title:'Social',
+            title:'Daily',
             headerLeft: () => (
               <Icon.Button 
                 name="menu" 
@@ -30,6 +31,10 @@ const SocialStackScreen = ({navigation}) => {
             )
           }}
         />
+        <SocialStack.Screen
+        name="Dailydetail"
+        component={Dailydetail}
+      />
       </SocialStack.Navigator>
     )
   }
