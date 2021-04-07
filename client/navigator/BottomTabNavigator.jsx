@@ -9,7 +9,7 @@ import {useNavigation} from '@react-navigation/native'
 
 // Stack Screen
 import CalendarStackScreen from '../screen/Calendar/CalendarStack'
-import SocialStackScreen from '../screen/Social/SocialStack'
+import DailyStackScreen from '../screen/Daily/DailyStack'
 import StatsStackScreen from '../screen/Stats/StatsStack'
 import QuestArchieveStackScreen from '../screen/Quest_Archieve/QuestArchieveStack'
 import PetStackScreen from '../screen/Pet/PetStack'
@@ -73,8 +73,8 @@ export default function TabFunction () {
             }}
           />
           <Tab.Screen
-            name="Social"
-            component={SocialStackScreen}
+            name="Daily"
+            component={DailyStackScreen}
             options={{
               tabBarLabel: 'Social',
               tabBarColor: `${themes[2].BUTTON_TAB_MENU_TWO}`,

@@ -27,14 +27,17 @@ let {
   toggleNotifications,
   deleteNotifications,
   toggleEventSuccess,
-  getAdminDashBoard
+  getAdminDashBoard,
+  getEventByMonth
 } = require('./handler/data')
 
 let {
   addFriend,
   acceptFriendRequest,
   deniedFriendRequest,
-  getFriendRequest
+  getFriendRequest,
+  getFriendList,
+  getFriendEvent
 } = require('./handler/friend')
 
 let {
@@ -58,6 +61,9 @@ let {
 
 let {addDaily, getUserDaily, editDaily, deleteDaily} = require('./handler/daily')
 
+app.get('/test', function test(req, res) {
+  res.json({success: true})
+})
 // Daily Route
 app.post('/addDaily', FBAuth, addDaily)
 app.post('/getUserDaily', FBAuth, getUserDaily)
@@ -67,18 +73,21 @@ app.post('/deleteDaily', FBAuth, deleteDaily)
 // User Route
 app.post('/signup',signup)
 app.post('/login', login)
-app.post('/authen', checkAuthen)
+app.post('/authen', FBAuth ,checkAuthen)
 app.get('/signout', signout)
 app.post('/editProfile' , FBAuth ,editProfile)
 
 // Friend Route
 app.post('/getFriendRequest', FBAuth, getFriendRequest)
+app.post('/getFriendList', FBAuth, getFriendList)
 app.post('/addFriend', FBAuth, addFriend)
 app.post('/acceptFriendRequest', FBAuth, acceptFriendRequest)
 app.post('/deniedFriendRequest', FBAuth, deniedFriendRequest)
+app.post('/getFriendEvent', FBAuth, getFriendEvent)
 
 // Data Route
 app.post('/getAllEvents',FBAuth, getAllEvents)
+app.post('/getEventByMonth',FBAuth, getEventByMonth)
 app.post('/addEvent', FBAuth, addEvent)
 app.post('/editEvent', FBAuth, editEvent)
 app.post('/deleteEvent', FBAuth, deleteEvent)

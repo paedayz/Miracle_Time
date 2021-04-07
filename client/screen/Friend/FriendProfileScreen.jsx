@@ -1,5 +1,5 @@
-import React from 'react';
-import { SafeAreaView, View, StyleSheet } from 'react-native';
+import React,{useState, useEffect} from 'react';
+import { SafeAreaView, View, StyleSheet, TextInput, Button } from 'react-native';
 import {
   Avatar,
   Title,
@@ -7,17 +7,38 @@ import {
   Text,
   TouchableRipple
 } from 'react-native-paper'
-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {useRoute} from '@react-navigation/native'
 
+// Component
+import FriendEventBox from './FriendEventBox'
+
 // Redux
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {getFriendEvent} from '../../redux/action/friendAction'
 
 export default function FriendProfileScreen({navigation}) {
     const route = useRoute()
 
-  const {username, nickname, email, userImage, level, exp, coin, bio, phone, website} = route.params
+    const {username, nickname, email, userImage, level, exp, coin, bio, phone, website} = route.params
+
+    const [searchDate, setSearchDate] = useState()
+
+    const friendEvent = useSelector((state) => state.friend.friendEvent)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+      dispatch({type:'CLEAR_FRIEND_EVENT'})
+    },[])
+
+    const onClickSearch = () => {
+      dispatch(getFriendEvent(username, searchDate))
+    }
+
+    const mapFriendEvent = friendEvent.map((item) => (
+      <FriendEventBox item={item} />
+    ))
     
       return (
         <SafeAreaView style={styles.container}>
@@ -75,13 +96,55 @@ export default function FriendProfileScreen({navigation}) {
               <Title>{coin}</Title>
               <Caption>Coins</Caption>
             </View>
-        </View>
+          </View>
+
+          <View style={styles.eventContainer}>
+            <Text style={styles.eventHeader}>Friend Event</Text>
+
+            <View style={{flexDirection:'row', justifyContent:'center'}}>
+              <View>
+                <TextInput
+                    onChangeText={data => setSearchDate(data)}
+                    placeholder="Ex. 2021-04-06"
+                    placeholderTextColor="#666666"
+                    autoCorrect={false}
+                    style={styles.textInput}
+                    value={searchDate}
+                    clearButtonMode="always"
+                />
+              </View>
+
+              <View style={{marginTop:27, marginLeft:30,borderRadius: 10}}>
+                <Button onPress={() => onClickSearch()} title="SEARCH" color="#738FD9" buttonStyle = {{borderRadius: 10}}/>
+              </View>
+
+            </View>
+            {mapFriendEvent}
+          </View>
 
         </SafeAreaView>
       );
 }
 
 const styles = StyleSheet.create({
+  eventHeader : {
+    fontSize: 20
+  },
+  eventContainer : {
+    marginLeft: 40,
+    marginTop: 30,
+    width: '80%'
+  },
+  textInput: {
+    marginTop: Platform.OS === 'ios' ? 0 : -2,
+    paddingLeft: 10,
+    color: 'black',
+    marginTop: 30,
+    marginBottom: 20,
+    backgroundColor: 'white',
+    maxWidth: 200,
+    minWidth: 200
+  },
   container: {
     flex: 1,
   },
