@@ -8,7 +8,12 @@ export const themes = [
         BUTTON_TAB_MENU_FIVE: '#B9CE8D',
         THEME_NAME: 'Basic',
         COST: 0,
-        THEME_THUMBNAIL: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/7897123.jpg?alt=media'
+        THEME_THUMBNAIL: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/7897123.jpg?alt=media',
+        BUTTON_TAB_MENU_ONE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fcalendar.png?alt=media',
+        BUTTON_TAB_MENU_TWO_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fdiary.png?alt=media',
+        BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fstat.png?alt=media',
+        BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fquest.png?alt=media',
+        BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fpet.png?alt=media',
     },
     {
         PRIMARY_TEXT_COLOR: 'blue',
@@ -19,7 +24,12 @@ export const themes = [
         BUTTON_TAB_MENU_FIVE: '#F2E2BA',
         THEME_NAME: 'Pastel',
         COST: 50,
-        THEME_THUMBNAIL: 'https://i.pinimg.com/564x/69/29/b2/6929b234c15ad8adf3bdfe8578d1971b.jpg'
+        THEME_THUMBNAIL: 'https://i.pinimg.com/564x/69/29/b2/6929b234c15ad8adf3bdfe8578d1971b.jpg',
+        BUTTON_TAB_MENU_ONE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20calendar.png?alt=media',
+        BUTTON_TAB_MENU_TWO_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20diary.png?alt=media',
+        BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20stat.png?alt=media',
+        BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20Q%26A.png?alt=media',        BUTTON_TAB_MENU_FIVE: '#F2E2BA',
+        BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20pet.png?alt=media',
     },
     {
         PRIMARY_TEXT_COLOR: 'red',
@@ -30,7 +40,12 @@ export const themes = [
         BUTTON_TAB_MENU_FIVE: '#2F3E46',
         THEME_NAME: 'Jungle',
         COST: 50,
-        THEME_THUMBNAIL: 'https://i.pinimg.com/564x/4a/ef/e7/4aefe77bfe3428f42a3af7dcb0f8f497.jpg'
+        THEME_THUMBNAIL: 'https://i.pinimg.com/564x/4a/ef/e7/4aefe77bfe3428f42a3af7dcb0f8f497.jpg',
+        BUTTON_TAB_MENU_ONE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fcalendar.png?alt=media',
+        BUTTON_TAB_MENU_TWO_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fdiary.png?alt=media',
+        BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fstat.png?alt=media',
+        BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fquest.png?alt=media',
+        BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fpet.png?alt=media',
     },
     {
         PRIMARY_TEXT_COLOR: 'yellow',
@@ -41,6 +56,11 @@ export const themes = [
         BUTTON_TAB_MENU_FIVE: '#21295C',
         THEME_NAME: 'Ocean',
         COST: 50,
-        THEME_THUMBNAIL: 'https://i.pinimg.com/564x/b1/31/5b/b1315b52c5d85a767a1863d9105f1221.jpg'
+        THEME_THUMBNAIL: 'https://i.pinimg.com/564x/b1/31/5b/b1315b52c5d85a767a1863d9105f1221.jpg',
+        BUTTON_TAB_MENU_ONE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fcalendar.png?alt=media',
+        BUTTON_TAB_MENU_TWO_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fdiary.png?alt=media',
+        BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fstat.png?alt=media',
+        BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fquest.png?alt=media',
+        BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fpet.png?alt=media',
     }
 ]

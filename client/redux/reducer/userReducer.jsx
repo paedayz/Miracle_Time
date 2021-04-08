@@ -5,6 +5,7 @@ import {
     SELECT_OPEN_MOOD, 
     BUY_THEME, 
     BUY_LOADING, 
+    SELECT_THEME_LOADING_SUCCESS,
     SELECT_THEME, 
     SELECT_THEME_LOADING
 } from '../type'
@@ -59,6 +60,12 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 loading_select_theme: true
+            }
+
+        case SELECT_THEME_LOADING_SUCCESS :
+            return {
+                ...state,
+                loading_select_theme: false,
             }
 
         case BUY_THEME :

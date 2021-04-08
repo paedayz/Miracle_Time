@@ -1,5 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react'
-import { Avatar, Badge, withBadge } from "react-native-elements";
+import { Avatar, Badge, withBadge, Image } from "react-native-elements";
 import { Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -69,18 +69,18 @@ export default function TabFunction () {
               tabBarLabel: 'Calendar',
               tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_ONE}`,
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="calendar" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_ONE_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />
           <Tab.Screen
-            name="Daily"
+            name="Social"
             component={DailyStackScreen}
             options={{
-              tabBarLabel: 'Social',
+              tabBarLabel: 'Daily',
               tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_TWO}`,
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="earth" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_TWO_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />
@@ -91,7 +91,7 @@ export default function TabFunction () {
               tabBarLabel: 'Stats',
               tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_THREE}`,
               tabBarIcon: ({ color }) => (
-                <Octicons name="graph" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_THREE_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />
@@ -102,7 +102,7 @@ export default function TabFunction () {
               tabBarLabel: 'Q/A',
               tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_FOUR}`,
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_FOUR_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />
@@ -113,7 +113,7 @@ export default function TabFunction () {
               tabBarLabel: 'Pet',
               tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_FIVE}`,
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="dog" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_FIVE_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />

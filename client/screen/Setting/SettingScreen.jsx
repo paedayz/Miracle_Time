@@ -15,10 +15,17 @@ export default function SettingScreen({navigation}) {
     const setting = useSelector((state) => state.user.setting)
     const buy_theme = useSelector((state) => state.user.setting.buy_theme)
     const loading_select_theme = useSelector((state) => state.user.loading_select_theme)
-    const current_theme = useSelector((state) => state.user.setting.current_theme)
+    let current_theme = useSelector((state) => state.user.setting.current_theme)
     const [Is_Enable_HowFeel, setIs_Enable_HowFeel] = useState(setting.select_mood)
 
     const dispatch = useDispatch()
+
+    navigation.addListener('focus', () => {
+        dispatch({type:'SELECT_THEME_LOADING'})
+        setTimeout(() => {
+            dispatch({type:'SELECT_THEME_LOADING_SUCCESS'})
+        }, 1000)
+    });
 
     const SwitchMode = () => {
         setIs_Enable_HowFeel(!Is_Enable_HowFeel)
@@ -49,7 +56,7 @@ export default function SettingScreen({navigation}) {
                     <FlatList
                     data={themes}
                     keyExtractor={(item) => item.THEME_NAME}
-                    numColumns={3}
+                    numColumns={2}
                     renderItem={({ item, index}) => {
                         let flag = 0
     
