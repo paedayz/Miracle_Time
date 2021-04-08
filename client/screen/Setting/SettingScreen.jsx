@@ -1,6 +1,9 @@
 import React , {useState} from 'react';
-import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity,Image} from 'react-native';
+import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity,Image, FlatList} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native'
+
+// Theme
+import {themes} from '../../utils/Theme'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,6 +21,23 @@ export default function SettingScreen({navigation}) {
         dispatch(setSelectMood(setting.docId, !setting.select_mood))
     }
 
+    const mapYourTheme = themes.map((theme) => {
+        if(theme.COST === 0) {
+            return (
+                <TouchableOpacity style={styles.Theme} key={theme.THEME_NAME}>
+                    <Image  
+                        style={{width: 120, height: 200}}
+                        source={require('../../assets/Theme_pic/Theme_Idle.png')}
+                    ></Image>
+                </TouchableOpacity>
+            )
+        } else {
+            return (
+                <View></View>
+            )
+        }
+    })
+
     
     return (
     <SafeAreaView style={styles.container}>
@@ -34,20 +54,31 @@ export default function SettingScreen({navigation}) {
         </View>
         <View style={styles.Theme_box}>
             <Text style={styles.Text}>Your Theme</Text>
-            <SafeAreaView style={styles.Theme_Img_box}>
-                <TouchableOpacity style={styles.Theme} >
-                    <Image  
-                        style={{width: 120, height: 200}}
-                        source={require('../../assets/Theme_pic/Theme_Selected.png')}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.Theme}>
-                    <Image  
-                        style={{width: 120, height: 200}}
-                        source={require('../../assets/Theme_pic/Theme_Idle.png')}
-                    ></Image>
-                </TouchableOpacity>
-            </SafeAreaView>
+                
+            <FlatList
+                data={themes}
+                keyExtractor={(item) => item.THEME_NAME}
+                numColumns={3}
+                renderItem={({ item}) => {
+                    console.log(item.THEME_THUMBNAIL)
+                    if(item.COST === 0) {
+                        return (
+                            <View style={styles.Theme}>
+                                <Image  
+                                    style={{width: 120, height: 200}}
+                                    source={{uri:item.THEME_THUMBNAIL}}
+                                ></Image>
+                                <Text>
+                                    {item.THEME_NAME}
+                                </Text>
+                            </View>
+                        )
+                    } else {
+                        return (
+                            <View></View>
+                        )
+                    }
+                }}/>
         </View>
         
     </SafeAreaView>

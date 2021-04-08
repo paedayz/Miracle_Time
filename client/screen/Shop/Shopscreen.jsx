@@ -1,71 +1,62 @@
 import React, { useState } from 'react';
 import { SafeAreaView, Modal, Text, View, Button,FlatList, StyleSheet, TouchableOpacity,Image} from 'react-native';
 
+// Theme
+import {themes} from '../../utils/Theme'
+
+// Redux
+import {useSelector} from 'react-redux'
 
 export default function Shopscreen({navigation}) {
-
-    const [Datu, setDatu] = useState(
-        [{image:'https://i.pinimg.com/originals/49/5c/3a/495c3a7470c2bafb63ea7fa2e934a276.jpg',
-         name:'1',
-         coin:'--1'},
-         {image:'https://www.gamemonday.com/wp-content/uploads/2019/01/Slime-2212019-2.jpg',
-         name:'2',
-         coin:'--2'},
-         {image:'https://img.online-station.net/_content/2019/0227/gallery/1551237601.jpg',
-         name:'3',
-         coin:'--3'},
-         {image:'https://f.ptcdn.info/379/053/000/ovl7cy7cd06ATBBvSxn-o.jpg',
-         name:'4',
-         coin:'--4'},
-         {image:'https://cdn.novelupdates.com/images/2020/07/slime_softcover_1.jpg',
-         name:'5',
-         coin:'--5'}])
     const [Card, setCard] = useState('')
     const [ModalVi, setModalVi] = useState(false)
 
-    console.log('-------',Card)
+    const user_coin = useSelector((state) => state.data.coin)
 
     let Open = () => {
-
-
         setModalVi(true);  
     }
 
 
     return (
     <View style={style.main}>
+        <View style={style.your_coin}>
+            <Text>
+                Your coin : {user_coin}
+            </Text>
+        </View>
         <FlatList
-                data={Datu}
-                keyExtractor={(item) => item.id}
+                data={themes}
+                keyExtractor={(item) => item.THEME_NAME}
                 numColumns={3}
-                renderItem={({ item}) => (
-                <View>
-                    
-            <TouchableOpacity onPress={() => Open(setCard(item))}>
-           
-                  <View style={style.card}>
-                    <View >
+                renderItem={({ item}) => {
+                    if(item.COST !== 0) {
+                        return (
                             <View>
-                                <Image style={style.mage} source={{uri: item.image}} />
+                                <TouchableOpacity onPress={() => Open(setCard(item))}>
+                                    <View style={style.card}>
+                                        <View>
+                                            <Image style={style.mage} source={{uri: item.THEME_THUMBNAIL}} />
+                                        </View>
+                                    </View>
+                                    <View style={style.texts}>
+                                        <Text style={{textAlign:'center'}}>
+                                            {item.THEME_NAME}
+                                        </Text>
+                                        <Text style={{textAlign:'center'}}>
+                                            {item.COST} Coin
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
-                    </View>
-                  </View>
-                  <View style={style.texts}>
-                        <Text style={{textAlign:'center'}}>
-                            {item.name}
-                        </Text>
-                  </View>
-            </TouchableOpacity>
-                  <View style={style.card2}>
-                     <TouchableOpacity >
-                        <Text style={{textAlign:'center'}}>
-                            ซื้อ Coin {item.coin}
-                        </Text>
-                     </TouchableOpacity >
-                  </View>
-                </View>
-                
-            )}>
+                            
+                        )
+                    } else {
+                        return (
+                            <View></View>
+                        )
+                    }
+                }}>
             </FlatList>
 
             <Modal
@@ -80,11 +71,11 @@ export default function Shopscreen({navigation}) {
                         <View style={style.cardModal}>
                             
                                 <View>
-                                    <Image style={style.mageModal} source={{uri: Card.image}} />
+                                    <Image style={style.mageModal} source={{uri: Card.THEME_THUMBNAIL}} />
                                 </View>
                                 <View style={style.texts}>
                                         <Text style={{textAlign:'center',color:'#fff',fontSize:20}}>
-                                            {Card.name}
+                                            {Card.THEME_NAME}
                                         </Text>
                                 </View>
                                     <View style={style.card2Modal}>
@@ -93,7 +84,7 @@ export default function Shopscreen({navigation}) {
                                         justifyContent: 'center',
                                         alignItems: 'center'}}>
                                                 <Text style={{textAlign:'center',fontSize:20,}}>
-                                                    ซื้อ Coin {Card.coin}
+                                                    ซื้อ Coin {Card.COST}
                                                 </Text>
                                         </View>
                                     </View>
@@ -119,6 +110,10 @@ const style = StyleSheet.create({
       alignItems: 'center', 
       marginTop:5
     },
+    your_coin: {
+      marginTop: 20,
+      marginBottom: 30
+    },
     card: {
       borderRadius: 10,
       backgroundColor: '#fff',
@@ -128,7 +123,7 @@ const style = StyleSheet.create({
       marginTop:5
     },
     mage: {
-        marginVertical: 15, marginLeft:9, height:150,width:'85%',borderRadius:10
+        marginVertical: 15, marginLeft:9, height:190,width:'85%',borderRadius:10
       },
     mageModal: {
         marginVertical: 15, marginLeft:9, height:'91%',width:'90%',borderRadius:10
@@ -157,6 +152,7 @@ const style = StyleSheet.create({
         marginTop:-60
     },
     texts: {
-    //   marginLeft:22
+        marginTop:'30%',
+        marginBottom: '20%'
     }
   });
