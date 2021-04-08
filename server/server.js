@@ -29,7 +29,8 @@ let {
   deleteNotifications,
   toggleEventSuccess,
   getAdminDashBoard,
-  getEventByMonth
+  getEventByMonth,
+  buyTheme
 } = require('./handler/data')
 
 let {
@@ -65,6 +66,10 @@ let {addDaily, getUserDaily, editDaily, deleteDaily} = require('./handler/daily'
 app.get('/test', function test(req, res) {
   res.json({success: true})
 })
+
+// Shop
+app.post('/buyTheme', FBAuth, buyTheme)
+
 // Daily Route
 app.post('/addDaily', FBAuth, addDaily)
 app.post('/getUserDaily', FBAuth, getUserDaily)

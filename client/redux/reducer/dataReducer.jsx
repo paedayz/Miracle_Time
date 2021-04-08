@@ -28,7 +28,8 @@ import {
     EDIT_DAILY,
     DELETE_DAILY,
     LOADING_DAILY,
-    SUCCESS_LOADING_DAILY
+    SUCCESS_LOADING_DAILY,
+    SET_COIN
 } from "../type"
 
 const initialState = {
@@ -366,6 +367,11 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 loading_daily: false,
+            }
+        case SET_COIN :
+            return {
+                ...state,
+                coin: action.payload,
             }
         case CLEAR_SESSION :
             return startState

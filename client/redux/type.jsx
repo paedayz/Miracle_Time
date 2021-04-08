@@ -78,3 +78,8 @@ export const SUCCESS_LOADING_DAILY = 'SUCCESS_LOADING_DAILY'
 // SETTING
 export const SET_USER_SETTING = 'SET_USER_SETTING'
 export const SELECT_OPEN_MOOD = 'SELECT_OPEN_MOOD'
+
+// SHOP
+export const BUY_THEME = 'BUY_THEME'
+export const BUY_LOADING = 'BUY_LOADING'
+export const SET_COIN = 'SET_COIN'
