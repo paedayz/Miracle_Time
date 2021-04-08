@@ -36,6 +36,7 @@ import FriendStackScreen from './Friend/FriendStackScreen'
 import TipsStack from './Tips/TipsStack'
 import HowFeel from './HowFeel'
 import SettingStack from './Setting/SettingStack'
+import ShopStack from './Shop/ShopStack'
 
 // Naviation
 import BottomTabNavigator from '../navigator/BottomTabNavigator'
@@ -85,6 +86,7 @@ export default function Screen({navigation}) {
                     <Drawer.Screen name="Friend" component={FriendStackScreen} />
                     <Drawer.Screen name="Tips" component={TipsStack} />
                     <Drawer.Screen name="Setting" component={SettingStack} />
+                    <Drawer.Screen name="Shop" component={ShopStack} />
                 </Drawer.Navigator>
             </ThemeProvider>
         )

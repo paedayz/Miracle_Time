@@ -34,6 +34,9 @@ exports.signup = (req, res) => {
     })
     .then((data) => {
       userId = data.user.uid;
+      return firestore.collection('setting').add({current_theme: 0, select_mood: true, username: newUser.username})
+    })
+    .then(() => {
       return firestore.collection('quests').get()
     })
     .then((snapshot) => {
@@ -288,3 +291,8 @@ exports.editProfile = (req, res) => {
     return res.status(500).json({ error: userData.errors });
   }
 };
+
+exports.setSelectMood = (req, res) => {
+  
+    
+}
