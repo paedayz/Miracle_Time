@@ -174,7 +174,6 @@ const Adddaily = ({setModalOpen}) => {
                         <View style={{width: 280, height: 400}}>
                                 <TextInput
                                     style={styles.input}
-                                    placeholder='detail'
                                     onChangeText={props.handleChange('detail')}
                                     value={props.values.detail}
                                     multiline

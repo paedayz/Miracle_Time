@@ -83,15 +83,39 @@ export const addDaily = (dailyData, blob) => (dispatch) => {
     
 }
 
-export const editDaily= (dailyData,docId) => (dispatch) => {
+export const editDaily= (dailyData,docId, blob) => (dispatch) => {
     let clientUserId = getClientUserId()
-    axios.post('/editDaily',{update_data: dailyData, docId, clientUserId})
-        .then((res) => {
-            dispatch({type: EDIT_DAILY, payload: res.data.data})
+
+    const imageName = blob._data.name
+    dailyData.image = `https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/${imageName}?alt=media`
+
+    const task = firebase.storage().ref().child(imageName).put(blob);
+
+    const taskProgress = snapshot => {
+        console.log('inprogress')
+    }
+
+    const taskCompleted = () => {
+        task.snapshot.ref.getDownloadURL().then((snapshot) => {
+            console.log('success')
+            axios.post('/editDaily',{update_data: dailyData, docId, clientUserId})
+                .then((res) => {
+                    dispatch({type: EDIT_DAILY, payload: res.data.data})
+                })
+                .catch((err) => {
+                    console.log(err)
+                    dispatch({type:SUCCESS_LOADING_DAILY})
+                })
         })
-        .catch((err) => {
-            console.log(err)
-        })
+        
+    }
+
+    const taskError = snapshot => {
+        console.log('errors')
+    }
+
+    task.on("state_changed", taskProgress, taskError, taskCompleted);
+    
 }
 
 export const deleteDaily = (dailyDocId) => (dispatch) => {
