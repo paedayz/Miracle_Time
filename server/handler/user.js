@@ -332,3 +332,18 @@ exports.setSelectMood = (req, res) => {
     });
     
 }
+
+exports.selectTheme = (req, res) => {
+  let docId = req.body.docId
+  let set_data = req.body.set_data
+
+  firestore.doc(`/setting/${docId}`).update({current_theme: set_data})
+    .then(() => {
+      return res.status(200).json({data: set_data})
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+    
+}

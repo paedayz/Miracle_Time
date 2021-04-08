@@ -16,6 +16,7 @@ let {
   signout, 
   editProfile,
   setSelectMood,
+  selectTheme
 } = require('./handler/user')
 
 let {
@@ -83,6 +84,7 @@ app.post('/authen', FBAuth ,checkAuthen)
 app.get('/signout', signout)
 app.post('/editProfile' , FBAuth ,editProfile)
 app.post('/setSelectMood' , FBAuth ,setSelectMood)
+app.post('/selectTheme' , FBAuth ,selectTheme)
 
 // Friend Route
 app.post('/getFriendRequest', FBAuth, getFriendRequest)

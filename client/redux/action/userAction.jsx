@@ -15,7 +15,9 @@ import {
     SET_ERROR,
     IS_GET_DATA,
     SET_USER_SETTING,
-    SELECT_OPEN_MOOD
+    SELECT_OPEN_MOOD,
+    SELECT_THEME,
+    SELECT_THEME_LOADING
 } from '../type'
 import firebase from 'firebase'
 
@@ -155,6 +157,18 @@ export const setSelectMood = (docId, set_data) => (dispatch) => {
     axios.post('/setSelectMood', {clientUserId: clientUserId, docId, set_data})
         .then((res) => {
             dispatch({type: SELECT_OPEN_MOOD, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const selectTheme = (docId, set_data) => (dispatch) => {
+    dispatch({type: SELECT_THEME_LOADING})
+    let clientUserId = getClientUserId()
+    axios.post('/selectTheme', {clientUserId: clientUserId, docId, set_data})
+        .then((res) => {
+            dispatch({type: SELECT_THEME, payload: res.data.data})
         })
         .catch((err) => {
             console.log(err)

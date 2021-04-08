@@ -1,14 +1,25 @@
-import {SET_USER_DATA, CLEAR_SESSION, SET_USER_SETTING, SELECT_OPEN_MOOD, BUY_THEME, BUY_LOADING} from '../type'
+import {
+    SET_USER_DATA, 
+    CLEAR_SESSION, 
+    SET_USER_SETTING, 
+    SELECT_OPEN_MOOD, 
+    BUY_THEME, 
+    BUY_LOADING, 
+    SELECT_THEME, 
+    SELECT_THEME_LOADING
+} from '../type'
 
 const initialState = {
     userData : null,
     buy_loading : false,
+    loading_select_theme: false,
     setting: []
 }
 
 const startState = {
     userData : null,
     buy_loading : false,
+    loading_select_theme: false,
     setting: []
 }
 
@@ -33,6 +44,21 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 setting: new_setting_after_select_mood
+            }
+
+        case SELECT_THEME :
+            let new_setting_after_select_theme = state.setting
+            new_setting_after_select_theme.current_theme = action.payload
+            return {
+                ...state,
+                setting: new_setting_after_select_theme,
+                loading_select_theme: false
+            }
+
+        case SELECT_THEME_LOADING :
+            return {
+                ...state,
+                loading_select_theme: true
             }
 
         case BUY_THEME :
