@@ -1,6 +1,7 @@
 import React , {useState} from 'react';
 import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity,Image, FlatList} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native'
+import Icon from "react-native-vector-icons/AntDesign";
 
 // Theme
 import {themes} from '../../utils/Theme'
@@ -12,6 +13,8 @@ import {setSelectMood} from '../../redux/action/userAction'
 export default function SettingScreen({navigation}) {
 
     const setting = useSelector((state) => state.user.setting)
+    const buy_theme = useSelector((state) => state.user.setting.buy_theme)
+    const current_theme = useSelector((state) => state.user.setting.current_theme)
     const [Is_Enable_HowFeel, setIs_Enable_HowFeel] = useState(setting.select_mood)
 
     const dispatch = useDispatch()
@@ -59,10 +62,19 @@ export default function SettingScreen({navigation}) {
                 data={themes}
                 keyExtractor={(item) => item.THEME_NAME}
                 numColumns={3}
-                renderItem={({ item}) => {
-                    console.log(item.THEME_THUMBNAIL)
-                    if(item.COST === 0) {
+                renderItem={({ item, index}) => {
+                    let flag = 0
+
+                    if(buy_theme){
+                        buy_theme.map((theme) => {
+                            if(theme === index) flag = 1
+                        })
+                    }
+                    
+                    if(current_theme === index) {
                         return (
+                            <View>
+                                
                             <View style={styles.Theme}>
                                 <Image  
                                     style={{width: 120, height: 200}}
@@ -71,6 +83,35 @@ export default function SettingScreen({navigation}) {
                                 <Text>
                                     {item.THEME_NAME}
                                 </Text>
+                                <View style={{backgroundColor: 'rgba(255, 255, 255, 0.70)',width: 120, height: 200, position:"absolute", flex:0}}></View>
+                                <View style={{position:'absolute', left:35, top:70}}>
+                                    <Icon
+                                        name="checkcircle"
+                                        size={50}
+                                        color="#36BB58"
+                                    />
+                                </View>
+                                
+                            </View>
+                            
+                            </View>
+                        )
+                    }
+                    if(item.COST === 0 || flag === 1) {
+                        return (
+                            <View>
+                                
+                            <View style={styles.Theme}>
+                                <Image  
+                                    style={{width: 120, height: 200}}
+                                    source={{uri:item.THEME_THUMBNAIL}}
+                                ></Image>
+                                <Text>
+                                    {item.THEME_NAME}
+                                </Text>
+                                
+                            </View>
+                            
                             </View>
                         )
                     } else {
