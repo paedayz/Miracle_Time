@@ -13,7 +13,8 @@ import {
     SET_COIN_EXP_LVL,
     SET_ACHIEVE,
     SET_ERROR,
-    IS_GET_DATA
+    IS_GET_DATA,
+    SET_USER_SETTING
 } from '../type'
 import firebase from 'firebase'
 
@@ -31,6 +32,11 @@ export const getAuthen = ()=> (dispatch) => {
         if(res.data.notiData.length !== 0) {
             dispatch({type: SET_NOTIFICATIONS, payload: res.data.notiData})
             dispatch({type: SET_UNREAD_NOTI, payload: true})
+        }
+
+        if(res.data.settingData.length !== 0) {
+            console.log(res.data.settingData)
+            dispatch({type: SET_USER_SETTING, payload: res.data.settingData})
         }
 
         dispatch({type: IS_GET_DATA})

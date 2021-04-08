@@ -1,11 +1,13 @@
-import {SET_USER_DATA, CLEAR_SESSION} from '../type'
+import {SET_USER_DATA, CLEAR_SESSION, SET_USER_SETTING} from '../type'
 
 const initialState = {
-    userData : null
+    userData : null,
+    setting: []
 }
 
 const startState = {
-    userData : null
+    userData : null,
+    setting: []
 }
 
 
@@ -15,6 +17,12 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 userData: action.payload
+            }
+        
+        case SET_USER_SETTING :
+            return {
+                ...state,
+                setting: action.payload
             }
 
         case CLEAR_SESSION :
