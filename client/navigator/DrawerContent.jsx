@@ -111,7 +111,7 @@ export function DrawerContent(props){
                                 />
                             )}
                             label="Settings"
-                            // onPress={() => {props.navigation.navigate('Calendar')}}
+                            onPress={() => {props.navigation.navigate('Setting')}}
                         />
                         {status === "admin"
                         &&
