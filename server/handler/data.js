@@ -292,7 +292,6 @@ exports.getAdminDashBoard = async (req, res) => {
                     if(parseInt(10,month) < 10){
                         month = `0${month}`
                     }
-                    console.log(year, month)
                     sum = sum + 1
                     if(returnData.length === 0) {
                         // returnData[`${year}-${month}`] = {}
@@ -305,7 +304,6 @@ exports.getAdminDashBoard = async (req, res) => {
                         }
                     }
                 })
-                console.log(returnData)
                 return returnData
             })
         
