@@ -14,7 +14,8 @@ import {
     SET_ACHIEVE,
     SET_ERROR,
     IS_GET_DATA,
-    SET_USER_SETTING
+    SET_USER_SETTING,
+    SELECT_OPEN_MOOD
 } from '../type'
 import firebase from 'firebase'
 
@@ -147,4 +148,15 @@ export const editProfile = (blob, updateData) => (dispatch) => {
 
 export const getClientUserId = () => {
     return clientUserId
+}
+
+export const setSelectMood = (docId, set_data) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/setSelectMood', {clientUserId: clientUserId, docId, set_data})
+        .then((res) => {
+            dispatch({type: SELECT_OPEN_MOOD, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 }

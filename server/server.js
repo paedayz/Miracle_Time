@@ -15,7 +15,7 @@ let {
   checkAuthen, 
   signout, 
   editProfile,
-  setSelectMood
+  setSelectMood,
 } = require('./handler/user')
 
 let {

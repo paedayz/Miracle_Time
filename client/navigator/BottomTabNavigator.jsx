@@ -24,6 +24,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function TabFunction () {
   const unRead = useSelector(state => state.data.unreadNoti)
+  const current_theme = useSelector(state => state.user.setting.current_theme)
   const navigation = useNavigation()
 
   const renderNotification = (
@@ -66,7 +67,7 @@ export default function TabFunction () {
             component={CalendarStackScreen}
             options={{
               tabBarLabel: 'Calendar',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_ONE}`,
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_ONE}`,
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="calendar" color={color} size={26} />
               ),
@@ -77,7 +78,7 @@ export default function TabFunction () {
             component={DailyStackScreen}
             options={{
               tabBarLabel: 'Social',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_TWO}`,
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_TWO}`,
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="earth" color={color} size={26} />
               ),
@@ -88,7 +89,7 @@ export default function TabFunction () {
             component={StatsStackScreen}
             options={{
               tabBarLabel: 'Stats',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_THREE}`,
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_THREE}`,
               tabBarIcon: ({ color }) => (
                 <Octicons name="graph" color={color} size={26} />
               ),
@@ -99,7 +100,7 @@ export default function TabFunction () {
             component={QuestArchieveStackScreen}
             options={{
               tabBarLabel: 'Q/A',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_FOUR}`,
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_FOUR}`,
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
               ),
@@ -110,7 +111,7 @@ export default function TabFunction () {
             component={PetStackScreen}
             options={{
               tabBarLabel: 'Pet',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_FIVE}`,
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_FIVE}`,
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="dog" color={color} size={26} />
               ),

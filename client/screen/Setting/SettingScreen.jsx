@@ -2,13 +2,20 @@ import React , {useState} from 'react';
 import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity,Image} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native'
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import {setSelectMood} from '../../redux/action/userAction'
 
 export default function SettingScreen({navigation}) {
-    
-    const [Is_Enable_HowFeel, setIs_Enable_HowFeel] = useState(false)
+
+    const setting = useSelector((state) => state.user.setting)
+    const [Is_Enable_HowFeel, setIs_Enable_HowFeel] = useState(setting.select_mood)
+
+    const dispatch = useDispatch()
 
     const SwitchMode = () => {
         setIs_Enable_HowFeel(!Is_Enable_HowFeel)
+        dispatch(setSelectMood(setting.docId, !setting.select_mood))
     }
 
     
