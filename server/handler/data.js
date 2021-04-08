@@ -280,16 +280,19 @@ exports.deleteNotifications = (req, res) => {
 }
 
 exports.getAdminDashBoard = async (req, res) => {
-    console.log('dash')
     const status = req.user.status
     if(status === "admin") {
-        const eventData = await firestore.collection('events').orderBy('date').get()
+        const eventData = await firestore.collection('events').orderBy('createdAt').get()
             .then((snapshot) => {
                 let returnData = []
                 let sum = 0
                 snapshot.forEach((doc) => {
-                    const year = doc.data().date.split('-')[0]
-                    const month = doc.data().date.split('-')[1]
+                    const year = doc.data().createdAt.split(',')[0].split('/')[2]
+                    let month = doc.data().createdAt.split(',')[0].split('/')[0]
+                    if(parseInt(10,month) < 10){
+                        month = `0${month}`
+                    }
+                    console.log(year, month)
                     sum = sum + 1
                     if(returnData.length === 0) {
                         // returnData[`${year}-${month}`] = {}
@@ -302,6 +305,7 @@ exports.getAdminDashBoard = async (req, res) => {
                         }
                     }
                 })
+                console.log(returnData)
                 return returnData
             })
         
