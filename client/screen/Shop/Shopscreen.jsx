@@ -105,7 +105,7 @@ export default function Shopscreen({navigation}) {
                                     ?
                                     <Button disabled type="outline" title="COIN NOT ENOUGH" />
                                     :
-                                    <Button onPress={() => onclickBuyTheme()} type="outline" title="Buy" />
+                                    <Button onPress={() => onclickBuyTheme()} title="Buy" />
                                     }
                                             
                                         </View>
@@ -115,6 +115,7 @@ export default function Shopscreen({navigation}) {
                        
                         <Button 
                             title="Cancel"
+                            type="outline"
                             onPress={() => setModalVi(false)}>
                               
                         </Button>
