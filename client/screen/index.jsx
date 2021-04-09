@@ -75,7 +75,7 @@ export default function Screen({navigation}) {
 
     if(userData && ( clickMood === true )) {
         return (
-            <ThemeProvider theme={themes[2]}>
+            <ThemeProvider theme={themes[3]}>
                 <Drawer.Navigator initialRouteName="Calendar" drawerContent={props => <DrawerContent {...props}/>}>
                     <Drawer.Screen name="Calendar" component={BottomTabNavigator} />
                     <Drawer.Screen name="Profile" component={ProfileStackScreen} />
