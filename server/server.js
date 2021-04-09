@@ -14,7 +14,9 @@ let {
   login, 
   checkAuthen, 
   signout, 
-  editProfile
+  editProfile,
+  setSelectMood,
+  selectTheme
 } = require('./handler/user')
 
 let {
@@ -28,7 +30,8 @@ let {
   deleteNotifications,
   toggleEventSuccess,
   getAdminDashBoard,
-  getEventByMonth
+  getEventByMonth,
+  buyTheme
 } = require('./handler/data')
 
 let {
@@ -64,6 +67,10 @@ let {addDaily, getUserDaily, editDaily, deleteDaily} = require('./handler/daily'
 app.get('/test', function test(req, res) {
   res.json({success: true})
 })
+
+// Shop
+app.post('/buyTheme', FBAuth, buyTheme)
+
 // Daily Route
 app.post('/addDaily', FBAuth, addDaily)
 app.post('/getUserDaily', FBAuth, getUserDaily)
@@ -76,6 +83,8 @@ app.post('/login', login)
 app.post('/authen', FBAuth ,checkAuthen)
 app.get('/signout', signout)
 app.post('/editProfile' , FBAuth ,editProfile)
+app.post('/setSelectMood' , FBAuth ,setSelectMood)
+app.post('/selectTheme' , FBAuth ,selectTheme)
 
 // Friend Route
 app.post('/getFriendRequest', FBAuth, getFriendRequest)

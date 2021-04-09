@@ -2,7 +2,6 @@ import axios from 'axios'
 import {
     LOADING_DATA, 
     LOADING_COMPLETE, 
-    SET_EVENT, 
     ADD_EVENT, 
     DELETE_EVENT, 
     EDIT_EVENT, 
@@ -13,14 +12,15 @@ import {
     DELETE_NOTI,
     DO_QUEST,
     SET_QUEST,
-    SET_USER_DATA,
     CLAIM_QUEST,
     SET_COIN_EXP_LVL,
     SET_ACHIEVE,
     DO_ACHIEVE,
     TOGGLE_EVENT_SUCCESS,
     SET_DASHBOARD_EVENT,
-
+    BUY_THEME,
+    BUY_LOADING,
+    SET_COIN
 } from "../type"
 
 import {getClientUserId} from './userAction'
@@ -212,6 +212,19 @@ export const getAdminDashBoard = () => (dispatch) => {
                 setData.push(data)
             })
             dispatch({type: SET_DASHBOARD_EVENT, payload: setData})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const buyTheme = (setting_docId, theme_id, new_user_coin) => (dispatch) => {
+    dispatch({type: BUY_LOADING})
+    let clientUserId = getClientUserId()
+    axios.post('/buyTheme', {clientUserId: clientUserId, setting_docId, theme_id, new_user_coin})
+        .then((res) => {
+            dispatch({type: BUY_THEME, payload: res.data.theme_id})
+            dispatch({type: SET_COIN, payload: res.data.new_user_coin})
         })
         .catch((err) => {
             console.log(err)
