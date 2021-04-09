@@ -13,7 +13,11 @@ import {
     SET_COIN_EXP_LVL,
     SET_ACHIEVE,
     SET_ERROR,
-    IS_GET_DATA
+    IS_GET_DATA,
+    SET_USER_SETTING,
+    SELECT_OPEN_MOOD,
+    SELECT_THEME,
+    SELECT_THEME_LOADING
 } from '../type'
 import firebase from 'firebase'
 
@@ -31,6 +35,11 @@ export const getAuthen = ()=> (dispatch) => {
         if(res.data.notiData.length !== 0) {
             dispatch({type: SET_NOTIFICATIONS, payload: res.data.notiData})
             dispatch({type: SET_UNREAD_NOTI, payload: true})
+        }
+
+        if(res.data.settingData.length !== 0) {
+            console.log(res.data.settingData)
+            dispatch({type: SET_USER_SETTING, payload: res.data.settingData})
         }
 
         dispatch({type: IS_GET_DATA})
@@ -141,4 +150,27 @@ export const editProfile = (blob, updateData) => (dispatch) => {
 
 export const getClientUserId = () => {
     return clientUserId
+}
+
+export const setSelectMood = (docId, set_data) => (dispatch) => {
+    let clientUserId = getClientUserId()
+    axios.post('/setSelectMood', {clientUserId: clientUserId, docId, set_data})
+        .then((res) => {
+            dispatch({type: SELECT_OPEN_MOOD, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+export const selectTheme = (docId, set_data) => (dispatch) => {
+    dispatch({type: SELECT_THEME_LOADING})
+    let clientUserId = getClientUserId()
+    axios.post('/selectTheme', {clientUserId: clientUserId, docId, set_data})
+        .then((res) => {
+            dispatch({type: SELECT_THEME, payload: res.data.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 }

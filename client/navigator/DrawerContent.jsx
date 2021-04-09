@@ -93,6 +93,17 @@ export function DrawerContent(props){
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
+                                <Icon 
+                                name="cart" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Shop"
+                            onPress={() => {props.navigation.navigate('Shop')}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
                                 <FontAwesome 
                                 name="gears" 
                                 color={color}
@@ -100,7 +111,7 @@ export function DrawerContent(props){
                                 />
                             )}
                             label="Settings"
-                            // onPress={() => {props.navigation.navigate('Calendar')}}
+                            onPress={() => {props.navigation.navigate('Setting')}}
                         />
                         {status === "admin"
                         &&

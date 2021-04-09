@@ -37,6 +37,7 @@ export const getFriendRequest = () => (dispatch) => {
 }
 
 export const addFriend = (recipient) => (dispatch) => {
+    console.log(recipient)
     let clientUserId = getClientUserId()
     dispatch({type: LOADING_FRIEND_DATA})
     axios.post('/addFriend',{recipient: recipient, clientUserId: clientUserId})
