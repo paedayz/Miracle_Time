@@ -185,6 +185,23 @@ exports.checkAuthen = async (req, res) => {
 
   let userData = {};
 
+  let setting = await firestore
+                  .collection("setting")
+                  .where("username", "==", username)
+                  .get()
+                  .then((snapshot) => {
+                    let setting_data
+                    snapshot.forEach(function (doc) {
+                      setting_data = doc.data()
+                      setting_data.docId = doc.id
+                    });
+                    return setting_data
+                  })
+                  .catch((err) => {
+                    console.log(err)
+                    return res.json({error: err})
+                  })
+
   let events = await firestore
                 .collection("users")
                 .where("userId", "==", clientUserId)
@@ -218,7 +235,11 @@ exports.checkAuthen = async (req, res) => {
                     return_events.push(newData);
                   });
                   return return_events
-                });
+                })
+                .catch((err) => {
+                  console.log(err)
+                  return res.json({error: err})
+                })
 
   let notifications = await firestore
                       .collection("notifications")
@@ -243,12 +264,17 @@ exports.checkAuthen = async (req, res) => {
                         );
 
                         return sortNotifications
-                      });
+                      })
+                      .catch((err) => {
+                        console.log(err)
+                        return res.json({error: err})
+                      })
   
   return res.json({
     eventData: events,
     notiData: notifications,
-    userData: userData
+    userData: userData,
+    settingData : setting
   });
 };
 
@@ -293,6 +319,31 @@ exports.editProfile = (req, res) => {
 };
 
 exports.setSelectMood = (req, res) => {
-  
+  let docId = req.body.docId
+  let set_data = req.body.set_data
+
+  firestore.doc(`/setting/${docId}`).update({select_mood: set_data})
+    .then(() => {
+      return res.status(200).json({data: set_data})
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
+    
+}
+
+exports.selectTheme = (req, res) => {
+  let docId = req.body.docId
+  let set_data = req.body.set_data
+
+  firestore.doc(`/setting/${docId}`).update({current_theme: set_data})
+    .then(() => {
+      return res.status(200).json({data: set_data})
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
     
 }

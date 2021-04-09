@@ -1,5 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react'
-import { Avatar, Badge, withBadge } from "react-native-elements";
+import { Avatar, Badge, withBadge, Image } from "react-native-elements";
 import { Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -24,6 +24,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function TabFunction () {
   const unRead = useSelector(state => state.data.unreadNoti)
+  const current_theme = useSelector(state => state.user.setting.current_theme)
   const navigation = useNavigation()
 
   const renderNotification = (
@@ -66,20 +67,20 @@ export default function TabFunction () {
             component={CalendarStackScreen}
             options={{
               tabBarLabel: 'Calendar',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_ONE}`,
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_ONE}`,
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="calendar" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_ONE_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />
           <Tab.Screen
-            name="Daily"
+            name="Social"
             component={DailyStackScreen}
             options={{
-              tabBarLabel: 'Social',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_TWO}`,
+              tabBarLabel: 'Daily',
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_TWO}`,
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="earth" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_TWO_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />
@@ -88,9 +89,9 @@ export default function TabFunction () {
             component={StatsStackScreen}
             options={{
               tabBarLabel: 'Stats',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_THREE}`,
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_THREE}`,
               tabBarIcon: ({ color }) => (
-                <Octicons name="graph" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_THREE_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />
@@ -99,9 +100,9 @@ export default function TabFunction () {
             component={QuestArchieveStackScreen}
             options={{
               tabBarLabel: 'Q/A',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_FOUR}`,
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_FOUR}`,
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_FOUR_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />
@@ -110,9 +111,9 @@ export default function TabFunction () {
             component={PetStackScreen}
             options={{
               tabBarLabel: 'Pet',
-              tabBarColor: `${themes[2].BUTTON_TAB_MENU_FIVE}`,
+              tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_FIVE}`,
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="dog" color={color} size={26} />
+                <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_FIVE_IMG}} style={{width:25, height:25, tintColor:'white'}}/>
               ),
             }}
           />

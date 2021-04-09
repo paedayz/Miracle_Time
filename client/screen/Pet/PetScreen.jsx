@@ -13,6 +13,7 @@ export default function PetScreen({navigation}) {
   const [textBox, setTextBox] = useState(false)
   const [isFirsBtnClick, setIsFirsBtnClick] = useState(false)
   const [isSecondBtnClick, setIsSecondBtnClick] = useState(false)
+  const [image, setImage] = useState(<Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>)
   const dispatch = useDispatch()
 
   const FirstBtnClick = () => {
@@ -47,6 +48,17 @@ export default function PetScreen({navigation}) {
     
   }
 
+  const togglePet = () => {
+    let imageArray = [
+      <Image source={require('../../assets/pet_pic/eat.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>,
+      <Image source={require('../../assets/pet_pic/hungry.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>,
+      <Image source={require('../../assets/pet_pic/play.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>,
+      <Image source={require('../../assets/pet_pic/sleep.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>,
+      <Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>
+    ]
+    setImage(imageArray[Math.floor(Math.random() * 5)])
+  }
+
   const CloseTextBox = () => {
     setTextBox(false)
     setIsFirsBtnClick(false)
@@ -62,18 +74,18 @@ export default function PetScreen({navigation}) {
             }
             
             {isFirsBtnClick &&
-              <View style={{position:'absolute', top: 60}}>
+              <View style={{position:'absolute', top: 40}}>
                 <Ask_Volitation/>
               </View>
             }
 
             {isSecondBtnClick &&
-              <View style={{position:'absolute', top: 60}}>
+              <View style={{position:'absolute', top: 40}}>
                 <Ask_Advice />
               </View>
             }
-            <TouchableOpacity>
-              <Image source={require('../../assets/madarao.png')} style={{ maxHeight: 330, maxWidth: '60%'}}/>
+            <TouchableOpacity onPress={() => togglePet()}>
+              {image}
             </TouchableOpacity>
 
           <View style={styles.button_box}>
