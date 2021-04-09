@@ -35,6 +35,7 @@ import FriendStackScreen from './Friend/FriendStackScreen'
 //component
 import TipsStack from './Tips/TipsStack'
 import HowFeel from './HowFeel'
+import SettingStack from './Setting/SettingStack'
 import ShopStack from './Shop/ShopStack'
 
 // Naviation
@@ -48,8 +49,9 @@ export default function Screen({navigation}) {
     const userData = useSelector(state => state.user.userData)
     const loading = useSelector(state => state.system.loading)
     const userEventData = useSelector(state => state.data.events)
+    const current_theme = useSelector(state => state.user.setting.current_theme)
 
-    const [Is_Enable_HowFeel, setIs_Enable_HowFeel] = useState(true)
+    const select_mood = useSelector(state => state.user.setting.select_mood)
     const [clickMood, setclickMood] = useState(false)
 
     const clicked_Mood = () =>{
@@ -74,9 +76,9 @@ export default function Screen({navigation}) {
         )
     }
 
-    if(userData && ( clickMood === true )) {
+    if(userData && ( clickMood === true || select_mood === false )) {
         return (
-            <ThemeProvider theme={themes[2]}>
+            <ThemeProvider theme={themes[current_theme]}>
                 <Drawer.Navigator initialRouteName="Calendar" drawerContent={props => <DrawerContent {...props}/>}>
                     <Drawer.Screen name="Calendar" component={BottomTabNavigator} />
                     <Drawer.Screen name="Profile" component={ProfileStackScreen} />
@@ -84,12 +86,13 @@ export default function Screen({navigation}) {
                     <Drawer.Screen name="Notifications" component={NotificationStackScreen} />
                     <Drawer.Screen name="Friend" component={FriendStackScreen} />
                     <Drawer.Screen name="Tips" component={TipsStack} />
+                    <Drawer.Screen name="Setting" component={SettingStack} />
                     <Drawer.Screen name="Shop" component={ShopStack} />
                 </Drawer.Navigator>
             </ThemeProvider>
         )
 
-    } else if(userData && ( clickMood === false )){
+    } else if(userData && ( clickMood === false && select_mood === true )){
         return (
             <HowFeel clickMood_func={clicked_Mood} />
         )
