@@ -21,11 +21,13 @@ import FriendList from './FriendLists'
 import FriendRequest from './FriendRequest'
 
 // Redux
+import {useDispatch} from 'react-redux'
 import {addFriend} from '../../redux/action/friendAction'
 
 export default function FriendScreen({ navigation }) {
     const [isList, setIsList] = useState(true)
     const [username, setUsername] = useState()
+    const dispatch = useDispatch()
 
     const showPage = () => {
         if(isList) {
@@ -36,7 +38,7 @@ export default function FriendScreen({ navigation }) {
     }
 
     const onClickAdd = () => {
-        addFriend(username)
+        dispatch(addFriend(username))
         setUsername(null)
     }
 

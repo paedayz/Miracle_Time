@@ -280,16 +280,18 @@ exports.deleteNotifications = (req, res) => {
 }
 
 exports.getAdminDashBoard = async (req, res) => {
-    console.log('dash')
     const status = req.user.status
     if(status === "admin") {
-        const eventData = await firestore.collection('events').orderBy('date').get()
+        const eventData = await firestore.collection('events').orderBy('createdAt').get()
             .then((snapshot) => {
                 let returnData = []
                 let sum = 0
                 snapshot.forEach((doc) => {
-                    const year = doc.data().date.split('-')[0]
-                    const month = doc.data().date.split('-')[1]
+                    const year = doc.data().createdAt.split(',')[0].split('/')[2]
+                    let month = doc.data().createdAt.split(',')[0].split('/')[0]
+                    if(parseInt(10,month) < 10){
+                        month = `0${month}`
+                    }
                     sum = sum + 1
                     if(returnData.length === 0) {
                         // returnData[`${year}-${month}`] = {}
@@ -309,4 +311,32 @@ exports.getAdminDashBoard = async (req, res) => {
     } else {
         res.status(403).json({message: 'Fuck off this is only admin'})
     }
+}
+
+exports.buyTheme = (req, res) => {
+    const setting_docId = req.body.setting_docId
+    const theme_id = req.body.theme_id
+    const new_user_coin = req.body.new_user_coin
+    firestore.collection('setting').doc(setting_docId).get()
+        .then((doc) => {
+            console.log(doc.data().buy_theme)
+            if(doc.data().buy_theme){
+                let old_buy_theme = doc.data().buy_theme
+                old_buy_theme.push(theme_id)
+                old_buy_theme = old_buy_theme.sort()
+                return firestore.collection('setting').doc(setting_docId).update({buy_theme: old_buy_theme})
+            } else {
+                return firestore.collection('setting').doc(setting_docId).update({buy_theme:[theme_id]})
+            }
+        })
+        .then(() => {
+            return firestore.collection('users').doc(req.user.username).update({coin: new_user_coin})
+        })
+        .then(() => {
+            return res.status(200).json({theme_id, new_user_coin})
+        })
+        .catch((err) => {
+            console.log(err)
+            return res.json({error: err})
+        })
 }

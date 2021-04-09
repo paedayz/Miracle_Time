@@ -3,6 +3,7 @@ const config = require("../util/config")
 
 exports.addFriend = (req, res) => {
     const recipient = req.body.recipient
+    console.log(recipient)
 
     if(recipient == req.user.username) {
         return res.status(403).json({error: 'You Can not send friend request to yourself'})
