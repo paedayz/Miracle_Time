@@ -121,6 +121,7 @@ export default function StatsScreen({navigation}) {
 const ChartHeader = styled.Text`
   color: ${(props) => props.theme.BUTTON_TAB_MENU_THREE};
   font-size: 30px;
+  margin: 20px;
 `
 
 const styles = StyleSheet.create({
