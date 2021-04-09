@@ -45,9 +45,12 @@ export default function Shopscreen({navigation}) {
                         renderItem={({ item, index}) => {
                             item.index = index
                             let flag = 0
-                            buy_theme.map((theme) => {
-                                if(index === theme) flag = 1
-                            })
+                            if(buy_theme){
+                                buy_theme.map((theme) => {
+                                    if(index === theme) flag = 1
+                                })
+                            }
+                            
                             if(item.COST !== 0 && flag == 0) {
                                 return (
                                     <View>
@@ -105,7 +108,7 @@ export default function Shopscreen({navigation}) {
                                     ?
                                     <Button disabled type="outline" title="COIN NOT ENOUGH" />
                                     :
-                                    <Button onPress={() => onclickBuyTheme()} type="outline" title="Buy" />
+                                    <Button onPress={() => onclickBuyTheme()} title="Buy" />
                                     }
                                             
                                         </View>
@@ -115,6 +118,7 @@ export default function Shopscreen({navigation}) {
                        
                         <Button 
                             title="Cancel"
+                            type="outline"
                             onPress={() => setModalVi(false)}>
                               
                         </Button>
