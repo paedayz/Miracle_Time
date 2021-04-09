@@ -14,6 +14,10 @@ export const themes = [
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fstat.png?alt=media',
         BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fquest.png?alt=media',
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fpet.png?alt=media',
+        DIARY_HAPPY_COLOR: '#BEFFB5',
+        DIARY_SAD_COLOR: '#A8DEFF',
+        DIARY_SOSO_COLOR: '#FBEC98',
+        DIARY_ANGRY_COLOR: '#FFDBDB',
     },
     {   //1-pastel theme
         PRIMARY_TEXT_COLOR: 'blue',
@@ -28,8 +32,12 @@ export const themes = [
         BUTTON_TAB_MENU_ONE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20calendar.png?alt=media',
         BUTTON_TAB_MENU_TWO_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20diary.png?alt=media',
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20stat.png?alt=media',
-        BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20Q%26A.png?alt=media',        BUTTON_TAB_MENU_FIVE: '#F2E2BA',
+        BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20Q%26A.png?alt=media',       
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20pet.png?alt=media',
+        DIARY_HAPPY_COLOR: '#EDCFED',
+        DIARY_SAD_COLOR: '#F9CDE1',
+        DIARY_SOSO_COLOR: '#FBCBC6',
+        DIARY_ANGRY_COLOR: '#FBD1C1',
     },
     {   //2-jungle theme
         PRIMARY_TEXT_COLOR: 'red',
@@ -46,6 +54,10 @@ export const themes = [
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fstat.png?alt=media',
         BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fquest.png?alt=media',
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fpet.png?alt=media',
+        DIARY_HAPPY_COLOR: '#85BC9A',
+        DIARY_SAD_COLOR: '#B4D7B2',
+        DIARY_SOSO_COLOR: '#A5BBA6',
+        DIARY_ANGRY_COLOR: '#92BCB5',
     },
     {   //3-ocean theme
         PRIMARY_TEXT_COLOR: 'yellow',
@@ -62,6 +74,10 @@ export const themes = [
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fstat.png?alt=media',
         BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fquest.png?alt=media',
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fpet.png?alt=media',
+        DIARY_HAPPY_COLOR: '#7DB8EB',
+        DIARY_SAD_COLOR: '#B1CEF1',
+        DIARY_SOSO_COLOR: '#A1DEFC',
+        DIARY_ANGRY_COLOR: '#B8DAFF',
     },
     {   //4-tropical theme *free*
         PRIMARY_TEXT_COLOR: 'black',
@@ -78,5 +94,9 @@ export const themes = [
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fstat.png?alt=media',
         BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fquest.png?alt=media',
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fpet.png?alt=media',
+        DIARY_HAPPY_COLOR: '#EFD595',
+        DIARY_SAD_COLOR: '#7EB7C4',
+        DIARY_SOSO_COLOR: '#86DFD5',
+        DIARY_ANGRY_COLOR: '#F7BC8D',
     }
 ]
