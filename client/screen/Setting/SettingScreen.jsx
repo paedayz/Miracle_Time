@@ -36,6 +36,22 @@ export default function SettingScreen({navigation}) {
         dispatch(selectTheme(setting.docId, theme_id))
     }
 
+    const filterShowTheme = (focus_theme, index) => {
+        let flag = 0
+    
+        if(buy_theme){
+            buy_theme.map((theme) => {
+                if(theme === focus_theme.THEME_INDEX) flag = 1
+            })
+        }
+
+        if(focus_theme.COST === 0 || flag === 1) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     if(!loading_select_theme)
     {
     return (
@@ -54,19 +70,17 @@ export default function SettingScreen({navigation}) {
             <View style={styles.Theme_box}>
                 <Text style={styles.Text}>Your Theme</Text>
                     <FlatList
-                    data={themes}
+                    data={themes.filter((value, index) => {
+                        return filterShowTheme(value, index)
+                    })
+                    .sort(function (a, b) {
+                        return b.COST - a.COST;
+                      })}
                     keyExtractor={(item) => item.THEME_NAME}
                     numColumns={2}
                     renderItem={({ item, index}) => {
-                        let flag = 0
-    
-                        if(buy_theme){
-                            buy_theme.map((theme) => {
-                                if(theme === index) flag = 1
-                            })
-                        }
                         
-                        if(current_theme === index) {
+                        if(current_theme === item.THEME_INDEX) {
                             return (
                                 <View>
                                     
@@ -91,10 +105,10 @@ export default function SettingScreen({navigation}) {
                                 
                                 </View>
                             )
-                        } else if(item.COST === 0 || flag === 1) {
+                        } else {
                             return (
                                 <View>
-                                <TouchableOpacity onPress={() => onclickSelectTheme(index)}>
+                                <TouchableOpacity onPress={() => onclickSelectTheme(item.THEME_INDEX)}>
                                       
                                 <View style={styles.Theme}>
                                     <Image  
@@ -109,10 +123,6 @@ export default function SettingScreen({navigation}) {
                                 </TouchableOpacity> 
                                 </View>
                                 
-                            )
-                        } else {
-                            return (
-                                <View></View>
                             )
                         }
                     }}/>

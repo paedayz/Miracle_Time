@@ -14,6 +14,7 @@ export const themes = [
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fstat.png?alt=media',
         BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fquest.png?alt=media',
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fpet.png?alt=media',
+        THEME_INDEX: 0,
     },
     {   //1-pastel theme
         PRIMARY_TEXT_COLOR: 'blue',
@@ -30,6 +31,7 @@ export const themes = [
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20stat.png?alt=media',
         BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20Q%26A.png?alt=media',        BUTTON_TAB_MENU_FIVE: '#F2E2BA',
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FPastel%2Fpastel%20pet.png?alt=media',
+        THEME_INDEX: 1,
     },
     {   //2-jungle theme
         PRIMARY_TEXT_COLOR: 'red',
@@ -46,6 +48,7 @@ export const themes = [
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fstat.png?alt=media',
         BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fquest.png?alt=media',
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FJungle%2Fpet.png?alt=media',
+        THEME_INDEX: 2,
     },
     {   //3-ocean theme
         PRIMARY_TEXT_COLOR: 'yellow',
@@ -62,6 +65,7 @@ export const themes = [
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fstat.png?alt=media',
         BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fquest.png?alt=media',
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FOcean%2Fpet.png?alt=media',
+        THEME_INDEX: 3,
     },
     {   //4-tropical theme *free*
         PRIMARY_TEXT_COLOR: 'black',
@@ -78,5 +82,6 @@ export const themes = [
         BUTTON_TAB_MENU_THREE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fstat.png?alt=media',
         BUTTON_TAB_MENU_FOUR_IMG : 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fquest.png?alt=media',
         BUTTON_TAB_MENU_FIVE_IMG: 'https://firebasestorage.googleapis.com/v0/b/dtime-44c09.appspot.com/o/Theme_Icon%2FBasic%2Fpet.png?alt=media',
+        THEME_INDEX: 4,
     }
 ]
