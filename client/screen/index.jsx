@@ -53,6 +53,7 @@ export default function Screen({navigation}) {
 
     const select_mood = useSelector(state => state.user.setting.select_mood)
     const [clickMood, setclickMood] = useState(false)
+    const [goToMain, setGoToMain] = useState(false)
 
     const clicked_Mood = () =>{
         setclickMood(true)
@@ -76,7 +77,10 @@ export default function Screen({navigation}) {
         )
     }
 
-    if(userData && ( clickMood === true || select_mood === false )) {
+    if(userData && ( clickMood === true || select_mood === false || goToMain || true )) {
+        if(goToMain === false){
+            setGoToMain(true)
+        }
         return (
             <ThemeProvider theme={themes[current_theme]}>
                 <Drawer.Navigator initialRouteName="Calendar" drawerContent={props => <DrawerContent {...props}/>}>
@@ -92,7 +96,7 @@ export default function Screen({navigation}) {
             </ThemeProvider>
         )
 
-    } else if(userData && ( clickMood === false && select_mood === true )){
+    } else if(userData && ( clickMood === false && select_mood === true && goToMain === false )){
         return (
             <HowFeel clickMood_func={clicked_Mood} />
         )
