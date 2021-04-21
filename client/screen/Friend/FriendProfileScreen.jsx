@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import { SafeAreaView, View, StyleSheet, TextInput, Button } from 'react-native';
+import { SafeAreaView, View, StyleSheet, TextInput, Button, ScrollView } from 'react-native';
 import {
   Avatar,
   Title,
@@ -37,11 +37,12 @@ export default function FriendProfileScreen({navigation}) {
     }
 
     const mapFriendEvent = friendEvent.map((item) => (
-      <FriendEventBox item={item} />
+      <FriendEventBox key={item.key} item={item} />
     ))
     
       return (
         <SafeAreaView style={styles.container}>
+          <ScrollView>
           <View style={styles.userInfoSection}>
             <View style={{flexDirection:'row', marginTop: 15}}>
               <Avatar.Image 
@@ -101,7 +102,9 @@ export default function FriendProfileScreen({navigation}) {
           <View style={styles.eventContainer}>
             <Text style={styles.eventHeader}>Friend Event</Text>
 
-            <View style={{flexDirection:'row', justifyContent:'center'}}>
+            
+              
+              <View style={{flexDirection:'row', justifyContent:'center'}}>
               <View>
                 <TextInput
                     onChangeText={data => setSearchDate(data)}
@@ -114,13 +117,15 @@ export default function FriendProfileScreen({navigation}) {
                 />
               </View>
 
-              <View style={{marginTop:27, marginLeft:30,borderRadius: 10}}>
+              <View style={{marginTop:15, marginLeft:30,borderRadius: 10}}>
                 <Button onPress={() => onClickSearch()} title="SEARCH" color="#738FD9" buttonStyle = {{borderRadius: 10}}/>
               </View>
+              </View>
 
-            </View>
             {mapFriendEvent}
+            
           </View>
+          </ScrollView>
 
         </SafeAreaView>
       );
@@ -139,7 +144,7 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'ios' ? 0 : -2,
     paddingLeft: 10,
     color: 'black',
-    marginTop: 30,
+    marginTop: 20,
     marginBottom: 20,
     backgroundColor: 'white',
     maxWidth: 200,
