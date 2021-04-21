@@ -2,6 +2,7 @@ import React, {useState}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity, Alert, Image } from 'react-native'
 import { useRoute }  from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import styled from 'styled-components'
 
 // Redux
 import {useDispatch} from 'react-redux'
@@ -21,9 +22,9 @@ export default function DailyDetail({navigation}) {
     setModalOpen(false)
   }
 
-    return (
-        <View >
-          <View>
+  const mainDetail = (
+    <View>
+      <View>
             <Image  style={style.mage} source={{uri: image }} />
           </View>
           <Modal visible={modalOpen} animationType={'slide'}>
@@ -80,10 +81,38 @@ export default function DailyDetail({navigation}) {
                 />
               </View>
             </View>
+    </View>
+  )
 
+    return (
+        <View>
+          {mood === 'happy' && <CardHappy>{mainDetail}</CardHappy>}
+          {mood === 'sad' && <CardSad>{mainDetail}</CardSad>}
+          {mood === 'ok' && <CardSoso>{mainDetail}</CardSoso>}
+          {mood === 'angry' && <CardAngry>{mainDetail}</CardAngry>}
         </View>
     )
 }
+
+const CardHappy = styled.View`
+    backgroundColor: ${(props) => props.theme.DIARY_HAPPY_COLOR};
+    height:100%;
+`
+
+const CardSad = styled.View`
+    backgroundColor: ${(props) => props.theme.DIARY_SAD_COLOR};
+    height:100%;
+`
+
+const CardSoso = styled.View`
+    backgroundColor: ${(props) => props.theme.DIARY_SOSO_COLOR};
+    height:100%;
+`
+
+const CardAngry = styled.View`
+    backgroundColor: ${(props) => props.theme.DIARY_ANGRY_COLOR};
+    height:100%;
+`
 
 const style = StyleSheet.create({
     container: {
@@ -116,7 +145,7 @@ const style = StyleSheet.create({
       marginTop:15
     },
 mage: {
-    width:420,height:90,
+    width:435,height:90,marginLeft:0
 }
   
   })

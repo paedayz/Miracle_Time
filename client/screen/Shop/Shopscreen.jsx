@@ -26,8 +26,24 @@ export default function Shopscreen({navigation}) {
 
     const onclickBuyTheme = () => {
         let new_user_coin = user_coin - Card.COST
-        dispatch(buyTheme(setting_docId, Card.index, new_user_coin))
+        dispatch(buyTheme(setting_docId, Card.THEME_INDEX, new_user_coin))
         setModalVi(false); 
+    }
+
+    const filterShowTheme = (focus_theme, index) => {
+        let flag = 0
+    
+        if(buy_theme){
+            buy_theme.map((theme) => {
+                if(theme === focus_theme.THEME_INDEX) flag = 1
+            })
+        }
+
+        if(focus_theme.COST !== 0 && flag === 0) {
+            return true
+        } else {
+            return false
+        }
     }
 
     if(!buy_loading) {
@@ -39,19 +55,14 @@ export default function Shopscreen({navigation}) {
                     </Text>
                 </View>
                 <FlatList
-                        data={themes}
+                        data={themes.filter((value, index) => {
+                            return filterShowTheme(value, index)
+                        })}
                         keyExtractor={(item) => item.THEME_NAME}
                         numColumns={3}
                         renderItem={({ item, index}) => {
-                            item.index = index
-                            let flag = 0
-                            if(buy_theme){
-                                buy_theme.map((theme) => {
-                                    if(index === theme) flag = 1
-                                })
-                            }
                             
-                            if(item.COST !== 0 && flag == 0) {
+                            if(item.COST !== 0) {
                                 return (
                                     <View>
                                         <TouchableOpacity onPress={() => Open(setCard(item))}>
@@ -72,11 +83,7 @@ export default function Shopscreen({navigation}) {
                                     </View>
                                     
                                 )
-                            } else {
-                                return (
-                                    <View></View>
-                                )
-                            }
+                            } 
                         }}>
                     </FlatList>
         
