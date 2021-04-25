@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-
 import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, ScrollView ,KeyboardAvoidingView } from 'react-native';
-
 import {
   Avatar,
   Title,
@@ -52,10 +50,14 @@ export default function EditachievementModal({setModalOpenEdit, achievementData}
                   <Text>Archeivement name</Text>
                   <TextInput style={styles.input}
                     placeholder="Please enter your text"
+                    value={achievementName}
+                    onChangeText={data => setAchievementName(data)}
                   />
                   <Text>Archeivement detail</Text>
                   <TextInput style={styles.input}
                     placeholder="Please enter your text"
+                    value={achievementDetail}
+                    onChangeText={data => setAchievementDetail(data)}
                   />
                   <View style={styles.modalButton}>
                     <Button 
