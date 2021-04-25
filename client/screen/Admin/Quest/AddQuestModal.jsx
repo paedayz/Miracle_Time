@@ -87,7 +87,7 @@ export default function AddQuestModal({setModalOpenAdd}) {
                     />
 
                     <Text>Quest EXP</Text>
-                    <TextInput style={styles.input}
+                    <TextInput keyboardType="numeric" style={styles.input}
                       placeholder="Please enter your text"
                       onChangeText={(data) => setQuestExp(data)}
                     />
