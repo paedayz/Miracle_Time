@@ -3,6 +3,7 @@ import React, {useState, useEffect}  from 'react'
 import { StyleSheet,Button,Modal,FlatList,View, Text, TouchableOpacity,Image, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useRoute }  from '@react-navigation/native'
+import styled from 'styled-components'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
@@ -24,12 +25,10 @@ export default function DailyScreen({navigation}) {
   const daily = useSelector((state) => state.data.daily)
   const loading_daily = useSelector((state) => state.data.loading_daily)
 
-  const mapDaily = daily.map((item) => {
+  const cardDetail = (item) => {
     return (
-      <View style={{marginTop:20, width:'100%'}} key={item.docId}>
-              <TouchableOpacity onPress={() => navigation.navigate('DailyDetail', item)}>
-                <View style={style.card}>
-                    <View>
+      <View>
+      <View>
                       <Image style={style.mage} source={{uri: item.image}} />
                     </View>
                     <View>
@@ -40,9 +39,19 @@ export default function DailyScreen({navigation}) {
                       {item.createdAt.split(',')[0]}
                     </Text>
                     </View>
-                      
-                      
-                  </View>
+                    </View>
+                    
+    )
+  }
+
+  const mapDaily = daily.map((item) => {
+    return (
+      <View style={{marginTop:20, width:'100%'}} key={item.docId}>
+              <TouchableOpacity onPress={() => navigation.navigate('DailyDetail', item)}>
+                  {item.mood === 'happy' && <CardHappy>{cardDetail(item)}</CardHappy>}
+                  {item.mood === 'sad' && <CardSad>{cardDetail(item)}</CardSad>}
+                  {item.mood === 'ok' && <CardSoso>{cardDetail(item)}</CardSoso>}
+                  {item.mood === 'angry' && <CardAngry>{cardDetail(item)}</CardAngry>}
               </TouchableOpacity>
             </View>
     )
@@ -88,6 +97,74 @@ export default function DailyScreen({navigation}) {
 
   
 }
+
+const CardHappy = styled.View`
+    backgroundColor: ${(props) => props.theme.DIARY_HAPPY_COLOR};
+    width:90%;
+    marginLeft:23px;
+    height:200px;
+    borderRadius:20px;
+    shadowColor: #000;
+    shadowOffset: {
+      width: 0;
+      height: 2;
+    };
+    shadowOpacity: 0.25;
+    shadowRadius: 3.84px;
+
+    elevation: 5;
+`
+
+const CardSad = styled.View`
+    backgroundColor: ${(props) => props.theme.DIARY_SAD_COLOR};
+    width:90%;
+    marginLeft:23px;
+    height:200px;
+    borderRadius:20px;
+    shadowColor: #000;
+    shadowOffset: {
+      width: 0;
+      height: 2;
+    };
+    shadowOpacity: 0.25;
+    shadowRadius: 3.84px;
+
+    elevation: 5;
+`
+
+const CardSoso = styled.View`
+    backgroundColor: ${(props) => props.theme.DIARY_SOSO_COLOR};
+    width:90%;
+    marginLeft:23px;
+    height:200px;
+    borderRadius:20px;
+    shadowColor: #000;
+    shadowOffset: {
+      width: 0;
+      height: 2;
+    };
+    shadowOpacity: 0.25;
+    shadowRadius: 3.84px;
+
+    elevation: 5;
+`
+
+const CardAngry = styled.View`
+    backgroundColor: ${(props) => props.theme.DIARY_ANGRY_COLOR};
+    width:90%;
+    marginLeft:23px;
+    height:200px;
+    borderRadius:20px;
+    shadowColor: #000;
+    shadowOffset: {
+      width: 0;
+      height: 2;
+    };
+    shadowOpacity: 0.25;
+    shadowRadius: 3.84px;
+
+    elevation: 5;
+`
 
 const style = StyleSheet.create({
   container: {
