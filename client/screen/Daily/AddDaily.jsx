@@ -176,8 +176,7 @@ const Adddaily = ({setModalOpen}) => {
                                     style={styles.input}
                                     onChangeText={props.handleChange('detail')}
                                     value={props.values.detail}
-                                    multiline
-                                    numberOfLines={20}
+                                    multiline={true}                                    
                                     >
                                 </TextInput>        
                         </View> 

@@ -123,8 +123,7 @@ export default function EditDailyDetail(props) {
                                 placeholder='detail'
                                 value={EditDetail}
                                 onChangeText={data => setEditDetail(data)}
-                                multiline
-                                numberOfLines={10}
+                                multiline={true}  
                                 >
                             </TextInput>       
                     </View> 
