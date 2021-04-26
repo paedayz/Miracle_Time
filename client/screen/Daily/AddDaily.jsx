@@ -209,8 +209,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         borderRadius: 6,
         marginBottom:10,
-        marginTop:10
-        
+        marginTop:10,
+        textAlignVertical: 'top'
     },
     container:{
         flex: 1,
