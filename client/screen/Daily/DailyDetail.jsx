@@ -32,7 +32,7 @@ export default function DailyDetail({navigation}) {
         },{},
         {
           text: "NO",
-          onPress: () => console.log("Cancel Pressed"),
+          onPress: () => console.log("Cancel delete dairy"),
           style: "cancel"
         },
       ],
