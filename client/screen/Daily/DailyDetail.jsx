@@ -22,6 +22,24 @@ export default function DailyDetail({navigation}) {
     setModalOpen(false)
   }
 
+  const onAlert = () => {
+    Alert.alert(
+      "Alert !!",
+      "Do you want to delete this dairy",
+      [
+        { 
+          text: "YES", onPress: () => {dispatch(deleteDaily(docId))} ,
+        },{},
+        {
+          text: "NO",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+      ],
+  
+    );
+  }
+
   const mainDetail = (
     <View>
       <View>
@@ -68,7 +86,7 @@ export default function DailyDetail({navigation}) {
                   color="#FC7C7C"
                   title="Delete"
                   buttonStyle = {{borderRadius: 10}}
-                  onPress={() => {dispatch(deleteDaily(docId))} }
+                  onPress={() => onAlert() }
                 />
               </View>
 
