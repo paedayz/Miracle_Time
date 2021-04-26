@@ -79,9 +79,9 @@ export default function DailyScreen({navigation}) {
                   </View>
           </Modal>
           
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row',alignSelf:"flex-end",padding:3}}>
                 <TouchableOpacity onPress={() => setModalOpen()}>
-                  <Image  style={{marginVertical: 10, marginLeft:360, height:40,width:40}} source={require('../img/add.png')} />
+                  <Image  style={{height:40,width:40}} source={require('../img/add.png')} />
                 </TouchableOpacity>
           </View>
           <View style={style.dailyContainer}>
