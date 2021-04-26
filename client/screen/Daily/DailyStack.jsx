@@ -19,7 +19,7 @@ const DailyStackScreen = ({navigation}) => {
           name="Daily" 
           component={DailyScreen} 
           options={{
-            title:'Daily',
+            title:'Dairy',
             headerLeft: () => (
               <Icon.Button 
                 name="menu" 
@@ -32,7 +32,7 @@ const DailyStackScreen = ({navigation}) => {
           }}
         />
         <DailyStack.Screen
-          name="DailyDetail"
+          name="DairyDetail"
           component={DailyDetail}
         />
       </DailyStack.Navigator>

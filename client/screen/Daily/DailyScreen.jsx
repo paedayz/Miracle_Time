@@ -47,7 +47,7 @@ export default function DailyScreen({navigation}) {
   const mapDaily = daily.map((item) => {
     return (
       <View style={{marginTop:20, width:'100%'}} key={item.docId}>
-              <TouchableOpacity onPress={() => navigation.navigate('DailyDetail', item)}>
+              <TouchableOpacity onPress={() => navigation.navigate('DairyDetail', item)}>
                   {item.mood === 'happy' && <CardHappy>{cardDetail(item)}</CardHappy>}
                   {item.mood === 'sad' && <CardSad>{cardDetail(item)}</CardSad>}
                   {item.mood === 'ok' && <CardSoso>{cardDetail(item)}</CardSoso>}
