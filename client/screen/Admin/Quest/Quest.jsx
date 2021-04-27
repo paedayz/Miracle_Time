@@ -48,7 +48,7 @@ export default function Quest ({questData}) {
               <Text>{questDetail}</Text>
               <View style={styles.textCoinAndExp}>
                 <Text>Exp: {questExp} </Text>
-                <Text>  Coins: {questCoin}</Text>
+                <Text>Coins: {questCoin}</Text>
               </View>
             </View>
             

@@ -42,7 +42,7 @@ export default function EditQuestModal({setModalOpenEdit, questData}) {
     setModalOpenEdit(false)
   }
     return (
-        <View style={styles.modal}>
+        <ScrollView style={styles.modal}>
               <Icon 
                       name="close"
                       size={20} 
@@ -92,7 +92,7 @@ export default function EditQuestModal({setModalOpenEdit, questData}) {
                     />
                   </View>
                 </View>
-              </View>
+              </ScrollView>
     )
 }
 
@@ -100,12 +100,13 @@ const styles = StyleSheet.create({
     closeIcon:
     {
         color: 'red',
-        marginLeft: 275
+        marginLeft: 345
     },
     modalButton: 
     {
       marginHorizontal: 80,
-      marginVertical: 10,
+      marginTop: 15,
+      marginBottom: 50,
       justifyContent: 'center'
     },
     input: 
@@ -119,16 +120,12 @@ const styles = StyleSheet.create({
     },
     questBox: {
         justifyContent: 'flex-start',
-        marginVertical: 5,
         marginLeft: 10
     },
     modal:
     {
       backgroundColor: '#dddddd',
-      marginHorizontal: 25,
-      marginTop: 40,
-      padding: 25,
-      borderRadius: 10,
-      height: 500
+        marginTop: 55,
+        padding: 25
     },
   });

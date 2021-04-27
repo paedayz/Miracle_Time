@@ -53,7 +53,7 @@ export default function (state = initialState, action){
         case EDIT_QUEST:
             let updateQuest = []
             state.questList.map((quest) => {
-                if(quest.docId === action.payload.questId) {
+                if(quest.docId === action.payload.docId) {
                     updateQuest.push(action.payload)
                 } else {
                     updateQuest.push(quest)
@@ -93,7 +93,7 @@ export default function (state = initialState, action){
         case EDIT_ACHIEVE:
             let updateAchievement = []
             state.achievementList.map((achievement) => {
-                if(achievement.docId === action.payload.achievementId) {
+                if(achievement.docId === action.payload.docId) {
                     updateAchievement.push(action.payload)
                 } else {
                     updateAchievement.push(achievement)

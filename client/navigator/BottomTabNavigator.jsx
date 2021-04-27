@@ -77,7 +77,7 @@ export default function TabFunction () {
             name="Social"
             component={DailyStackScreen}
             options={{
-              tabBarLabel: 'Daily',
+              tabBarLabel: 'Dairy',
               tabBarColor: `${themes[current_theme].BUTTON_TAB_MENU_TWO}`,
               tabBarIcon: ({ color }) => (
                 <Image source={{uri:themes[current_theme].BUTTON_TAB_MENU_TWO_IMG}} style={{width:25, height:25, tintColor:'white'}}/>

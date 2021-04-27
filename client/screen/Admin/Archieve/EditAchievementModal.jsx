@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-
 import { SafeAreaView, View, StyleSheet, TouchableOpacity, Modal, ScrollView ,KeyboardAvoidingView } from 'react-native';
-
 import {
   Avatar,
   Title,
@@ -39,7 +37,7 @@ export default function EditachievementModal({setModalOpenEdit, achievementData}
     setModalOpenEdit(false)
   }
     return (
-        <View style={styles.modal}>
+        <ScrollView style={styles.modal}>
               <Icon 
                       name="close"
                       size={20} 
@@ -52,56 +50,58 @@ export default function EditachievementModal({setModalOpenEdit, achievementData}
                   <Text>Archeivement name</Text>
                   <TextInput style={styles.input}
                     placeholder="Please enter your text"
+                    value={achievementName}
+                    onChangeText={data => setAchievementName(data)}
                   />
                   <Text>Archeivement detail</Text>
                   <TextInput style={styles.input}
                     placeholder="Please enter your text"
+                    value={achievementDetail}
+                    onChangeText={data => setAchievementDetail(data)}
                   />
                   <View style={styles.modalButton}>
                     <Button 
-                        buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
-                        title="Save"
+                      onPress={() => onSubmit()}
+                      buttonStyle = {{backgroundColor: '#738FD9', borderRadius: 10}}
+                      title="Save"
                     />
                   </View>
                 </View>
                 </KeyboardAvoidingView> 
-              </View>
+              </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     closeIcon:
     {
-        color: 'red',
-        marginLeft: 265
+      color: 'red',
+      marginLeft: 345
     },
     modalButton: 
     {
       marginHorizontal: 80,
-      marginVertical: 10,
+      marginTop: 15,
+      marginBottom: 50,
       justifyContent: 'center'
     },
     input: 
     {
-        marginBottom: 7,
-        fontSize: 16,
-        borderWidth: 1,
-        borderColor: 'gray',
-        backgroundColor: '#f2f2f2',
-        height: 40
+      marginBottom: 7,
+      fontSize: 16,
+      borderWidth: 1,
+      borderColor: 'gray',
+      backgroundColor: '#f2f2f2',
+      height: 40
     },
     achievementBox: {
-        justifyContent: 'flex-start',
-        marginVertical: 5,
-        marginLeft: 10
+      justifyContent: 'flex-start',
+      marginLeft: 10
     },
     modal:
     {
-        backgroundColor: '#dddddd',
-        marginHorizontal: 25,
-        marginTop: 40,
-        padding: 25,
-        borderRadius: 10,
-        height: 290
+      backgroundColor: '#dddddd',
+      marginTop: 55,
+      padding: 25
     },
   });
