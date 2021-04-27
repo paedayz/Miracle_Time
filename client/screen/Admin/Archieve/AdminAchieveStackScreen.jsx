@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import ArcheivementScreen from './ArcheivementScreen'
+import AchievementDetail from './AchievementDetail'
 
 const QuestArchieveStack = createStackNavigator()
 
@@ -25,6 +26,10 @@ const AdminArchieveStackScreen = ({navigation}) => {
               />
             )
           }}
+        />
+        <QuestArchieveStack.Screen 
+          name="adminAchievementDetail"
+          component={AchievementDetail}
         />
       </QuestArchieveStack.Navigator>
     )
