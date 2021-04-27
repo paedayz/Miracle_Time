@@ -14,7 +14,7 @@ const Edittodaylist = () => {
 
     const route = useRoute() 
     const navigation = useNavigation()
-    const { event,detail,start,end,key, rank, catagory, date } = route.params
+    const { event,detail,start,end,key, rank, catagory, date, createdAt, privacy } = route.params
 
     const dispatch = useDispatch()
 
@@ -46,12 +46,17 @@ const Edittodaylist = () => {
     return (
         <View style={styles.container}>
             <Formik
-                initialValues={{ event: event, start:start, end:end , detail: detail, key: key}}  
+                initialValues={{ event: event, start:start, end:end, detail: detail, key:key}}  
                 onSubmit={(values) => {
                     values.catagory = catagory
                     values.rank = rank
                     values.date = date
+                    values.key = key
+                    values.privacy = privacy
+                    values.createdAt = createdAt
+                    console.log('Edittttttttt',values)
                     dispatch(editEvent(values))
+
                     // navigation.navigate('TodayList')
                 }}
             >
@@ -68,6 +73,12 @@ const Edittodaylist = () => {
                 <View style={{width: 50, height: 30,marginTop:10}}>
                             <Text >Event :</Text>
                            
+                </View>
+                <View style={{width: 0, height: 0}}>
+                    <TextInput
+                        defaultValue={key}
+                        >
+                    </TextInput>
                 </View>
                 <View style={{width: 280, height: 90}}>
                     <TextInput

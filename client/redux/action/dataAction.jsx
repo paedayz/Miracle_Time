@@ -58,9 +58,13 @@ export const editEvent = (eventData) => (dispatch) => {
     let clientUserId = getClientUserId()
     dispatch({type: LOADING_DATA})
     eventData.clientUserId = clientUserId
+    
+    console.log('cccccccccccc',eventData)
     axios.post('/editEvent', eventData)
         .then((res) => {
+            console.log('bbbbbbbbb',res.config.data)
             dispatch({type: EDIT_EVENT, payload: res.data.data})
+            console.log('uuuuuuuuuuuuu',res.data.data)
             dispatch({type: LOADING_COMPLETE})
         })
         .catch((err) => {
