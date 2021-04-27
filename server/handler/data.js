@@ -116,10 +116,11 @@ exports.editEvent = (req, res) => {
         createdAt: req.body.createdAt,
         username : username,
     }
+    console.log(updateData)
     firestore.collection('events').where('key', '==', updateData.key).limit(1).get()
         .then((snapshot) => {
             snapshot.forEach((doc) => {
-                return firestore.collection('events').doc(doc.id).set(updateData)
+                return firestore.collection('events').doc(doc.id).update(updateData)
             })
         })
         .then(() => {
@@ -138,7 +139,8 @@ exports.editEvent = (req, res) => {
                     end: doc.data().end,
                     catagory: doc.data().catagory,
                     privacy: doc.data().privacy,
-                    createdAt: doc.data().createdAt
+                    createdAt: doc.data().createdAt,
+                    success: doc.data().success
                 }
             })
             return res.json({data: data})

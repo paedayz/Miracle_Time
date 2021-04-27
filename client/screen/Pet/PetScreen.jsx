@@ -14,6 +14,7 @@ export default function PetScreen({navigation}) {
   const [isFirsBtnClick, setIsFirsBtnClick] = useState(false)
   const [isSecondBtnClick, setIsSecondBtnClick] = useState(false)
   const [image, setImage] = useState(<Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>)
+  const [currentPetImg, setCurrentPetImg] = useState(4)
   const dispatch = useDispatch()
 
   const FirstBtnClick = () => {
@@ -56,7 +57,16 @@ export default function PetScreen({navigation}) {
       <Image source={require('../../assets/pet_pic/sleep.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>,
       <Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>
     ]
-    setImage(imageArray[Math.floor(Math.random() * 5)])
+
+    let randNum
+
+    do {
+      randNum = Math.floor(Math.random() * 5)
+    } while (randNum === currentPetImg);
+
+    setCurrentPetImg(randNum)
+
+    setImage(imageArray[randNum])
   }
 
   const CloseTextBox = () => {
