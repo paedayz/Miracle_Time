@@ -88,7 +88,7 @@ export default function DetailToday({navigation}) {
                   color="#FC7C7C"
                   title="Delete"
                   buttonStyle = {{borderRadius: 10}}
-                  // onPress={() => dispatch({type: 'DELETE_EVENT', payload: values}, navigation.navigate('Todaylist'))}
+                  onPress={() => dispatch({type: 'DELETE_EVENT', payload: values}, navigation.navigate('Todaylist'))}
                   onPress={() => onAlert()}
                 />
               </View>
