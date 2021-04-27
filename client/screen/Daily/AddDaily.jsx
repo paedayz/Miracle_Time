@@ -176,8 +176,7 @@ const Adddaily = ({setModalOpen}) => {
                                     style={styles.input}
                                     onChangeText={props.handleChange('detail')}
                                     value={props.values.detail}
-                                    multiline
-                                    numberOfLines={20}
+                                    multiline={true}                                    
                                     >
                                 </TextInput>        
                         </View> 
@@ -209,8 +208,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         borderRadius: 6,
         marginBottom:10,
-        marginTop:10
-        
+        marginTop:10,
+        textAlignVertical: 'top'
     },
     container:{
         flex: 1,

@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Button, LogBox , Platform ,TouchableOpacity, Image, ScrollView} from 'react-native'
 import { Formik } from 'formik'
 import { TextInput } from 'react-native-gesture-handler'
-import RNPickerSelect from 'react-native-picker-select';
-import * as ImagePicker from 'expo-image-picker';
+import RNPickerSelect from 'react-native-picker-select'
+import * as ImagePicker from 'expo-image-picker'
 
 //redux
 import {useDispatch} from 'react-redux'
@@ -123,8 +123,7 @@ export default function EditDailyDetail(props) {
                                 placeholder='detail'
                                 value={EditDetail}
                                 onChangeText={data => setEditDetail(data)}
-                                multiline
-                                numberOfLines={10}
+                                multiline={true}  
                                 >
                             </TextInput>       
                     </View> 
@@ -152,7 +151,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         borderRadius: 6,
         marginBottom:5,
-        marginTop:10
+        marginTop:10,
+        textAlignVertical: 'top'
     },
     container:{
         flex: 1,
