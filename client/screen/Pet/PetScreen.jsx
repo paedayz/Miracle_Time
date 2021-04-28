@@ -13,7 +13,7 @@ export default function PetScreen({navigation}) {
   const [textBox, setTextBox] = useState(false)
   const [isFirsBtnClick, setIsFirsBtnClick] = useState(false)
   const [isSecondBtnClick, setIsSecondBtnClick] = useState(false)
-  const [image, setImage] = useState(<Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>)
+  const [image, setImage] = useState(<Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 300, maxWidth: '78%'}}/>)
   const [currentPetImg, setCurrentPetImg] = useState(4)
   const dispatch = useDispatch()
 
@@ -51,11 +51,11 @@ export default function PetScreen({navigation}) {
 
   const togglePet = () => {
     let imageArray = [
-      <Image source={require('../../assets/pet_pic/eat.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>,
-      <Image source={require('../../assets/pet_pic/hungry.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>,
-      <Image source={require('../../assets/pet_pic/play.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>,
-      <Image source={require('../../assets/pet_pic/sleep.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>,
-      <Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>
+      <Image source={require('../../assets/pet_pic/eat.gif')} style={{ maxHeight: 300, maxWidth: '78%'}}/>,
+      <Image source={require('../../assets/pet_pic/hungry.gif')} style={{ maxHeight: 300, maxWidth: '78%'}}/>,
+      <Image source={require('../../assets/pet_pic/play.gif')} style={{ maxHeight: 300, maxWidth: '78%'}}/>,
+      <Image source={require('../../assets/pet_pic/sleep.gif')} style={{ maxHeight: 300, maxWidth: '78%'}}/>,
+      <Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 300, maxWidth: '78%'}}/>
     ]
 
     let randNum
