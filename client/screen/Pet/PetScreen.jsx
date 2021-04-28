@@ -13,7 +13,7 @@ export default function PetScreen({navigation}) {
   const [textBox, setTextBox] = useState(false)
   const [isFirsBtnClick, setIsFirsBtnClick] = useState(false)
   const [isSecondBtnClick, setIsSecondBtnClick] = useState(false)
-  const [image, setImage] = useState(<Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>)
+  const [image, setImage] = useState(<Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>)
   const [currentPetImg, setCurrentPetImg] = useState(4)
   const dispatch = useDispatch()
 
@@ -51,11 +51,11 @@ export default function PetScreen({navigation}) {
 
   const togglePet = () => {
     let imageArray = [
-      <Image source={require('../../assets/pet_pic/eat.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>,
-      <Image source={require('../../assets/pet_pic/hungry.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>,
-      <Image source={require('../../assets/pet_pic/play.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>,
-      <Image source={require('../../assets/pet_pic/sleep.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>,
-      <Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 400, maxWidth: '100%'}}/>
+      <Image source={require('../../assets/pet_pic/eat.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>,
+      <Image source={require('../../assets/pet_pic/hungry.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>,
+      <Image source={require('../../assets/pet_pic/play.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>,
+      <Image source={require('../../assets/pet_pic/sleep.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>,
+      <Image source={require('../../assets/pet_pic/idle.gif')} style={{ maxHeight: 300, maxWidth: '70%'}}/>
     ]
 
     let randNum
@@ -78,9 +78,11 @@ export default function PetScreen({navigation}) {
       return (
         <SafeAreaView style={styles.container}>
             {textBox && 
-                <TouchableOpacity onPress={() => {CloseTextBox()}}>
-                  <Image source={require('../../assets/Pokemon-TextFrame.png')} style={{ maxHeight: 120, maxWidth: '65%', marginBottom: 30}}/>
+            <View>
+               <TouchableOpacity onPress={() => {CloseTextBox()}}>
+                  <Image source={require('../../assets/Pokemon-TextFrame.png')} style={{width:200, height:95, position: 'absolute', bottom:-15, right: -100}}/>
                 </TouchableOpacity>
+                </View>
             }
             
             {isFirsBtnClick &&
@@ -147,8 +149,6 @@ const styles = StyleSheet.create({
   },
   button_box:{
     flexDirection: 'row',
-    flex: 2,
-    alignItems: 'center',
   },
   button_text: {
     color:'white',
