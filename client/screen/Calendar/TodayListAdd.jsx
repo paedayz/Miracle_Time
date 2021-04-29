@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View, Button, LogBox , Platform ,KeyboardAvoidingView, Switch} from 'react-native'
+import { StyleSheet, Text, View, Button, LogBox , Platform , ScrollView, KeyboardAvoidingView} from 'react-native'
 import { Formik } from 'formik'
 import { TextInput } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -51,6 +51,8 @@ const Addtodaylist = (props) => {
 
 
     return (
+        <KeyboardAvoidingView >
+        <ScrollView style={styles.modal}>
         <View style={styles.container}>
             <Formik
                 initialValues={{ event: '', start: '',end: '',catagory:'งาน', detail: '', key: '',rank: '1',date: props.date, success: false, privacy: 'private'}}  
@@ -64,7 +66,8 @@ const Addtodaylist = (props) => {
                 }}
             >
                 {(props) => (
-                <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'stretch',marginTop: 470}}>
+                    
+                <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'stretch',marginTop: -125}}>
 
                         <View >
                             
@@ -222,10 +225,13 @@ const Addtodaylist = (props) => {
                         </View>
                        
                 </View>
+               
             )}
             </Formik>
 
-       </View>      
+       </View>   
+       </ScrollView>
+    </KeyboardAvoidingView>   
     )
 }
 
