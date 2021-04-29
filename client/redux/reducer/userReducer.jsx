@@ -15,7 +15,7 @@ const initialState = {
     buy_loading : false,
     loading_select_theme: false,
     setting: []
-}
+} 
 
 const startState = {
     userData : null,
