@@ -46,7 +46,7 @@ export default function Acheivement ({achievementData}) {
           </View>
           <View style={styles.questBox}>
             <Title style={styles.headerTitle}>{achievementName}</Title>
-            <View style={{maxWidth: 200}}>
+            <View style={{maxWidth: 160}}>
               <Text>{achievementDetail}</Text>
             </View>
           </View>
@@ -64,7 +64,13 @@ export default function Acheivement ({achievementData}) {
               buttonStyle = {{backgroundColor: '#FC7C7C', width: 70, height: 30, borderRadius: 10}}
               title='Delete'
               onPress={() => setModalOpenDelete(true)}/>
-              <Modal transparent={true} visible={modalOpenDelete}>
+              
+          </View>
+        </View>
+        </TouchableOpacity>
+
+        <Modal transparent={true} visible={modalOpenDelete}>
+              <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', width:"100%", height: "600%", position:"absolute"}}></View>
                 <View style={styles.deleteModal}>
                   <View style={styles.questBox}>
                     <Title style={styles.headerTitle}>Are you sure to delete archeivement?</Title>
@@ -87,9 +93,6 @@ export default function Acheivement ({achievementData}) {
                   </View>
                 </View>
               </Modal>
-          </View>
-        </View>
-        </TouchableOpacity>
       </SafeAreaView>
     );
   }
@@ -141,13 +144,13 @@ export default function Acheivement ({achievementData}) {
       justifyContent: 'center',
       position: 'absolute',
       top: 18,
-      left: 300
+      left: '75%'
     },
     deleteButton: {
       justifyContent: 'center',
       position: 'absolute',
       top: 52,
-      left: 300
+      left: '75%'
     },
     modalButton: 
     {
@@ -170,8 +173,8 @@ export default function Acheivement ({achievementData}) {
     },
     deleteModal:
     {
+      marginTop: '50%',
       backgroundColor: '#dddddd',
-      marginVertical: 300,
       marginHorizontal: 10,
       padding: 10,
       borderRadius: 10,
