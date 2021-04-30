@@ -61,12 +61,10 @@ export const login = (userData) => (dispatch) => {
         }
         dispatch({type: SET_USER_DATA, payload: res.data.data})
         dispatch({type: SET_COIN_EXP_LVL, payload: coin_exp_lvl})
-        dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {
         console.log(err)
         dispatch({type: SET_ERROR, payload: 'Login Failed'})
-        dispatch({type: LOADING_COMPLETE})
     })
 }
 
