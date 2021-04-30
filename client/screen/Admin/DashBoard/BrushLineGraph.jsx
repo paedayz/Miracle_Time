@@ -18,7 +18,7 @@ export default function App() {
     if(dashboardEvent.length != 0) {
       return (
         <Fragment>
-          <VictoryChart width={400} height={250}
+          <VictoryChart width={350} height={200}
             containerComponent={
               <VictoryZoomContainer
                 zoomDimension="x"

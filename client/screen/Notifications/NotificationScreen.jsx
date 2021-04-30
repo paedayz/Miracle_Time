@@ -42,7 +42,6 @@ export default function NotificationScreen({navigation}) {
     <Item data={sortNoti} />
   );
   return (
-    <SafeAreaView style={{ flex: 1 }}>
     <View style={styles.responsiveBox}>
     <FlatList
         data={sortNoti}
@@ -50,7 +49,6 @@ export default function NotificationScreen({navigation}) {
         keyExtractor={item => item.docId}
       />
     </View>
-    </SafeAreaView>
   );
 }
 
@@ -66,7 +64,6 @@ const styles = StyleSheet.create({
   },
   responsiveBox: {
     width: wp('100%'),
-    height: hp('100%'),
     flexDirection: 'column',
   },
 });

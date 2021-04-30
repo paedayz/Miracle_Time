@@ -27,6 +27,7 @@ export function Login () {
             <Text style={styles.headerText}>Miracle time</Text>
             <TextInput style={styles.input}
                 placeholder=" Email"
+                keyboardType="email-address"
                 onChangeText={(email) => setEmail(email)}
             />
             <TextInput style={styles.input}
@@ -70,6 +71,7 @@ export function Register({setMode}) {
             <Text style={styles.headerText}>Miracle time</Text>
             <TextInput  style={styles.input}
                 placeholder=" Email"
+                keyboardType="email-address"
                 onChangeText={(email) => setEmail(email)}
             />
             <TextInput  style={styles.input}
@@ -173,7 +175,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         color: '#738FD9',
-        marginHorizontal: 165
     },
     footerView: {
         justifyContent: 'center'

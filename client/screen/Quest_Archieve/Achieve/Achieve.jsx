@@ -43,7 +43,7 @@ export default function Achievement({achievementData}) {
           </View>
           <View style={styles.achievementBox}>
             <Title style={styles.headerTitle}>{achievementName}</Title>
-            <View style={{maxWidth:200, minWidth: 180}}>
+            <View style={{maxWidth:150, minWidth: 150, marginRight:"20%"}}>
                 <Text>{achievementDetail}</Text>
                 <View>
                   <Text>{achievementExp}</Text>
@@ -135,9 +135,7 @@ export default function Achievement({achievementData}) {
       left: 320
     },
     achievementDone: {
-      position: 'absolute',
       marginTop: 35,
-      marginLeft: 320
     },
     achievementClaim: {
       fontSize: 15,

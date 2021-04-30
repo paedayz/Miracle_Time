@@ -67,7 +67,11 @@ export default function Quest ({questData}) {
               buttonStyle = {{backgroundColor: '#FC7C7C', width: 70, height: 30, borderRadius: 10}}
               title='Delete'
               onPress={() => setModalOpenDelete(true)}/>
-              <Modal transparent={true} visible={modalOpenDelete}>
+          </View>
+          
+        </TouchableOpacity>
+        <Modal transparent={true} visible={modalOpenDelete}>
+          <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', width:"100%", height: "600%", position:"absolute"}}></View>
                 <View style={styles.deleteModal}>
                   <View style={styles.questBox}>
                     <Title style={styles.headerTitle}>Are you sure to delete quest?</Title>
@@ -90,8 +94,6 @@ export default function Quest ({questData}) {
                   </View>
                 </View>
               </Modal>
-          </View>
-        </TouchableOpacity>
       </SafeAreaView>
     );
 }
@@ -147,13 +149,13 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       position: 'absolute',
       top: 18,
-      left: 300
+      left: '75%'
     },
     deleteButton: {
       justifyContent: 'center',
       position: 'absolute',
       top: 52,
-      left: 300
+      left: '75%'
     },
     modalButton: 
     {
@@ -167,6 +169,7 @@ const styles = StyleSheet.create({
     },
     modal:
     {
+      
       backgroundColor: '#dddddd',
       marginHorizontal: 25,
       marginTop: 60,
@@ -176,8 +179,8 @@ const styles = StyleSheet.create({
     },
     deleteModal:
     {
+      marginTop: '50%',
       backgroundColor: '#dddddd',
-      marginVertical: 300,
       marginHorizontal: 10,
       padding: 10,
       borderRadius: 10,
