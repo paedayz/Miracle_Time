@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
       marginTop:35
     },
     responsiveBox: {
-      width: wp('67%'),
+      width: wp('65%'),
       flexDirection: 'column',
     },
     deleteBox: {

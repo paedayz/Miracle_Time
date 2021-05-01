@@ -27,6 +27,7 @@ let clientUserId
 
 export const getAuthen = ()=> (dispatch) => {
     dispatch({type: LOADING_DATA})
+    dispatch({type: IS_GET_DATA})
     axios.post('/authen', {clientUserId : clientUserId}).then((res) => {
         if(res.data.eventData.length !== 0) {
             dispatch({type: SET_EVENT, payload: res.data.eventData})
@@ -41,8 +42,6 @@ export const getAuthen = ()=> (dispatch) => {
             console.log(res.data.settingData)
             dispatch({type: SET_USER_SETTING, payload: res.data.settingData})
         }
-
-        dispatch({type: IS_GET_DATA})
         dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {
@@ -62,24 +61,25 @@ export const login = (userData) => (dispatch) => {
         }
         dispatch({type: SET_USER_DATA, payload: res.data.data})
         dispatch({type: SET_COIN_EXP_LVL, payload: coin_exp_lvl})
-        dispatch({type: LOADING_COMPLETE})
     })
     .catch((err) => {
         console.log(err)
         dispatch({type: SET_ERROR, payload: 'Login Failed'})
-        dispatch({type: LOADING_COMPLETE})
     })
 }
 
 export const register = (userData, setMode) => (dispatch) => {
+    dispatch({type: LOADING_DATA})
     axios.post('/signup', userData)
         .then((res) => {
             dispatch({type: SET_USER_DATA, payload: res.data.data})
+            dispatch({type: LOADING_COMPLETE})
         })
         .catch((err) => {
             console.log(err)
             setMode(false)
             dispatch({type: SET_ERROR, payload: 'Register Failed'})
+            dispatch({type: LOADING_COMPLETE})
         })
 }
 

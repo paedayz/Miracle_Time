@@ -82,19 +82,23 @@ export default function Todaylist({navigation}) {
                 </View>
             </Modal>
             
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', justifyContent:'space-between', marginVertical:10}}>
+              <View style={{flexDirection: 'row'}}>
               <Text style={{marginTop:15,marginHorizontal:8,fontSize:16}}>Sort</Text>
               <TouchableOpacity onPress={() => sortTime()}>
-                <Image  style={{marginVertical: 10, marginRight:10, height:33,width:33}} source={require('../img/clock.png')} />
+                <Image  style={{ height:33,width:33}} source={require('../img/clock.png')} />
               </TouchableOpacity>
               
               <TouchableOpacity onPress={() => sortRank()}>
-                <Image  style={{marginVertical: 10, marginRight:230, height:30,width:40}} source={require('../img/rank.png')} />
+                <Image  style={{ height:30,width:40}} source={require('../img/rank.png')} />
               </TouchableOpacity>
+              </View>
+              <View>
               <TouchableOpacity onPress={() => setModalOpen()}>
-                <Image  style={{marginVertical: 10, marginRight:10, height:40,width:40}} source={require('../img/add.png')} />
+                <Image  style={{ height:40,width:40}} source={require('../img/add.png')} />
               </TouchableOpacity>
-            </View>
+              </View>
+              </View>
             
             <FlatList
                 data={showData}
@@ -122,21 +126,21 @@ export default function Todaylist({navigation}) {
                                     </View>
                                     <View style={{flexDirection: 'column'}}>
                                       <View style={{}}>
-                                        <Text key={index} style={{fontSize: 17,width:190}}>{item.event}</Text>
+                                        <Text key={index} style={{fontSize: 17,width:150}}>{item.event}</Text>
                                       </View>
                                       {item.catagory === "งาน" &&
                                       <View style={{marginTop:8}}>
-                                          <Text style={{fontSize: 14,width:190,color:'#ff3399'}}>{item.catagory}</Text>
+                                          <Text style={{fontSize: 14,width:150,color:'#ff3399'}}>{item.catagory}</Text>
                                       </View>
                                       }
                                       {item.catagory === "ทั่วไป" &&
                                       <View style={{marginTop:8}}>
-                                          <Text style={{fontSize: 14,width:190,color:'#009900'}}>{item.catagory}</Text>
+                                          <Text style={{fontSize: 14,width:150,color:'#009900'}}>{item.catagory}</Text>
                                       </View>
                                       }
                                       {item.catagory === "นัดสำคัญ" &&
                                       <View style={{marginTop:8}}>
-                                          <Text style={{fontSize: 14,width:190,color:'#993300'}}>{item.catagory}</Text>
+                                          <Text style={{fontSize: 14,width:150,color:'#993300'}}>{item.catagory}</Text>
                                       </View>
                                       }
                                     </View>
@@ -176,21 +180,21 @@ export default function Todaylist({navigation}) {
                                     </View>
                                     <View style={{flexDirection: 'column'}}>
                                       <View style={{}}>
-                                        <Text key={index} style={{fontSize: 17,width:190}}>{item.event}</Text>
+                                        <Text key={index} style={{fontSize: 17,width:150}}>{item.event}</Text>
                                       </View>
                                       {item.catagory === "งาน" &&
                                       <View style={{marginTop:8}}>
-                                          <Text style={{fontSize: 14,width:190,color:'#ff3399'}}>{item.catagory}</Text>
+                                          <Text style={{fontSize: 14,width:150,color:'#ff3399'}}>{item.catagory}</Text>
                                       </View>
                                       }
                                       {item.catagory === "ทั่วไป" &&
                                       <View style={{marginTop:8}}>
-                                          <Text style={{fontSize: 14,width:190,color:'#009900'}}>{item.catagory}</Text>
+                                          <Text style={{fontSize: 14,width:150,color:'#009900'}}>{item.catagory}</Text>
                                       </View>
                                       }
                                       {item.catagory === "นัดสำคัญ" &&
                                       <View style={{marginTop:8}}>
-                                          <Text style={{fontSize: 14,width:190,color:'#993300'}}>{item.catagory}</Text>
+                                          <Text style={{fontSize: 14,width:150,color:'#993300'}}>{item.catagory}</Text>
                                       </View>
                                       }
                                     </View>
@@ -231,21 +235,21 @@ export default function Todaylist({navigation}) {
                                   </View>
                                   <View style={{flexDirection: 'column'}}>
                                       <View style={{}}>
-                                        <Text key={index} style={{fontSize: 17,width:190}}>{item.event}</Text>
+                                        <Text key={index} style={{fontSize: 17,width:150}}>{item.event}</Text>
                                       </View>
                                       {item.catagory === "งาน" &&
                                       <View style={{marginTop:8}}>
-                                          <Text style={{fontSize: 14,width:190,color:'#ff3399'}}>{item.catagory}</Text>
+                                          <Text style={{fontSize: 14,width:150,color:'#ff3399'}}>{item.catagory}</Text>
                                       </View>
                                       }
                                       {item.catagory === "ทั่วไป" &&
                                       <View style={{marginTop:8}}>
-                                          <Text style={{fontSize: 14,width:190,color:'#009900'}}>{item.catagory}</Text>
+                                          <Text style={{fontSize: 14,width:150,color:'#009900'}}>{item.catagory}</Text>
                                       </View>
                                       }
                                       {item.catagory === "นัดสำคัญ" &&
                                       <View style={{marginTop:8}}>
-                                          <Text style={{fontSize: 14,width:190,color:'#993300'}}>{item.catagory}</Text>
+                                          <Text style={{fontSize: 14,width:150,color:'#993300'}}>{item.catagory}</Text>
                                       </View>
                                       }
                                     </View>
@@ -297,8 +301,6 @@ export default function Todaylist({navigation}) {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   card: {
     borderRadius: 10,
@@ -317,7 +319,7 @@ const style = StyleSheet.create({
   },
   fontSize:{
     fontSize: 17,
-    width:190
+    width:150
   }, 
   modalToggle:{
     marginBottom: 5,

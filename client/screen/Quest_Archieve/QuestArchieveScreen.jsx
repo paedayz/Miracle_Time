@@ -30,7 +30,7 @@ export default function QuestArchieveScreen ({navigation}) {
 
   if(mode) {
       return (
-        <View>
+        <View style={{marginBottom:60}}>
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity style={[styles.headerBox, {
               borderRightColor: '#dddddd',
@@ -54,7 +54,7 @@ export default function QuestArchieveScreen ({navigation}) {
       )
   } else {
       return (
-        <View>
+        <View style={{marginBottom:60}}>
           <View style={styles.headerBoxWrapper}>
             <TouchableOpacity onPress={() => changeMode()}
               style={[styles.headerBox, {

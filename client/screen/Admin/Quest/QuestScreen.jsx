@@ -42,7 +42,7 @@ export default function QuestScreen (){
     );
 
     return (
-        <View>
+      <View style={{marginBottom:60}}>
           <View style={styles.addButton}>
             <Button
               icon={

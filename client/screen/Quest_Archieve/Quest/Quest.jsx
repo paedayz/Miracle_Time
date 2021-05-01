@@ -49,7 +49,7 @@ export default function Quest({questData}) {
           </View>
           <View style={styles.questBox}>
             <Title style={styles.headerTitle}>{questName}</Title>
-            <View style={{maxWidth:200, minWidth: 180}}>
+            <View style={{maxWidth:200, minWidth: 200, marginRight: 10}}>
                 <Text>{questDetail}</Text>
                 <View style={styles.textCoinAndExp}>
                   <Text>Exp: {questExp}  </Text>
@@ -134,9 +134,6 @@ export default function Quest({questData}) {
     },
     claimButton: {
       justifyContent: 'center',
-      position: 'absolute',
-      top: 34,
-      left: 300
     },
     demo: {
       justifyContent: 'center',
@@ -149,9 +146,8 @@ export default function Quest({questData}) {
       left: 320
     },
     questDone: {
-      position: 'absolute',
       marginTop: 35,
-      marginLeft: 320
+      width: "20%"
     },
     questClaim: {
       fontSize: 15,
