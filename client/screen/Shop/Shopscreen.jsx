@@ -59,7 +59,7 @@ export default function Shopscreen({navigation}) {
                             return filterShowTheme(value, index)
                         })}
                         keyExtractor={(item) => item.THEME_NAME}
-                        numColumns={3}
+                        numColumns={2}
                         renderItem={({ item, index}) => {
                             
                             if(item.COST !== 0) {

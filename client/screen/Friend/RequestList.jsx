@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 // Redux
 import {useDispatch} from 'react-redux'
@@ -44,14 +45,15 @@ export default function RequestList({ data, setIsList }) {
                 }}
               />
             </View>
-
+            <View style={styles.responsiveBox}>
             <View style={styles.text}>
               <View style={{ flexDirection: "column" }}>
-                <View style={{ width: 150, flexDirection: "row" }}>
+                <View style={{flexDirection: "row" }}>
                   <Text style={styles.title}>{data.nickname}</Text>
                   <Text style={{ marginLeft: 5, marginTop: 3 }}>
                     Lv.{data.level}
                   </Text>
+                  </View>
                 </View>
                 <View>
                   <Text>@{data.username}</Text>
@@ -89,5 +91,9 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: 15,
+  },
+  responsiveBox: {
+    width: wp('29%'),
+    flexDirection: 'column',
   },
 });
