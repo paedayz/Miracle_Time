@@ -17,7 +17,7 @@ import RefreshGetData from './screen/RefreshGetData'
 
 
 let axiosDefaults = require("axios/lib/defaults");
-axiosDefaults.baseURL =`http://${config.IPAddress}:3003`;
+axiosDefaults.baseURL =`http://localhost:3003`;
 
 const Stack = createStackNavigator()
 
