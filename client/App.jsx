@@ -17,7 +17,7 @@ import RefreshGetData from './screen/RefreshGetData'
 
 
 let axiosDefaults = require("axios/lib/defaults");
-axiosDefaults.baseURL =`http://localhost:3003`;
+axiosDefaults.baseURL =`https://miracle-time.herokuapp.com`;
 
 const Stack = createStackNavigator()
 
