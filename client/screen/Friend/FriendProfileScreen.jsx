@@ -108,7 +108,7 @@ export default function FriendProfileScreen({navigation}) {
               <View>
                 <TextInput
                     onChangeText={data => setSearchDate(data)}
-                    placeholder="Ex. 2021-04-06"
+                    placeholder="Ex. yyyy-mm-dd"
                     placeholderTextColor="#666666"
                     autoCorrect={false}
                     style={styles.textInput}
