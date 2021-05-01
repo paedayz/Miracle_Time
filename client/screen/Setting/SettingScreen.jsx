@@ -1,5 +1,5 @@
 import React , {useState} from 'react';
-import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity,Image, FlatList} from 'react-native';
+import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity,Image, FlatList, ScrollView} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native'
 import Icon from "react-native-vector-icons/AntDesign";
 
@@ -55,6 +55,7 @@ export default function SettingScreen({navigation}) {
     if(!loading_select_theme)
     {
     return (
+        <ScrollView>
         <SafeAreaView style={styles.container}>
             <View style={styles.bottom_box}>
                 <ToggleSwitch
@@ -130,6 +131,7 @@ export default function SettingScreen({navigation}) {
             </View>
             
         </SafeAreaView>
+        </ScrollView>
         );
     } else {
         return (
