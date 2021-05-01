@@ -19,30 +19,33 @@ import { useDispatch } from 'react-redux'
 import {addQuest} from '../../../redux/action/adminAction'
 
 export default function AddQuestModal({setModalOpenAdd}) {
-  const [questName, setQuestName] = useState()
-  const [questDetail, setqQuestDetail] = useState()
-  const [questType, setQuestType] = useState()
-  const [questAction, setQuestAction] = useState()
-  const [questRequirement, setQuestRequirement] = useState()
-  const [questCoin, setQuestCoin] = useState()
-  const [questExp, setQuestExp] = useState()
+  const [questName, setQuestName] = useState(null)
+  const [questDetail, setqQuestDetail] = useState(null)
+  const [questType, setQuestType] = useState(null)
+  const [questAction, setQuestAction] = useState(null)
+  const [questRequirement, setQuestRequirement] = useState(null)
+  const [questCoin, setQuestCoin] = useState(null)
+  const [questExp, setQuestExp] = useState(null)
 
   const dispatch = useDispatch()
 
   const onSubmit = () => {
-    let questData = {
-      questName : questName,
-      questDetail : questDetail,
-      questType : questType,
-      questAction : questAction,
-      questRequirement : questRequirement,
-      questCoin : questCoin,
-      questExp : questExp
+    if(questName !=null&& questDetail !=null&& questType !=null&& questAction !=null&& questRequirement !=null&& questCoin !=null&& questExp){
+      let questData = {
+        questName : questName,
+        questDetail : questDetail,
+        questType : questType,
+        questAction : questAction,
+        questRequirement : parseInt(questRequirement, 10),
+        questCoin : parseInt(questCoin, 10),
+        questExp : parseInt(questExp, 10)
+      }
+  
+      dispatch(addQuest(questData))
+      setModalOpenAdd(false)
     }
-
-    dispatch(addQuest(questData))
-    setModalOpenAdd(false)
   }
+
     return (
         <KeyboardAvoidingView style={{flex:1}}>
         <ScrollView style={styles.modal}>
@@ -81,6 +84,7 @@ export default function AddQuestModal({setModalOpenAdd}) {
                     <Text>Quest request amount</Text>
                     <TextInput style={styles.input}
                       placeholder="Please enter your text"
+                      keyboardType="numeric"
                       onChangeText={(data) => setQuestRequirement(data)}
                     />
 
@@ -91,6 +95,7 @@ export default function AddQuestModal({setModalOpenAdd}) {
                     />
                     <Text>Quest coin</Text>
                     <TextInput style={styles.input}
+                      keyboardType="numeric"
                       placeholder="Please enter your text"
                       onChangeText={(data) => setQuestCoin(data)}
                     />
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
     closeIcon:
     {
         color: 'red',
-        marginLeft: 345
+        marginLeft: '95%'
     },
     modalButton: 
     {

@@ -17,23 +17,27 @@ import {useDispatch} from 'react-redux'
 import {addAchievement} from '../../../redux/action/adminAction'
 
 export default function AddQuestModal({setModalOpenAdd}) {
-  const [achievementName, setAchievementName] = useState()
-  const [achievementDetail, setAchievementDetail] = useState()
-  const [achievementAction, setAchievementAction] = useState()
-  const [achievementRequirement, setAchievementRequirement] = useState()
+  const [achievementName, setAchievementName] = useState(null)
+  const [achievementDetail, setAchievementDetail] = useState(null)
+  const [achievementAction, setAchievementAction] = useState(null)
+  const [achievementRequirement, setAchievementRequirement] = useState(null)
 
   const dispatch = useDispatch()
 
   const onSubmit = () => {
-    let achievementData = {
-      achievementName : achievementName,
-      achievementDetail : achievementDetail,
-      achievementAction : achievementAction,
-      achievementRequirement : achievementRequirement,
-    }
 
-    dispatch(addAchievement(achievementData))
-    setModalOpenAdd(false)
+    if (achievementName != null && achievementDetail != null && achievementAction != null && achievementRequirement != null){
+      let achievementData = {
+        achievementName : achievementName,
+        achievementDetail : achievementDetail,
+        achievementAction : achievementAction,
+        achievementRequirement : parseInt(achievementRequirement, 10),
+      }
+  
+      dispatch(addAchievement(achievementData))
+      setModalOpenAdd(false)
+    }
+    
   }
 
     return (
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
     closeIcon:
     {
       color: 'red',
-      marginLeft: 345
+      marginLeft: '95%'
     },
     modalButton: 
     {

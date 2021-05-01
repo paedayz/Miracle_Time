@@ -74,7 +74,6 @@ export default function NowEvent({data, eventData, createdAt, docId}) {
                         name="times" 
                         size={19}
                         style={{
-                          padding: 5,
                           marginTop: -24,
                           color: "#aaa"
                         }}
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
       marginTop:35
     },
     responsiveBox: {
-      width: wp('67%'),
+      width: wp('65%'),
       flexDirection: 'column'
 
     },

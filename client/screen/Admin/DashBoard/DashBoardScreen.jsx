@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import { SafeAreaView, Text, StyleSheet } from 'react-native';
+import {Divider} from 'react-native-elements'
 import Styled from 'styled-components'
 
 // Component
@@ -22,7 +23,6 @@ export default function App({navigation}) {
         <SafeAreaView styles={styles.container}>
           <Text style={styles.headGraph}>Graph</Text>
           <BrushLineGraph/>
-          <Text style={styles.headDetail}>Detail</Text>
           <EventDataTable/>
         </SafeAreaView>
       );
@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
     headDetail: {
       fontSize: 25,
       marginLeft: 15,
-      marginTop: 30
+      marginTop: 15
     }
   });

@@ -77,7 +77,7 @@ export default function Screen({navigation}) {
         )
     }
 
-    if(userData && ( clickMood === true || select_mood === false || goToMain || true )) {
+    if(userData && ( clickMood === true || select_mood === false || goToMain )) {
         if(goToMain === false){
             setGoToMain(true)
         }
